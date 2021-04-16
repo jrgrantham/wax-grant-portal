@@ -3,13 +3,11 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import Tippy from "@tippy.js/react";
-// import "tippy.js/dist/tippy.css";
-// import "react-tippy/dist/tippy.css";
 
 import TeamInfoRow from "./teamRow";
 import { addTeamMember, reorderTeam } from "../../store/projectData/team";
 import { useSelector } from "react-redux";
-import add from "../../images/add-grey.png";
+import add from "../../images/addTeam.png";
 import { Container } from "./teamStyling";
 import { nextIndexOfGroup } from "../../helpers";
 

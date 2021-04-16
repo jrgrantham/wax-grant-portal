@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  .rows.company {
+  .rows {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    max-height: 400px;
+  }
+  .company {
   }
   .row {
-    width: 40%;
+    width: 46%;
   }
   .field {
     width: 400px;

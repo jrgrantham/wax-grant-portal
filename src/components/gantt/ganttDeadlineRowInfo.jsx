@@ -8,12 +8,17 @@ import {
   deleteDeadline,
   updateDeadline,
 } from "../../store/projectData/deadlines";
+import { getProjectDates } from "../../store/projectData/project";
 
 function GanttRowDetails(props) {
   const dispatch = useDispatch();
   const projectDates = useSelector((state) => state.project.data.details.dates);
   const { deadline, provided } = props;
   const { description, scheduled, deadlineId } = deadline;
+
+  const dateList = getProjectDates(
+    useSelector((state) => state)
+  );
 
   function handleChange(key, value) {
     dispatch(
@@ -49,7 +54,7 @@ function GanttRowDetails(props) {
           value={scheduled}
           onChange={(e) => handleChange("scheduled", parseInt(e.target.value))}
         >
-          {projectDates.map((date, index) => (
+          {dateList.map((date, index) => (
             <option value={index} key={index} className="date">
               {date}
             </option>

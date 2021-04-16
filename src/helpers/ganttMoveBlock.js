@@ -1,14 +1,14 @@
 import { store } from "../store";
 import { updateDeadline } from "../store/projectData/deadlines";
 
-export function moveBlock(data, e, blockDiv) {
+export function moveBlock(data, e, blockDiv, projectLength) {
   console.log('listening');
   document.addEventListener("mouseup", dropBlock, false);
   document.addEventListener("mousemove", handleMouseMove, false);
 
   const { blockWidth, position, deadlineId } = data;
   const leftObstruction = 0;
-  const rightObstruction = store.getState().project.data.projectLength - 1;
+  const rightObstruction = store.getState().project.data.details.projectLength - 1;
 
   let offset = blockDiv.offsetLeft - e.clientX;
   let mousePosition;

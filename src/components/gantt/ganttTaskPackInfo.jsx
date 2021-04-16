@@ -16,7 +16,7 @@ import {
 import GanttTaskRowInfo from "./ganttTaskRowInfo";
 import EditModal from "../modals/ganttEditModal";
 import tick from "../../images/tick-white.png";
-import add from "../../images/add-grey.png";
+import add from "../../images/addTask.png";
 import bin from "../../images/bin-grey.png";
 import { deleteTaskAllocations } from "../../store/projectData/allocations";
 
@@ -132,7 +132,7 @@ function GanttPackWork(props) {
               {provided.placeholder}
               <div className="bottom packBackground">
                 <div>
-                  <Tippy content="Add a new row">
+                  <Tippy content="Add tasks">
                     <button className="evenWidth" onClick={handleAddNewRow}>
                       <img src={add} alt="add" />
                     </button>

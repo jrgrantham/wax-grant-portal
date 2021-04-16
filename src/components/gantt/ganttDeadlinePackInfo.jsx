@@ -1,17 +1,20 @@
 import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 import GanttRowdeadlines from "./ganttDeadlineRowInfo";
 import {
   reorderDeadline,
   addDeadline,
 } from "../../store/projectData/deadlines";
-import add from "../../images/add-grey.png";
+import addMiles from "../../images/addMilestone.png";
+import addDeads from "../../images/addDeliverable.png";
 import { nextIndexOfGroup } from "../../helpers";
 import { Container } from "./ganttPackStyling";
 
-function GanttPackdeadlines(props) {
+function GanttPackDeadlines(props) {
   const title = props.title;
   const packData = props.workPackData;
   const dispatch = useDispatch();
@@ -30,6 +33,8 @@ function GanttPackdeadlines(props) {
     const deadlineId = packData[result.source.index].deadlineId;
     dispatch(reorderDeadline({ deadlineId, movement }));
   }
+
+  const add = title === 'Deliverables' ? addDeads : addMiles;
 
   return (
     <Container titleBarColor={props.titleBarColor}>
@@ -65,9 +70,11 @@ function GanttPackdeadlines(props) {
               })}
               {provided.placeholder}
               <div className="bottom packBackground">
-                <button className='evenWidth' onClick={addNewRow}>
-                  <img src={add} alt="add" />
-                </button>
+                <Tippy content={`Add ${title}`}>
+                  <button className="evenWidth" onClick={addNewRow}>
+                    <img src={add} alt="add" />
+                  </button>
+                </Tippy>
               </div>
             </div>
           )}
@@ -76,4 +83,4 @@ function GanttPackdeadlines(props) {
     </Container>
   );
 }
-export default GanttPackdeadlines;
+export default GanttPackDeadlines;

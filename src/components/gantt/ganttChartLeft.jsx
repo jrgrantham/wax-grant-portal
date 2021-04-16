@@ -15,6 +15,7 @@ import {
   totalDaysColor,
 } from "../../helpers";
 import add from "../../images/add-white.png";
+// import add from "../../images/addTask.png";
 
 function GanttChartLeft(props) {
   const {

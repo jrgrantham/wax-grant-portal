@@ -4,8 +4,7 @@ import styled from "styled-components";
 import Tippy from "@tippy.js/react";
 import moment from "moment";
 
-// import "react-tippy/dist/tippy.css";
-// import "tippy.js/dist/tippy.css";
+import { getProjectDates } from "../../store/projectData/project";
 import {
   monthWidth,
   schedColor,
@@ -14,25 +13,7 @@ import {
 } from "../../helpers";
 
 function GanttScheduleBackground() {
-
-  // this calculates date array - move to a selector function
-  const { projectLength } = useSelector((state) => state.project.data.details);
-
-  const month = "Feb";
-  const year = 2021;
-  const projectStart = moment(`${month} ${year}`, "MMM YYYY");
-  const dateArray = () => {
-    const years = [];
-    const dateStart = projectStart;
-    for (let i = 0; i < projectLength; i++) {
-      years.push(dateStart.format("MMM YYYY"));
-      dateStart.add(1, "month");
-    }
-    return years;
-  };
-  const dateList = dateArray();
-
-  // this calculates date array
+  const dateList = getProjectDates(useSelector((state) => state));
 
   const classNames = [
     "backgroundColumn columnLeft",

@@ -14,8 +14,8 @@ export const Container = styled.div`
   .info {
     margin: 0;
     margin-left: 7px;
-    width: 13px;
-    height: 13px;
+    width: 16px;
+    height: 16px;
   }
   .grabHandle {
     position: absolute;

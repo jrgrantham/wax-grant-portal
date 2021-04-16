@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 import { Container } from "./ganttPackStyling";
 
@@ -130,15 +132,19 @@ function GanttPackWork(props) {
               {provided.placeholder}
               <div className="bottom packBackground">
                 <div>
-                <button className="evenWidth" onClick={handleAddNewRow}>
-                  <img src={add} alt="add" />
-                </button>
-                <button
-                  onClick={() => handleRemovePack()}
-                  className="evenWidth delete"
-                >
-                  <img src={bin} alt="delete" />
-                </button>
+                  <Tippy content="Add a new row">
+                    <button className="evenWidth" onClick={handleAddNewRow}>
+                      <img src={add} alt="add" />
+                    </button>
+                  </Tippy>
+                  <Tippy content="Delete work package (immediate)">
+                    <button
+                      onClick={() => handleRemovePack()}
+                      className="evenWidth delete"
+                    >
+                      <img src={bin} alt="delete" />
+                    </button>
+                  </Tippy>
                 </div>
                 <div className="evenWidth">
                   <p className="days">{calculateDays()}</p>

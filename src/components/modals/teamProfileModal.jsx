@@ -18,6 +18,7 @@ function ProfileModal(props) {
   }
 
   function closeModal() {
+    console.log('listening');
     window.removeEventListener("keydown", checkCloseModal);
     props.setShowProfile(false);
   }

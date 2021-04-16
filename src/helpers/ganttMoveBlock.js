@@ -2,6 +2,7 @@ import { store } from "../store";
 import { updateDeadline } from "../store/projectData/deadlines";
 
 export function moveBlock(data, e, blockDiv) {
+  console.log('listening');
   document.addEventListener("mouseup", dropBlock, false);
   document.addEventListener("mousemove", handleMouseMove, false);
 

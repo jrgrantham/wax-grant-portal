@@ -47,6 +47,7 @@ function GanttWPBar(props) {
   useEffect(() => {
     const barDiv = document.getElementById(barId);
     function handleMouseDown(e) {
+      console.log('listening');
       if (e.target.id.slice(0, 6) === "handle") {
         resizeBar(data, barDiv, e);
       } else moveBar(data, barDiv, e);

@@ -5,6 +5,7 @@ import "tippy.js/dist/tippy.css";
 import { useSelector } from "react-redux";
 import { Container } from "./projectStyling";
 import { updateProjectInfo } from "../../store/projectData/project";
+import qMark from "../../images/qMark.png";
 
 function ProjectRows() {
   const dispatch = useDispatch();
@@ -44,7 +45,12 @@ function ProjectRows() {
           </Tippy>
         </div>
         <div className="row">
-          <Tippy placement="top-start" content="Application Number">
+          {/* <Tippy content="IUK's grant platform applicant number">
+            <div className="info">
+              <img src={qMark} alt="info" />
+            </div>
+          </Tippy> */}
+          <Tippy placement="top-start" content="IUK's grant platform applicant number">
             <input
               type="text"
               value={applicationNumber}
@@ -55,7 +61,12 @@ function ProjectRows() {
           </Tippy>
         </div>
         <div className="row">
-          <Tippy placement="top-start" content="Project Nature">
+          {/* <Tippy content="The nature of the output from the project">
+            <div className="info">
+              <img src={qMark} alt="info" />
+            </div>
+          </Tippy> */}
+          <Tippy placement="top-start" content="Nature of Product or Service">
             <input
               type="text"
               value={nature}
@@ -66,7 +77,12 @@ function ProjectRows() {
           </Tippy>
         </div>
         <div className="row">
-          <Tippy placement="top-start" content="IP Protection">
+          {/* <Tippy content="The strategy used to protect the IP generated during the project">
+            <div className="info">
+              <img src={qMark} alt="info" />
+            </div>
+          </Tippy> */}
+          <Tippy placement="top-start" content="IP Protection Strategy">
             <input
               type="text"
               value={protection}
@@ -88,6 +104,11 @@ function ProjectRows() {
           </Tippy>
         </div>
         <div className="row">
+          <Tippy content="Select the project length (months). Check IUK competition website for guidance on project lengths">
+            <div className="info">
+              <img src={qMark} alt="info" />
+            </div>
+          </Tippy>
           <Tippy placement="top-start" content="Project Length (months)">
             <input
               type="number"

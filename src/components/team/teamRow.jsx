@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 import {
   updateTeamMember,
   deleteTeamMember,
@@ -46,9 +47,11 @@ function TeamRow(props) {
       {showProfile ? (
         <ProfileModal setShowProfile={setShowProfile} person={person} />
       ) : null}
-      <div {...provided.dragHandleProps} className="hidden grabHandle">
-        <BiMenu />
-      </div>
+      <Tippy content="Drag to reorder the rows">
+        <div {...provided.dragHandleProps} className="hidden grabHandle">
+          <BiMenu />
+        </div>
+      </Tippy>
       <input
         id={person.personId + "name"}
         name="name"
@@ -134,19 +137,25 @@ function TeamRow(props) {
       </button>
       {/* <Tippy content="Associated data will be lost"> */}
       {confirmDelete ? (
-        <div className='confirmDelete'>
-          <button onClick={() => setConfirmDelete(false)} className="cancel">Cancel</button>
-          <button onClick={deletePerson} className="confirm">All associated data will be lost</button>
+        <div className="confirmDelete">
+          <button onClick={() => setConfirmDelete(false)} className="cancel">
+            Cancel
+          </button>
+          <button onClick={deletePerson} className="confirm">
+            Delete
+          </button>
         </div>
       ) : (
         <div className="hidden deleteIcon">
-          <img
-            // className="delete"
-            src={bin}
-            alt="delete"
-            style={{ cursor: "pointer" }}
-            onClick={() => setConfirmDelete(true)}
-          />
+          <Tippy content="All associated data will be lost">
+            <img
+              // className="delete"
+              src={bin}
+              alt="delete"
+              style={{ cursor: "pointer" }}
+              onClick={() => setConfirmDelete(true)}
+            />
+          </Tippy>
         </div>
       )}
     </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 import GanttPackWork from "./ganttTaskPackInfo";
 import GanttPackdeadlines from "./ganttDeadlinePackInfo";
@@ -56,9 +58,14 @@ function GanttChartLeft(props) {
             })
           : null}
         <div className="divider">
-          <button className="totalDays content" onClick={createNewWorkPackage}>
-            <img src={add} alt="add" />
-          </button>
+          <Tippy content="Add a new work package">
+            <button
+              className="totalDays content"
+              onClick={createNewWorkPackage}
+            >
+              <img src={add} alt="add" />
+            </button>
+          </Tippy>
           <div className="totalDays content">
             <h3>{totalDays ? totalDays : null}</h3>
           </div>

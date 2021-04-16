@@ -89,13 +89,14 @@ function EditModal(props) {
   function checkCloseModal(e) {
     console.log("listening");
     if (e.target.id === "background" || e.key === "Escape" || e.keycode === 27)
+      e.preventDefault();
       closeModal();
   }
 
   function closeModal() {
     console.log('closed');
-    window.removeEventListener("keydown", checkCloseModal);
     props.setEditModal(false);
+    window.removeEventListener("keydown", checkCloseModal);
   }
 
   function resetBars() {
@@ -117,10 +118,6 @@ function EditModal(props) {
     dispatch(removeTask(taskId));
     dispatch(deleteTaskAllocations({ taskId }));
   }
-
-  // useEffect(() => {
-  //   return window.removeEventListener("keydown", checkCloseModal);
-  // })
 
   return (
     <Container id="background" onClick={checkCloseModal}>

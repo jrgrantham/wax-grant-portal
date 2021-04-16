@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 import { BiMenu, BiDotsHorizontalRounded } from "react-icons/bi";
 import { isNumberKey, getResources, toastDelay } from "../../helpers";
 import EditModal from "../modals/ganttEditModal";
@@ -84,9 +86,11 @@ function GanttTaskRowInfo(props) {
         />
       ) : null}
       <div className="rowDescription">
-        <div {...provided.dragHandleProps} className="hidden menu">
-          <BiMenu />
-        </div>
+        <Tippy content="Drag to reorder the tasks">
+          <div {...provided.dragHandleProps} className="hidden menu">
+            <BiMenu />
+          </div>
+        </Tippy>
         <input
           className="highlight description packBackground"
           value={description}

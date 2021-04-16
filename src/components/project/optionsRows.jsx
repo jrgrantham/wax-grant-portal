@@ -5,6 +5,7 @@ import "tippy.js/dist/tippy.css";
 import { useSelector } from "react-redux";
 import { Container } from "./projectStyling";
 import { updateProjectInfo } from "../../store/projectData/project";
+import qMark from "../../images/qMark.png";
 
 function OptionsRows() {
   const dispatch = useDispatch();
@@ -16,15 +17,17 @@ function OptionsRows() {
     dispatch(updateProjectInfo({ key, value }));
   }
 
-  const {
-    ganttRef,
-    competitor,
-  } = useSelector((state) => state.project.data);
+  const { ganttRef, competitor } = useSelector((state) => state.project.data);
 
   return (
     <Container>
       <div className="rows">
         <div className="row">
+          <Tippy content="This is typically Q7, but see IUK competition webpage for details">
+            <div className="info">
+              <img src={qMark} alt="info" />
+            </div>
+          </Tippy>
           <Tippy placement="top-start" content="Gantt Appendix Reference">
             <input
               type="text"

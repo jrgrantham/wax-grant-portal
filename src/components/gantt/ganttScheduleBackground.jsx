@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Tippy from "@tippy.js/react";
-import moment from "moment";
 
 import { getProjectDates } from "../../store/projectData/project";
 import {

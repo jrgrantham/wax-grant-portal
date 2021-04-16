@@ -6,7 +6,7 @@ const slice = createSlice({
   initialState: {
     selectedLeader: "lead",
     selectedAdminOption: "project",
-    selectedProjectOption: "company",
+    selectedProjectOption: "project",
     selectedTeamOption: "staff",
     selectedCostsOption: "labour",
     selectedRevenueOption: "targetMarket",

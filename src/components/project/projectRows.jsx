@@ -24,12 +24,33 @@ function ProjectRows() {
     protection,
     projectName,
     projectLength,
-    ProjectStart,
+    startMonth,
+    startYear,
     projectManager,
     software,
     funding,
   } = useSelector((state) => state.project.data.details);
 
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const years = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029];
+  const length = [];
+  for (let i = 1; i < 37; i++) {
+    length.push(i);
+  }
+  console.log(length);
   return (
     <Container>
       <div className="rows">
@@ -50,7 +71,10 @@ function ProjectRows() {
               <img src={qMark} alt="info" />
             </div>
           </Tippy> */}
-          <Tippy placement="top-start" content="IUK's grant platform applicant number">
+          <Tippy
+            placement="top-start"
+            content="IUK's grant platform applicant number"
+          >
             <input
               type="text"
               value={applicationNumber}
@@ -103,7 +127,7 @@ function ProjectRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+        {/* <div className="row">
           <Tippy content="Select the project length (months). Check IUK competition website for guidance on project lengths">
             <div className="info">
               <img src={qMark} alt="info" />
@@ -118,17 +142,63 @@ function ProjectRows() {
               onChange={onchangeHandler}
             />
           </Tippy>
-        </div>
+        </div> */}
         <div className="row">
-          <Tippy placement="top-start" content="Project Start">
-            <input
-              type="date"
-              value={ProjectStart}
-              className="field"
-              name="ProjectStart"
-              onChange={onchangeHandler}
-            />
+          <Tippy content="Check IUK competition website for guidance on project lengths">
+            <div className="info">
+              <img src={qMark} alt="info" />
+            </div>
           </Tippy>
+          <div className="projectStart">
+            <Tippy placement="top-start" content="Month project starts">
+              <select
+                className="field month"
+                name="startMonth"
+                value={startMonth}
+                onChange={onchangeHandler}
+              >
+                {months.map((month, index) => {
+                  return (
+                    <option key={index} value={month}>
+                      {month}
+                    </option>
+                  );
+                })}
+              </select>
+            </Tippy>
+            <Tippy content="Year project starts">
+              <select
+                className="field year"
+                name="startYear"
+                value={startYear}
+                onChange={onchangeHandler}
+              >
+                {years.map((year, index) => {
+                  return (
+                    <option key={index} value={year}>
+                      {year}
+                    </option>
+                  );
+                })}
+              </select>
+            </Tippy>
+            <Tippy content="Project length (months)">
+              <select
+                className="field length"
+                name="projectLength"
+                value={projectLength}
+                onChange={onchangeHandler}
+              >
+                {length.map((year, index) => {
+                  return (
+                    <option key={index} value={year}>
+                      {year}
+                    </option>
+                  );
+                })}
+              </select>
+            </Tippy>
+          </div>
         </div>
         <div className="row">
           <Tippy placement="top-start" content="Project Manager">

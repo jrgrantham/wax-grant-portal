@@ -5,7 +5,6 @@ import "tippy.js/dist/tippy.css";
 import { useSelector } from "react-redux";
 import { Container } from "./projectStyling";
 import { updateLeaderInfo } from "../../store/projectData/project";
-import qMark from "../../images/qMark.png";
 
 function CompanyRows() {
   const leader = useSelector((state) => state.user.selectedLeader);

@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export const projectData = {
   loading: false,
   data: {
@@ -10,7 +8,8 @@ export const projectData = {
       protection: "protection",
       projectName: "first Project",
       projectLength: 20,
-      ProjectStart: "Feb 2021",
+      startMonth: "Feb",
+      startYear: "2021",
       projectManager: "projectManager",
       software: "software",
       funding: "funding",

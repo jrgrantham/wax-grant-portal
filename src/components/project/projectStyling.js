@@ -13,7 +13,16 @@ export const Container = styled.div`
     width: 46%;
   }
   .field {
-    width: 400px;
+    width: 100%;
+  }
+  .month {
+    width: 40px;
+  }
+  .year {
+    width: 50px;
+  }
+  .length {
+    width: 30px;
   }
   .info {
     position: absolute;

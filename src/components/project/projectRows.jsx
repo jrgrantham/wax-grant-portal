@@ -1,15 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
 import Tippy from "@tippy.js/react";
-import 'tippy.js/dist/tippy.css';
+import "tippy.js/dist/tippy.css";
 import { useSelector } from "react-redux";
 import { Container } from "./projectStyling";
 import { updateProjectInfo } from "../../store/projectData/project";
 
-function ProjectRows(props) {
+function ProjectRows() {
   const dispatch = useDispatch();
-  const team = useSelector((state) => state.team.data);
 
   function onchangeHandler(e) {
     const key = e.target.name;
@@ -29,15 +27,13 @@ function ProjectRows(props) {
     projectManager,
     software,
     funding,
-    ganttRef,
-    competitor,
   } = useSelector((state) => state.project.data);
 
   return (
     <Container>
       <div className="rows">
-        <Tippy content="Product / Platform Name">
-          <div className="row">
+        <div className="row">
+          <Tippy placement="top-start" content="Product / Platform Name">
             <input
               type="text"
               value={productPlatformName}
@@ -45,10 +41,10 @@ function ProjectRows(props) {
               name="productPlatformName"
               onChange={onchangeHandler}
             />
-          </div>
-        </Tippy>
-        {/* <Tippy content="Application Number"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy placement="top-start" content="Application Number">
             <input
               type="text"
               value={applicationNumber}
@@ -56,10 +52,10 @@ function ProjectRows(props) {
               name="applicationNumber"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Project Nature"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy placement="top-start" content="Project Nature">
             <input
               type="text"
               value={nature}
@@ -67,10 +63,10 @@ function ProjectRows(props) {
               name="nature"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="IP Protection"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy placement="top-start" content="IP Protection">
             <input
               type="text"
               value={protection}
@@ -78,10 +74,10 @@ function ProjectRows(props) {
               name="protection"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Project Name"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy placement="top-start" content="Project Name">
             <input
               type="text"
               value={projectName}
@@ -89,10 +85,10 @@ function ProjectRows(props) {
               name="projectName"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Project Length (months)"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy placement="top-start" content="Project Length (months)">
             <input
               type="number"
               value={projectLength}
@@ -100,10 +96,10 @@ function ProjectRows(props) {
               name="projectLength"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Project Start"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy placement="top-start" content="Project Start">
             <input
               type="date"
               value={ProjectStart}
@@ -111,10 +107,10 @@ function ProjectRows(props) {
               name="ProjectStart"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Project Manager"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy placement="top-start" content="Project Manager">
             <input
               type="text"
               value={projectManager}
@@ -122,10 +118,10 @@ function ProjectRows(props) {
               name="projectManager"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Management Software"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy placement="top-start" content="Management Software">
             <input
               type="text"
               value={software}
@@ -133,10 +129,13 @@ function ProjectRows(props) {
               name="software"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Commercialisation Funding Required"> */}
-          <div className="row">
+          </Tippy>
+        </div>
+        <div className="row">
+          <Tippy
+            placement="top-start"
+            content="Commercialisation Funding Required"
+          >
             <input
               type="boolean"
               value={funding}
@@ -144,30 +143,8 @@ function ProjectRows(props) {
               name="funding"
               onChange={onchangeHandler}
             />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Gantt Appendix Reference"> */}
-          <div className="row">
-            <input
-              type="text"
-              value={ganttRef}
-              className="field"
-              name="ganttRef"
-              onChange={onchangeHandler}
-            />
-          </div>
-        {/* </Tippy> */}
-        {/* <Tippy content="Competitors Appendix Reference"> */}
-          <div className="row">
-            <input
-              type="text"
-              value={competitor}
-              className="field"
-              name="competitor"
-              onChange={onchangeHandler}
-            />
-          </div>
-        {/* </Tippy> */}
+          </Tippy>
+        </div>
       </div>
     </Container>
   );

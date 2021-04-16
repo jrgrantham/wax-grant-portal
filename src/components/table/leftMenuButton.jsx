@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { tableLeftHighlight, teamFontColor } from "../../helpers";
+import { tableLeftHighlight } from "../../helpers";
 
 function LeftMenuButton(props) {
   const { selectedOption, updateOption, color } = props.data;

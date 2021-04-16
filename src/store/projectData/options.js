@@ -5,11 +5,11 @@ import { options } from "../../data";
 const slice = createSlice({
   name: "options",
   initialState: options,
-  reducers: {
+  // reducers: {
     
-  },
+  // },
 });
 
-export const {
-} = slice.actions;
+// export const {
+// } = slice.actions;
 export default slice.reducer;

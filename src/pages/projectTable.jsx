@@ -6,6 +6,7 @@ import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
 import { TableContainer } from "../components/table/tableStyling";
 import ProjectRows from "../components/project/projectRows";
+import OptionsRows from "../components/project/optionsRows";
 
 function Team() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function Team() {
   function content() {
     if (selectedOption === "company") return <ProjectRows />;
     if (selectedOption === "project") return <ProjectRows />;
-    if (selectedOption === "options") return <ProjectRows />;
+    if (selectedOption === "options") return <OptionsRows />;
   }
 
   return (

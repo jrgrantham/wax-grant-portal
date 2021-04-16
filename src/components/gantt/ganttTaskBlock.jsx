@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { updateTaskBlock } from "../../store/projectData/tasks";
-import { wpBarColor, isNumberKey, checkZero } from "../../helpers";
+import { wpBarColor, isNumberKey } from "../../helpers";
 import tick from "../../images/tick-white.png";
 
 function GanttWPBlock(props) {

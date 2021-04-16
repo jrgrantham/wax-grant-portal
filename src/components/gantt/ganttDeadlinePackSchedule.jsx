@@ -7,7 +7,7 @@ import GanttDMRowSchedule from "./ganttDeadlineRowSchedule";
 function GanttDMPackSchedule(props) {
   const prefix = props.prefix;
   const projectLength = useSelector(
-    (state) => state.project.data.projectLength
+    (state) => state.project.data.details.projectLength
   );
 
   const scheduleWidth =

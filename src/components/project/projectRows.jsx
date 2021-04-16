@@ -28,7 +28,7 @@ function ProjectRows() {
     projectManager,
     software,
     funding,
-  } = useSelector((state) => state.project.data);
+  } = useSelector((state) => state.project.data.details);
 
   return (
     <Container>

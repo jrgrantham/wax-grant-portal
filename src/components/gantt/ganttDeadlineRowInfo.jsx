@@ -11,7 +11,7 @@ import {
 
 function GanttRowDetails(props) {
   const dispatch = useDispatch();
-  const projectDates = useSelector((state) => state.project.data.dates);
+  const projectDates = useSelector((state) => state.project.data.details.dates);
   const { deadline, provided } = props;
   const { description, scheduled, deadlineId } = deadline;
 

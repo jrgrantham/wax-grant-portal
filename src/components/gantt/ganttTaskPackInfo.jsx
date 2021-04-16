@@ -31,7 +31,7 @@ function GanttPackWork(props) {
   const [newTitle, setNewTitle] = useState(title);
   // const [confirmDelete, setConfirmDelete] = useState(false);
 
-  const { projectLength } = useSelector((state) => state.project.data);
+  const { projectLength } = useSelector((state) => state.project.data.details);
   function handleAddNewRow() {
     dispatch(addTask({ projectLength, title }));
   }

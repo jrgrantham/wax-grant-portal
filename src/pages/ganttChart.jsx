@@ -8,7 +8,6 @@ import GanttChartRight from "../components/gantt/ganttChartRight";
 // import { allResources } from "../store";
 
 function GanttChart() {
-
   const allTasks = useSelector((state) => state.tasks.data);
   // for testing ------------ could be used on other page
   const people = useSelector((state) => state.team.data);
@@ -30,6 +29,27 @@ function GanttChart() {
   });
   // for testing ------------ could be used on other page
 
+  // this might want moving --------
+
+  // const month = "Feb";
+  // const year = 2021;
+
+  // const projectStart = moment(`${month} ${year}`, "MMM YYYY");
+  // const dateArray = () => {
+  //   const years = [];
+  //   const dateStart = projectStart;
+  //   for (let i = 0; i < projectData.data.projectLength; i++) {
+  //     years.push(dateStart.format("MMM YYYY"));
+  //     dateStart.add(1, "month");
+  //   }
+  //   return years;
+  // };
+
+  // const dateList = dateArray();
+  // projectData.data.dates = dateList;
+
+  // this might want moving --------
+
   function createGroupedTasks(titles, data) {
     const groupedTask = [];
     titles.forEach((title) => {
@@ -43,9 +63,8 @@ function GanttChart() {
 
   const taskPackTitles = [
     ...new Set(
-      allTasks
-        .map((workPackage) => workPackage.workPackageTitle)
-        // .sort((a, b) => a - b)
+      allTasks.map((workPackage) => workPackage.workPackageTitle)
+      // .sort((a, b) => a - b)
     ),
   ];
   const groupedTasks = createGroupedTasks(taskPackTitles, allTasks);
@@ -57,7 +76,7 @@ function GanttChart() {
   );
 
   const projectLength = useSelector(
-    (state) => state.project.data.projectLength
+    (state) => state.project.data.details.projectLength
   );
 
   const daysPerMonth = [];

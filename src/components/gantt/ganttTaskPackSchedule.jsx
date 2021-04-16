@@ -9,7 +9,7 @@ function GanttWPPackSchedule(props) {
   const nonWPPrefix = props.prefix;
   const wpIndex=props.wpIndex
   const projectLength = useSelector(
-    (state) => state.project.data.projectLength
+    (state) => state.project.data.details.projectLength
   );
   // console.log(props);
 

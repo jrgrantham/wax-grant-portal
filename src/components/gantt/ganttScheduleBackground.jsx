@@ -2,12 +2,37 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Tippy from "@tippy.js/react";
+import moment from "moment";
+
 // import "react-tippy/dist/tippy.css";
 // import "tippy.js/dist/tippy.css";
-import {monthWidth, schedColor, schedGapColor, wpMarginBottom} from '../../helpers'
+import {
+  monthWidth,
+  schedColor,
+  schedGapColor,
+  wpMarginBottom,
+} from "../../helpers";
 
 function GanttScheduleBackground() {
-  const { dates } = useSelector((state) => state.project.data);
+
+  // this calculates date array - move to a selector function
+  const { projectLength } = useSelector((state) => state.project.data.details);
+
+  const month = "Feb";
+  const year = 2021;
+  const projectStart = moment(`${month} ${year}`, "MMM YYYY");
+  const dateArray = () => {
+    const years = [];
+    const dateStart = projectStart;
+    for (let i = 0; i < projectLength; i++) {
+      years.push(dateStart.format("MMM YYYY"));
+      dateStart.add(1, "month");
+    }
+    return years;
+  };
+  const dateList = dateArray();
+
+  // this calculates date array
 
   const classNames = [
     "backgroundColumn columnLeft",
@@ -15,12 +40,12 @@ function GanttScheduleBackground() {
     "backgroundColumn columnRight",
   ];
 
-  const backgroundColumn = dates.map((date, i) => {
+  const backgroundColumn = dateList.map((date, i) => {
     return (
       <div key={i} className={classNames[i % 3]}>
         {/* <Tippy content={date}> */}
         <Tippy delay={250} content={date}>
-          <div className='monthLetter'>
+          <div className="monthLetter">
             <p>{date[0]}</p>
           </div>
         </Tippy>
@@ -51,7 +76,6 @@ const Container = styled.div`
     padding-bottom: 3px;
     padding-top: 3px;
     border-bottom: ${wpMarginBottom} solid ${schedGapColor};
-
   }
   .columnLeft {
     border-left: 2px solid ${schedGapColor};

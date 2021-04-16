@@ -26,7 +26,7 @@ function GanttChartLeft(props) {
   } = props.data;
 
   const projectLength = useSelector(
-    (state) => state.project.data.projectLength
+    (state) => state.project.data.details.projectLength
   );
   const dispatch = useDispatch();
   function createNewWorkPackage() {

@@ -7,7 +7,7 @@ import { Container } from "./projectStyling";
 import { updateProjectInfo } from "../../store/projectData/project";
 import qMark from "../../images/qMark.png";
 
-function OptionsRows() {
+function CompanyRows() {
   const dispatch = useDispatch();
 
   function onchangeHandler(e) {
@@ -17,34 +17,38 @@ function OptionsRows() {
     dispatch(updateProjectInfo({ key, value }));
   }
 
-  const { ganttRef, competitor } = useSelector((state) => state.project.data.details);
+  const user = useSelector((state) => state.user.selectedLeader);
+
+  const {
+    companyName,
+    companyAcronym,
+    organisationType,
+    organisationSize,
+    postcode,
+    turnover,
+    lastYear,
+    lawyer,
+    bankHolidays,
+    annualLeave,
+    numEmployees,
+    partnerFunding,
+    fundingLevel,
+    matchFundingSource,
+    investorName,
+  } = useSelector((state) => state.project.data[user]);
+
+  console.log(companyName);
 
   return (
     <Container>
       <div className="rows">
         <div className="row">
-          <Tippy content="This is typically Q7, but see IUK competition webpage for details">
-            <div className="info">
-              <img src={qMark} alt="info" />
-            </div>
-          </Tippy>
-          <Tippy placement="top-start" content="Gantt Appendix Reference">
+          <Tippy placement="top-start" content="Product / Platform Name">
             <input
               type="text"
-              value={ganttRef}
+              value={companyName}
               className="field"
-              name="ganttRef"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
-        </div>
-        <div className="row">
-          <Tippy placement="top-start" content="Competitors Appendix Reference">
-            <input
-              type="text"
-              value={competitor}
-              className="field"
-              name="competitor"
+              name="productPlatformName"
               onChange={onchangeHandler}
             />
           </Tippy>
@@ -53,4 +57,4 @@ function OptionsRows() {
     </Container>
   );
 }
-export default OptionsRows;
+export default CompanyRows;

@@ -19,10 +19,10 @@ export const Container = styled.div`
     width: 40px;
   }
   .year {
-    width: 50px;
+    width: 55px;
   }
   .length {
-    width: 30px;
+    width: 35px;
   }
   .info {
     position: absolute;

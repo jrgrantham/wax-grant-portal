@@ -64,15 +64,6 @@ export const Container = styled.div`
     background-color: white;
     padding: 5px 0px 5px 5px;
   }
-  .cancel {
-    padding: 5px 10px;
-    background-color: green;
-    margin-right: 10px;
-  }
-  .confirm {
-    padding: 5px 10px;
-    background-color: red;
-  }
   .addIcon {
     height: 25px;
     width: 25px;

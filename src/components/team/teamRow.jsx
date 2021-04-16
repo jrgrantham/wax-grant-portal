@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";import Tippy from "@tippy.js/react";
+import { useDispatch, useSelector } from "react-redux";
+import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import {
   updateTeamMember,
@@ -10,6 +11,7 @@ import { isNumberKey } from "../../helpers";
 import { deletePersonAllocations } from "../../store/projectData/allocations";
 import bin from "../../images/bin-grey.png";
 import ProfileModal from "../modals/teamProfileModal";
+import DeleteModal from "../modals/teamDeleteModal";
 
 function TeamRow(props) {
   const dispatch = useDispatch();
@@ -46,6 +48,13 @@ function TeamRow(props) {
     <div className="row">
       {showProfile ? (
         <ProfileModal setShowProfile={setShowProfile} person={person} />
+      ) : null}
+      {confirmDelete ? (
+        <DeleteModal
+          setConfirmDelete={setConfirmDelete}
+          name={person.name}
+          deletePerson={deletePerson}
+        />
       ) : null}
       <Tippy content="Drag to reorder the rows">
         <div {...provided.dragHandleProps} className="hidden grabHandle">
@@ -108,13 +117,6 @@ function TeamRow(props) {
             onChange={onChangeHandler}
             className="field dayRate"
           />
-          {/* <input
-            id={person.personId + "location"}
-            name="location"
-            value={person.location}
-            onChange={onChangeHandler}
-            className="field location"
-          /> */}
           <select
             className="field location"
             id={person.personId + "location"}
@@ -135,29 +137,17 @@ function TeamRow(props) {
       <button onClick={() => setShowProfile(true)} className="profileButton">
         Profile
       </button>
-      {/* <Tippy content="Associated data will be lost"> */}
-      {confirmDelete ? (
-        <div className="confirmDelete">
-          <button onClick={() => setConfirmDelete(false)} className="cancel">
-            Cancel
-          </button>
-          <button onClick={deletePerson} className="confirm">
-            Delete
-          </button>
-        </div>
-      ) : (
-        <div className="hidden deleteIcon">
-          <Tippy content="All associated data will be lost">
-            <img
-              // className="delete"
-              src={bin}
-              alt="delete"
-              style={{ cursor: "pointer" }}
-              onClick={() => setConfirmDelete(true)}
-            />
-          </Tippy>
-        </div>
-      )}
+      <div className="hidden deleteIcon">
+        <Tippy content="All associated data will be lost">
+          <img
+            // className="delete"
+            src={bin}
+            alt="delete"
+            style={{ cursor: "pointer" }}
+            onClick={() => setConfirmDelete(true)}
+          />
+        </Tippy>
+      </div>
     </div>
   );
 }

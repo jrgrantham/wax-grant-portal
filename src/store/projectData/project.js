@@ -9,17 +9,12 @@ const slice = createSlice({
     updateProjectInfo: (project, action) => {
       project.data.details[action.payload.key] = action.payload.value;
     },
-    updateLeadInfo: (project, action) => {
-      project.data.lead[action.payload.key] = action.payload.value;
-    },
-    updatepOneInfo: (project, action) => {
-      project.data.pOne[action.payload.key] = action.payload.value;
-    },
-    updatepTwoInfo: (project, action) => {
-      project.data.pTwo[action.payload.key] = action.payload.value;
+    updateLeaderInfo: (project, action) => {
+      const {leader, key, value} = action.payload;
+      project.data[leader][key] = value;
     },
   },
 });
 
-export const { updateProjectInfo } = slice.actions;
+export const { updateProjectInfo, updateLeaderInfo } = slice.actions;
 export default slice.reducer;

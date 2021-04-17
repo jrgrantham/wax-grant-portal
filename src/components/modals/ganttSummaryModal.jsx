@@ -38,11 +38,12 @@ function GanttSummaryModal() {
       <div onClick={closeModal} className="close">
         <img src={close} alt="close" />
       </div>
+      <h3>Days</h3>
       {people.map((person, index) => {
         return (
           <div key={index} className="person">
             <span>{person.acronym}:</span>
-            <span>{peoplesDays[person.acronym].toFixed(2)}</span>
+            <span>{peoplesDays[person.acronym].toFixed(1)}</span>
           </div>
         );
       })}
@@ -59,6 +60,9 @@ const Container = styled.div`
   bottom: 10px;
   right: 10px;
   background-color: ${wpInfoColor};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 15px 20px;
   border-radius: 10px;
   color: white;
@@ -75,10 +79,16 @@ const Container = styled.div`
   .person {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     margin: 4px 0px;
   }
   img {
     width: 100%;
     height: 100%;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 7px;
   }
 `;

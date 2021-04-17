@@ -2,53 +2,18 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-import { appTop, appWidth, wpMarginBottom, getResources } from "../helpers/";
+import {
+  appTop,
+  appWidth,
+  wpMarginBottom,
+} from "../helpers/";
 import GanttChartLeft from "../components/gantt/ganttChartLeft";
 import GanttChartRight from "../components/gantt/ganttChartRight";
+import GanttSummaryModal from "../components/modals/ganttSummaryModal";
 // import { allResources } from "../store";
 
 function GanttChart() {
   const allTasks = useSelector((state) => state.tasks.data);
-  // for testing ------------ could be used on other page
-  const people = useSelector((state) => state.team.data);
-  const resources = getResources();
-  const peoplesDays = {};
-  people.forEach((person) => {
-    const initials = person.acronym;
-    peoplesDays[initials] = 0;
-    allTasks.forEach((task) => {
-      let percentage = 0;
-      if (resources[task.taskId][initials] !== undefined) {
-        percentage = resources[task.taskId][initials].percent;
-      }
-      if (percentage > 0) {
-        const days = (task.days * percentage) / 100;
-        peoplesDays[initials] = peoplesDays[initials] + days;
-      }
-    });
-  });
-  // for testing ------------ could be used on other page
-
-  // this might want moving --------
-
-  // const month = "Feb";
-  // const year = 2021;
-
-  // const projectStart = moment(`${month} ${year}`, "MMM YYYY");
-  // const dateArray = () => {
-  //   const years = [];
-  //   const dateStart = projectStart;
-  //   for (let i = 0; i < projectData.data.projectLength; i++) {
-  //     years.push(dateStart.format("MMM YYYY"));
-  //     dateStart.add(1, "month");
-  //   }
-  //   return years;
-  // };
-
-  // const dateList = dateArray();
-  // projectData.data.dates = dateList;
-
-  // this might want moving --------
 
   function createGroupedTasks(titles, data) {
     const groupedTask = [];
@@ -91,6 +56,10 @@ function GanttChart() {
     daysPerMonth.push(days);
   }
 
+  function showSummary() {
+    if (useSelector(state => state.user.showGanttSummary)) return <GanttSummaryModal />
+  }
+
   const [chartWidth, setChartWidth] = useState(0);
   useEffect(() => {
     const scheduleElement = document.getElementById("schedule").scrollWidth;
@@ -113,16 +82,7 @@ function GanttChart() {
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />
       </div>
-      <div className="testPeople">
-        {people.map((person, index) => {
-          return (
-            <div key={index} className="person">
-              <span>{person.acronym}:</span>
-              <span>{peoplesDays[person.acronym].toFixed(2)}</span>
-            </div>
-          );
-        })}
-      </div>
+      {showSummary()}
     </PageContainer>
   );
 }
@@ -132,7 +92,7 @@ const PageContainer = styled.div`
   position: relative;
   top: ${appTop};
   margin: auto;
-  padding: 10px;
+  padding: 0px 10px 10px 10px;
   width: 100%;
   max-width: ${appWidth};
 
@@ -157,23 +117,4 @@ const PageContainer = styled.div`
       border-bottom: 0;
     }
   }
-
-  // remove this
-  .testPeople {
-    min-height: 100px;
-    min-width: 125px;
-    z-index: 5;
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    background-color: white;
-    padding: 10px;
-    border: 10px solid black;
-    border-radius: 10px;
-    .person {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-  // remove this
 `;

@@ -17,6 +17,20 @@ function ProjectRows() {
     dispatch(updateProjectInfo({ key, value }));
   }
 
+  function applyDefault() {}
+
+  const {
+    fundingLevels,
+    ipProtections,
+    markets,
+    locations,
+    orgSize,
+    orgType,
+    matchFundingSources,
+    natures,
+    overheadRates,
+  } = useSelector((state) => state.options.data);
+
   const {
     productPlatformName,
     applicationNumber,
@@ -50,10 +64,15 @@ function ProjectRows() {
   for (let i = 1; i < 37; i++) {
     length.push(i);
   }
-  console.log(length);
+
   return (
     <Container>
       <div className="rows">
+        <div className="bottomRow">
+          <button onClick={applyDefault}>
+            <h3>Apply defaults</h3>
+          </button>
+        </div>
         <div className="row">
           <Tippy placement="top-start" content="Product / Platform Name">
             <input
@@ -91,13 +110,17 @@ function ProjectRows() {
             </div>
           </Tippy> */}
           <Tippy placement="top-start" content="Nature of Product or Service">
-            <input
-              type="text"
+            <select
+              // type="text"
               value={nature}
               className="field"
               name="nature"
               onChange={onchangeHandler}
-            />
+            >
+              {natures.map((nature,index) => {
+                return <option key={index} value={nature}>{nature}</option>
+              })}
+            </select>
           </Tippy>
         </div>
         <div className="row">
@@ -107,13 +130,17 @@ function ProjectRows() {
             </div>
           </Tippy> */}
           <Tippy placement="top-start" content="IP Protection Strategy">
-            <input
-              type="text"
+            <select
+              // type="text"
               value={protection}
               className="field"
               name="protection"
               onChange={onchangeHandler}
-            />
+            >
+              {ipProtections.map((protection, index) => {
+                return <option key={index} value={protection}>{protection}</option>
+              })}
+            </select>
           </Tippy>
         </div>
         <div className="row">

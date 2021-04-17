@@ -7,7 +7,7 @@ import {
   leadingZero,
   monthWidth,
   moveBar,
-  wpBarColor,
+  wpScheduleColor,
   resizeBar,
 } from "../../helpers";
 
@@ -41,13 +41,13 @@ function GanttWPBar(props) {
     startPosition,
     blockCount,
     barNumber,
-    setShowBlock
+    setShowBlock,
   };
 
   useEffect(() => {
     const barDiv = document.getElementById(barId);
     function handleMouseDown(e) {
-      console.log('listening');
+      console.log("listening");
       if (e.target.id.slice(0, 6) === "handle") {
         resizeBar(data, barDiv, e);
       } else moveBar(data, barDiv, e);
@@ -81,7 +81,7 @@ const Container = styled.div`
   position: absolute;
   left: ${(props) => props.startPosition}px;
   margin: 2px 0;
-  background-color: ${wpBarColor};
+  background-color: ${wpScheduleColor};
   border-radius: 6px;
   z-index: 1;
   display: flex;

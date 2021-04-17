@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { updateTaskBlock } from "../../store/projectData/tasks";
-import { wpBarColor, isNumberKey } from "../../helpers";
+import { wpScheduleColor, isNumberKey } from "../../helpers";
 import tick from "../../images/tick-white.png";
 
 function GanttWPBlock(props) {
@@ -119,7 +119,7 @@ const Container = styled.div`
     padding: 0;
     margin: 0;
     border: none;
-    background-color: ${wpBarColor};
+    background-color: ${wpScheduleColor};
     color: white;
     z-index: 1;
   }
@@ -142,7 +142,7 @@ const Container = styled.div`
     /* border-radius: 50%; */
     z-index: 1;
     .accept {
-      /* background-color: ${wpBarColor}; */
+      /* background-color: ${wpScheduleColor}; */
       position: absolute;
       display: flex;
       align-items: center;
@@ -159,7 +159,7 @@ const Container = styled.div`
     position: absolute;
     height: 22px;
     width: 12px;
-    background-color: ${wpBarColor};
+    background-color: ${wpScheduleColor};
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 35%;
     /* z-index: 3; */

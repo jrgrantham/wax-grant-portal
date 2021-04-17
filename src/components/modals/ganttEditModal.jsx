@@ -8,7 +8,7 @@ import { deleteTaskAllocations } from "../../store/projectData/allocations";
 import close from "../../images/close-grey.png";
 import save from "../../images/save-grey.png";
 import bin from "../../images/bin-grey.png";
-import { wpTitleColor } from "../../helpers";
+import { wpInfoColor } from "../../helpers";
 
 function numberOfBars(schedule) {
   let bars = 0;
@@ -90,11 +90,11 @@ function EditModal(props) {
     console.log("listening");
     if (e.target.id === "background" || e.key === "Escape" || e.keycode === 27)
       e.preventDefault();
-      closeModal();
+    closeModal();
   }
 
   function closeModal() {
-    console.log('closed');
+    console.log("closed");
     props.setEditModal(false);
     window.removeEventListener("keydown", checkCloseModal);
   }
@@ -277,7 +277,7 @@ const Container = styled.div`
     position: absolute;
     width: 160px;
     height: 100%;
-    background-color: ${wpTitleColor};
+    background-color: ${wpInfoColor};
   }
 
   form {

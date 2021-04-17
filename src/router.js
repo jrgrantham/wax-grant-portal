@@ -28,10 +28,6 @@ const Router = () => (
     <Route exact path="/costs" component={Costs} />
     <Route exact path="/revenue" component={Revenue} />
     <Route exact path="/" component={HomePage} />
-    {/* <Route
-      path="/gantt"
-      render={(props) => protectedRoute(GanttPage, props)}
-    /> */}
     <Route path="/" component={NoResult} />
   </Switch>
 );

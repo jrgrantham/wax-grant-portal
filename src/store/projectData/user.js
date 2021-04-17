@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const slice = createSlice({
   name: "user",
   initialState: {
-    selectedLeader: "lead",
+    showGanttSummary: true,
+    selectedLeader: "lead", // = user type if(pOne) else... or admin / lead
     selectedAdminOption: "project",
     selectedProjectOption: "project",
     selectedTeamOption: "staff",

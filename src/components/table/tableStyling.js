@@ -20,12 +20,13 @@ export const TableContainer = styled.div`
     padding: 0px;
   }
   .displayArea {
+    position: relative;
     margin-bottom: 50px;
     display: flex;
     min-height: ${tableMinHeight};
     overflow: hidden;
     border-radius: 6px;
-    box-shadow: 8px 8px rgba(1, 1, 1, 0.3);
+    box-shadow: 8px 8px 12px rgba(1, 1, 1, 0.5);
   }
   .content {
     width: ${tableRightWidth};

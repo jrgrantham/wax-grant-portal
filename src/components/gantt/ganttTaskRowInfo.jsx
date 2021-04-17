@@ -86,7 +86,7 @@ function GanttTaskRowInfo(props) {
         />
       ) : null}
       <div className="rowDescription">
-        <Tippy content="Drag to reorder the tasks">
+        <Tippy content="Drag to reorder tasks">
           <div {...provided.dragHandleProps} className="hidden menu">
             <BiMenu />
           </div>

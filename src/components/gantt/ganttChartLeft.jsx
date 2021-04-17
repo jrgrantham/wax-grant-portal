@@ -8,13 +8,14 @@ import GanttPackWork from "./ganttTaskPackInfo";
 import GanttPackdeadlines from "./ganttDeadlinePackInfo";
 import { addTask } from "../../store/projectData/tasks";
 import {
-  wpTitleColor,
+  wpInfoColor,
   delTitleColor,
   milTitleColor,
   dividerHeight,
   totalDaysColor,
 } from "../../helpers";
 import add from "../../images/add-white.png";
+import { updateUserSelection } from "../../store/projectData/user";
 // import add from "../../images/addTask.png";
 
 function GanttChartLeft(props) {
@@ -40,9 +41,17 @@ function GanttChartLeft(props) {
     );
   }
 
+  const showSummary = useSelector((state) => state.user.showGanttSummary);
+  function toggleSummary() {
+    dispatch(
+      updateUserSelection({ key: "showGanttSummary", value: !showSummary })
+    );
+  }
+
   return (
     <PageContainer>
       <div id="details">
+        <button onClick={toggleSummary} className="summary">Summary</button>
         <div className="monthHeaderSpacer"></div>
         {groupedTasks.length
           ? groupedTasks.map((task, index) => {
@@ -51,7 +60,7 @@ function GanttChartLeft(props) {
                   key={index}
                   index={index}
                   packData={task}
-                  titleBarColor={wpTitleColor}
+                  titleBarColor={wpInfoColor}
                   title={taskPackTitles[index]}
                   taskPackTitles={taskPackTitles}
                 />
@@ -88,6 +97,7 @@ function GanttChartLeft(props) {
 export default GanttChartLeft;
 
 const PageContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -129,5 +139,16 @@ const PageContainer = styled.div`
       height: 80%;
       width: auto;
     }
+  }
+  .summary {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    background-color: ${wpInfoColor};
+    border: none;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 600;
   }
 `;

@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { appWidth, navBackground } from "./helpers";
-import navHome from './images/navHome.png';
-import navBurger from './images/navBurger.png';
+import navHome from "./images/navHome.png";
+import navBurger from "./images/navBurger.png";
 
 function Navigation() {
   function openMenu() {
     setMenu(true);
-    // console.log("open");
   }
   const [menu, setMenu] = useState(false);
   return (
@@ -25,7 +24,7 @@ function Navigation() {
 
         <div className="links">
           <NavLink exact to="/project" activeClassName="selected">
-            <div className="navButton">Project</div>
+            <div className="navButton">Details</div>
           </NavLink>
           <NavLink exact to="/team" activeClassName="selected">
             <div className="navButton">Team</div>
@@ -91,7 +90,7 @@ const Container = styled.nav`
     display: flex;
     justify-content: center;
     /* width: 170px; */
-    margin: 10px 5px;
+    margin: 15px 5px;
     padding: 5px 20px;
     color: white;
     font-size: 20px;
@@ -145,7 +144,7 @@ const Container = styled.nav`
       font-size: 14px;
       margin: 0;
       padding: 0;
-      color: #a1a1a1
+      color: #a1a1a1;
     }
   }
   .menuButton {

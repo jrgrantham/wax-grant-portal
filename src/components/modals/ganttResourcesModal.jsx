@@ -7,7 +7,7 @@ import close from "../../images/close-grey.png";
 
 import ResourcesRow from "./ganttResourcesModalRow";
 
-import { getResources, toastDelay, wpTitleColor} from '../../helpers'
+import { getResources, toastDelay, wpInfoColor } from "../../helpers";
 
 toast.configure();
 
@@ -15,7 +15,7 @@ function ResourcesModal(props) {
   const allPeople = useSelector((state) => state.team.data);
   const { packData } = props;
   const taskIds = [...new Set(packData.map((task) => task.taskId))];
-  const resources = getResources()
+  const resources = getResources();
 
   function closeModal() {
     let close = true;
@@ -74,7 +74,7 @@ function ResourcesModal(props) {
 
         <div className="bottomRow">
           <button onClick={closeModal}>
-            <img src={close} alt="close"/>
+            <img src={close} alt="close" />
           </button>
         </div>
       </div>
@@ -130,7 +130,7 @@ const Container = styled.div`
   .title {
     height: 50px;
     margin-bottom: 10px;
-    background-color: ${wpTitleColor};
+    background-color: ${wpInfoColor};
     color: white;
     padding: 0 20px;
   }

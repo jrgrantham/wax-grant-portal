@@ -61,7 +61,7 @@ export const options = {
     overheadRateDefault: 20,
     matchFundingSources: ["Investor", "Company Funds"],
     matchFundingSourceDefault: "Investor",
-    nature: ["platform", "process", "product"],
+    natures: ["platform", "process", "product"],
     natureDefault: "Platform",
     ipProtections: [
       "copyright",

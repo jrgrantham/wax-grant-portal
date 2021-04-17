@@ -56,7 +56,7 @@ function TeamRow(props) {
           deletePerson={deletePerson}
         />
       ) : null}
-      <Tippy content="Drag to reorder the rows">
+      <Tippy content="Drag to reorder rows">
         <div {...provided.dragHandleProps} className="hidden grabHandle">
           <BiMenu />
         </div>
@@ -138,7 +138,7 @@ function TeamRow(props) {
         Profile
       </button>
       <div className="hidden deleteIcon">
-        <Tippy content="All associated data will be lost">
+        {/* <Tippy content="All associated data will be lost"> */}
           <img
             // className="delete"
             src={bin}
@@ -146,7 +146,7 @@ function TeamRow(props) {
             style={{ cursor: "pointer" }}
             onClick={() => setConfirmDelete(true)}
           />
-        </Tippy>
+        {/* </Tippy> */}
       </div>
     </div>
   );

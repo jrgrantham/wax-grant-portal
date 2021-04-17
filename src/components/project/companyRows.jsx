@@ -19,6 +19,13 @@ function CompanyRows() {
   }
 
   const {
+    orgSizes,
+    orgTypes,
+    fundingLevels,
+    matchFundingSources,
+  } = useSelector((state) => state.options.data);
+
+  const {
     companyName,
     companyAcronym,
     organisationType,
@@ -63,24 +70,38 @@ function CompanyRows() {
         </div>
         <div className="row">
           <Tippy placement="top-start" content="Organisation type">
-            <input
-              type="text"
+            <select
               value={organisationType}
               className="field"
               name="organisationType"
               onChange={onchangeHandler}
-            />
+            >
+              {orgTypes.map((value, index) => {
+                return (
+                  <option key={index} value={value}>
+                    {value}
+                  </option>
+                );
+              })}
+            </select>
           </Tippy>
         </div>
         <div className="row">
           <Tippy placement="top-start" content="Organisation size">
-            <input
-              type="text"
+            <select
               value={organisationSize}
               className="field"
               name="organisationSize"
               onChange={onchangeHandler}
-            />
+            >
+              {orgSizes.map((value, index) => {
+                return (
+                  <option key={index} value={value}>
+                    {value}
+                  </option>
+                );
+              })}
+            </select>
           </Tippy>
         </div>
         <div className="row">
@@ -97,7 +118,7 @@ function CompanyRows() {
         <div className="row">
           <Tippy placement="top-start" content="Turnover last financial year">
             <input
-              type="text"
+              type="number"
               value={turnover}
               className="field"
               name="turnover"
@@ -130,7 +151,7 @@ function CompanyRows() {
         <div className="row">
           <Tippy placement="top-start" content="Bank holidays per year">
             <input
-              type="text"
+              type="number"
               value={bankHolidays}
               className="field"
               name="bankHolidays"
@@ -141,7 +162,7 @@ function CompanyRows() {
         <div className="row">
           <Tippy placement="top-start" content="Annual leave entitlement">
             <input
-              type="text"
+              type="number"
               value={annualLeave}
               className="field"
               name="annualLeave"
@@ -152,7 +173,7 @@ function CompanyRows() {
         <div className="row">
           <Tippy placement="top-start" content="Current number of employees">
             <input
-              type="text"
+              type="number"
               value={numEmployees}
               className="field"
               name="numEmployees"
@@ -173,24 +194,40 @@ function CompanyRows() {
         </div>
         <div className="row">
           <Tippy placement="top-start" content="Funding level (%)">
-            <input
+            <select
               type="text"
               value={fundingLevel}
               className="field"
               name="fundingLevel"
               onChange={onchangeHandler}
-            />
+            >
+              {fundingLevels.map((value, index) => {
+                return (
+                  <option key={index} value={value}>
+                    {value}
+                  </option>
+                );
+              })}
+            </select>
           </Tippy>
         </div>
         <div className="row">
           <Tippy placement="top-start" content="Match funding source">
-            <input
+            <select
               type="text"
               value={matchFundingSource}
               className="field"
               name="matchFundingSource"
               onChange={onchangeHandler}
-            />
+            >
+              {matchFundingSources.map((value, index) => {
+                return (
+                  <option key={index} value={value}>
+                    {value}
+                  </option>
+                );
+              })}
+            </select>
           </Tippy>
         </div>
         <div className="row">

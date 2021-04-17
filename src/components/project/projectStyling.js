@@ -7,6 +7,18 @@ export const Container = styled.div`
     flex-wrap: wrap;
     max-height: 400px;
   }
+  .bottomRow {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 30px;
+    button {
+      border: none;
+      color: gray;
+    }
+  }
   .company {
   }
   .row {

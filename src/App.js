@@ -12,7 +12,7 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <img
+        {/* <img
           alt=''
           src={background}
           style={{
@@ -23,7 +23,7 @@ function App() {
             zIndex: "-1",
             top: 0,
           }}
-        />
+        /> */}
         <Navigation />
         <Router />
       </BrowserRouter>

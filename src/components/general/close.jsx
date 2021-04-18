@@ -1,17 +1,29 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import closeWhite from "../../images/close-white.png";
 import closeGrey from "../../images/close-grey.png";
+import { updateUserSelection } from "../../store/projectData/user";
 
-function GanttSummaryModal(props) {
-  const color = props.color === "white" ? closeWhite : closeGrey;
+function Close(props) {
+  const {key} = props.data
+  const dispatch = useDispatch();
+  function close() {
+    dispatch(
+      updateUserSelection({
+        key,
+        value: "",
+      })
+    );
+  }
+  // const color = props.color === "white" ? closeWhite : closeGrey;
   return (
-    <Container>
-      <img onClick={props.close} src={color} alt="close" />
+    <Container onClick={close}>
+      <img src={closeGrey} alt="close" />
     </Container>
   );
 }
-export default GanttSummaryModal;
+export default Close;
 
 const Container = styled.div`
   position: absolute;

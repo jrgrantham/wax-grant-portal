@@ -16,7 +16,6 @@ export const Container = styled.div`
 
   .editWindow {
     position: relative;
-    /* width: 450px; */
     padding: 20px;
 
     display: flex;
@@ -26,11 +25,9 @@ export const Container = styled.div`
     background-color: white;
     border: 1px solid black;
     border-radius: 8px;
-    /* overflow: hidden; */
     label {
       font-weight: 600;
       z-index: 1;
-      /* margin-left: 10px; */
     }
   }
   .errorMessage {
@@ -39,7 +36,6 @@ export const Container = styled.div`
     font-size: 12px;
     color: red;
   }
-
   .formField {
     display: flex;
     /* justify-content: space-between; */

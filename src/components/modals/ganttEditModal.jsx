@@ -8,6 +8,7 @@ import Close from "../general/close";
 import save from "../../images/save-grey.png";
 import bin from "../../images/bin-grey.png";
 import { Container } from "./modalStyling";
+import { updateUserSelection } from "../../store/projectData/user";
 
 function numberOfBars(schedule) {
   let bars = 0;
@@ -20,10 +21,9 @@ function numberOfBars(schedule) {
 }
 
 function EditModal(props) {
-  const dispatch = useDispatch();
-  // const [confirmDelete, setConfirmDelete] = useState(false);
-  const { task, taskPackTitles } = props;
+  const { task, taskPackTitles, setEditModal } = props;
   const { dayLoading, days, description, workPackageTitle, schedule } = task;
+  const dispatch = useDispatch();
   const barLimit = Math.ceil(schedule.length / 2);
   const bars = numberOfBars(schedule);
 
@@ -78,16 +78,25 @@ function EditModal(props) {
           changes,
         })
       );
-      props.closeModal();
+      closeModal();
     },
     validationSchema,
   });
 
+  function closeModal() {
+    dispatch(
+      updateUserSelection({
+        key: "showTaskEditModal",
+        value: "",
+      })
+    );
+  }
+
   function checkCloseModal(e) {
-    e.preventDefault();
-    console.log("listening");
+    // e.preventDefault();
+    // console.log("listening");
     if (e.target.id === "background" || e.key === "Escape" || e.keycode === 27)
-      props.setEditModal(false);
+      closeModal();
   }
 
   function resetBars() {
@@ -103,17 +112,22 @@ function EditModal(props) {
         changes,
       })
     );
-    props.setEditModal(false);
+    closeModal();
   }
+
   function deleteTask(taskId) {
     dispatch(removeTask(taskId));
     dispatch(deleteTaskAllocations({ taskId }));
   }
 
+  const closeData = {
+    key: 'showTaskEditModal',
+  };
+
   return (
     <Container id="background" onClick={checkCloseModal}>
       <div className="editWindow">
-        <Close close={props.closeModal} />
+        <Close data={closeData}/>
         <form onSubmit={formik.handleSubmit}>
           <div className="formField">
             <label htmlFor="description">Task Title</label>

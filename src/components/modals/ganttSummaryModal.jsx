@@ -28,15 +28,13 @@ function GanttSummaryModal() {
     });
   });
 
-  function closeModal() {
-    const key = "showGanttSummary";
-    const value = false;
-    dispatch(updateUserSelection({ key, value }));
+  const data = {
+    key: "showGanttSummary"
   }
 
   return (
     <Container>
-      <Close close={closeModal} />
+      <Close data={data}/>
       <h3>Days</h3>
       {people.map((person, index) => {
         return (

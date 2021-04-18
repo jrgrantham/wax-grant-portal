@@ -56,9 +56,7 @@ function GanttChart() {
     daysPerMonth.push(days);
   }
 
-  function showSummary() {
-    if (useSelector(state => state.user.showGanttSummary)) return <GanttSummaryModal />
-  }
+  const showSummary = useSelector(state => state.user.showGanttSummary)
 
   const [chartWidth, setChartWidth] = useState(0);
   useEffect(() => {
@@ -82,7 +80,7 @@ function GanttChart() {
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />
       </div>
-      {showSummary()}
+      {showSummary === 'summary' ? <GanttSummaryModal /> : null }
     </PageContainer>
   );
 }

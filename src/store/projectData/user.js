@@ -4,9 +4,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const slice = createSlice({
   name: "user",
   initialState: {
-    userType: 'admin',
-    showGanttSummary: true,
-    selectedLeader: "lead", // = user type if(pOne) else... or admin / lead
+    userType: "admin",
+    showGanttSummary: "",
+    showTaskEditModal: "",
+    showTaskAllocationModal: "",
+    selectedLeader: "lead", // default should be user
     selectedAdminOption: "project",
     selectedProjectOption: "project",
     selectedTeamOption: "staff",

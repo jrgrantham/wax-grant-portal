@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { BiMenu, BiDotsHorizontalRounded } from "react-icons/bi";
@@ -14,24 +14,26 @@ import tick from "../../images/tick-grey.png";
 import { Container } from "./ganttRowStyling";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { updateUserSelection } from "../../store/projectData/user";
 
 toast.configure();
 
 function GanttTaskRowInfo(props) {
-  const dispatch = useDispatch();
-  const [editModal, setEditModal] = useState(true);
-  const [resourcesModal, setResourcesModal] = useState(false);
   const { task, provided, packData, taskPackTitles } = props;
-  const { description, days } = task;
+  const { description, days, taskId } = task;
+  const dispatch = useDispatch();
+  const { showTaskEditModal, showTaskAllocationModal } = useSelector(
+    (state) => state.user
+  );
   const resources = getResources();
-  const buttonContent = resources[task.taskId].people;
+  const buttonContent = resources[taskId].people;
   const [showEditDays, setShowEditDays] = useState(false);
   const [newDays, setNewDays] = useState(days);
 
   function handleDescriptionChange(value) {
     dispatch(
       updateTaskKeyValue({
-        taskId: task.taskId,
+        taskId,
         key: "description",
         value,
       })
@@ -60,18 +62,17 @@ function GanttTaskRowInfo(props) {
     }
   }
 
+  function updateUser(key, value) {
+    dispatch(updateUserSelection({ key, value }));
+  }
+
   return (
     <Container>
-      {editModal ? (
-        <EditModal
-          taskPackTitles={taskPackTitles}
-          setEditModal={setEditModal}
-          task={task}
-        />
+      {showTaskEditModal === taskId ? (
+        <EditModal taskPackTitles={taskPackTitles} task={task} />
       ) : null}
-      {resourcesModal ? (
+      {showTaskAllocationModal === taskId ? (
         <ResourcesModal
-          setResourcesModal={setResourcesModal}
           packData={packData}
         />
       ) : null}
@@ -93,7 +94,7 @@ function GanttTaskRowInfo(props) {
       </div>
       <div className="rowData">
         <button
-          onClick={() => setResourcesModal(!editModal)}
+          // onClick={() => ()}
           className="resources highlight packBackground"
         >
           {buttonContent}
@@ -124,7 +125,7 @@ function GanttTaskRowInfo(props) {
         )}
 
         <button
-          onClick={() => setEditModal(!editModal)}
+          onClick={() => updateUser("showTaskEditModal", taskId)}
           className="hidden icon"
         >
           <BiDotsHorizontalRounded />

@@ -22,7 +22,7 @@ function GanttDMPackSchedule(props) {
             key={index}
             deadline={deadline}
             prefix={prefix}
-            taskIndex={index}
+            taskNumber={index}
           />
         );
       })}

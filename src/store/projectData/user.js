@@ -6,8 +6,7 @@ const slice = createSlice({
   initialState: {
     userType: "admin",
     showGanttSummary: "",
-    showTaskEditModal: "",
-    showTaskAllocationModal: "",
+    showComponent: "", // set component identifier
     selectedLeader: "lead", // default should be user
     selectedAdminOption: "project",
     selectedProjectOption: "project",

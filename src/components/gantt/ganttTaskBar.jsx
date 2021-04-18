@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 import WPBlock from "./ganttTaskBlock";
 import {
   leadingZero,
@@ -11,28 +9,21 @@ import {
   resizeBar,
 } from "../../helpers";
 
-// toast.configure();
-
 function GanttWPBar(props) {
-  const [showBlock, setShowBlock] = useState(true);
-  const { task, bar, wpIndex, taskIndex, barNumber } = props;
+  const [showBlock, setShowBlock] = useState(true); // when resizing
+  const { task, bar, wpNumber, taskNumber, barNumber } = props;
   const { leftObstruction, rightObstruction, blockCount, startIndex } = bar;
 
-  const wpCode = leadingZero(wpIndex);
-  const taskCode = leadingZero(taskIndex);
+  const wpCode = leadingZero(wpNumber);
+  const taskCode = leadingZero(taskNumber);
   const barCode = leadingZero(barNumber);
   const barId = "bar-" + wpCode + "-" + taskCode + "-" + barCode;
 
-  const leftHandle =
-    "handle-" + wpCode + "-" + taskCode + "-" + barCode + "-lft";
-  const rightHandle =
-    "handle-" + wpCode + "-" + taskCode + "-" + barCode + "-rgt";
   const blockWidth = monthWidth.slice(0, 2);
-
   const startPosition = startIndex * blockWidth;
   const barWidth = blockWidth * blockCount;
 
-  const data = {
+  const barFunctionData = {
     task,
     blockWidth,
     leftObstruction,
@@ -44,13 +35,19 @@ function GanttWPBar(props) {
     setShowBlock,
   };
 
+  const blockData = {
+    task,
+    showBlock,
+    barId,
+  };
+
   useEffect(() => {
     const barDiv = document.getElementById(barId);
     function handleMouseDown(e) {
       console.log("listening");
       if (e.target.id.slice(0, 6) === "handle") {
-        resizeBar(data, barDiv, e);
-      } else moveBar(data, barDiv, e);
+        resizeBar(barFunctionData, barDiv, e);
+      } else moveBar(barFunctionData, barDiv, e);
     }
     barDiv.addEventListener("mousedown", handleMouseDown, false);
     return () => {
@@ -63,12 +60,9 @@ function GanttWPBar(props) {
       {bar.map((block, index) => (
         <WPBlock
           key={index}
-          task={task}
           block={block}
           blockIndex={startIndex + index}
-          leftHandle={leftHandle}
-          rightHandle={rightHandle}
-          showBlock={showBlock}
+          data={blockData}
         />
       ))}
     </Container>

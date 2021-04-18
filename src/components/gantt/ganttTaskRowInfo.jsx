@@ -22,7 +22,7 @@ function GanttTaskRowInfo(props) {
   const { task, provided, packData, taskPackTitles } = props;
   const { description, days, taskId } = task;
   const dispatch = useDispatch();
-  const { showTaskEditModal, showTaskAllocationModal } = useSelector(
+  const { showComponent } = useSelector(
     (state) => state.user
   );
   const resources = getResources();
@@ -68,10 +68,10 @@ function GanttTaskRowInfo(props) {
 
   return (
     <Container>
-      {showTaskEditModal === taskId ? (
+      {showComponent === taskId+'edit' ? (
         <EditModal taskPackTitles={taskPackTitles} task={task} />
       ) : null}
-      {showTaskAllocationModal === taskId ? (
+      {showComponent === taskId+'resources' ? (
         <ResourcesModal
           packData={packData}
         />
@@ -94,7 +94,7 @@ function GanttTaskRowInfo(props) {
       </div>
       <div className="rowData">
         <button
-          onClick={() => updateUser("showTaskAllocationModal", taskId)}
+          onClick={() => updateUser("showComponent", taskId+'resources')}
           className="resources highlight packBackground"
         >
           {buttonContent}
@@ -125,7 +125,7 @@ function GanttTaskRowInfo(props) {
         )}
 
         <button
-          onClick={() => updateUser("showTaskEditModal", taskId)}
+          onClick={() => updateUser("showComponent", taskId+'edit')}
           className="hidden icon"
         >
           <BiDotsHorizontalRounded />

@@ -5,7 +5,7 @@ import GanttBar from "./ganttTaskBar";
 import { leadingZero } from "../../helpers";
 
 function GanttWPRowSchedule(props) {
-  const { task, wpIndex, taskIndex } = props;
+  const { task, wpNumber, taskNumber } = props;
   const schedule = props.task.schedule;
 
   const bars = [];
@@ -54,7 +54,7 @@ function GanttWPRowSchedule(props) {
     }
     // at the end of the bar
     const endOfSched = currentMonth && i === schedule.length - 1;
-    const endOfBar = lastMonth === true && currentMonth === false
+    const endOfBar = lastMonth === true && currentMonth === false;
     if (endOfBar || endOfSched) {
       const prefix = bars[currentBarIndex][blockIndex - 1].blockNumber.slice(
         0,
@@ -79,8 +79,8 @@ function GanttWPRowSchedule(props) {
           <GanttBar
             key={index}
             task={task}
-            wpIndex={wpIndex}
-            taskIndex={taskIndex}
+            wpNumber={wpNumber}
+            taskNumber={taskNumber}
             barNumber={index + 1}
             bar={bar}
           />

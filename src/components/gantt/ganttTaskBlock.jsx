@@ -1,34 +1,28 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateTaskBlock } from "../../store/projectData/tasks";
-import { wpScheduleColor, isNumberKey } from "../../helpers";
+import { wpScheduleColor, isNumberKey, leadingZero } from "../../helpers";
 import tick from "../../images/tick-white.png";
+import { updateUserSelection } from "../../store/projectData/user";
 
 function GanttWPBlock(props) {
   const dispatch = useDispatch();
-  const { leftHandle, rightHandle, block, task, blockIndex, showBlock } = props;
+  const { block, blockIndex } = props;
+  const { task, showBlock, barId } = props.data;
   const { blockNumber, value } = block;
   const blockPosition = blockNumber.slice(-1);
-  const [showEditDays, setShowEditDays] = useState(false);
   const [newValue, setNewValue] = useState(value);
 
-  // document.addEventListener("mousemove", handleMouseMove, false);
-  // document.removeEventListener("mousemove", handleMouseMove);
+  const blockCode = leadingZero(blockIndex);
+  const blockId = (barId + "-" + blockCode).slice(-11);
+  const leftHandle = "handle-" + barId + "-lft";
+  const rightHandle = "handle-" + barId + "-rgt";
 
+  const showContent = useSelector(state => state.user.showContent)
   function handleClick() {
-    setShowEditDays(true);
-    // document.addEventListener("mousedown", handleMouseDown, false);
+    dispatch(updateUserSelection({ key: "showContent", value: blockId }));
   }
-  // function handleMouseDown(e) {
-  //   console.log(e.target.id);
-  //   if (e.target.id === "accept") {
-  //     console.log("accept");
-  //     acceptNewDays();
-  //   } else setNewValue(value)
-  //   setShowEditDays(false);
-  //   document.removeEventListener("mousedown", handleMouseDown);
-  // }
   function handleDayChange(e) {
     if (e.target.value) {
       const lastTwoNumbers = e.target.value.slice(-2);
@@ -38,7 +32,7 @@ function GanttWPBlock(props) {
     }
   }
   function acceptNewDays() {
-    setShowEditDays(false);
+    dispatch(updateUserSelection({ key: "showContent", value: "" }));
     if (newValue !== value)
       dispatch(
         updateTaskBlock({
@@ -51,10 +45,10 @@ function GanttWPBlock(props) {
   }
 
   return (
-    <Container id={blockNumber}>
+    <Container>
       {showBlock ? (
         <div>
-          {showEditDays ? (
+          {blockId === showContent ? (
             <div className="editDays">
               <input
                 autoFocus
@@ -166,10 +160,10 @@ const Container = styled.div`
     cursor: col-resize;
   }
   .right {
-    margin-left: 39px;
+    right: -5px;
   }
   .left {
-    margin-right: 39px;
+    left: -5px;
   }
 `;
 // export default GanttWPBlock;

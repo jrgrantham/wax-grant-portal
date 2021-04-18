@@ -50,7 +50,7 @@ function GanttChartRight(props) {
                   <GanttWPPackSchedule
                     key={index}
                     workPackData={task}
-                    wpIndex={index}
+                    wpNumber={index + 1}
                   />
                 );
               })

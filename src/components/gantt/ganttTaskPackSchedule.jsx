@@ -6,12 +6,10 @@ import GanttWPRowSchedule from "./ganttTaskRowSchedule";
 // import GanttRowSchedule from "./ganttRowSchedule";
 
 function GanttWPPackSchedule(props) {
-  const nonWPPrefix = props.prefix;
-  const wpIndex=props.wpIndex
+  const { nonWPPrefix, wpNumber } = props;
   const projectLength = useSelector(
     (state) => state.project.data.details.projectLength
   );
-  // console.log(props);
 
   const scheduleWidth =
     projectLength * parseInt(monthWidth.slice(0, -2)) + "px";
@@ -25,8 +23,8 @@ function GanttWPPackSchedule(props) {
             key={index}
             task={task}
             nonWPPrefix={nonWPPrefix}
-            taskIndex={index}
-            wpIndex={wpIndex}
+            taskNumber={index + 1}
+            wpNumber={wpNumber}
           />
         );
       })}

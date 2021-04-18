@@ -8,25 +8,27 @@ import "react-toastify/dist/ReactToastify.css";
 import { toastDelay } from "../../helpers";
 
 function Close(props) {
-  const { key, message } = props.data;
+  const { message } = props.data;
   const dispatch = useDispatch();
-
+  let notification = true;
   function close() {
     if (message) {
-      toast.configure();
-      toast.info(message, {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: toastDelay,
-      });
+      if (notification) {
+        toast.configure();
+        toast.info(message, {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: toastDelay,
+        });
+        notification = false;
+      }
     } else
       dispatch(
         updateUserSelection({
-          key,
+          key: "showComponent",
           value: "",
         })
       );
   }
-  // const color = props.color === "white" ? closeWhite : closeGrey;
   return (
     <Container onClick={close}>
       <img src={closeGrey} alt="close" />

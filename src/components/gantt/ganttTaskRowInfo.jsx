@@ -94,7 +94,7 @@ function GanttTaskRowInfo(props) {
       </div>
       <div className="rowData">
         <button
-          // onClick={() => ()}
+          onClick={() => updateUser("showTaskAllocationModal", taskId)}
           className="resources highlight packBackground"
         >
           {buttonContent}

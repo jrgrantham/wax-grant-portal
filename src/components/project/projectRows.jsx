@@ -18,18 +18,7 @@ function ProjectRows() {
   }
 
   function applyDefault() {}
-
-  const {
-    fundingLevels,
-    ipProtections,
-    markets,
-    locations,
-    orgSize,
-    orgType,
-    matchFundingSources,
-    natures,
-    overheadRates,
-  } = useSelector((state) => state.options.data);
+  const { ipProtections, natures } = useSelector((state) => state.options.data);
 
   const {
     productPlatformName,
@@ -117,8 +106,12 @@ function ProjectRows() {
               name="nature"
               onChange={onchangeHandler}
             >
-              {natures.map((nature,index) => {
-                return <option key={index} value={nature}>{nature}</option>
+              {natures.map((nature, index) => {
+                return (
+                  <option key={index} value={nature}>
+                    {nature}
+                  </option>
+                );
               })}
             </select>
           </Tippy>
@@ -138,7 +131,11 @@ function ProjectRows() {
               onChange={onchangeHandler}
             >
               {ipProtections.map((protection, index) => {
-                return <option key={index} value={protection}>{protection}</option>
+                return (
+                  <option key={index} value={protection}>
+                    {protection}
+                  </option>
+                );
               })}
             </select>
           </Tippy>

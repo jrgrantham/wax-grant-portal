@@ -5,9 +5,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import ResourcesRow from "./ganttResourcesModalRow";
-import Close from '../general/close';
-
-import { getResources, toastDelay, wpInfoColor } from "../../helpers";
+import Close from "../general/close";
+import { getResources, wpInfoColor } from "../../helpers";
 
 toast.configure();
 
@@ -17,29 +16,23 @@ function ResourcesModal(props) {
   const taskIds = [...new Set(packData.map((task) => task.taskId))];
   const resources = getResources();
 
-  function closeModal() {
-    let close = true;
-    for (let i = 0; i < taskIds.length; i++) {
-      if (resources[taskIds[i]].completion !== 100) {
-        close = false;
-        toast.info("All tasks must be 100%", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: toastDelay,
-        });
-        break;
-      }
+  let closeMessage = false;
+  for (let i = 0; i < taskIds.length; i++) {
+    if (resources[taskIds[i]].completion !== 100) {
+      closeMessage = "All tasks must be 100%";
+      break;
     }
-    if (close) props.setResourcesModal(false);
   }
 
-  function checkBackground(e) {
-    if (e.target.id === "background") closeModal();
-  }
+  const data = {
+    key: "showTaskAllocationModal",
+    message: closeMessage,
+  };
 
   return (
-    <Container id="background" onClick={(e) => checkBackground(e)}>
+    <Container id="background">
       <div className="editWindow">
-        <Close close={closeModal}/>
+        <Close data={data} />
         <div className="modalRow title">
           <h3 className="description">Description</h3>
           {allPeople.map((person, index) => {
@@ -56,7 +49,6 @@ function ResourcesModal(props) {
           return (
             <ResourcesRow
               task={task}
-              // index={index}
               key={index}
               allPeople={allPeople}
             />

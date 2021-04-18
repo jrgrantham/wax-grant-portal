@@ -17,8 +17,6 @@ function OptionsRows() {
     dispatch(updateProjectInfo({ key, value }));
   }
 
-  function applyDefault() {}
-
   const { ganttRef, competitor } = useSelector(
     (state) => state.project.data.details
   );

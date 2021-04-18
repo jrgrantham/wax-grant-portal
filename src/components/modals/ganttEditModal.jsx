@@ -21,7 +21,7 @@ function numberOfBars(schedule) {
 }
 
 function EditModal(props) {
-  const { task, taskPackTitles, setEditModal } = props;
+  const { task, taskPackTitles } = props;
   const { dayLoading, days, description, workPackageTitle, schedule } = task;
   const dispatch = useDispatch();
   const barLimit = Math.ceil(schedule.length / 2);
@@ -92,13 +92,6 @@ function EditModal(props) {
     );
   }
 
-  function checkCloseModal(e) {
-    // e.preventDefault();
-    // console.log("listening");
-    if (e.target.id === "background" || e.key === "Escape" || e.keycode === 27)
-      closeModal();
-  }
-
   function resetBars() {
     // send bars = 1 then days = 1
     const changes = {
@@ -121,13 +114,13 @@ function EditModal(props) {
   }
 
   const closeData = {
-    key: 'showTaskEditModal',
+    key: "showTaskEditModal",
   };
 
   return (
-    <Container id="background" onClick={checkCloseModal}>
+    <Container>
       <div className="editWindow">
-        <Close data={closeData}/>
+        <Close data={closeData} />
         <form onSubmit={formik.handleSubmit}>
           <div className="formField">
             <label htmlFor="description">Task Title</label>

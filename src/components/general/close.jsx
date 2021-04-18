@@ -1,20 +1,30 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import closeWhite from "../../images/close-white.png";
 import closeGrey from "../../images/close-grey.png";
 import { updateUserSelection } from "../../store/projectData/user";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toastDelay } from "../../helpers";
 
 function Close(props) {
-  const {key} = props.data
+  const { key, message } = props.data;
   const dispatch = useDispatch();
+
   function close() {
-    dispatch(
-      updateUserSelection({
-        key,
-        value: "",
-      })
-    );
+    if (message) {
+      toast.configure();
+      toast.info(message, {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: toastDelay,
+      });
+    } else
+      dispatch(
+        updateUserSelection({
+          key,
+          value: "",
+        })
+      );
   }
   // const color = props.color === "white" ? closeWhite : closeGrey;
   return (

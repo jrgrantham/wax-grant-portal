@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import close from "../../images/close-white.png";
+import { useSelector } from "react-redux";
 import { getResources, wpInfoColor } from "../../helpers/";
-import { updateUserSelection } from "../../store/projectData/user";
 import Close from '../general/close'
 
 function GanttSummaryModal() {
-  const dispatch = useDispatch();
   const allTasks = useSelector((state) => state.tasks.data);
   const people = useSelector((state) => state.team.data);
 

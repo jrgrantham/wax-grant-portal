@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import close from "../../images/close-white.png";
 import { getResources, wpInfoColor } from "../../helpers/";
 import { updateUserSelection } from "../../store/projectData/user";
+import Close from '../general/close'
 
 function GanttSummaryModal() {
   const dispatch = useDispatch();
@@ -35,9 +36,7 @@ function GanttSummaryModal() {
 
   return (
     <Container>
-      <div onClick={closeModal} className="close">
-        <img src={close} alt="close" />
-      </div>
+      <Close close={closeModal} />
       <h3>Days</h3>
       {people.map((person, index) => {
         return (
@@ -55,8 +54,8 @@ export default GanttSummaryModal;
 const Container = styled.div`
   position: fixed;
   min-height: 100px;
-  min-width: 120px;
-  z-index: 5;
+  min-width: 110px;
+  z-index: 2;
   bottom: 10px;
   right: 10px;
   background-color: ${wpInfoColor};
@@ -68,19 +67,11 @@ const Container = styled.div`
   color: white;
   font-weight: 700;
   font-size: 14px;
-  .close {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    height: 20px;
-    width: 20px;
-    cursor: pointer;
-  }
   .person {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin: 4px 0px;
+    margin: 3px 0px;
   }
   img {
     width: 100%;

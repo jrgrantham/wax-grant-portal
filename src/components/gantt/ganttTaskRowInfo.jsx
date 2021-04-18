@@ -19,7 +19,7 @@ toast.configure();
 
 function GanttTaskRowInfo(props) {
   const dispatch = useDispatch();
-  const [editModal, setEditModal] = useState(false);
+  const [editModal, setEditModal] = useState(true);
   const [resourcesModal, setResourcesModal] = useState(false);
   const { task, provided, packData, taskPackTitles } = props;
   const { description, days } = task;
@@ -38,17 +38,6 @@ function GanttTaskRowInfo(props) {
     );
   }
 
-  function handleClick() {
-    setShowEditDays(true);
-    // document.addEventListener("mousedown", handleMouseDown, false);
-  }
-  // function handleMouseDown(e) {
-  //   setShowEditDays(false);
-  //   document.removeEventListener("mousedown", handleMouseDown);
-  //   if (e.target.id === "accept") {
-  //     acceptNewDays();
-  //   } else setNewDays(days);
-  // }
   function handleDayChange(e) {
     if (e.target.value) {
       const lastThreeNumbers = e.target.value.slice(-3);
@@ -57,6 +46,7 @@ function GanttTaskRowInfo(props) {
       setNewDays(0);
     }
   }
+
   function acceptNewDays() {
     setShowEditDays(false);
     console.log(newDays);
@@ -127,7 +117,7 @@ function GanttTaskRowInfo(props) {
         ) : (
           <button
             className="days highlight packBackground"
-            onClick={handleClick}
+            onClick={() => setShowEditDays(true)}
           >
             {days}
           </button>

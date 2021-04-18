@@ -42,3 +42,8 @@ input {
 input:focus {
   border-color: dodgerblue;
 }
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+}

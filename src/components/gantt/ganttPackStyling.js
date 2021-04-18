@@ -23,10 +23,6 @@ export const Container = styled.div`
     height: 100%;
     padding: 0;
   }
-  img {
-    max-height: 80%;
-    max-width: 100%;
-  }
   .packBackground {
     background-color: ${wpBackground};
   }

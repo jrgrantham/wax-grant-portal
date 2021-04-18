@@ -1,14 +1,13 @@
 import React from "react";
-import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { removeTask, updateTaskPack } from "../../store/projectData/tasks";
 import { deleteTaskAllocations } from "../../store/projectData/allocations";
-import close from "../../images/close-grey.png";
+import Close from "../general/close";
 import save from "../../images/save-grey.png";
 import bin from "../../images/bin-grey.png";
-import { wpInfoColor } from "../../helpers";
+import { Container } from "./modalStyling";
 
 function numberOfBars(schedule) {
   let bars = 0;
@@ -79,24 +78,16 @@ function EditModal(props) {
           changes,
         })
       );
-      closeModal();
+      props.closeModal();
     },
     validationSchema,
   });
 
-  window.addEventListener("keydown", checkCloseModal, false);
-
   function checkCloseModal(e) {
+    e.preventDefault();
     console.log("listening");
     if (e.target.id === "background" || e.key === "Escape" || e.keycode === 27)
-      e.preventDefault();
-    closeModal();
-  }
-
-  function closeModal() {
-    console.log("closed");
-    props.setEditModal(false);
-    window.removeEventListener("keydown", checkCloseModal);
+      props.setEditModal(false);
   }
 
   function resetBars() {
@@ -112,7 +103,7 @@ function EditModal(props) {
         changes,
       })
     );
-    closeModal();
+    props.setEditModal(false);
   }
   function deleteTask(taskId) {
     dispatch(removeTask(taskId));
@@ -122,46 +113,36 @@ function EditModal(props) {
   return (
     <Container id="background" onClick={checkCloseModal}>
       <div className="editWindow">
-        <div className="color" />
-        <div className="topRow">
-          <button onClick={() => closeModal()}>
-            <img src={close} alt="close" />
-          </button>
-        </div>
-
+        <Close close={props.closeModal} />
         <form onSubmit={formik.handleSubmit}>
           <div className="formField">
-            <div className="inputArea">
-              <label htmlFor="description">Task Title</label>
-              <input
-                type="text"
-                name="description"
-                id="description"
-                onChange={formik.handleChange}
-                value={formik.values.description}
-              />
-            </div>
+            <label htmlFor="description">Task Title</label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              onChange={formik.handleChange}
+              value={formik.values.description}
+            />
             {formik.touched.description && formik.errors.description ? (
               <p className="errorMessage">{formik.errors.description}</p>
             ) : null}
           </div>
 
           <div className="formField">
-            <div className="inputArea">
-              <label htmlFor="work pack">Work Package</label>
-              <select
-                value={formik.values.workPackageTitle}
-                onChange={formik.handleChange}
-                name="workPackageTitle"
-                id="workPackageTitle"
-              >
-                {taskPackTitles.map((title, index) => (
-                  <option value={title} key={index} className="title">
-                    {title}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <label htmlFor="work pack">Work Package</label>
+            <select
+              value={formik.values.workPackageTitle}
+              onChange={formik.handleChange}
+              name="workPackageTitle"
+              id="workPackageTitle"
+            >
+              {taskPackTitles.map((title, index) => (
+                <option value={title} key={index} className="title">
+                  {title}
+                </option>
+              ))}
+            </select>
             {formik.touched.workPackageTitle &&
             formik.errors.workPackageTitle ? (
               <p className="errorMessage">{formik.errors.workPackageTitle}</p>
@@ -169,67 +150,65 @@ function EditModal(props) {
           </div>
 
           <div className="formField">
-            <div className="inputArea">
-              <label htmlFor="Assigned days">Assigned days</label>
-              <input
-                type="text"
-                name="days"
-                id="days"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.days}
-              />
-            </div>
+            <label htmlFor="Assigned days">Assigned days</label>
+            <input
+              type="text"
+              name="days"
+              id="days"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.days}
+            />
             {formik.touched.days && formik.errors.days ? (
               <p className="errorMessage">{formik.errors.days}</p>
             ) : null}
           </div>
 
           <div className="formField">
-            <div className="inputArea">
-              <label htmlFor="Number of bars">Number of bars</label>
-              <input
-                type="text"
-                name="bars"
-                id="bars"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.bars}
-              />
-            </div>
+            <label htmlFor="Number of bars">Number of bars</label>
+            <input
+              type="number"
+              name="bars"
+              id="bars"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.bars}
+            />
             {formik.touched.bars && formik.errors.bars ? (
               <p className="errorMessage">{formik.errors.bars}</p>
             ) : null}
           </div>
 
           <div className="formField">
-            <div className="inputArea">
-              <label htmlFor="Days Loading">Days Loading</label>
-              <select
-                id="dayLoading"
-                name="dayLoading"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.dayLoading}
-              >
-                <option value="front">Front</option>
-                <option value="level">Level</option>
-                <option value="back">Back</option>
-              </select>
-            </div>
+            <label htmlFor="Days Loading">Days Loading</label>
+            <select
+              id="dayLoading"
+              name="dayLoading"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.dayLoading}
+            >
+              <option value="front">Front</option>
+              <option value="level">Level</option>
+              <option value="back">Back</option>
+            </select>
             {formik.touched.daysLoading && formik.errors.dayLoading ? (
               <p className="errorMessage">{formik.errors.dayLoading}</p>
             ) : null}
           </div>
-          <div className="bottomRow">
+          <div className="bottomButtons">
             <button className="leftB" onClick={resetBars}>
               Reset Bars
             </button>
             <button onClick={() => deleteTask(task.taskId)}>
-              <img src={bin} alt="delete" />
+              <div className="image">
+                <img src={bin} alt="delete" />
+              </div>
             </button>
             <button type="submit">
-              <img src={save} alt="save" />
+              <div className="image">
+                <img src={save} alt="save" />
+              </div>
             </button>
           </div>
         </form>
@@ -239,111 +218,3 @@ function EditModal(props) {
 }
 
 export default EditModal;
-
-const Container = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: rgba(20, 20, 20, 0.6);
-  z-index: 2;
-
-  .editWindow {
-    position: relative;
-    width: 450px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 8px;
-    overflow: hidden;
-    label {
-      font-weight: 600;
-      color: white;
-      z-index: 1;
-      margin-left: 10px;
-    }
-  }
-  .color {
-    position: absolute;
-    width: 160px;
-    height: 100%;
-    background-color: ${wpInfoColor};
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* width: 100%; */
-  }
-  button {
-    padding-left: 10px;
-    padding-right: 10px;
-    cursor: pointer;
-  }
-
-  .errorMessage {
-    font-size: 12px;
-    color: red;
-  }
-
-  .formField {
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: flex-end;
-    flex-direction: column;
-    width: 95%;
-    height: 45px;
-    margin-bottom: 5px;
-    margin-right: 10px;
-  }
-  .inputArea {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  select,
-  input {
-    width: 250px;
-    border: 1px solid #d1d1d1;
-    margin-right: 0;
-  }
-  .topRow {
-    display: flex;
-    justify-content: flex-end;
-    margin: 10px 5px 10px 0;
-    img {
-      height: 25px;
-    }
-  }
-  .bottomRow {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
-    padding-right: 5px;
-  }
-  img {
-    height: 25px;
-  }
-  .content {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
-  /* .leftB {
-    margin-right: 10px;
-  } */
-`;

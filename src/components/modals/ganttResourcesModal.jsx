@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import close from "../../images/close-grey.png";
 
 import ResourcesRow from "./ganttResourcesModalRow";
+import Close from '../general/close';
 
 import { getResources, toastDelay, wpInfoColor } from "../../helpers";
 
@@ -21,7 +21,6 @@ function ResourcesModal(props) {
     let close = true;
     for (let i = 0; i < taskIds.length; i++) {
       if (resources[taskIds[i]].completion !== 100) {
-        // window.removeEventListener("keydown", checkKey);
         close = false;
         toast.info("All tasks must be 100%", {
           position: toast.POSITION.TOP_RIGHT,
@@ -36,19 +35,11 @@ function ResourcesModal(props) {
   function checkBackground(e) {
     if (e.target.id === "background") closeModal();
   }
-  // function checkKey(event) {
-  //   if (event.key === "Escape" || event.keycode === 27) closeModal();
-  // }
-
-  // useEffect(() => {
-  //   window.addEventListener("keydown", checkKey, false);
-  //   return window.removeEventListener("keydown", checkKey);
-  // }, []);
 
   return (
     <Container id="background" onClick={(e) => checkBackground(e)}>
-      {/* <Container id="background" onClick={(e) => checkBackground(e)}> */}
       <div className="editWindow">
+        <Close close={closeModal}/>
         <div className="modalRow title">
           <h3 className="description">Description</h3>
           {allPeople.map((person, index) => {
@@ -71,12 +62,6 @@ function ResourcesModal(props) {
             />
           );
         })}
-
-        <div className="bottomRow">
-          <button onClick={closeModal}>
-            <img src={close} alt="close" />
-          </button>
-        </div>
       </div>
     </Container>
   );
@@ -99,9 +84,8 @@ const Container = styled.div`
   z-index: 2;
 
   .editWindow {
-    /* padding: 40px 45px 30px 45px; */
+    position: relative;
     max-height: 80vh;
-    overflow: auto;
 
     display: flex;
     flex-direction: column;
@@ -110,11 +94,6 @@ const Container = styled.div`
     background-color: white;
     border: 1px solid black;
     border-radius: 8px;
-  }
-  .bottomRow {
-    margin: 10px 20px 15px 0px;
-    display: flex;
-    justify-content: flex-end;
   }
   .modalRow {
     height: 40px;
@@ -165,7 +144,7 @@ const Container = styled.div`
     color: red;
   }
   img {
-    max-width: 25px;
-    max-height: 25px;
+    max-width: 100%;
+    max-height: 100%;
   }
 `;

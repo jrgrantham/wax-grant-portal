@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/wax-grant-portal/precache-manifest.3ad0b840cd80eb0f59df7603cc395bd1.js"
+  "/wax-grant-portal/precache-manifest.db13dd03a4a7833c8aee5fad0849cd0c.js"
 );
 
 workbox.clientsClaim();

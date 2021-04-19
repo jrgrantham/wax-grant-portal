@@ -20,13 +20,26 @@ export const getProjectDefaults = (state) => {
   const {
     natureDefault,
     ipProtectionDefault,
-    fundingLevelDefault,
   } = state.options.data;
-
   const defaults = [
     { key: 'nature', value: natureDefault },
     { key: 'ipProtection', value: ipProtectionDefault },
-    // { nature: natureDefault },
+  ]
+  return defaults
+}
+
+export const getCompanyDefaults = (state) => {
+  const {
+    orgTypeDefault,
+    orgSizeDefault,
+    fundingLevelDefault,
+    matchFundingSourceDefault
+  } = state.options.data;
+  const defaults = [
+    {key: 'organisationType', value: orgTypeDefault},
+    {key: 'organisationSize', value: orgSizeDefault},
+    {key: 'fundingLevel', value: fundingLevelDefault},
+    {key: 'matchFundingSource', value: matchFundingSourceDefault},
   ]
   return defaults
 }

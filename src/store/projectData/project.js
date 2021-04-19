@@ -18,8 +18,15 @@ const slice = createSlice({
       const { defaults } = action.payload;
       defaults.forEach((row) => {
         const { key, value } = row;
-        console.log(key, value);
         project.data.details[key] = value;
+      });
+    },
+    setCompanyDefaults: (project, action) => {
+      const { defaults, leader } = action.payload;
+      console.log(defaults, leader);
+      defaults.forEach((row) => {
+        const { key, value } = row;
+        project.data[leader][key] = value;
       });
     },
   },
@@ -29,6 +36,7 @@ export const {
   updateProjectInfo,
   updateLeaderInfo,
   setProjectDefaults,
+  setCompanyDefaults,
 } = slice.actions;
 export default slice.reducer;
 

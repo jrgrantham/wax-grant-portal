@@ -28,7 +28,7 @@ export const options = {
       "Industrial Design",
       "Electronics Engineer",
     ],
-    projectRoleDefault: "Select...",
+    projectRoleDefault: null,
     locations: ["UK", "Other"],
     locationDefault: "UK",
     orgTypes: ["Business", "Academic"],

@@ -4,7 +4,8 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { useSelector } from "react-redux";
 import { Container } from "./projectStyling";
-import { updateLeaderInfo } from "../../store/projectData/project";
+import { setCompanyDefaults, updateLeaderInfo } from "../../store/projectData/project";
+import { getCompanyDefaults } from "../../store/projectData/options";
 
 function CompanyRows() {
   const leader = useSelector((state) => state.user.selectedLeader);
@@ -43,9 +44,19 @@ function CompanyRows() {
     investorName,
   } = useSelector((state) => state.project.data[leader]);
 
+  const defaults = getCompanyDefaults(useSelector((state) => state));
+  function applyDefaults() {
+    dispatch(setCompanyDefaults({ defaults, leader }));
+  }
+
   return (
     <Container>
       <div className="rows company">
+        <div className="bottomRow">
+          <button onClick={applyDefaults}>
+            <h3>Apply defaults</h3>
+          </button>
+        </div>
         <div className="row">
           <Tippy placement="top-start" content="Full company name">
             <input

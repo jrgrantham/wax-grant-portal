@@ -118,6 +118,7 @@ function TeamRow(props) {
             className="field dayRate"
           />
           <select
+          selected='UK'
             className="field location"
             id={person.personId + "location"}
             name="location"

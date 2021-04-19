@@ -1,15 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
-import { useSelector } from "react-redux";
-import { Container } from "./projectStyling";
 import {
   updateProjectInfo,
   setProjectDefaults,
 } from "../../store/projectData/project";
 import { getProjectDefaults } from "../../store/projectData/options";
 import qMark from "../../images/qMark.png";
+import { Container } from "./projectStyling";
 
 function ProjectRows() {
   const dispatch = useDispatch();
@@ -64,11 +63,6 @@ function ProjectRows() {
           </Tippy>
         </div>
         <div className="row">
-          {/* <Tippy content="IUK's grant platform applicant number">
-            <div className="info">
-              <img src={qMark} alt="info" />
-            </div>
-          </Tippy> */}
           <Tippy
             placement="top-start"
             content="IUK's grant platform applicant number"
@@ -83,11 +77,6 @@ function ProjectRows() {
           </Tippy>
         </div>
         <div className="row">
-          {/* <Tippy content="The nature of the output from the project">
-            <div className="info">
-              <img src={qMark} alt="info" />
-            </div>
-          </Tippy> */}
           <Tippy placement="top-start" content="Nature of Product or Service">
             <select
               // type="text"

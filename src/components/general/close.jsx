@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import closeGrey from "../../images/close-grey.png";
+import closeImg from "../../images/close-grey-white.png";
 import { updateUserSelection } from "../../store/projectData/user";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,7 +31,7 @@ function Close(props) {
   }
   return (
     <Container onClick={close}>
-      <img src={closeGrey} alt="close" />
+      <img src={closeImg} alt="close" />
     </Container>
   );
 }

@@ -4,7 +4,7 @@ export const projectData = {
     details: {
       productPlatformName: "productPlatformName",
       applicationNumber: "123445",
-      nature: "nature",
+      nature: "Process",
       ipProtection: "protection",
       projectName: "first Project",
       projectLength: 20,

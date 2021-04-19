@@ -14,10 +14,22 @@ const slice = createSlice({
       const { leader, key, value } = action.payload;
       project.data[leader][key] = value;
     },
+    setProjectDefaults: (project, action) => {
+      const { defaults } = action.payload;
+      defaults.forEach((row) => {
+        const { key, value } = row;
+        console.log(key, value);
+        project.data.details[key] = value;
+      });
+    },
   },
 });
 
-export const { updateProjectInfo, updateLeaderInfo } = slice.actions;
+export const {
+  updateProjectInfo,
+  updateLeaderInfo,
+  setProjectDefaults,
+} = slice.actions;
 export default slice.reducer;
 
 export const getProjectDates = (state) => {

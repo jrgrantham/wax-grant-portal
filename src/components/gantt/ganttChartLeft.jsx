@@ -45,9 +45,7 @@ function GanttChartLeft(props) {
 
   function toggleSummary() {
     const value = showSummary === "summary" ? "" : "summary";
-    dispatch(
-      updateUserSelection({ key: "showGanttSummary", value })
-    );
+    dispatch(updateUserSelection({ key: "showGanttSummary", value }));
   }
 
   return (

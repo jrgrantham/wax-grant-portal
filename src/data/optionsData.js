@@ -1,3 +1,11 @@
+function lengths() {
+  const length = [];
+  for (let i = 1; i < 37; i++) {
+    length.push(i);
+  }
+  return length;
+}
+
 export const options = {
   loading: false,
   data: {
@@ -61,19 +69,35 @@ export const options = {
     overheadRateDefault: 20,
     matchFundingSources: ["Investor", "Company Funds"],
     matchFundingSourceDefault: "Investor",
-    natures: ["platform", "process", "product"],
+    natures: ["Platform", "Process", "Product"],
     natureDefault: "Platform",
     ipProtections: [
-      "copyright",
-      "patents",
-      "trade secrets",
-      "patents and copyright",
-      "copyright and trade secrets",
-      "patents and trade secrets",
+      "Copyright",
+      "Patents",
+      "Trade Secrets",
+      "Patents and Copyright",
+      "Copyright and Trade Secrets",
+      "Patents and Trade Secrets",
     ],
-    ipProtectionDefault: "patents and copyright",
+    ipProtectionDefault: "Patents and Copyright",
     markets: ["UK", "EU", "US", "Asia"],
     marketDefault: "UK",
+    months: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    years: [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029],
+    projectLengths: lengths()
   },
   error: "",
 };

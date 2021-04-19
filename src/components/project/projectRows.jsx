@@ -4,7 +4,11 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { useSelector } from "react-redux";
 import { Container } from "./projectStyling";
-import { updateProjectInfo } from "../../store/projectData/project";
+import {
+  updateProjectInfo,
+  setProjectDefaults,
+} from "../../store/projectData/project";
+import { getProjectDefaults } from "../../store/projectData/options";
 import qMark from "../../images/qMark.png";
 
 function ProjectRows() {
@@ -17,14 +21,15 @@ function ProjectRows() {
     dispatch(updateProjectInfo({ key, value }));
   }
 
-  function applyDefault() {}
-  const { ipProtections, natures } = useSelector((state) => state.options.data);
+  const { ipProtections, natures, months, years, projectLengths } = useSelector(
+    (state) => state.options.data
+  );
 
   const {
     productPlatformName,
     applicationNumber,
     nature,
-    protection,
+    ipProtection,
     projectName,
     projectLength,
     startMonth,
@@ -34,31 +39,16 @@ function ProjectRows() {
     funding,
   } = useSelector((state) => state.project.data.details);
 
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const years = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029];
-  const length = [];
-  for (let i = 1; i < 37; i++) {
-    length.push(i);
+  const defaults = getProjectDefaults(useSelector((state) => state));
+  function applyDefaults() {
+    dispatch(setProjectDefaults({ defaults }));
   }
 
   return (
     <Container>
       <div className="rows">
         <div className="bottomRow">
-          <button onClick={applyDefault}>
+          <button onClick={applyDefaults}>
             <h3>Apply defaults</h3>
           </button>
         </div>
@@ -117,17 +107,11 @@ function ProjectRows() {
           </Tippy>
         </div>
         <div className="row">
-          {/* <Tippy content="The strategy used to protect the IP generated during the project">
-            <div className="info">
-              <img src={qMark} alt="info" />
-            </div>
-          </Tippy> */}
           <Tippy placement="top-start" content="IP Protection Strategy">
             <select
-              // type="text"
-              value={protection}
+              value={ipProtection}
               className="field"
-              name="protection"
+              name="ipProtection"
               onChange={onchangeHandler}
             >
               {ipProtections.map((protection, index) => {
@@ -151,22 +135,6 @@ function ProjectRows() {
             />
           </Tippy>
         </div>
-        {/* <div className="row">
-          <Tippy content="Select the project length (months). Check IUK competition website for guidance on project lengths">
-            <div className="info">
-              <img src={qMark} alt="info" />
-            </div>
-          </Tippy>
-          <Tippy placement="top-start" content="Project Length (months)">
-            <input
-              type="number"
-              value={projectLength}
-              className="field"
-              name="projectLength"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
-        </div> */}
         <div className="row">
           <Tippy content="Check IUK competition website for guidance on project lengths">
             <div className="info">
@@ -213,7 +181,7 @@ function ProjectRows() {
                 value={projectLength}
                 onChange={onchangeHandler}
               >
-                {length.map((year, index) => {
+                {projectLengths.map((year, index) => {
                   return (
                     <option key={index} value={year}>
                       {year}

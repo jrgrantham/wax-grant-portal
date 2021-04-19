@@ -13,3 +13,20 @@ const slice = createSlice({
 // export const {
 // } = slice.actions;
 export default slice.reducer;
+
+
+
+export const getProjectDefaults = (state) => {
+  const {
+    natureDefault,
+    ipProtectionDefault,
+    fundingLevelDefault,
+  } = state.options.data;
+
+  const defaults = [
+    { key: 'nature', value: natureDefault },
+    { key: 'ipProtection', value: ipProtectionDefault },
+    // { nature: natureDefault },
+  ]
+  return defaults
+}

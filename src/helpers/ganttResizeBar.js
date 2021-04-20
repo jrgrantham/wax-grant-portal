@@ -25,7 +25,7 @@ export function resizeBar(data, barDiv, e) {
   const originalPosition = e.clientX + offset;
 
   let blockCount = data.blockCount;
-  let width;
+  let newWidth;
   let origStartIndex = startPosition / blockWidth;
   let newStartIndex = startPosition / blockWidth;
   let origEndIndex = (startPosition + barWidth) / blockWidth - 1;
@@ -47,20 +47,20 @@ export function resizeBar(data, barDiv, e) {
   function resize(e) {
     setShowBlock(false);
     if (handle === "rgt") {
-      const uncontrolledWidth = e.pageX - barDiv.getBoundingClientRect().left;
-      width = Math.min(
-        Math.max(blockWidth, uncontrolledWidth),
+      const draggedSize = e.pageX - barDiv.getBoundingClientRect().left;
+      newWidth = Math.min(
+        Math.max(blockWidth, draggedSize),
         rightObstruction * blockWidth - startPosition
       );
-      setSize(width);
+      setSize(newWidth);
     } else if (handle === "lft") {
       newPosition = Math.min(
         Math.max(e.clientX + offset, leftObstruction * blockWidth),
         originalPosition + barWidth - blockWidth
       );
-      width = barWidth + originalPosition - newPosition;
+      newWidth = barWidth + originalPosition - newPosition;
       setPosition(newPosition);
-      setSize(width);
+      setSize(newWidth);
     }
   }
 
@@ -69,8 +69,8 @@ export function resizeBar(data, barDiv, e) {
     window.removeEventListener("mousemove", resize);
     window.removeEventListener("mouseup", stopResize);
     setSize(null);
-    if (!width) return; // undefined if no movement
-    const newBlockCount = Math.floor(width / blockWidth + 0.5);
+    if (!newWidth) return; // undefined if no movement
+    const newBlockCount = Math.floor(newWidth / blockWidth + 0.5);
     if (handle === "rgt" && blockCount !== newBlockCount) {
       change = newBlockCount - blockCount;
       newEndIndex = newBlockCount + startPosition / blockWidth - 1;
@@ -115,7 +115,7 @@ export function resizeBar(data, barDiv, e) {
       if (started && i > newEndIndex) {
         workingDay = false;
       }
-      task.schedule[i].status = workingDay;
+      // task.schedule[i].status = workingDay;
       if (workingDay) task.schedule[i].barNumber = barNumber;
       else task.schedule[i].barNumber = 0;
     }

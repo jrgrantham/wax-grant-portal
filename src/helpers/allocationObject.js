@@ -12,14 +12,17 @@ export function getTeamInitialsById() {
 export function getResources() {
   const resources = {};
   const team = store.getState().team.data;
-  const allTasks = store.getState().tasks.data;
+  const taskData = store.getState().tasks.data;
   const allocations = store.getState().allocations.data;
+  
+  const taskKeys = Object.keys(taskData)
+  const taskIds = taskKeys.filter(key => key !== 'taskOrder')
 
   team.forEach((person) => {
     getTeamInitialsById[person.personId] = person.acronym;
   });
 
-  allTasks.forEach((task) => {
+  taskIds.forEach((taskId) => {
     const peopleKeys = {};
     team.forEach((person) => {
       peopleKeys[person.acronym] = {
@@ -27,7 +30,7 @@ export function getResources() {
         percent: 0,
       };
     });
-    resources[task.taskId] = { completion: 0, people: "", ...peopleKeys };
+    resources[taskId] = { completion: 0, people: "", ...peopleKeys };
   });
 
   for (let i = 0; i < allocations.length; i++) {

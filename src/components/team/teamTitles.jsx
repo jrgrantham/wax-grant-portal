@@ -13,10 +13,10 @@ function Titles() {
     <Container>
       <div className="row titles">
         <div className="title name">
-          <h3>Name</h3>
+          <p>Name</p>
         </div>
         <div className="title acronym">
-          <h3>Acronym</h3>
+          <p>Acronym</p>
           <Tippy content="Identifies the team member on the Gantt Chart (red text indicates duplicate)">
             <div className="info">
               <img src={qMark} alt="add" />
@@ -24,7 +24,7 @@ function Titles() {
           </Tippy>
         </div>
         <div className="title role">
-          <h3>Role</h3>
+          <p>Role</p>
           <Tippy content="Project role (not necessarily job title)">
             <div className="info">
               <img src={qMark} alt="add" />
@@ -33,7 +33,7 @@ function Titles() {
         </div>
         {employmentType === "staff" ? (
           <div className="title salary">
-            <h3>Salary</h3>
+            <p>Salary</p>
             <Tippy content="Gross salary including company NI, company pension contribution and life insurance (£)">
               <div className="info">
                 <img src={qMark} alt="add" />
@@ -43,7 +43,7 @@ function Titles() {
         ) : (
           <>
             <div className="title dayRate">
-              <h3>Day rate</h3>
+              <p>Day rate</p>
               <Tippy content="Day rate (£)">
                 <div className="info">
                   <img src={qMark} alt="add" />
@@ -51,7 +51,7 @@ function Titles() {
               </Tippy>
             </div>
             <div className="title location">
-              <h3>Location</h3>
+              <p>Location</p>
             </div>
           </>
         )}

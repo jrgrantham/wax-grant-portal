@@ -39,7 +39,7 @@ export const TableContainer = styled.div`
   }
   .row {
     position: relative;
-    height: 45px;
+    min-height: 45px;
     margin-left: ${tableContentSideMargin};
     display: flex;
     align-items: center;
@@ -47,9 +47,6 @@ export const TableContainer = styled.div`
       transition: opacity 0.3s;
       opacity: 1;
     }
-  }
-  .row.titles {
-    /* margin-bottom: -20px; */
   }
   .hidden {
     opacity: 0;
@@ -59,6 +56,8 @@ export const TableContainer = styled.div`
     padding-left: 0;
     border-radius: 0;
     border-bottom: 2px solid ${tableInputUnderline};
+    color: #606060;
+    font-size: 16px;
     &:focus {
       border: none;
       border-bottom: 2px solid ${(props) => props.underline};

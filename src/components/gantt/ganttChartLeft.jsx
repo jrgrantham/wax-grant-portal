@@ -21,7 +21,8 @@ import { updateUserSelection } from "../../store/projectData/user";
 function GanttChartLeft(props) {
   const {
     taskPackTitles,
-    groupedTasks,
+    // groupedTasks,
+    workPackages,
     deliverables,
     milestones,
     totalDays,
@@ -35,7 +36,7 @@ function GanttChartLeft(props) {
     dispatch(
       addTask({
         projectLength,
-        title: `Work Package ${taskPackTitles.length + 1}`,
+        // title: `Work Package ${taskPackTitles.length + 1}`,
       })
       // addTask({ projectLength })
     );
@@ -52,11 +53,11 @@ function GanttChartLeft(props) {
     <PageContainer>
       <div id="details">
         <button onClick={toggleSummary} className="summary">
-          Summary
+          {showSummary === 'summary' ? "Hide Summary" : 'Show Summary'}
         </button>
         <div className="monthHeaderSpacer"></div>
-        {groupedTasks.length
-          ? groupedTasks.map((task, index) => {
+        {workPackages.length
+          ? workPackages.map((task, index) => {
               return (
                 <GanttPackWork
                   key={index}

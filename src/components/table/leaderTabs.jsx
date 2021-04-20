@@ -13,8 +13,8 @@ function LeaderTabs(props) {
   const dispatch = useDispatch();
   const leader = useSelector((state) => state.user.selectedLeader);
 
-  const pOne = "Partner One";
-  const pTwo = "Partner One";
+  const pOne = "Partner One"; // for dynamic
+  const pTwo = "Partner Two"; // for dynamic
 
   const tabs = [
     { name: "Lead Applicant", key: "lead" },
@@ -23,6 +23,7 @@ function LeaderTabs(props) {
     { name: "Combined", key: "combined" },
   ];
 
+  // set to leader if combined not relevant
   if (!props.viewCombinedTab) {
     if (leader === "combined") selectLeader("lead");
     tabs.pop();

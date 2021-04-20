@@ -10,6 +10,8 @@ export const Container = styled.div`
     display: flex;
     margin-right: 20px;
     padding: 5px 0px;
+    color: ${teamColor};
+    font-weight: bold;
   }
   .info {
     margin: 0;

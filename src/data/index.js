@@ -1,4 +1,5 @@
 export * from "./taskData";
+export * from "./taskData2";
 export * from "./deadlineData";
 export * from "./projectData";
 export * from "./teamData";

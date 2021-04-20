@@ -21,8 +21,12 @@ function OptionsRows() {
     (state) => state.project.data.details
   );
 
+  const data = {
+    maxHeight: "550px",
+  };
+
   return (
-    <Container>
+    <Container data={data}>
       <div className="rows">
         <div className="row">
           <Tippy content="This is typically Q7, but see IUK competition webpage for details">

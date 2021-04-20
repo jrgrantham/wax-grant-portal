@@ -35,7 +35,8 @@ export function updateEditedWp(oldRow, changes) {
           autoClose: toastDelay,
         });
       }
-      updateNumberOfBars(draft, bars);
+      const resetSchedule = updateNumberOfBars(bars, draft.schedule);
+      draft.schedule = resetSchedule
     }
   });
   return newRow;
@@ -47,9 +48,9 @@ function updateDays(draftRow, days, reset) {
   const schedule = draftRow.schedule;
   let statusCount = 0;
   for (let i = 0; i < schedule.length; i++) {
-    if (schedule[i].status) statusCount++;
+    if (schedule[i].value > 0) statusCount++; // was just status
     if (statusCount > days) {
-      schedule[i].status = false;
+      // schedule[i].status = false;
       schedule[i].value = 0;
       schedule[i].barNumber = 0;
       if (!alerted && !reset) {
@@ -76,19 +77,13 @@ function updateNumberOfBars(task, numberOfBars) {
   const schedule = task.schedule;
   let barNumber = 1;
   for (let i = 0; i < schedule.length - 1; i = i + 2) {
-    schedule[i].value = 0;
     if (barNumber <= numberOfBars) {
-      schedule[i].status = true;
       schedule[i].barNumber = barNumber;
       barNumber++;
-      schedule[i + 1].status = false;
-      schedule[i + 1].barNumber = 0;
     } else {
-      schedule[i].status = false;
       schedule[i].barNumber = 0;
-      schedule[i + 1].status = false;
-      schedule[i + 1].barNumber = 0;
     }
+    schedule[i + 1].barNumber = 0;
   }
   spreadWork(task);
   return task;
@@ -102,7 +97,8 @@ export function spreadWork(task) {
   const remainderMonths = days % duration;
   let j = 0;
   for (let i = 0; i < schedule.length; i++) {
-    if (schedule[i].status) {
+    if (schedule[i].value > 0) {
+      // was just status
       if (j < remainderMonths) {
         schedule[i].value = Months + 1;
         j++;
@@ -132,12 +128,11 @@ export function wPCreateNewRow(scheduleLength, title = newTitle) {
     days: 1, // default
     dayLoading: "front", // default
     sortPosition: 0, // should sort its self out...
-    resources: [], // empty to start with
     schedule: [], // create from project settings
   };
   for (let i = 0; i < scheduleLength; i++) {
     const emptyBlock = {
-      status: false,
+      // status: false,
       start: false,
       end: false,
       barNumber: 0,
@@ -147,29 +142,29 @@ export function wPCreateNewRow(scheduleLength, title = newTitle) {
     };
     newRow.schedule.push(emptyBlock);
   }
-  newRow.schedule[0].status = true;
+  // newRow.schedule[0].status = true;
   newRow.schedule[0].value = 1;
   newRow.schedule[0].barNumber = 1;
   return newRow;
 }
 
-export function dAndMCreateNewRow(type, scheduleLength) {
-  const newRow = {
-    taskId: uuidv4(),
-    sortPosition: 0,
-    type,
-    description: "Deadline description",
-  };
-  for (let i = 0; i < scheduleLength; i++) {
-    const emptyBlock = {
-      status: false,
-      start: false,
-      end: false,
-      blockId: uuidv4(),
-      scheduleIndex: 0,
-    };
-    newRow.schedule.push(emptyBlock);
-  }
-  newRow.schedule[0].status = true;
-  return newRow;
-}
+// export function dAndMCreateNewRow(type, scheduleLength) {
+//   const newRow = {
+//     taskId: uuidv4(),
+//     sortPosition: 0,
+//     type,
+//     description: "Deadline description",
+//   };
+//   for (let i = 0; i < scheduleLength; i++) {
+//     const emptyBlock = {
+//       // status: false,
+//       start: false,
+//       end: false,
+//       blockId: uuidv4(),
+//       scheduleIndex: 0,
+//     };
+//     newRow.schedule.push(emptyBlock);
+//   }
+//   // newRow.schedule[0].status = true;
+//   return newRow;
+// }

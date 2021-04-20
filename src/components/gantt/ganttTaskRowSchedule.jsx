@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import GanttBar from "./ganttTaskBar";
 import { leadingZero } from "../../helpers";
@@ -7,6 +8,7 @@ import { leadingZero } from "../../helpers";
 function GanttWPRowSchedule(props) {
   const { task, wpNumber, taskNumber } = props;
   const schedule = props.task.schedule;
+  const {projectLength} = useSelector(state => state.project.data.details)
 
   const bars = [];
   let newBar = false;
@@ -20,8 +22,15 @@ function GanttWPRowSchedule(props) {
 
   // create an array of bars
   // generate obstruction locations during this loop
-  for (let i = 0; i < schedule.length; i++) {
-    const currentMonth = schedule[i].status;
+  for (let i = 0; i < projectLength; i++) {
+
+    // console.log(i, schedule[i]);
+    // const currentMonth = schedule[i].status;
+    if (!schedule[i]) {
+
+      break
+    }
+    const currentMonth = schedule[i].barNumber > 0;
 
     if (lastMonth === false && currentMonth === true) {
       newBar = true;
@@ -33,7 +42,7 @@ function GanttWPRowSchedule(props) {
         bars.push([]);
         bars[currentBarIndex].startIndex = i;
         bars[currentBarIndex].leftObstruction = 0;
-        bars[currentBarIndex].rightObstruction = schedule.length;
+        bars[currentBarIndex].rightObstruction = projectLength;
 
         // set obstructions
         if (currentBarIndex > 0) {
@@ -53,7 +62,7 @@ function GanttWPRowSchedule(props) {
       blockIndex++;
     }
     // at the end of the bar
-    const endOfSched = currentMonth && i === schedule.length - 1;
+    const endOfSched = currentMonth && i === projectLength - 1;
     const endOfBar = lastMonth === true && currentMonth === false;
     if (endOfBar || endOfSched) {
       const prefix = bars[currentBarIndex][blockIndex - 1].blockNumber.slice(

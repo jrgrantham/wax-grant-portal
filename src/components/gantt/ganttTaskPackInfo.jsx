@@ -12,7 +12,6 @@ import {
   updateTaskPackTitle,
   removeTaskPack,
 } from "../../store/projectData/tasks";
-// import { dAndMReorderRows } from "../../store/projectData/deadlines";
 import GanttTaskRowInfo from "./ganttTaskRowInfo";
 import EditModal from "../modals/ganttEditModal";
 import tick from "../../images/tick-white.png";
@@ -29,11 +28,16 @@ function GanttPackWork(props) {
   const [edit, setEdit] = useState(false);
   const [editTitleWindow, setEditTitleWindow] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
-  // const [confirmDelete, setConfirmDelete] = useState(false);
 
   const { projectLength } = useSelector((state) => state.project.data.details);
+  const { taskOrder } = useSelector((state) => state.tasks.data);
+
   function handleAddNewRow() {
-    dispatch(addTask({ projectLength, title }));
+    const [lastTask] = packData.slice(-1);
+    const lastTaskId = lastTask.taskId;
+    const workPackageId = lastTask.workPackageId;
+    const workPackageTitle = lastTask.workPackageTitle;
+    dispatch(addTask({ lastTaskId, workPackageId, workPackageTitle, projectLength }));
   }
 
   function calculateDays() {

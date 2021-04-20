@@ -13,9 +13,8 @@ import { updateUserSelection } from "../../store/projectData/user";
 function numberOfBars(schedule) {
   let bars = 0;
   for (let i = schedule.length - 1; i >= 0; i--) {
-    if (schedule[i].status) {
-      bars = schedule[i].barNumber;
-      return bars;
+    if (schedule[i].barNumber > 0) {
+      return schedule[i].barNumber;
     }
   }
 }
@@ -86,7 +85,7 @@ function EditModal(props) {
   function closeModal() {
     dispatch(
       updateUserSelection({
-        key: "showTaskEditModal",
+        key: "showComponent",
         value: "",
       })
     );

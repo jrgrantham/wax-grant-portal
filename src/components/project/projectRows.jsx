@@ -43,26 +43,38 @@ function ProjectRows() {
     dispatch(setProjectDefaults({ defaults }));
   }
 
+  const data = {
+    maxHeight: '350px'
+  }
+
   return (
-    <Container>
+    <Container data={data}>
       <div className="rows">
         <div className="bottomRow">
           <button onClick={applyDefaults}>
             <h3>Apply defaults</h3>
           </button>
         </div>
-        <div className="row">
-          <Tippy placement="top-start" content="Product / Platform Name">
-            <input
-              type="text"
-              value={productPlatformName}
-              className="field"
-              name="productPlatformName"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Product / Platform Name</p>
+          </div>
+          <input
+            type="text"
+            value={productPlatformName}
+            className="field"
+            name="productPlatformName"
+            onChange={onchangeHandler}
+          />
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Applicant number</p>
+          </div>
           <Tippy
             placement="top-start"
             content="IUK's grant platform applicant number"
@@ -76,7 +88,12 @@ function ProjectRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Nature of Product or Service</p>
+          </div>
           <Tippy placement="top-start" content="Nature of Product or Service">
             <select
               // type="text"
@@ -95,7 +112,12 @@ function ProjectRows() {
             </select>
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>IP Protection Strategy</p>
+          </div>
           <Tippy placement="top-start" content="IP Protection Strategy">
             <select
               value={ipProtection}
@@ -113,7 +135,12 @@ function ProjectRows() {
             </select>
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Project Name</p>
+          </div>
           <Tippy placement="top-start" content="Project Name">
             <input
               type="text"
@@ -124,7 +151,12 @@ function ProjectRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Time Scale</p>
+          </div>
           <Tippy content="Check IUK competition website for guidance on project lengths">
             <div className="info">
               <img src={qMark} alt="info" />
@@ -181,7 +213,12 @@ function ProjectRows() {
             </Tippy>
           </div>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Project Manager</p>
+          </div>
           <Tippy placement="top-start" content="Project Manager">
             <input
               type="text"
@@ -192,7 +229,12 @@ function ProjectRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Management Software</p>
+          </div>
           <Tippy placement="top-start" content="Management Software">
             <input
               type="text"
@@ -203,7 +245,12 @@ function ProjectRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Commercialisation Funding Required</p>
+          </div>
           <Tippy
             placement="top-start"
             content="Commercialisation Funding Required"

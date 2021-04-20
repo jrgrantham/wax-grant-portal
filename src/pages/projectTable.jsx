@@ -31,6 +31,11 @@ function Team() {
     if (selectedOption === "options") return <OptionsRows />;
   }
 
+  const data = {
+    underline: menuData.backgroundColor,
+    maxHeight: '550px'
+  }
+
   return (
     <TableContainer underline={menuData.backgroundColor}>
       <div className="displayArea">

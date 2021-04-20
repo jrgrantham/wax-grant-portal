@@ -2,37 +2,64 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-import {
-  appTop,
-  appWidth,
-  wpMarginBottom,
-} from "../helpers/";
+import { appTop, appWidth, wpMarginBottom } from "../helpers/";
 import GanttChartLeft from "../components/gantt/ganttChartLeft";
 import GanttChartRight from "../components/gantt/ganttChartRight";
 import GanttSummaryModal from "../components/modals/ganttSummaryModal";
+import { getCompanyDefaults } from "../store/projectData/options";
+import { getTaskIds, getWorkPackageTitles } from "../store/projectData/tasks";
 // import { allResources } from "../store";
 
 function GanttChart() {
-  const allTasks = useSelector((state) => state.tasks.data);
+  const taskData = useSelector((state) => state.tasks.data);
+  const showSummary = useSelector((state) => state.user.showGanttSummary);
+  const taskIdKeys = getTaskIds(useSelector((state) => state));
+  const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
 
-  function createGroupedTasks(titles, data) {
-    const groupedTask = [];
-    titles.forEach((title) => {
-      const group = data.filter(
-        (workPack) => workPack.workPackageTitle === title
-      );
-      groupedTask.push(group);
+  const workPackageObject = {};
+  taskIdKeys.forEach((taskId) => {
+    const title = taskData[taskId].workPackageTitle;
+    if (!workPackageObject[title]) workPackageObject[title] = {};
+    workPackageObject[title][taskId] = taskData[taskId];
+  });
+
+  const daysPerMonth = [];
+  let totalDays = 0;
+  for (let i = 0; i < projectLength; i++) {
+    let days = 0;
+    taskIdKeys.forEach((task) => {
+      const currentDay = taskData[task].schedule[i].value;
+      days += currentDay;
+      totalDays += currentDay;
     });
-    return groupedTask;
+    daysPerMonth.push(days);
   }
 
-  const taskPackTitles = [
-    ...new Set(
-      allTasks.map((workPackage) => workPackage.workPackageTitle)
-      // .sort((a, b) => a - b)
-    ),
-  ];
-  const groupedTasks = createGroupedTasks(taskPackTitles, allTasks);
+  // create an array of arrays to get the site running as was
+
+  function generateWorkPackages() {
+    const taskOrder = taskData.taskOrder;
+    const groupedTasks = [[]];
+    // set initial value equal to the first entry
+    let previousPackId = taskData[taskOrder[0]].workPackageId;
+    let packIndex = 0;
+
+    for (let i = 0; i < taskOrder.length; i++) {
+      const currentTask = taskData[taskOrder[i]];
+      const currentPackId = currentTask.workPackageId;
+      // if new, increment the index and add an empty array
+      if (currentPackId !== previousPackId) {
+        packIndex++;
+        groupedTasks[packIndex] = [];
+      }
+      groupedTasks[packIndex].push(currentTask);
+      previousPackId = currentPackId;
+    }
+    return groupedTasks;
+  }
+
+  const workPackages = generateWorkPackages();
+
   const deliverables = useSelector((state) =>
     state.deadlines.data.filter((task) => task.type === "deliverable")
   );
@@ -44,20 +71,6 @@ function GanttChart() {
     (state) => state.project.data.details.projectLength
   );
 
-  const daysPerMonth = [];
-  let totalDays = 0;
-  for (let i = 0; i < projectLength; i++) {
-    let days = 0;
-    for (let j = 0; j < allTasks.length; j++) {
-      const currentDay = allTasks[j].schedule[i].value;
-      days += currentDay;
-      totalDays += currentDay;
-    }
-    daysPerMonth.push(days);
-  }
-
-  const showSummary = useSelector(state => state.user.showGanttSummary)
-
   const [chartWidth, setChartWidth] = useState(0);
   useEffect(() => {
     const scheduleElement = document.getElementById("schedule").scrollWidth;
@@ -67,7 +80,7 @@ function GanttChart() {
 
   const data = {
     taskPackTitles,
-    groupedTasks,
+    workPackages,
     deliverables,
     milestones,
     daysPerMonth,
@@ -80,7 +93,7 @@ function GanttChart() {
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />
       </div>
-      {showSummary === 'summary' ? <GanttSummaryModal /> : null }
+      {showSummary === "summary" ? <GanttSummaryModal /> : null}
     </PageContainer>
   );
 }

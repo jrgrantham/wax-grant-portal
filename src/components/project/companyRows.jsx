@@ -49,15 +49,24 @@ function CompanyRows() {
     dispatch(setCompanyDefaults({ defaults, leader }));
   }
 
+  const data = {
+    maxHeight: '550px'
+  }
+
   return (
-    <Container>
+    <Container data={data}>
       <div className="rows company">
         <div className="bottomRow">
           <button onClick={applyDefaults}>
             <h3>Apply defaults</h3>
           </button>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Full Company Name</p>
+          </div>
           <Tippy placement="top-start" content="Full company name">
             <input
               type="text"
@@ -68,7 +77,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Company Acronym</p>
+          </div>
           <Tippy placement="top-start" content="Company acronym">
             <input
               type="text"
@@ -79,7 +93,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Organisation Type</p>
+          </div>
           <Tippy placement="top-start" content="Organisation type">
             <select
               value={organisationType}
@@ -97,7 +116,12 @@ function CompanyRows() {
             </select>
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Organisation Size</p>
+          </div>
           <Tippy placement="top-start" content="Organisation size">
             <select
               value={organisationSize}
@@ -115,7 +139,12 @@ function CompanyRows() {
             </select>
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Postcode for Project Work</p>
+          </div>
           <Tippy placement="top-start" content="Postcode for project work">
             <input
               type="text"
@@ -126,7 +155,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Turnover (last financial year)</p>
+          </div>
           <Tippy placement="top-start" content="Turnover last financial year">
             <input
               type="number"
@@ -137,7 +171,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Last financial year (MMM/YY)</p>
+          </div>
           <Tippy placement="top-start" content="Last financial year (MMM/YY)">
             <input
               type="text"
@@ -148,7 +187,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>IP Lawyer Name</p>
+          </div>
           <Tippy placement="top-start" content="IP lawyer name">
             <input
               type="text"
@@ -159,7 +203,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Bank Holidays</p>
+          </div>
           <Tippy placement="top-start" content="Bank holidays per year">
             <input
               type="number"
@@ -170,7 +219,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Annual leave entitlement</p>
+          </div>
           <Tippy placement="top-start" content="Annual leave entitlement">
             <input
               type="number"
@@ -181,7 +235,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Current number of employees</p>
+          </div>
           <Tippy placement="top-start" content="Current number of employees">
             <input
               type="number"
@@ -192,8 +251,13 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
-          <Tippy placement="top-start" content="partner receives IUK funding?">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Partner receives IUK Funding?</p>
+          </div>
+          <Tippy placement="top-start" content="Partner receives IUK Funding?">
             <input
               type="text"
               value={partnerFunding}
@@ -203,7 +267,12 @@ function CompanyRows() {
             />
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Funding level (%)</p>
+          </div>
           <Tippy placement="top-start" content="Funding level (%)">
             <select
               type="text"
@@ -222,7 +291,12 @@ function CompanyRows() {
             </select>
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Product / Platform Name</p>
+          </div>
           <Tippy placement="top-start" content="Match funding source">
             <select
               type="text"
@@ -241,7 +315,12 @@ function CompanyRows() {
             </select>
           </Tippy>
         </div>
-        <div className="row">
+
+
+        <div className="row column">
+          <div className="title">
+            <p>Product / Platform Name</p>
+          </div>
           <Tippy placement="top-start" content="Investor name (if applicable)">
             <input
               type="text"

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { getResources, wpInfoColor } from "../../helpers/";
-import Close from '../general/close'
+// import Close from '../general/close'
 
 function GanttSummaryModal() {
   const allTasks = useSelector((state) => state.tasks.data);
@@ -31,7 +31,7 @@ function GanttSummaryModal() {
 
   return (
     <Container>
-      <Close data={data}/>
+      {/* <Close data={data}/> */}
       <h3>Days</h3>
       {people.map((person, index) => {
         return (

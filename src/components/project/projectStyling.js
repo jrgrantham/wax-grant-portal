@@ -1,11 +1,13 @@
 import styled from "styled-components";
+import { tableContentSideMargin } from "../../helpers";
+import {projectColor} from '../../helpers'
 
 export const Container = styled.div`
   .rows {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-height: 400px;
+    max-height: ${props => props.data.maxHeight};
   }
   .bottomRow {
     position: absolute;
@@ -19,13 +21,21 @@ export const Container = styled.div`
       color: gray;
     }
   }
-  .company {
+  .column {
+    width: calc(50% - ${tableContentSideMargin});
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+    margin-bottom: 15px;
   }
-  .row {
-    width: 46%;
+  .title {
+    display: flex;
+    font-weight: bold;
+    color: ${projectColor}
   }
   .field {
-    width: 100%;
+    width: 95%;
   }
   .month {
     width: 40px;

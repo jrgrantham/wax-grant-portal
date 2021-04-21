@@ -53,9 +53,7 @@ function GanttChartLeft(props) {
   return (
     <PageContainer>
       <div id="details">
-        <button onClick={toggleSummary} className="summary">
-          {showSummary ? "Hide Summary" : "Show Summary"}
-        </button>
+        <button onClick={toggleSummary} className="summary">Summary</button>
         <div className="monthHeaderSpacer"></div>
         {workPackages.length
           ? workPackages.map((task, index) => {
@@ -135,8 +133,6 @@ const PageContainer = styled.div`
       border: none;
       padding: 0;
       display: flex;
-      /* padding-left: 30px;
-      padding-right: 30px; */
     }
     img {
       margin: none;
@@ -152,6 +148,6 @@ const PageContainer = styled.div`
     border: none;
     color: white;
     font-weight: 600;
-    width: 150px;
+    width: 100px;
   }
 `;

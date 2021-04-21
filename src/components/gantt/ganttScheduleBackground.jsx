@@ -65,7 +65,7 @@ const Container = styled.div`
   .backgroundColumn {
     height: 100%;
     width: ${monthWidth};
-    background-color: rgba(255, 255, 255, 0.06);
+    background-color: rgba(255, 255, 255, 0.05);
     z-index: -1;
 
     display: flex;

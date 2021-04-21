@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getResources, wpInfoColor } from "../../helpers/";
 import { getTaskIds } from "../../store/projectData/tasks";
+import { updateUserSelection } from "../../store/projectData/user";
 
 function GanttSummaryModal() {
+  const dispatch = useDispatch();
   const allTasks = useSelector((state) => state.tasks.data);
   const people = useSelector((state) => state.team.data);
   const taskIds = getTaskIds(useSelector((state) => state));
   const resources = getResources();
+
+  function close() {
+    dispatch(updateUserSelection({ key: "showGanttSummary", value: false }));
+  }
 
   const peoplesDays = {};
   people.forEach((person) => {
@@ -26,7 +32,7 @@ function GanttSummaryModal() {
   });
 
   return (
-    <Container>
+    <Container onClick={close}>
       <h3>Days</h3>
       {people.map((person, index) => {
         return (
@@ -57,6 +63,8 @@ const Container = styled.div`
   color: white;
   font-weight: 700;
   font-size: 14px;
+  cursor: pointer;
+  
   .person {
     display: flex;
     justify-content: space-between;

@@ -8,7 +8,7 @@ function Navigation() {
   const showMenu = useSelector((state) => state.user.showMenu);
   const dispatch = useDispatch();
   function closeMenu() {
-    console.log('close');
+    console.log("close");
     dispatch(updateUserSelection({ key: "showMenu", value: false }));
   }
   const data = {
@@ -18,19 +18,17 @@ function Navigation() {
   };
   return (
     <Container appWidth={appWidth} data={data} onClick={closeMenu} id="menu">
-      <div onClick={closeMenu} id="menu" className="menu">
-        <div className="topButtons">
-          <button onClick={() => console.log("Export")} className="menuButton">
-            Export
-          </button>
-          <button onClick={() => console.log("Logout")} className="menuButton">
-            Logout
-          </button>
-        </div>
-        <button className="menuButton">
-          <a href="http://intangible-engineering.com">Developer</a>
+      <div className="topButtons">
+        <button onClick={() => console.log("Export")} className="menuButton">
+          Export
+        </button>
+        <button onClick={() => console.log("Logout")} className="menuButton">
+          Logout
         </button>
       </div>
+      <button className="menuButton">
+        <a href="http://intangible-engineering.com">Developer</a>
+      </button>
     </Container>
   );
 }
@@ -52,6 +50,7 @@ const Container = styled.nav`
   padding-bottom: 20px;
   background-color: rgba(50, 50, 50, 1);
   cursor: pointer;
+
   .topButtons {
     display: flex;
     flex-direction: column;
@@ -59,9 +58,6 @@ const Container = styled.nav`
   }
   a {
     font-size: 14px;
-    margin: 0;
-    padding: 0;
-    color: #a1a1a1;
   }
 
   .menuButton {

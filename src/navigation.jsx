@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Menu from "./components/general/menu";
-import { appTop, appWidth, navBackground } from "./helpers";
+import { appTop, appWidth, navBackground, navHighlight } from "./helpers";
 import navHome from "./images/navHome.png";
 import navBurger from "./images/navBurger.png";
 import { updateUserSelection } from "./store/projectData/user";
@@ -11,22 +11,22 @@ import { updateUserSelection } from "./store/projectData/user";
 function Navigation() {
   const dispatch = useDispatch();
   function openMenu() {
-    dispatch(updateUserSelection({key: 'showMenu', value: true}))
+    dispatch(updateUserSelection({ key: "showMenu", value: true }));
   }
   return (
     <Container appWidth={appWidth}>
       <Menu />
       <div className="navBar">
-        <NavLink
-          exact
-          to="/"
-          className="navButton icon"
-          activeClassName="selected"
-        >
-          <img src={navHome} alt="home" />
-        </NavLink>
-
+        <div className="burger" />
         <div className="pageLinks">
+          <NavLink
+            exact
+            to="/"
+            className="navButton icon"
+            activeClassName="selected"
+          >
+            <img src={navHome} alt="home" />
+          </NavLink>
           <NavLink
             exact
             to="/project"
@@ -72,9 +72,9 @@ function Navigation() {
           </NavLink>
         </div>
 
-        <p className="navButton icon burger" onClick={openMenu}>
+        <div className="icon burger" onClick={openMenu}>
           <img src={navBurger} alt="menu" />
-        </p>
+        </div>
       </div>
     </Container>
   );
@@ -116,23 +116,25 @@ const Container = styled.nav`
     }
   }
   .navButton.selected:hover h3 {
-    border-bottom: 2px solid rgba(30, 91, 127, 1);
+    border-bottom: 2px solid ${navHighlight};
   }
   .icon {
     height: 40px;
-    padding: 5px 15px;
+    padding: 10px 15px;
   }
   .burger {
-    max-height: 35px;
+    height: 20px;
+    width: 20px;
+    padding: 0;
   }
   img {
     max-width: 100%;
     max-height: 100%;
   }
   .selected {
-    background-color: rgba(30, 91, 127, 1);
+    background-color: ${navHighlight};
     h3 {
-      border-bottom: 2px solid rgba(30, 91, 127, 1);
+      border-bottom: 2px solid ${navHighlight};
     }
   }
   h3 {

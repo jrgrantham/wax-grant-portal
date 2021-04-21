@@ -5,7 +5,6 @@ export const appTop = "80px";
 export const toastDelay = 2000;
 
 export const navBackground = "rgba(12, 58, 93, 1)";
-export const navSelected = "rgba(12, 58, 93, 1)";
 
 export const adminColor = "rgba(162,84,198)";
 export const adminFontColor = "rgba(110,57,135)";
@@ -39,9 +38,8 @@ export const wpHighlight = "rgba(150, 150, 150, 0.2)";
 
 export const wpMarginBottom = "10px";
 export const rowHeight = "40px"; // not used
-export const dividerHeight = "50px";
+export const taskDeadlineGap = "50px";
 export const monthWidth = "40px";
 export const totalDaysColor = "rgba(255, 255, 255, 0.8)";
 
-export const schedGapColor = "rgba(1, 1, 1, 0.1)";
-export const schedColor = "rgba(255, 255, 255, 0.1)";
+export const schedGapColor = "rgba(12, 58, 93, 1)";

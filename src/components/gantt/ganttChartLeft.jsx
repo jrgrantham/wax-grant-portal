@@ -11,7 +11,7 @@ import {
   wpInfoColor,
   delTitleColor,
   milTitleColor,
-  dividerHeight,
+  taskDeadlineGap,
   totalDaysColor,
 } from "../../helpers";
 import add from "../../images/add-white.png";
@@ -112,7 +112,7 @@ const PageContainer = styled.div`
     width: 100%;
   }
   .divider {
-    height: ${dividerHeight};
+    height: ${taskDeadlineGap};
     width: 100%;
     padding-top: 5px;
     display: flex;

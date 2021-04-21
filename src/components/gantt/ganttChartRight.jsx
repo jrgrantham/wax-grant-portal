@@ -1,11 +1,19 @@
 import React from "react";
 // import React, { useEffect } from "react";
 import styled from "styled-components";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 import GanttScheduleBackground from "./ganttScheduleBackground";
 import GanttWPPackSchedule from "./ganttTaskPackSchedule";
 import GanttDMPackSchedule from "./ganttDeadlinePackSchedule";
-import { dividerHeight, monthWidth, totalDaysColor } from "../../helpers";
+import {
+  taskDeadlineGap,
+  monthWidth,
+  totalDaysColor,
+  navBackground,
+  schedGapColor,
+} from "../../helpers";
 
 function GanttChartRight(props) {
   const { workPackages, deliverables, milestones, daysPerMonth } = props.data;
@@ -58,9 +66,11 @@ function GanttChartRight(props) {
           <div className="divider">
             {daysPerMonth.map((month, index) => {
               return (
-                <div key={index} className="monthTotalDays">
-                  <h3>{month ? month : null}</h3>
-                </div>
+                <Tippy content="Turnover last financial year">
+                  <div key={index} className="monthTotalDays">
+                    <h3>{month ? month : null}</h3>
+                  </div>
+                </Tippy>
               );
             })}
           </div>
@@ -88,9 +98,11 @@ const PageContainer = styled.div`
   }
 
   .divider {
-    height: ${dividerHeight};
+    height: ${taskDeadlineGap};
     display: flex;
     align-items: flex-start;
+    border-bottom: 10px solid ${schedGapColor};
+    background-color: ${schedGapColor};
   }
   .monthTotalDays {
     width: ${monthWidth};

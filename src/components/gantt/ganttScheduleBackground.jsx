@@ -6,7 +6,6 @@ import Tippy from "@tippy.js/react";
 import { getProjectDates } from "../../store/projectData/project";
 import {
   monthWidth,
-  schedColor,
   schedGapColor,
   wpMarginBottom,
 } from "../../helpers";
@@ -41,7 +40,7 @@ export default GanttScheduleBackground;
 const Container = styled.div`
   position: absolute;
   display: flex;
-  height: calc(100% - 10px);
+  height: calc(100% - ${wpMarginBottom});
   p {
     font-size: 18px;
     font-weight: 700;
@@ -66,7 +65,8 @@ const Container = styled.div`
   .backgroundColumn {
     height: 100%;
     width: ${monthWidth};
-    background-color: ${schedColor};
+    background-color: rgba(255, 255, 255, 0.06);
+    z-index: -1;
 
     display: flex;
     justify-content: center;

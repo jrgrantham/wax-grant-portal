@@ -1,6 +1,5 @@
 import { store } from "../store";
 import { moveTaskBar } from "../store/projectData/tasks";
-import produce from "immer";
 
 export function moveBar(data, bar, e) {
   const {
@@ -26,8 +25,10 @@ export function moveBar(data, bar, e) {
     bar.style.left = null;
     const newIndex = Math.floor(position / blockWidth + 0.5);
     if (mousePosition !== undefined && newIndex !== originalIndex) {
-      const updatedRow = updateRow(task, originalIndex, newIndex, blockCount);
-      store.dispatch(moveTaskBar(updatedRow));
+      const taskId = task.taskId;
+      store.dispatch(
+        moveTaskBar({ taskId, originalIndex, newIndex, blockCount })
+      );
     }
   }
 
@@ -42,16 +43,4 @@ export function moveBar(data, bar, e) {
     );
     bar.style.left = position + "px";
   }
-}
-
-function updateRow(task, originalIndex, newIndex, blockCount) {
-  const newRow = produce(task, (draft) => {
-    const movement = newIndex - originalIndex;
-    const item = draft.schedule.splice(originalIndex, blockCount);
-    draft.schedule.splice(originalIndex + movement, 0, ...item);
-    for (let i = 0; i < task.schedule.length; i++) {
-      draft.schedule[i].scheduleIndex = i;
-    }
-  });
-  return newRow;
 }

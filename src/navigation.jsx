@@ -126,6 +126,7 @@ const Container = styled.nav`
     height: 20px;
     width: 20px;
     padding: 0;
+    cursor: pointer;
   }
   img {
     max-width: 100%;

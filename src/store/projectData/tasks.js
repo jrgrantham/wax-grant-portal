@@ -25,7 +25,7 @@ export const updateTaskDays = createAction("updateTaskDays");
 export const updateTaskPack = createAction("updateTaskPack"); // formik modal
 export const updateTaskBlock = createAction("updateTaskBlock");
 export const updateTaskPackTitle = createAction("updateTaskPackTitle");
-export const moveTaskBar = createAction("moveTaskBar");
+// export const moveTaskBar = createAction("moveTaskBar");
 
 // const initialState = {
 //   loading: false,
@@ -227,11 +227,18 @@ const slice = createSlice({
       tasks.data[taskId][key] = value;
     },
     updateTaskSchedule: (tasks, action) => {
+      // what is this? replace schedule??
       const { taskId, value } = action.payload;
       tasks.data[taskId].schedule = value;
     },
     resizeTaskBar: () => {},
-    moveTaskBar: () => {},
+    moveTaskBar: (tasks, action) => {
+      console.log("moving");
+      const { taskId, originalIndex, newIndex, blockCount } = action.payload;
+      const movement = newIndex - originalIndex;
+      const bar = tasks.data[taskId].schedule.splice(originalIndex, blockCount);
+      tasks.data[taskId].schedule.splice(originalIndex + movement, 0, ...bar);
+    },
     updateBlockDays: () => {},
 
     // pack operations
@@ -263,7 +270,7 @@ const slice = createSlice({
   },
 });
 
-export const { addTask } = slice.actions;
+export const { addTask, moveTaskBar, resizeTaskBar } = slice.actions;
 export default slice.reducer;
 
 export const getWorkPackageTitles = (state) => {
@@ -274,7 +281,7 @@ export const getWorkPackageTitles = (state) => {
       taskIds.map((taskId) => state.tasks.data[taskId].workPackageTitle)
     ),
   ];
-  return titles
+  return titles;
 };
 export const getTaskIds = (state) => {
   const list = Object.keys(state.tasks.data);

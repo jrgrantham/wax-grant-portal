@@ -11,7 +11,6 @@ import {
   taskDeadlineGap,
   monthWidth,
   totalDaysColor,
-  navBackground,
   schedGapColor,
 } from "../../helpers";
 
@@ -66,11 +65,11 @@ function GanttChartRight(props) {
           <div className="divider">
             {daysPerMonth.map((month, index) => {
               return (
-                <Tippy content="Turnover last financial year">
+                // <Tippy content="Turnover last financial year">
                   <div key={index} className="monthTotalDays">
                     <h3>{month ? month : null}</h3>
                   </div>
-                </Tippy>
+                // </Tippy>
               );
             })}
           </div>

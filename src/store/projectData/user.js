@@ -9,7 +9,7 @@ const slice = createSlice({
     showComponent: "", // set component identifier
     selectedLeader: "lead", // default should be user
     selectedAdminOption: "project",
-    selectedProjectOption: "company",
+    selectedDetailsOption: "company",
     selectedTeamOption: "staff",
     selectedCostsOption: "labour",
     selectedRevenueOption: "targetMarket",

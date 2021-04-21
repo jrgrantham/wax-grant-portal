@@ -12,7 +12,7 @@ import CompanyRows from "../components/project/companyRows";
 function Team() {
   const dispatch = useDispatch();
   const selectedOption = useSelector(
-    (state) => state.user.selectedProjectOption
+    (state) => state.user.selectedDetailsOption
   );
   const menuList = ["Company", "Project", "Options"];
   const menuData = {
@@ -21,7 +21,7 @@ function Team() {
     color: projectFontColor,
     backgroundColor: projectColor,
     updateOption: function (value) {
-      dispatch(updateUserSelection({ key: "selectedProjectOption", value }));
+      dispatch(updateUserSelection({ key: "selectedDetailsOption", value }));
     },
   };
 
@@ -31,13 +31,19 @@ function Team() {
     if (selectedOption === "options") return <OptionsRows />;
   }
 
-  const data = {
-    underline: menuData.backgroundColor,
-    maxHeight: '550px'
-  }
+  const maxHeight = {
+    company: "550px",
+    project: "350px",
+    options: "550px", // min height applies
+  };
 
+  const data = {
+    backgroundColor: menuData.backgroundColor,
+    maxHeight: maxHeight[selectedOption],
+  };
+  console.log(maxHeight[selectedOption]);
   return (
-    <TableContainer underline={menuData.backgroundColor}>
+    <TableContainer data={data}>
       <div className="displayArea">
         <LeftMenu data={menuData} />
         <div className="content">

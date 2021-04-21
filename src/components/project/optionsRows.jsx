@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { useSelector } from "react-redux";
-import { Container } from "./projectStyling";
+import { Container } from "./detailsStyling";
 import { updateProjectInfo } from "../../store/projectData/project";
 import qMark from "../../images/qMark.png";
+import { isNumberKey } from "../../helpers";
+// onKeyDown={(e) => isNumberKey(e)}
 
 function OptionsRows() {
   const dispatch = useDispatch();
@@ -28,32 +30,34 @@ function OptionsRows() {
   return (
     <Container data={data}>
       <div className="rows">
-        <div className="row">
-          <Tippy content="This is typically Q7, but see IUK competition webpage for details">
-            <div className="info">
-              <img src={qMark} alt="info" />
-            </div>
-          </Tippy>
-          <Tippy placement="top-start" content="Gantt Appendix Reference">
-            <input
-              type="text"
-              value={ganttRef}
-              className="field"
-              name="ganttRef"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
+        <div className="row column">
+          <div className="title">
+            <p>Gantt Appendix Reference</p>
+            <Tippy content="This is typically Q7, but see IUK competition webpage for details">
+              <div className="info">
+                <img src={qMark} alt="info" />
+              </div>
+            </Tippy>
+          </div>
+          <input
+            type="text"
+            value={ganttRef}
+            className="field"
+            name="ganttRef"
+            onChange={onchangeHandler}
+          />
         </div>
-        <div className="row">
-          <Tippy placement="top-start" content="Competitors Appendix Reference">
-            <input
-              type="text"
-              value={competitor}
-              className="field"
-              name="competitor"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
+        <div className="row column">
+          <div className="title">
+            <p>Competitors Appendix Reference</p>
+          </div>
+          <input
+            type="text"
+            value={competitor}
+            className="field"
+            name="competitor"
+            onChange={onchangeHandler}
+          />
         </div>
       </div>
     </Container>

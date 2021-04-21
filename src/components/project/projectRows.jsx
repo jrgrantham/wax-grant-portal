@@ -8,7 +8,8 @@ import {
 } from "../../store/projectData/project";
 import { getProjectDefaults } from "../../store/projectData/options";
 import qMark from "../../images/qMark.png";
-import { Container } from "./projectStyling";
+import { Container } from "./detailsStyling";
+import { isNumberKey } from "../../helpers";
 
 function ProjectRows() {
   const dispatch = useDispatch();
@@ -44,18 +45,17 @@ function ProjectRows() {
   }
 
   const data = {
-    maxHeight: '350px'
-  }
+    maxHeight: "350px",
+  };
 
   return (
     <Container data={data}>
       <div className="rows">
-        <div className="bottomRow">
+        <div className="applyDefaults">
           <button onClick={applyDefaults}>
             <h3>Apply defaults</h3>
           </button>
         </div>
-
 
         <div className="row column">
           <div className="title">
@@ -70,98 +70,83 @@ function ProjectRows() {
           />
         </div>
 
-
         <div className="row column">
           <div className="title">
-            <p>Applicant number</p>
+            <p>Applicant Number</p>
           </div>
-          <Tippy
-            placement="top-start"
-            content="IUK's grant platform applicant number"
-          >
-            <input
-              type="text"
-              value={applicationNumber}
-              className="field"
-              name="applicationNumber"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
+          <input
+            type="text"
+            value={applicationNumber}
+            className="field"
+            name="applicationNumber"
+            onChange={onchangeHandler}
+          />
         </div>
-
 
         <div className="row column">
           <div className="title">
             <p>Nature of Product or Service</p>
           </div>
-          <Tippy placement="top-start" content="Nature of Product or Service">
-            <select
-              // type="text"
-              value={nature}
-              className="field"
-              name="nature"
-              onChange={onchangeHandler}
-            >
-              {natures.map((nature, index) => {
-                return (
-                  <option key={index} value={nature}>
-                    {nature}
-                  </option>
-                );
-              })}
-            </select>
-          </Tippy>
+          <select
+            // type="text"
+            value={nature}
+            className="field"
+            name="nature"
+            onChange={onchangeHandler}
+          >
+            {natures.map((nature, index) => {
+              return (
+                <option key={index} value={nature}>
+                  {nature}
+                </option>
+              );
+            })}
+          </select>
         </div>
-
 
         <div className="row column">
           <div className="title">
             <p>IP Protection Strategy</p>
           </div>
-          <Tippy placement="top-start" content="IP Protection Strategy">
-            <select
-              value={ipProtection}
-              className="field"
-              name="ipProtection"
-              onChange={onchangeHandler}
-            >
-              {ipProtections.map((protection, index) => {
-                return (
-                  <option key={index} value={protection}>
-                    {protection}
-                  </option>
-                );
-              })}
-            </select>
-          </Tippy>
+          <select
+            value={ipProtection}
+            className="field"
+            name="ipProtection"
+            onChange={onchangeHandler}
+          >
+            {ipProtections.map((protection, index) => {
+              return (
+                <option key={index} value={protection}>
+                  {protection}
+                </option>
+              );
+            })}
+          </select>
+          {/* </Tippy> */}
         </div>
-
 
         <div className="row column">
           <div className="title">
             <p>Project Name</p>
           </div>
-          <Tippy placement="top-start" content="Project Name">
-            <input
-              type="text"
-              value={projectName}
-              className="field"
-              name="projectName"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
+          <input
+            type="text"
+            value={projectName}
+            className="field"
+            name="projectName"
+            onChange={onchangeHandler}
+          />
         </div>
-
 
         <div className="row column">
           <div className="title">
-            <p>Time Scale</p>
+            <p>Timescale</p>
+            <Tippy content="Check IUK competition website for guidance on project lengths">
+              <div className="info">
+                <img src={qMark} alt="info" />
+              </div>
+            </Tippy>
           </div>
-          <Tippy content="Check IUK competition website for guidance on project lengths">
-            <div className="info">
-              <img src={qMark} alt="info" />
-            </div>
-          </Tippy>
           <div className="projectStart">
             <Tippy placement="top-start" content="Month project starts">
               <select
@@ -195,7 +180,7 @@ function ProjectRows() {
                 })}
               </select>
             </Tippy>
-            <Tippy content="Project length (months)">
+            <Tippy content="Project length (months). Changing this will affect the Gantt Chart data">
               <select
                 className="field length"
                 name="projectLength"
@@ -214,55 +199,43 @@ function ProjectRows() {
           </div>
         </div>
 
-
         <div className="row column">
           <div className="title">
             <p>Project Manager</p>
           </div>
-          <Tippy placement="top-start" content="Project Manager">
-            <input
-              type="text"
-              value={projectManager}
-              className="field"
-              name="projectManager"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
+          <input
+            type="text"
+            value={projectManager}
+            className="field"
+            name="projectManager"
+            onChange={onchangeHandler}
+          />
         </div>
-
 
         <div className="row column">
           <div className="title">
             <p>Management Software</p>
           </div>
-          <Tippy placement="top-start" content="Management Software">
-            <input
-              type="text"
-              value={software}
-              className="field"
-              name="software"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
+          <input
+            type="text"
+            value={software}
+            className="field"
+            name="software"
+            onChange={onchangeHandler}
+          />
         </div>
-
 
         <div className="row column">
           <div className="title">
             <p>Commercialisation Funding Required</p>
           </div>
-          <Tippy
-            placement="top-start"
-            content="Commercialisation Funding Required"
-          >
-            <input
-              type="boolean"
-              value={funding}
-              className="field"
-              name="funding"
-              onChange={onchangeHandler}
-            />
-          </Tippy>
+          <input
+            type="boolean"
+            value={funding}
+            className="field"
+            name="funding"
+            onChange={onchangeHandler}
+          />
         </div>
       </div>
     </Container>

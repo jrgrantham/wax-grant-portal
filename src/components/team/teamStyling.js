@@ -6,19 +6,6 @@ import {
 
 export const Container = styled.div`
   display: flex;
-  .title {
-    display: flex;
-    margin-right: 20px;
-    padding: 5px 0px;
-    color: ${teamColor};
-    font-weight: bold;
-  }
-  .info {
-    margin: 0;
-    margin-left: 7px;
-    width: 16px;
-    height: 16px;
-  }
   .grabHandle {
     position: absolute;
     width: 20px;
@@ -60,17 +47,10 @@ export const Container = styled.div`
     padding-top: 4px;
     margin-left: 15px;
   }
-  .confirmDelete {
-    position: absolute;
-    right: 0;
-    background-color: white;
-    padding: 5px 0px 5px 5px;
-  }
   .addIcon {
     height: 25px;
     width: 25px;
     margin-top: 15px;
-    /* margin-bottom: 20px; */
     margin-left: ${tableContentSideMargin}
   }
   img {

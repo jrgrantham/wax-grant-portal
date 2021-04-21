@@ -23,8 +23,13 @@ function Team() {
     },
   };
 
+  const data = {
+    backgroundColor: menuData.backgroundColor,
+    maxHeight: '550px'
+  }
+
   return (
-    <TableContainer underline={menuData.backgroundColor}>
+    <TableContainer data={data}>
       <div className="displayArea">
         <LeftMenu data={menuData} />
         <div className="content">

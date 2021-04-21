@@ -26,7 +26,7 @@ function GanttTaskRowInfo(props) {
     (state) => state.user
   );
   const resources = getResources();
-  console.log(resources);
+  // console.log(resources);
   const buttonContent = resources[taskId].people;
   const [showEditDays, setShowEditDays] = useState(false);
   const [newDays, setNewDays] = useState(days);

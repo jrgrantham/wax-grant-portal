@@ -2,36 +2,31 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { getResources, wpInfoColor } from "../../helpers/";
-// import Close from '../general/close'
+import { getTaskIds } from "../../store/projectData/tasks";
 
 function GanttSummaryModal() {
   const allTasks = useSelector((state) => state.tasks.data);
   const people = useSelector((state) => state.team.data);
-
+  const taskIds = getTaskIds(useSelector((state) => state));
   const resources = getResources();
+
   const peoplesDays = {};
   people.forEach((person) => {
     const initials = person.acronym;
     peoplesDays[initials] = 0;
-    allTasks.forEach((task) => {
+    taskIds.forEach((taskId) => {
+      const taskDays = allTasks[taskId].days;
       let percentage = 0;
-      if (resources[task.taskId][initials] !== undefined) {
-        percentage = resources[task.taskId][initials].percent;
-      }
-      if (percentage > 0) {
-        const days = (task.days * percentage) / 100;
+      if (resources[taskId][initials].percent) {
+        percentage = resources[taskId][initials].percent;
+        const days = (taskDays * percentage) / 100;
         peoplesDays[initials] = peoplesDays[initials] + days;
       }
     });
   });
 
-  const data = {
-    key: "showGanttSummary"
-  }
-
   return (
     <Container>
-      {/* <Close data={data}/> */}
       <h3>Days</h3>
       {people.map((person, index) => {
         return (

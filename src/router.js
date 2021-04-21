@@ -10,6 +10,7 @@ import NoResult from "./pages/noResult";
 import Team from "./pages/teamTable";
 import Costs from "./pages/costs";
 import Revenue from "./pages/revenue";
+import Risks from "./pages/risks";
 
 // function protectedRoute(Component, props) {
 //   // Not really secure. Any token would pass the test.
@@ -27,6 +28,7 @@ const Router = () => (
     <Route exact path="/team" component={Team} />
     <Route exact path="/costs" component={Costs} />
     <Route exact path="/revenue" component={Revenue} />
+    <Route exact path="/risks" component={Risks} />
     <Route exact path="/" component={HomePage} />
     <Route path="/" component={NoResult} />
   </Switch>

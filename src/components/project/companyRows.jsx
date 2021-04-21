@@ -286,6 +286,8 @@ function CompanyRows() {
             onChange={onchangeHandler}
           />
         </div>
+        {/* Funding Level –  */}
+        {/* Match Funding Source –  */}
 
         <div className="row column">
           <div className="title">
@@ -308,6 +310,11 @@ function CompanyRows() {
           <div className="row column">
             <div className="title">
               <p>Funding Level (%)</p>
+              <Tippy content="The percentage of the project cost IUK will provide. See IUK competition webpage for funding level details">
+                <div className="info">
+                  <img src={qMark} alt="info" />
+                </div>
+              </Tippy>
             </div>
             <select
               type="text"
@@ -348,18 +355,25 @@ function CompanyRows() {
           </select>
         </div>
 
-        <div className="row column">
-          <div className="title">
-            <p>Investor Name</p>
+        {matchFundingSource === "Company Funds" ? null : (
+          <div className="row column">
+            <div className="title">
+              <p>Investor Name</p>
+              <Tippy content="The source of the match funding provided to the project by the project partners">
+                <div className="info">
+                  <img src={qMark} alt="info" />
+                </div>
+              </Tippy>
+            </div>
+            <input
+              type="text"
+              value={investorName}
+              className="field"
+              name="investorName"
+              onChange={onchangeHandler}
+            />
           </div>
-          <input
-            type="text"
-            value={investorName}
-            className="field"
-            name="investorName"
-            onChange={onchangeHandler}
-          />
-        </div>
+        )}
       </div>
     </Container>
   );

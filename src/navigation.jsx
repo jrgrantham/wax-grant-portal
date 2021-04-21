@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { appWidth, navBackground } from "./helpers";
+import { appTop, appWidth, navBackground } from "./helpers";
 import navHome from "./images/navHome.png";
 import navBurger from "./images/navBurger.png";
 
@@ -16,32 +16,60 @@ function Navigation() {
         <NavLink
           exact
           to="/"
-          className="navButton small"
+          className="navButton icon"
           activeClassName="selected"
         >
-          Home
+          <img src={navHome} alt="home"/>
         </NavLink>
 
-        <div className="links">
-          <NavLink exact to="/project" activeClassName="selected">
-            <div className="navButton">Details</div>
+        <div className="pageLinks">
+          <NavLink
+            exact
+            to="/project"
+            className="navButton"
+            activeClassName="selected"
+          >
+            <h3>Details</h3>
           </NavLink>
-          <NavLink exact to="/team" activeClassName="selected">
-            <div className="navButton">Team</div>
+          <NavLink
+            exact
+            to="/team"
+            className="navButton"
+            activeClassName="selected"
+          >
+            <h3>Team</h3>
           </NavLink>
-          <NavLink to="/gantt" activeClassName="selected">
-            <div className="navButton">Gantt Chart</div>
+          <NavLink to="/gantt" className="navButton" activeClassName="selected">
+            <h3>Gantt Chart</h3>
           </NavLink>
-          <NavLink exact to="/costs" activeClassName="selected">
-            <div className="navButton">Costs</div>
+          <NavLink
+            exact
+            to="/costs"
+            className="navButton"
+            activeClassName="selected"
+          >
+            <h3>Costs</h3>
           </NavLink>
-          <NavLink exact to="/revenue" activeClassName="selected">
-            <div className="navButton">Revenue</div>
+          <NavLink
+            exact
+            to="/revenue"
+            className="navButton"
+            activeClassName="selected"
+          >
+            <h3>Revenue</h3>
+          </NavLink>
+          <NavLink
+            exact
+            to="/risks"
+            className="navButton"
+            activeClassName="selected"
+          >
+            <h3>Risks</h3>
           </NavLink>
         </div>
 
-        <p className="navButton small" onClick={openMenu}>
-          Menu
+        <p className="navButton icon burger" onClick={openMenu}>
+        <img src={navBurger} alt="menu"/>
         </p>
       </div>
 
@@ -64,68 +92,72 @@ function Navigation() {
 export default Navigation;
 
 const Container = styled.nav`
+  // full width of screen
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: auto;
+  align-items: center;
   position: fixed;
   top: 0;
+  height: ${appTop};
   background-color: ${navBackground};
   z-index: 10;
 
   .navBar {
     width: 100%;
     max-width: ${(props) => props.appWidth};
-    padding: 0 5px;
+    /* height: 100%; */
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .links {
+  .pageLinks {
     display: flex;
-  }
-  a,
-  p {
-    /* width: 170px; */
-    display: flex;
-    justify-content: center;
-    /* width: 170px; */
-    margin: 15px 5px;
-    padding: 5px 20px;
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0);
-    border-radius: 5px;
   }
   .navButton {
+    display: flex;
+    justify-content: center;
+    color: white;
     border-radius: 5px;
-    padding: 5px;
-    background-image: linear-gradient(${navBackground}, ${navBackground}),
-      linear-gradient(white, white);
-    background-size: 100% 2px, 100% 2px;
-    background-position: 100% 100%, 0 100%;
-    background-repeat: no-repeat, no-repeat;
-    transition: background-size 0.3s linear;
-    &:hover {
-      background-size: 0 2px, 100% 2px;
+    padding: 5px 15px;
+    margin: 0 5px;
+    &:hover h3 {
+      border-bottom: 2px solid rgba(255, 255, 255, 1);
     }
   }
-  .navButton.small {
-    width: 80px;
+  .navButton.selected:hover h3 {
+    border-bottom: 2px solid rgba(30, 91, 127, 1);
+  }
+  .icon {
+    height: 40px;
+    padding: 5px 15px;
+  }
+  .burger {
+    max-height: 35px;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
   }
   .selected {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(30, 91, 127, 1);
+    h3 {
+      border-bottom: 2px solid rgba(30, 91, 127, 1);
+    }
   }
-  .selected .navButton:hover {
-    background-size: 100% 2px, 100% 2px;
+  h3 {
+    border-top: 2px solid rgba(255, 255, 255, 0);
+    border-bottom: 2px solid rgba(255, 255, 255, 0);
+    padding: 2px 0px;
+    transition: border-bottom 0.6s;
   }
+
   .menu {
     position: fixed;
     right: ${(props) => (props.menu ? "0" : "-200px")};
     transition: right 0.3s;
     width: 200px;
-    height: 100%;
+    min-height: 100%;
 
     padding-top: 10px;
     display: flex;

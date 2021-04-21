@@ -73,6 +73,11 @@ function ProjectRows() {
         <div className="row column">
           <div className="title">
             <p>Applicant Number</p>
+            <Tippy content="Applicant number from IUK's grant platform">
+              <div className="info">
+                <img src={qMark} alt="info" />
+              </div>
+            </Tippy>
           </div>
           <input
             type="text"
@@ -88,7 +93,6 @@ function ProjectRows() {
             <p>Nature of Product or Service</p>
           </div>
           <select
-            // type="text"
             value={nature}
             className="field"
             name="nature"
@@ -122,7 +126,6 @@ function ProjectRows() {
               );
             })}
           </select>
-          {/* </Tippy> */}
         </div>
 
         <div className="row column">

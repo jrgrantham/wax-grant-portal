@@ -150,8 +150,7 @@ const PageContainer = styled.div`
     background-color: ${wpInfoColor};
     border: none;
     color: white;
-    padding-left: 15px;
-    padding-right: 15px;
     font-weight: 600;
+    width: 150px;
   }
 `;

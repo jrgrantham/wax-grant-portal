@@ -11,7 +11,6 @@ import { Container } from "./modalStyling";
 import { updateUserSelection } from "../../store/projectData/user";
 
 function numberOfBars(schedule) {
-  let bars = 0;
   for (let i = schedule.length - 1; i >= 0; i--) {
     if (schedule[i].barNumber > 0) {
       return schedule[i].barNumber;

@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import Menu from "./components/general/menu";
 import { appTop, appWidth, navBackground } from "./helpers";
 import navHome from "./images/navHome.png";
 import navBurger from "./images/navBurger.png";
+import { updateUserSelection } from "./store/projectData/user";
 
 function Navigation() {
+  const dispatch = useDispatch();
   function openMenu() {
-    setMenu(true);
+    dispatch(updateUserSelection({key: 'showMenu', value: true}))
   }
-  const [menu, setMenu] = useState(false);
   return (
-    <Container appWidth={appWidth} menu={menu}>
+    <Container appWidth={appWidth}>
+      <Menu />
       <div className="navBar">
         <NavLink
           exact
@@ -19,7 +23,7 @@ function Navigation() {
           className="navButton icon"
           activeClassName="selected"
         >
-          <img src={navHome} alt="home"/>
+          <img src={navHome} alt="home" />
         </NavLink>
 
         <div className="pageLinks">
@@ -69,22 +73,8 @@ function Navigation() {
         </div>
 
         <p className="navButton icon burger" onClick={openMenu}>
-        <img src={navBurger} alt="menu"/>
+          <img src={navBurger} alt="menu" />
         </p>
-      </div>
-
-      <div onClick={() => setMenu(false)} id="menu" className="menu">
-        <div className="top">
-          <button onClick={() => console.log("Export")} className="menuButton">
-            Export
-          </button>
-          <button onClick={() => console.log("Logout")} className="menuButton">
-            Logout
-          </button>
-        </div>
-        <button className="menuButton">
-          <a href="http://intangible-engineering.com">Developer</a>
-        </button>
       </div>
     </Container>
   );
@@ -150,44 +140,5 @@ const Container = styled.nav`
     border-bottom: 2px solid rgba(255, 255, 255, 0);
     padding: 2px 0px;
     transition: border-bottom 0.6s;
-  }
-
-  .menu {
-    position: fixed;
-    right: ${(props) => (props.menu ? "0" : "-200px")};
-    transition: right 0.3s;
-    width: 200px;
-    min-height: 100%;
-
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 20px;
-    background-color: rgba(50, 50, 50, 1);
-    cursor: pointer;
-    .top {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    a {
-      font-size: 14px;
-      margin: 0;
-      padding: 0;
-      color: #a1a1a1;
-    }
-  }
-  .menuButton {
-    margin-top: 20px;
-    width: 150px;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0);
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.15);
-    border: 1px solid #404040;
   }
 `;

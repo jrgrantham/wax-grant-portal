@@ -45,15 +45,16 @@ function GanttChartLeft(props) {
   const showSummary = useSelector((state) => state.user.showGanttSummary);
 
   function toggleSummary() {
-    const value = showSummary === "summary" ? "" : "summary";
-    dispatch(updateUserSelection({ key: "showGanttSummary", value }));
+    dispatch(
+      updateUserSelection({ key: "showGanttSummary", value: !showSummary })
+    );
   }
 
   return (
     <PageContainer>
       <div id="details">
         <button onClick={toggleSummary} className="summary">
-          {showSummary === 'summary' ? "Hide Summary" : 'Show Summary'}
+          {showSummary ? "Hide Summary" : "Show Summary"}
         </button>
         <div className="monthHeaderSpacer"></div>
         {workPackages.length

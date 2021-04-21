@@ -30,7 +30,6 @@ function GanttPackWork(props) {
   const [newTitle, setNewTitle] = useState(title);
 
   const { projectLength } = useSelector((state) => state.project.data.details);
-  const { taskOrder } = useSelector((state) => state.tasks.data);
 
   function handleAddNewRow() {
     const [lastTask] = packData.slice(-1);

@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 import { Container } from "./detailsStyling";
 import { updateProjectInfo } from "../../store/projectData/project";
 import qMark from "../../images/qMark.png";
-import { isNumberKey } from "../../helpers";
-// onKeyDown={(e) => isNumberKey(e)}
 
 function OptionsRows() {
   const dispatch = useDispatch();

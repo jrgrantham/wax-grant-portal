@@ -9,7 +9,6 @@ import {
 import { getProjectDefaults } from "../../store/projectData/options";
 import qMark from "../../images/qMark.png";
 import { Container } from "./detailsStyling";
-import { isNumberKey } from "../../helpers";
 
 function ProjectRows() {
   const dispatch = useDispatch();

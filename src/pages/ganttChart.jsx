@@ -6,7 +6,6 @@ import { appTop, appWidth, wpMarginBottom } from "../helpers/";
 import GanttChartLeft from "../components/gantt/ganttChartLeft";
 import GanttChartRight from "../components/gantt/ganttChartRight";
 import GanttSummaryModal from "../components/modals/ganttSummaryModal";
-import { getCompanyDefaults } from "../store/projectData/options";
 import { getTaskIds, getWorkPackageTitles } from "../store/projectData/tasks";
 // import { allResources } from "../store";
 
@@ -15,6 +14,10 @@ function GanttChart() {
   const showSummary = useSelector((state) => state.user.showGanttSummary);
   const taskIdKeys = getTaskIds(useSelector((state) => state));
   const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
+
+  const projectLength = useSelector(
+    (state) => state.project.data.details.projectLength
+  );
 
   const workPackageObject = {};
   taskIdKeys.forEach((taskId) => {
@@ -67,10 +70,6 @@ function GanttChart() {
     state.deadlines.data.filter((task) => task.type === "milestone")
   );
 
-  const projectLength = useSelector(
-    (state) => state.project.data.details.projectLength
-  );
-
   const [chartWidth, setChartWidth] = useState(0);
   useEffect(() => {
     const scheduleElement = document.getElementById("schedule").scrollWidth;
@@ -93,7 +92,7 @@ function GanttChart() {
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />
       </div>
-      {showSummary === "summary" ? <GanttSummaryModal /> : null}
+      {showSummary ? <GanttSummaryModal /> : null}
     </PageContainer>
   );
 }

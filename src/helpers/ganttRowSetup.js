@@ -36,7 +36,7 @@ export function updateEditedWp(oldRow, changes) {
         });
       }
       const resetSchedule = updateNumberOfBars(bars, draft.schedule);
-      draft.schedule = resetSchedule
+      draft.schedule = resetSchedule;
     }
   });
   return newRow;
@@ -90,6 +90,7 @@ function updateNumberOfBars(task, numberOfBars) {
 }
 
 export function spreadWork(task) {
+  console.log(task);
   const days = task.days;
   const schedule = task.schedule;
   const duration = currentCombinedLengthOfBars(task.schedule);
@@ -97,15 +98,14 @@ export function spreadWork(task) {
   const remainderMonths = days % duration;
   let j = 0;
   for (let i = 0; i < schedule.length; i++) {
-    if (schedule[i].value > 0) {
-      // was just status
+    if (schedule[i].barNumber) { // was status
       if (j < remainderMonths) {
         schedule[i].value = Months + 1;
         j++;
       } else schedule[i].value = Months;
     } else schedule[i].value = 0;
   }
-  return task;
+  return task.schedule;
 }
 
 export function wPUpdateBlock(oldRow, newValue, oldValue, blockIndex) {

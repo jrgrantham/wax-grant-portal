@@ -15,6 +15,7 @@ import {
   totalDaysColor,
 } from "../../helpers";
 import add from "../../images/add-white.png";
+import qMark from "../../images/qMark.png";
 import { updateUserSelection } from "../../store/projectData/user";
 // import add from "../../images/addTask.png";
 
@@ -53,7 +54,9 @@ function GanttChartLeft(props) {
   return (
     <PageContainer>
       <div id="details">
-        <button onClick={toggleSummary} className="summary">Summary</button>
+        <button onClick={toggleSummary} className="summary">
+          Summary
+        </button>
         <div className="monthHeaderSpacer"></div>
         {workPackages.length
           ? workPackages.map((task, index) => {
@@ -80,6 +83,11 @@ function GanttChartLeft(props) {
           </Tippy>
           <div className="totalDays content">
             <h3>{totalDays ? totalDays : null}</h3>
+            <Tippy content="Total project days. To the right are days per month">
+              <div className="info">
+                <img src={qMark} alt="info" />
+              </div>
+            </Tippy>
           </div>
         </div>
         <GanttPackdeadlines
@@ -120,12 +128,20 @@ const PageContainer = styled.div`
       width: 80px;
     }
     .totalDays.content {
+      position: relative;
       height: 30px;
       padding-right: 30px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       color: ${totalDaysColor};
+    }
+    .info {
+      position: absolute;
+      margin: 0;
+      right: 0px;
+      width: 19px;
+      height: 19px;
     }
     button {
       height: 40px;

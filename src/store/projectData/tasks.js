@@ -2,6 +2,7 @@
 // import { v4 as uuidv4 } from "uuid";
 
 import { createAction, createSlice } from "@reduxjs/toolkit";
+// import { spreadWork } from "../../helpers";
 import { taskData2 } from "../../data";
 // import {
 //   reorderArrayByIndex,
@@ -226,14 +227,58 @@ const slice = createSlice({
       const { taskId, key, value } = action.payload;
       tasks.data[taskId][key] = value;
     },
-    updateTaskSchedule: (tasks, action) => {
+    replaceTaskSchedule: (tasks, action) => {
       // what is this? replace schedule??
       const { taskId, value } = action.payload;
       tasks.data[taskId].schedule = value;
     },
-    resizeTaskBar: () => {},
+    resizeTaskBar: (tasks, action) => {
+      const {
+        taskId,
+        newDays,
+        origStartIndex,
+        newStartIndex,
+        origEndIndex,
+        newEndIndex,
+        barNumber,
+      } = action.payload;
+      tasks.data[taskId].days = newDays; // set days
+      // calculate new block positions
+      const loopStart = Math.min(origStartIndex, newStartIndex);
+      const loopEnd = Math.max(origEndIndex, newEndIndex);
+      let workingDay = false;
+      let started = false;
+      for (let i = loopStart; i <= loopEnd; i++) {
+        if (!started && i >= newStartIndex) {
+          workingDay = true;
+          started = true;
+        }
+        if (started && i > newEndIndex) {
+          workingDay = false;
+        }
+        if (workingDay) tasks.data[taskId].schedule[i].barNumber = barNumber;
+        else tasks.data[taskId].schedule[i].barNumber = 0;
+      }
+      // const updatedSchedule = spreadWork(tasks.data[taskId]);
+      // tasks.data[taskId].schedule = updatedSchedule;
+    },
+    spreadWork: (tasks, action) => {
+      const { taskId, combinedLength } = action.payload;
+      const { days, schedule } = tasks.data[taskId];
+      const Months = Math.floor(days / combinedLength);
+      const remainderMonths = days % combinedLength;
+      let j = 0;
+      for (let i = 0; i < schedule.length; i++) {
+        if (schedule[i].barNumber) {
+          // was status
+          if (j < remainderMonths) {
+            schedule[i].value = Months + 1;
+            j++;
+          } else schedule[i].value = Months;
+        } else schedule[i].value = 0;
+      }
+    },
     moveTaskBar: (tasks, action) => {
-      console.log("moving");
       const { taskId, originalIndex, newIndex, blockCount } = action.payload;
       const movement = newIndex - originalIndex;
       const bar = tasks.data[taskId].schedule.splice(originalIndex, blockCount);
@@ -270,7 +315,12 @@ const slice = createSlice({
   },
 });
 
-export const { addTask, moveTaskBar, resizeTaskBar } = slice.actions;
+export const {
+  addTask,
+  moveTaskBar,
+  resizeTaskBar,
+  spreadWork,
+} = slice.actions;
 export default slice.reducer;
 
 export const getWorkPackageTitles = (state) => {

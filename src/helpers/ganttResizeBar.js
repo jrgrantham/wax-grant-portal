@@ -1,11 +1,10 @@
-import produce from "immer";
-import { moveTaskBar } from "../store/projectData/tasks";
+import { resizeTaskBar, spreadWork } from "../store/projectData/tasks";
 import { store } from "../store";
 import { toast } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
-import { currentCombinedLengthOfBars, spreadWork } from "./index";
+import { currentCombinedLengthOfBars } from "./index";
 import { toastDelay } from "./settings";
+// import { spreadWork } from "./ganttRowSetup";
 
 toast.configure();
 
@@ -20,6 +19,7 @@ export function resizeBar(data, barDiv, e) {
     barNumber,
     setShowBlock,
   } = data;
+  const taskId = task.taskId;
   const handle = e.target.id.slice(-3);
   const offset = barDiv.offsetLeft - e.clientX;
   const originalPosition = e.clientX + offset;
@@ -32,6 +32,7 @@ export function resizeBar(data, barDiv, e) {
   let newEndIndex = (startPosition + barWidth) / blockWidth - 1;
   let change = 0;
   let newPosition = originalPosition;
+  let combinedLength = 1;
 
   window.addEventListener("mousemove", resize, false);
   window.addEventListener("mouseup", stopResize, false);
@@ -61,7 +62,7 @@ export function resizeBar(data, barDiv, e) {
       newWidth = barWidth + originalPosition - newPosition;
       setPosition(newPosition);
       setSize(newWidth);
-    }
+    } else alert("check resize function");
   }
 
   function stopResize() {
@@ -74,50 +75,39 @@ export function resizeBar(data, barDiv, e) {
     if (handle === "rgt" && blockCount !== newBlockCount) {
       change = newBlockCount - blockCount;
       newEndIndex = newBlockCount + startPosition / blockWidth - 1;
-      updateRow();
+      handleNewSize();
     } else if (handle === "rgt") setSize(blockCount * blockWidth);
     else if (handle === "lft" && blockCount !== newBlockCount) {
       change = newBlockCount - blockCount;
       newStartIndex = origStartIndex - change;
       setPosition(newStartIndex * blockWidth);
-      updateRow();
+      handleNewSize();
     } else if (handle === "lft") {
       setSize(blockCount * blockWidth);
     }
   }
 
-  function updateRow() {
-    const newLength = currentCombinedLengthOfBars(task.schedule) + change;
-    if (newLength > task.days) {
+  function handleNewSize() {
+    combinedLength = currentCombinedLengthOfBars(task.schedule) + change;
+    if (combinedLength > task.days) {
       toast.info("Increased number of days", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: toastDelay,
       });
     }
-    const updatedRow = produce(task, (draft) => {
-      draft.days = Math.max(newLength, task.days);
-      draft.task = updateBar(draft);
-      spreadWork(draft);
-    });
-    store.dispatch(moveTaskBar(updatedRow));
-  }
-
-  function updateBar(task) {
-    const earliest = Math.min(origStartIndex, newStartIndex);
-    const latest = Math.max(origEndIndex, newEndIndex);
-    let workingDay = false;
-    let started = false;
-    for (let i = earliest; i <= latest; i++) {
-      if (!started && i >= newStartIndex) {
-        workingDay = true;
-        started = true;
-      }
-      if (started && i > newEndIndex) {
-        workingDay = false;
-      }
-      // task.schedule[i].status = workingDay;
-      if (workingDay) task.schedule[i].barNumber = barNumber;
-      else task.schedule[i].barNumber = 0;
-    }
+    const newDays = Math.max(combinedLength, task.days);
+    store.dispatch(
+      resizeTaskBar({
+        taskId,
+        newDays,
+        origStartIndex,
+        newStartIndex,
+        origEndIndex,
+        newEndIndex,
+        barNumber,
+        // combinedLength,
+      })
+    );
+    store.dispatch(spreadWork({taskId, combinedLength}))
   }
 }

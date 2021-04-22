@@ -52,7 +52,7 @@ function GanttWPRowSchedule(props) {
         newBar = false;
       }
 
-      // append start or middle
+      // append start or middle 
       let blockNumber = leadingZero(blockIndex);
       if (blockIndex === 0) blockNumber = blockNumber + "s";
       else blockNumber = blockNumber + "m";

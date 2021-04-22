@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { removeTask, updateTaskPack } from "../../store/projectData/tasks";
+import { deleteTask, removeTask, updateTaskPack } from "../../store/projectData/tasks";
 import { deleteTaskAllocations } from "../../store/projectData/allocations";
 import Close from "../general/close";
 import save from "../../images/save-grey.png";
@@ -106,8 +106,8 @@ function EditModal(props) {
     closeModal();
   }
 
-  function deleteTask(taskId) {
-    dispatch(removeTask(taskId));
+  function handleDelete(taskId) {
+    dispatch(deleteTask({taskId}));
     dispatch(deleteTaskAllocations({ taskId }));
   }
 
@@ -205,7 +205,7 @@ function EditModal(props) {
             <button className="leftB" onClick={resetBars}>
               Reset Bars
             </button>
-            <button onClick={() => deleteTask(task.taskId)}>
+            <button onClick={() => handleDelete(task.taskId)}>
               <div className="image">
                 <img src={bin} alt="delete" />
               </div>

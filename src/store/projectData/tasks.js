@@ -16,8 +16,7 @@ export const wPFetchRequest = createAction("wPFetchRequest");
 export const wPFetchSuccess = createAction("wPFetchSuccess");
 export const wPFetchFailure = createAction("wPFetchFailure");
 
-// export const addTask = createAction("addTask");
-export const removeTask = createAction("removeTask");
+// export const removeTask = createAction("removeTask");
 export const removeTaskPack = createAction("removeTaskPack");
 export const setTaskBars = createAction("setTaskBars");
 // export const reorderTasks = createAction("reorderTasks");
@@ -322,7 +321,8 @@ export const {
   moveTaskBar,
   resizeTaskBar,
   spreadWork,
-  reorderTasks
+  reorderTasks,
+  deleteTask,
 } = slice.actions;
 export default slice.reducer;
 

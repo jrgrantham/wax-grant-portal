@@ -1,23 +1,23 @@
 self.__precacheManifest = [
   {
-    "revision": "fb3899019bd90366bbc3",
+    "revision": "e31eed357d91cf36c004",
     "url": "/wax-grant-portal/static/css/main.74587c96.chunk.css"
   },
   {
-    "revision": "fb3899019bd90366bbc3",
-    "url": "/wax-grant-portal/static/js/main.e09bc4cd.chunk.js"
+    "revision": "e31eed357d91cf36c004",
+    "url": "/wax-grant-portal/static/js/main.15d219f7.chunk.js"
   },
   {
     "revision": "2eb2f8a0d27a2ccb4117",
     "url": "/wax-grant-portal/static/js/runtime~main.8d40ecfa.js"
   },
   {
-    "revision": "edc1a9c4e401dbfbb0ec",
+    "revision": "b7e85ad9aa3cc758292b",
     "url": "/wax-grant-portal/static/css/2.6074d3f7.chunk.css"
   },
   {
-    "revision": "edc1a9c4e401dbfbb0ec",
-    "url": "/wax-grant-portal/static/js/2.5847c920.chunk.js"
+    "revision": "b7e85ad9aa3cc758292b",
+    "url": "/wax-grant-portal/static/js/2.b779db3a.chunk.js"
   },
   {
     "revision": "c769d3e7a84478df305b",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/wax-grant-portal/static/media/background.f2338171.jpg"
   },
   {
-    "revision": "2022cb563c13303eed45156f6a80c49c",
+    "revision": "31c7852c4f2f5a45defbc94bf6e8d96b",
     "url": "/wax-grant-portal/index.html"
   }
 ];

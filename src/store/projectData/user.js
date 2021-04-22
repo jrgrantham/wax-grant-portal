@@ -7,7 +7,7 @@ const slice = createSlice({
     userType: "admin",
     showMenu: false,
     showGanttSummary: false,
-    showComponent: "", // set component identifier
+    showComponent: "task1resources", // set component identifier
     selectedLeader: "lead", // default should be the user
     selectedAdminOption: "project",
     selectedDetailsOption: "project",

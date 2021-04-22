@@ -70,7 +70,7 @@ function GanttTaskRowInfo(props) {
   return (
     <Container>
       {showComponent === taskId+'edit' ? (
-        <EditModal taskPackTitles={taskPackTitles} task={task} />
+        <EditModal task={task} />
       ) : null}
       {showComponent === taskId+'resources' ? (
         <ResourcesModal

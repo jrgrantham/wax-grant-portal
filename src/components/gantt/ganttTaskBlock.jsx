@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTaskBlock } from "../../store/projectData/tasks";
+import { updateBlock } from "../../store/projectData/tasks";
 import { wpScheduleColor, isNumberKey, leadingZero } from "../../helpers";
 import tick from "../../images/tick-white.png";
 import { updateUserSelection } from "../../store/projectData/user";
@@ -12,37 +12,52 @@ function GanttWPBlock(props) {
   const { task, showBlock, barId } = props.data;
   const { blockNumber, value } = block;
   const blockPosition = blockNumber.slice(-1);
-  const [newValue, setNewValue] = useState(value);
 
+  // const [tempValue, setTempValue] = useState(value);
+  // if (task.taskId === 'task2') console.log(`blockIndex ${blockIndex}`,value);
   const blockCode = leadingZero(blockIndex);
   const blockId = (barId + "-" + blockCode).slice(-11);
   const leftHandle = "handle-" + barId + "-lft";
   const rightHandle = "handle-" + barId + "-rgt";
 
-  const showContent = useSelector(state => state.user.showContent)
+  const showContent = useSelector((state) => state.user.showContent);
   function handleClick() {
     dispatch(updateUserSelection({ key: "showContent", value: blockId }));
   }
   function handleDayChange(e) {
+    // console.log("handleDayChange", tempValue, value);
+    let number;
     if (e.target.value) {
-      const lastTwoNumbers = e.target.value.slice(-2);
-      setNewValue(parseInt(lastTwoNumbers));
+      number = e.target.value.slice(-2);
+      // let lastTwoNumbers = e.target.value.slice(-2);
+      number = parseInt(number);
     } else {
-      setNewValue(0);
+      number = 0;
     }
+    dispatch(
+      updateBlock({
+        taskId: task.taskId,
+        blockIndex,
+        value: number,
+        // change,
+      })
+    );
   }
-  function acceptNewDays() {
-    dispatch(updateUserSelection({ key: "showContent", value: "" }));
-    if (newValue !== value)
-      dispatch(
-        updateTaskBlock({
-          task,
-          blockIndex,
-          newValue,
-          oldValue: value,
-        })
-      );
-  }
+  // function acceptNewDays() {
+  //   dispatch(updateUserSelection({ key: "showContent", value: "" }));
+  //   console.log('accept days',tempValue,value);
+  //   if (tempValue !== value) {
+  //     const change = tempValue - value;
+  //     dispatch(
+  //       updateBlock({
+  //         taskId: task.taskId,
+  //         blockIndex,
+  //         value: tempValue,
+  //         change,
+  //       })
+  //     );
+  //   }
+  // }
 
   return (
     <Container>
@@ -54,13 +69,13 @@ function GanttWPBlock(props) {
                 autoFocus
                 className="days highlight packBackground"
                 type="text"
-                value={newValue}
+                value={value}
                 onKeyDown={(e) => isNumberKey(e)}
                 onChange={(e) => handleDayChange(e)}
               />
-              <button onClick={acceptNewDays} className="accept">
+              {/* <button onClick={acceptNewDays} className="accept">
                 <img id="accept" src={tick} alt="accept" />
-              </button>
+              </button> */}
             </div>
           ) : (
             <button

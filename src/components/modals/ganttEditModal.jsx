@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { deleteTask, removeTask, updateTaskPack } from "../../store/projectData/tasks";
+import { deleteTask, updateTaskPack } from "../../store/projectData/tasks";
 import { deleteTaskAllocations } from "../../store/projectData/allocations";
 import Close from "../general/close";
 import save from "../../images/save-grey.png";
@@ -19,14 +19,13 @@ function numberOfBars(schedule) {
 }
 
 function EditModal(props) {
-  const { task, taskPackTitles } = props;
-  const { dayLoading, days, description, workPackageTitle, schedule } = task;
+  const { task } = props;
+  const { dayLoading, days, description, schedule } = task;
   const dispatch = useDispatch();
   const barLimit = Math.ceil(schedule.length / 2);
   const bars = numberOfBars(schedule);
 
   const validationSchema = Yup.object({
-    workPackageTitle: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
     days: Yup.number()
       .typeError("You must specify a number")
@@ -44,7 +43,6 @@ function EditModal(props) {
 
   const formik = useFormik({
     initialValues: {
-      workPackageTitle,
       description,
       days,
       dayLoading,
@@ -55,10 +53,6 @@ function EditModal(props) {
       const parsedDays = parseInt(values.days);
       const newBars = bars === parsedBars ? false : parsedBars;
       const newDays = days === parsedDays ? false : parsedDays;
-      const newWorkPackageTitle =
-        workPackageTitle === values.workPackageTitle
-          ? false
-          : values.workPackageTitle;
       const newDescription =
         description === values.description ? false : values.description;
       const newDayLoading =
@@ -66,7 +60,6 @@ function EditModal(props) {
       const changes = {
         newBars,
         newDays,
-        newWorkPackageTitle,
         newDescription,
         newDayLoading,
       };
@@ -91,7 +84,6 @@ function EditModal(props) {
   }
 
   function resetBars() {
-    // send bars = 1 then days = 1
     const changes = {
       newBars: 1,
       newDays: 1,
@@ -131,26 +123,6 @@ function EditModal(props) {
             />
             {formik.touched.description && formik.errors.description ? (
               <p className="errorMessage">{formik.errors.description}</p>
-            ) : null}
-          </div>
-
-          <div className="formField">
-            <label htmlFor="work pack">Work Package</label>
-            <select
-              value={formik.values.workPackageTitle}
-              onChange={formik.handleChange}
-              name="workPackageTitle"
-              id="workPackageTitle"
-            >
-              {taskPackTitles.map((title, index) => (
-                <option value={title} key={index} className="title">
-                  {title}
-                </option>
-              ))}
-            </select>
-            {formik.touched.workPackageTitle &&
-            formik.errors.workPackageTitle ? (
-              <p className="errorMessage">{formik.errors.workPackageTitle}</p>
             ) : null}
           </div>
 

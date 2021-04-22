@@ -10,7 +10,7 @@ import {
   reorderTasks,
   addTask,
   updateTaskPackTitle,
-  removeTaskPack,
+  deleteTask,
 } from "../../store/projectData/tasks";
 import GanttTaskRowInfo from "./ganttTaskRowInfo";
 import EditModal from "../modals/ganttEditModal";
@@ -70,8 +70,8 @@ function GanttPackWork(props) {
     const taskList = [...new Set(packData.map((task) => task.taskId))];
     taskList.forEach((taskId) => {
       dispatch(deleteTaskAllocations({ taskId }));
+      dispatch(deleteTask({ taskId }));
     });
-    dispatch(removeTaskPack({ workPackageTitle: title }));
     // setConfirmDelete(false);
   }
 

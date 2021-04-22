@@ -1,29 +1,41 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { deleteTask, updateTaskPack } from "../../store/projectData/tasks";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import {
+  deleteTask,
+  updateTask,
+  updateTaskKey,
+  updatedNumberOfBars,
+  spreadWork,
+  getCombinedLengthOfBars,
+  getNumberOfBars,
+} from "../../store/projectData/tasks";
 import { deleteTaskAllocations } from "../../store/projectData/allocations";
 import Close from "../general/close";
 import save from "../../images/save-grey.png";
 import bin from "../../images/bin-grey.png";
 import { Container } from "./modalStyling";
 import { updateUserSelection } from "../../store/projectData/user";
-
-function numberOfBars(schedule) {
-  for (let i = schedule.length - 1; i >= 0; i--) {
-    if (schedule[i].barNumber > 0) {
-      return schedule[i].barNumber;
-    }
-  }
-}
+import { toastDelay } from "../../helpers";
 
 function EditModal(props) {
+  const dispatch = useDispatch();
   const { task } = props;
   const { dayLoading, days, description, schedule } = task;
-  const dispatch = useDispatch();
+  const taskId = task.taskId;
   const barLimit = Math.ceil(schedule.length / 2);
-  const bars = numberOfBars(schedule);
+  const bars = getNumberOfBars(
+    useSelector((state) => state),
+    taskId
+  );
+  const combinedLength = getCombinedLengthOfBars(
+    useSelector((state) => state),
+    taskId
+  );
 
   const validationSchema = Yup.object({
     description: Yup.string().required("Required"),
@@ -37,6 +49,7 @@ function EditModal(props) {
       .typeError("You must specify a number")
       .min(1, "Minimum 1 bar")
       .max(barLimit, `Maximum ${barLimit} bars`)
+      // .max(formik.values.days, "cannot exceed days")
       .required("Required")
       .integer("Must be a whole number"),
   });
@@ -52,23 +65,36 @@ function EditModal(props) {
       const parsedBars = parseInt(values.bars);
       const parsedDays = parseInt(values.days);
       const newBars = bars === parsedBars ? false : parsedBars;
-      const newDays = days === parsedDays ? false : parsedDays;
+      let newDays = days === parsedDays ? false : parsedDays;
       const newDescription =
         description === values.description ? false : values.description;
       const newDayLoading =
         dayLoading === values.dayLoading ? false : values.dayLoading;
-      const changes = {
-        newBars,
-        newDays,
-        newDescription,
-        newDayLoading,
-      };
-      dispatch(
-        updateTaskPack({
-          task,
-          changes,
-        })
-      );
+
+      if (newBars && newBars > parsedDays) {
+        newDays = newBars;
+        toast.info("Days increased to number of bars", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: toastDelay,
+        });
+      }
+      if (newDescription)
+        dispatch(
+          updateTaskKey({ taskId, key: "description", value: newDescription })
+        );
+      if (newDayLoading)
+        dispatch(
+          updateTaskKey({ taskId, key: "daysLoading", value: newDayLoading })
+        );
+      if (newDays) {
+        dispatch(updateTaskKey({ taskId, key: "days", value: newDays }));
+      }
+      if (newBars) {
+        dispatch(updatedNumberOfBars({ taskId, newBars }));
+      }
+      if (newDayLoading || newDays || newBars)
+        dispatch(spreadWork({ taskId, combinedLength }));
+
       closeModal();
     },
     validationSchema,
@@ -84,22 +110,18 @@ function EditModal(props) {
   }
 
   function resetBars() {
-    const changes = {
-      newBars: 1,
-      newDays: 1,
-      reset: true, // to stop toast notification
-    };
     dispatch(
-      updateTaskPack({
-        task,
-        changes,
+      updateTask({
+        taskId,
+        newBars: 1,
+        reset: true, // toast
       })
     );
     closeModal();
   }
 
   function handleDelete(taskId) {
-    dispatch(deleteTask({taskId}));
+    dispatch(deleteTask({ taskId }));
     dispatch(deleteTaskAllocations({ taskId }));
   }
 

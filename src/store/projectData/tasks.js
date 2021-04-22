@@ -5,11 +5,11 @@ export const wPFetchRequest = createAction("wPFetchRequest");
 export const wPFetchSuccess = createAction("wPFetchSuccess");
 export const wPFetchFailure = createAction("wPFetchFailure");
 
-export const setTaskBars = createAction("setTaskBars");
+// export const setTaskBars = createAction("setTaskBars");
 export const updateTaskKeyValue = createAction("updateTaskKeyValue");
 export const updateTaskDays = createAction("updateTaskDays");
-export const updateTaskPack = createAction("updateTaskPack"); // formik modal
-export const updateTaskBlock = createAction("updateTaskBlock");
+// export const updateTaskPack = createAction("updateTaskPack"); // formik modal
+// export const updateTaskBlock = createAction("updateTaskBlock");
 export const updateTaskPackTitle = createAction("updateTaskPackTitle");
 
 //     case wPFetchRequest.type:
@@ -76,11 +76,21 @@ const slice = createSlice({
       const { taskId, key, value } = action.payload;
       tasks.data[taskId][key] = value;
     },
-    // replaceTaskSchedule: (tasks, action) => {
-    //   // what is this? replace schedule??
-    //   const { taskId, value } = action.payload;
-    //   tasks.data[taskId].schedule = value;
-    // },
+    updatedNumberOfBars: (tasks, action) => {
+      const { taskId, newBars } = action.payload;
+      const length = tasks.data[taskId].schedule.length;
+      let barNumber = 1;
+      for (let i = 0; i < length - 1; i = i + 2) {
+        if (barNumber <= newBars) {
+          tasks.data[taskId].schedule[i].barNumber = barNumber;
+          barNumber++;
+        } else {
+          tasks.data[taskId].schedule[i].barNumber = 0;
+        }
+        // tasks.data[taskId].schedule[i].barNumber = 0;
+        tasks.data[taskId].schedule[i + 1].barNumber = 0;
+      }
+    },
     resizeTaskBar: (tasks, action) => {
       const {
         taskId,
@@ -133,7 +143,7 @@ const slice = createSlice({
     },
     updateBlock: (tasks, action) => {
       const { taskId, blockIndex, value } = action.payload;
-      const change = value - tasks.data[taskId].schedule[blockIndex].value
+      const change = value - tasks.data[taskId].schedule[blockIndex].value;
       console.log(change);
       tasks.data[taskId].schedule[blockIndex].value = value;
       tasks.data[taskId].days = tasks.data[taskId].days + change;
@@ -163,6 +173,8 @@ export const {
   deleteTask,
   updateBlock,
   updateTaskKey,
+  updateTask,
+  updatedNumberOfBars,
 } = slice.actions;
 export default slice.reducer;
 
@@ -180,4 +192,22 @@ export const getTaskIds = (state) => {
   const list = Object.keys(state.tasks.data);
   const taskIds = list.filter((id) => id !== "taskOrder");
   return taskIds;
+};
+
+export const getCombinedLengthOfBars = (state, taskId) => {
+  let length = state.tasks.data[taskId].schedule.length;
+  let result = 0;
+  for (let i = 0; i < length; i++) {
+    if (state.tasks.data[taskId].schedule[i].barNumber > 0) result++;
+  }
+  return result;
+};
+
+export const getNumberOfBars = (state, taskId) => {
+  let length = state.tasks.data[taskId].schedule.length;
+  for (let i = length - 1; i >= 0; i--) {
+    if (state.tasks.data[taskId].schedule[i].barNumber > 0) {
+      return state.tasks.data[taskId].schedule[i].barNumber;
+    }
+  }
 };

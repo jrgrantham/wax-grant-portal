@@ -85,7 +85,7 @@ function updateNumberOfBars(task, numberOfBars) {
     }
     schedule[i + 1].barNumber = 0;
   }
-  spreadWork(task);
+  // spreadWork(task);
   return task;
 }
 

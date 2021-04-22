@@ -7,8 +7,11 @@ import { isNumberKey, getResources, toastDelay } from "../../helpers";
 import EditModal from "../modals/ganttEditModal";
 import ResourcesModal from "../modals/ganttResourcesModal";
 import {
-  updateTaskKeyValue,
-  updateTaskDays,
+  updateTaskKey,
+  updateNumberOfBars,
+  spreadWork,
+  getNumberOfBars,
+  getCombinedLengthOfBars,
 } from "../../store/projectData/tasks";
 import tick from "../../images/tick-grey.png";
 import { Container } from "./ganttRowStyling";
@@ -19,21 +22,27 @@ import { updateUserSelection } from "../../store/projectData/user";
 toast.configure();
 
 function GanttTaskRowInfo(props) {
-  const { task, provided, packData, taskPackTitles } = props;
-  const { description, days, taskId } = task;
   const dispatch = useDispatch();
-  const { showComponent } = useSelector(
-    (state) => state.user
-  );
+  const { task, provided, packData } = props;
+  const { description, days, taskId } = task;
+  const { showComponent } = useSelector((state) => state.user);
   const resources = getResources();
   // console.log(resources);
   const buttonContent = resources[taskId].people;
   const [showEditDays, setShowEditDays] = useState(false);
   const [newDays, setNewDays] = useState(days);
+  const numberOfBars = getNumberOfBars(
+    useSelector((state) => state),
+    taskId
+  );
+  const combinedLength = getCombinedLengthOfBars(
+    useSelector((state) => state),
+    taskId
+  );
 
   function handleDescriptionChange(value) {
     dispatch(
-      updateTaskKeyValue({
+      updateTaskKey({
         taskId,
         key: "description",
         value,
@@ -53,10 +62,20 @@ function GanttTaskRowInfo(props) {
   function acceptNewDays() {
     setShowEditDays(false);
     console.log(newDays);
-    if (newDays > 0) {
-      if (newDays !== days) dispatch(updateTaskDays({ task, days: newDays }));
+    if (newDays >= numberOfBars) {
+      if (newDays !== days) {
+        dispatch(updateTaskKey({ taskId, key: "days", value: newDays }));
+        if (newDays < combinedLength) {
+          toast.info("Bar lengths reset due to too few days", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: toastDelay,
+          });
+          dispatch(updateNumberOfBars({ taskId, newBars: numberOfBars }));
+          dispatch(spreadWork({ taskId, combinedLength: numberOfBars }));
+        } else dispatch(spreadWork({ taskId, combinedLength }));
+      }
     } else {
-      toast.info("Must enter at least 1 day", {
+      toast.info("Days cannot be less than number of bars", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: toastDelay,
       });
@@ -69,13 +88,9 @@ function GanttTaskRowInfo(props) {
 
   return (
     <Container>
-      {showComponent === taskId+'edit' ? (
-        <EditModal task={task} />
-      ) : null}
-      {showComponent === taskId+'resources' ? (
-        <ResourcesModal
-          packData={packData}
-        />
+      {showComponent === taskId + "edit" ? <EditModal task={task} /> : null}
+      {showComponent === taskId + "resources" ? (
+        <ResourcesModal packData={packData} />
       ) : null}
       <div className="rowDescription">
         <Tippy content="Drag to reorder tasks">
@@ -95,7 +110,7 @@ function GanttTaskRowInfo(props) {
       </div>
       <div className="rowData">
         <button
-          onClick={() => updateUser("showComponent", taskId+'resources')}
+          onClick={() => updateUser("showComponent", taskId + "resources")}
           className="resources highlight packBackground"
         >
           {buttonContent}
@@ -126,7 +141,7 @@ function GanttTaskRowInfo(props) {
         )}
 
         <button
-          onClick={() => updateUser("showComponent", taskId+'edit')}
+          onClick={() => updateUser("showComponent", taskId + "edit")}
           className="hidden icon"
         >
           <BiDotsHorizontalRounded />

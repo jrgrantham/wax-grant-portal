@@ -147,24 +147,3 @@ export function wPCreateNewRow(scheduleLength, title = newTitle) {
   newRow.schedule[0].barNumber = 1;
   return newRow;
 }
-
-// export function dAndMCreateNewRow(type, scheduleLength) {
-//   const newRow = {
-//     taskId: uuidv4(),
-//     sortPosition: 0,
-//     type,
-//     description: "Deadline description",
-//   };
-//   for (let i = 0; i < scheduleLength; i++) {
-//     const emptyBlock = {
-//       // status: false,
-//       start: false,
-//       end: false,
-//       blockId: uuidv4(),
-//       scheduleIndex: 0,
-//     };
-//     newRow.schedule.push(emptyBlock);
-//   }
-//   // newRow.schedule[0].status = true;
-//   return newRow;
-// }

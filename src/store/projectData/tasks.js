@@ -6,8 +6,8 @@ export const wPFetchSuccess = createAction("wPFetchSuccess");
 export const wPFetchFailure = createAction("wPFetchFailure");
 
 // export const setTaskBars = createAction("setTaskBars");
-export const updateTaskKeyValue = createAction("updateTaskKeyValue");
-export const updateTaskDays = createAction("updateTaskDays");
+// export const updateTaskKeyValue = createAction("updateTaskKeyValue");
+// export const updateTaskDays = createAction("updateTaskDays");
 // export const updateTaskPack = createAction("updateTaskPack"); // formik modal
 // export const updateTaskBlock = createAction("updateTaskBlock");
 export const updateTaskPackTitle = createAction("updateTaskPackTitle");
@@ -76,7 +76,7 @@ const slice = createSlice({
       const { taskId, key, value } = action.payload;
       tasks.data[taskId][key] = value;
     },
-    updatedNumberOfBars: (tasks, action) => {
+    updateNumberOfBars: (tasks, action) => {
       const { taskId, newBars } = action.payload;
       const length = tasks.data[taskId].schedule.length;
       let barNumber = 1;
@@ -90,6 +90,9 @@ const slice = createSlice({
         // tasks.data[taskId].schedule[i].barNumber = 0;
         tasks.data[taskId].schedule[i + 1].barNumber = 0;
       }
+    },
+    updateTaskDays: (tasks, action) => {
+      const { taskId, days } = action.payload;
     },
     resizeTaskBar: (tasks, action) => {
       const {
@@ -174,7 +177,8 @@ export const {
   updateBlock,
   updateTaskKey,
   updateTask,
-  updatedNumberOfBars,
+  updateNumberOfBars,
+  updateTaskDays,
 } = slice.actions;
 export default slice.reducer;
 

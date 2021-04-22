@@ -11,6 +11,7 @@ import {
   addTask,
   updateTaskPackTitle,
   deleteTask,
+  updateTaskKey,
 } from "../../store/projectData/tasks";
 import GanttTaskRowInfo from "./ganttTaskRowInfo";
 import EditModal from "../modals/ganttEditModal";
@@ -25,18 +26,21 @@ function GanttPackWork(props) {
   const { title, index, packData } = props;
   const wpNumber = index + 1;
 
+  console.log(packData);
+
   const [edit, setEdit] = useState(false);
   const [editTitleWindow, setEditTitleWindow] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
 
   const { projectLength } = useSelector((state) => state.project.data.details);
-
   function handleAddNewRow() {
     const [lastTask] = packData.slice(-1);
     const lastTaskId = lastTask.taskId;
     const workPackageId = lastTask.workPackageId;
     const workPackageTitle = lastTask.workPackageTitle;
-    dispatch(addTask({ lastTaskId, workPackageId, workPackageTitle, projectLength }));
+    dispatch(
+      addTask({ lastTaskId, workPackageId, workPackageTitle, projectLength })
+    );
   }
 
   function calculateDays() {
@@ -60,9 +64,18 @@ function GanttPackWork(props) {
     setNewTitle(value);
   }
 
-  function sendEditedTitle() {
+  function acceptEditedTitle() {
     if (title !== newTitle)
-      dispatch(updateTaskPackTitle({ oldTitle: title, newTitle: newTitle }));
+      packData.forEach((task) => {
+        dispatch(
+          updateTaskKey({
+            taskId: task.taskId,
+            key: "workPackageTitle",
+            value: newTitle,
+          })
+        );
+      });
+    // dispatch(updateTaskPackTitle({ oldTitle: title, newTitle: newTitle }));
     setEditTitleWindow(false);
   }
 
@@ -87,7 +100,7 @@ function GanttPackWork(props) {
               value={newTitle}
               onChange={(e) => handleEditTitle(e.target.value)}
             />
-            <button className="evenWidth" onClick={sendEditedTitle}>
+            <button className="evenWidth" onClick={acceptEditedTitle}>
               <img src={tick} alt="accept" />
             </button>
           </>

@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateBlock } from "../../store/projectData/tasks";
-import { wpScheduleColor, isNumberKey, leadingZero } from "../../helpers";
-import tick from "../../images/tick-white.png";
-import { updateUserSelection } from "../../store/projectData/user";
+import { wpScheduleColor, isNumberKey } from "../../helpers";
 
 function GanttWPBlock(props) {
   const dispatch = useDispatch();
@@ -13,23 +11,13 @@ function GanttWPBlock(props) {
   const { blockNumber, value } = block;
   const blockPosition = blockNumber.slice(-1);
 
-  // const [tempValue, setTempValue] = useState(value);
-  // if (task.taskId === 'task2') console.log(`blockIndex ${blockIndex}`,value);
-  const blockCode = leadingZero(blockIndex);
-  const blockId = (barId + "-" + blockCode).slice(-11);
   const leftHandle = "handle-" + barId + "-lft";
   const rightHandle = "handle-" + barId + "-rgt";
 
-  const showContent = useSelector((state) => state.user.showContent);
-  function handleClick() {
-    dispatch(updateUserSelection({ key: "showContent", value: blockId }));
-  }
   function handleDayChange(e) {
-    // console.log("handleDayChange", tempValue, value);
     let number;
     if (e.target.value) {
       number = e.target.value.slice(-2);
-      // let lastTwoNumbers = e.target.value.slice(-2);
       number = parseInt(number);
     } else {
       number = 0;
@@ -39,52 +27,24 @@ function GanttWPBlock(props) {
         taskId: task.taskId,
         blockIndex,
         value: number,
-        // change,
       })
     );
   }
-  // function acceptNewDays() {
-  //   dispatch(updateUserSelection({ key: "showContent", value: "" }));
-  //   console.log('accept days',tempValue,value);
-  //   if (tempValue !== value) {
-  //     const change = tempValue - value;
-  //     dispatch(
-  //       updateBlock({
-  //         taskId: task.taskId,
-  //         blockIndex,
-  //         value: tempValue,
-  //         change,
-  //       })
-  //     );
-  //   }
-  // }
 
   return (
     <Container>
       {showBlock ? (
         <div>
-          {blockId === showContent ? (
-            <div className="editDays">
-              <input
-                autoFocus
-                className="days highlight packBackground"
-                type="text"
-                value={value}
-                onKeyDown={(e) => isNumberKey(e)}
-                onChange={(e) => handleDayChange(e)}
-              />
-              {/* <button onClick={acceptNewDays} className="accept">
-                <img id="accept" src={tick} alt="accept" />
-              </button> */}
-            </div>
-          ) : (
-            <button
+          <div className="editDays">
+            <input
+              autoFocus
               className="days highlight packBackground"
-              onClick={handleClick}
-            >
-              {value}
-            </button>
-          )}
+              type="text"
+              value={value}
+              onKeyDown={(e) => isNumberKey(e)}
+              onChange={(e) => handleDayChange(e)}
+            />
+          </div>
         </div>
       ) : null}
       {blockPosition === "s" ? (
@@ -131,35 +91,6 @@ const Container = styled.div`
     background-color: ${wpScheduleColor};
     color: white;
     z-index: 1;
-  }
-  button {
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    color: white;
-    cursor: text;
-  }
-  img {
-    max-height: 18px;
-    max-width: 18px;
-    cursor: pointer;
-  }
-  .editDays {
-    position: relative;
-    display: flex;
-    align-items: center;
-    /* border-radius: 50%; */
-    z-index: 1;
-    .accept {
-      /* background-color: ${wpScheduleColor}; */
-      position: absolute;
-      display: flex;
-      align-items: center;
-      /* bottom: 6px; */
-      right: -20px;
-      max-width: 22px;
-      max-height: 22px;
-    }
   }
 
   .dragHandle {

@@ -9,7 +9,7 @@ import {
   deleteTask,
   updateTask,
   updateTaskKey,
-  updatedNumberOfBars,
+  updateNumberOfBars,
   spreadWork,
   getCombinedLengthOfBars,
   getNumberOfBars,
@@ -90,7 +90,7 @@ function EditModal(props) {
         dispatch(updateTaskKey({ taskId, key: "days", value: newDays }));
       }
       if (newBars) {
-        dispatch(updatedNumberOfBars({ taskId, newBars }));
+        dispatch(updateNumberOfBars({ taskId, newBars }));
       }
       if (newDayLoading || newDays || newBars)
         dispatch(spreadWork({ taskId, combinedLength }));

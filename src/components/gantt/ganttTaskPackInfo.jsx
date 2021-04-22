@@ -51,8 +51,8 @@ function GanttPackWork(props) {
     if (!result.destination || result.destination.index === result.source.index)
       return;
     const movement = result.destination.index - result.source.index;
-    const task = packData[result.source.index];
-    dispatch(reorderTasks({ task, movement }));
+    const taskId = packData[result.source.index].taskId;
+    dispatch(reorderTasks({ taskId, movement }));
   }
 
   function handleEditTitle(value) {

@@ -20,7 +20,7 @@ export const wPFetchFailure = createAction("wPFetchFailure");
 export const removeTask = createAction("removeTask");
 export const removeTaskPack = createAction("removeTaskPack");
 export const setTaskBars = createAction("setTaskBars");
-export const reorderTasks = createAction("reorderTasks");
+// export const reorderTasks = createAction("reorderTasks");
 export const updateTaskKeyValue = createAction("updateTaskKeyValue");
 export const updateTaskDays = createAction("updateTaskDays");
 export const updateTaskPack = createAction("updateTaskPack"); // formik modal
@@ -289,13 +289,15 @@ const slice = createSlice({
     // pack operations
     renameTaskPack: () => {},
     reorderTasks: (tasks, action) => {
+      console.log('reordering');
       const { taskId, movement } = action.payload;
       const originalIndex = tasks.data.taskOrder.findIndex(
         (task) => task === taskId
       );
+      console.log(originalIndex);
       const newIndex = originalIndex + movement;
-      const [movedTask] = tasks.data.splice(originalIndex, 1);
-      tasks.data.splice(newIndex, 0, movedTask);
+      const [movedTask] = tasks.data.taskOrder.splice(originalIndex, 1);
+      tasks.data.taskOrder.splice(newIndex, 0, movedTask);
     },
     deleteTaskPack: (tasks, action) => {
       // filter uses an array of allowed values
@@ -320,6 +322,7 @@ export const {
   moveTaskBar,
   resizeTaskBar,
   spreadWork,
+  reorderTasks
 } = slice.actions;
 export default slice.reducer;
 

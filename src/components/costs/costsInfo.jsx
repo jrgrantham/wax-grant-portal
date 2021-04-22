@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import Tippy from "@tippy.js/react";
 
-import TeamInfoRow from "./teamRow";
+import TeamInfoRow from "./costsRow";
 import { addTeamMember, reorderTeam } from "../../store/projectData/team";
 import { useSelector } from "react-redux";
 import add from "../../images/addTeam.png";
-import { Container } from "./teamStyling";
+import { Container } from "./costsStyling";
 import { nextIndexOfGroup } from "../../helpers";
 
 function TeamInfo() {

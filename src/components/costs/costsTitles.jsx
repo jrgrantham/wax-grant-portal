@@ -5,7 +5,7 @@ import Tippy from "@tippy.js/react";
 import { useSelector } from "react-redux";
 
 import qMark from "../../images/qMark.png";
-import { Container } from "./teamStyling";
+import { Container } from "./costsStyling";
 
 function Titles() {
   const employmentType = useSelector((state) => state.user.selectedTeamOption);

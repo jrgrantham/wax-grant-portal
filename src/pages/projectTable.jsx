@@ -5,9 +5,9 @@ import { projectColor, projectFontColor } from "../helpers";
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
 import { TableContainer } from "../components/table/tableStyling";
-import ProjectRows from "../components/project/projectRows";
-import OptionsRows from "../components/project/optionsRows";
-import CompanyRows from "../components/project/companyRows";
+import ProjectRows from "../components/details/projectRows";
+import OptionsRows from "../components/details/optionsRows";
+import CompanyRows from "../components/details/companyRows";
 
 function Team() {
   const dispatch = useDispatch();
@@ -41,7 +41,6 @@ function Team() {
     backgroundColor: menuData.backgroundColor,
     maxHeight: maxHeight[selectedOption],
   };
-  console.log(maxHeight[selectedOption]);
   return (
     <TableContainer data={data}>
       <div className="displayArea">

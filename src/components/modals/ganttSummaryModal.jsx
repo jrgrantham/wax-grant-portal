@@ -31,6 +31,8 @@ function GanttSummaryModal() {
     });
   });
 
+  console.log(peoplesDays);
+
   return (
     <Container onClick={close}>
       <h3>Days</h3>

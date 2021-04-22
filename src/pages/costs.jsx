@@ -4,9 +4,9 @@ import { updateUserSelection } from "../store/projectData/user";
 import { costsColor, costsFontColor } from "../helpers";
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
-import CostInfo from "../components/costs/costsInfo";
-import CostTitles from "../components/costs/costsTitles";
 import { TableContainer } from "../components/table/tableStyling";
+import CostsTitles from "../components/costs/costsTitles";
+import CostsInfo from "../components/costs/costsInfo";
 
 function Team() {
   const dispatch = useDispatch();
@@ -39,15 +39,15 @@ function Team() {
   };
 
   const showLeaderTabs = {
-    labour: 4,
+    labour: 3,
     overhead: 4,
     materials: 4,
     travel: 3,
     subcontract: 4,
     capex: 4,
     other: 4,
-    summary: false,
-    breakdown: false,
+    summary: 0,
+    breakdown: 0,
   };
 
   return (
@@ -58,8 +58,8 @@ function Team() {
           {showLeaderTabs[selectedOption] ? (
             <LeaderTabs viewCombinedTab={showLeaderTabs[selectedOption] === 4} />
           ) : null}
-          {/* <TeamTitles /> */}
-          {/* <TeamData /> */}
+          <CostsTitles />
+          <CostsInfo />
         </div>
       </div>
     </TableContainer>

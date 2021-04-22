@@ -26,8 +26,6 @@ function GanttPackWork(props) {
   const { title, index, packData } = props;
   const wpNumber = index + 1;
 
-  console.log(packData);
-
   const [edit, setEdit] = useState(false);
   const [editTitleWindow, setEditTitleWindow] = useState(false);
   const [newTitle, setNewTitle] = useState(title);

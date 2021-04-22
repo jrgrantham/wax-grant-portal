@@ -1,4 +1,8 @@
-import { resizeTaskBar, spreadWork } from "../store/projectData/tasks";
+import {
+  getCombinedLengthOfBars,
+  resizeTaskBar,
+  spreadWork,
+} from "../store/projectData/tasks";
 import { store } from "../store";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -88,7 +92,8 @@ export function resizeBar(data, barDiv, e) {
   }
 
   function handleNewSize() {
-    combinedLength = currentCombinedLengthOfBars(task.schedule) + change;
+    console.log(store.getState());
+    combinedLength = getCombinedLengthOfBars(store.getState(), taskId) + change;
     if (combinedLength > task.days) {
       toast.info("Increased number of days", {
         position: toast.POSITION.TOP_RIGHT,
@@ -108,6 +113,6 @@ export function resizeBar(data, barDiv, e) {
         // combinedLength,
       })
     );
-    store.dispatch(spreadWork({taskId, combinedLength}))
+    store.dispatch(spreadWork({ taskId, combinedLength }));
   }
 }

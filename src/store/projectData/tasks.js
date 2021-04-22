@@ -1,16 +1,5 @@
-import { createAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { taskData2 } from "../../data";
-
-export const wPFetchRequest = createAction("wPFetchRequest");
-export const wPFetchSuccess = createAction("wPFetchSuccess");
-export const wPFetchFailure = createAction("wPFetchFailure");
-
-// export const setTaskBars = createAction("setTaskBars");
-// export const updateTaskKeyValue = createAction("updateTaskKeyValue");
-// export const updateTaskDays = createAction("updateTaskDays");
-// export const updateTaskPack = createAction("updateTaskPack"); // formik modal
-// export const updateTaskBlock = createAction("updateTaskBlock");
-export const updateTaskPackTitle = createAction("updateTaskPackTitle");
 
 //     case wPFetchRequest.type:
 //       return {
@@ -44,7 +33,6 @@ const slice = createSlice({
   name: "tasks",
   initialState: taskData2,
   reducers: {
-    // individual tasks
     addTask: (tasks, action) => {
       const {
         lastTaskId,
@@ -59,7 +47,6 @@ const slice = createSlice({
       newTask.taskId = newId;
       newTask.workPackageId = workPackageId;
       newTask.workPackageTitle = workPackageTitle;
-      // newTask.schedule = schedule;
       tasks.data.taskOrder.splice(index, 0, newId);
       for (let i = 1; i < projectLength; i++) {
         newTask.schedule[i] = { barNumber: 0, value: 0 };
@@ -87,12 +74,8 @@ const slice = createSlice({
         } else {
           tasks.data[taskId].schedule[i].barNumber = 0;
         }
-        // tasks.data[taskId].schedule[i].barNumber = 0;
         tasks.data[taskId].schedule[i + 1].barNumber = 0;
       }
-    },
-    updateTaskDays: (tasks, action) => {
-      const { taskId, days } = action.payload;
     },
     resizeTaskBar: (tasks, action) => {
       const {
@@ -130,7 +113,6 @@ const slice = createSlice({
       let j = 0;
       for (let i = 0; i < tasks.data[taskId].schedule.length; i++) {
         if (tasks.data[taskId].schedule[i].barNumber) {
-          // was status
           if (j < remainderMonths) {
             tasks.data[taskId].schedule[i].value = months + 1;
             j++;
@@ -151,8 +133,6 @@ const slice = createSlice({
       tasks.data[taskId].schedule[blockIndex].value = value;
       tasks.data[taskId].days = tasks.data[taskId].days + change;
     },
-    // pack operations
-    renameTaskPack: (tasks, action) => {},
     reorderTasks: (tasks, action) => {
       console.log("reordering");
       const { taskId, movement } = action.payload;
@@ -178,7 +158,7 @@ export const {
   updateTaskKey,
   updateTask,
   updateNumberOfBars,
-  updateTaskDays,
+  // updateTaskDays,
 } = slice.actions;
 export default slice.reducer;
 

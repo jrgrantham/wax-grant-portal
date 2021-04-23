@@ -37,7 +37,7 @@ function GanttWPBlock(props) {
         <div>
           <div className="editDays">
             <input
-              autoFocus
+              // autoFocus
               className="days highlight packBackground"
               type="text"
               value={value}

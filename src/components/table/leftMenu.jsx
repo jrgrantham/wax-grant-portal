@@ -15,7 +15,6 @@ function LeftMenu(props) {
     changeStatus,
     section,
   } = props.data;
-  console.log(props.data);
 
   const leader = useSelector((state) => state.user.selectedLeader);
   const company = useSelector(

@@ -6,6 +6,8 @@ export const toastDelay = 2000;
 
 export const navBackground = "rgba(12, 58, 93, 1)";
 export const navHighlight = "rgba(30, 91, 127, 1)";
+export const warningColor = "rgba(240,90,40)";
+export const fontColorGrey = "#606060";
 
 export const adminColor = "rgba(162,84,198)";
 export const adminFontColor = "rgba(110,57,135)";

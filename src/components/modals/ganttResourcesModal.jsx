@@ -86,7 +86,7 @@ const Container = styled.div`
 
     padding-bottom: 10px;
     background-color: white;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 6px;
   }
   .modalRow {
@@ -106,7 +106,7 @@ const Container = styled.div`
     background-color: ${wpInfoColor};
     color: white;
     padding: 0 20px;
-    border-radius: 5px 5px 0px 0px
+    border-radius: 6px 6px 0px 0px
   }
   .person {
     width: 35px;

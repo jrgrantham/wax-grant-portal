@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {
   appTop,
   appWidth,
+  fontColorGrey,
   tabBottomMargin,
   tableContentSideMargin,
   tableInputUnderline,
@@ -40,6 +41,7 @@ export const TableContainer = styled.div`
   }
   .titles.row {
     min-height: 0;
+    margin-bottom: 10px;
   }
   .title {
     display: flex;
@@ -98,12 +100,15 @@ export const TableContainer = styled.div`
     padding-left: 0;
     border-radius: 0;
     border-bottom: 2px solid ${tableInputUnderline};
-    color: #606060;
+    color: ${fontColorGrey};
     font-size: 16px;
     &:focus {
       border: none;
       border-bottom: 2px solid ${(props) => props.data.backgroundColor};
     }
+  }
+  .field.display {
+    border-color: transparent;
   }
   .applyDefaults {
     position: absolute;
@@ -116,9 +121,5 @@ export const TableContainer = styled.div`
       border: none;
       color: gray;
     }
-  }
-  img {
-    width: 100%;
-    height: 100%;
   }
 `;

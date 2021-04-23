@@ -1,16 +1,23 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserSelection } from "../store/projectData/user";
-import { costsColor, costsFontColor } from "../helpers";
+
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
+import MarkedComplete from "../components/modals/markedComplete";
+import { updateUserSelection } from "../store/projectData/user";
 import { TableContainer } from "../components/table/tableStyling";
-import CostsTitles from "../components/costs/costsTitles";
-import CostsInfo from "../components/costs/costsInfo";
+import { updateSectionStatus } from "../store/projectData/project";
+import { costsColor, costsFontColor } from "../helpers"; // check this
+import LabourTitles from "../components/costs/labourTitles"; // check this
+import LabourInfo from "../components/costs/labourInfo"; // check this
 
 function Team() {
   const dispatch = useDispatch();
-  const selectedOption = useSelector((state) => state.user.selectedCostsOption); // remember to change this when copying
+  const selectedLeader = useSelector((state) => state.user.selectedLeader);
+  const selectedOption = useSelector((state) => state.user.selectedCostsOption); // check this
+  const status = useSelector(
+    (state) => state.project.data.status.costs[selectedLeader] // check this
+  );
   const menuList = [
     "Labour",
     "Overhead",
@@ -21,21 +28,28 @@ function Team() {
     "Other",
     "Summary",
     "Breakdown",
-  ];
+  ]; // check this
 
   const menuData = {
+    section: "Costs", // check this
+    status,
     menuList,
     selectedOption,
-    color: costsFontColor,
-    backgroundColor: costsColor,
+    color: costsFontColor, // check this
+    backgroundColor: costsColor, // check this
     updateOption: function (value) {
-      dispatch(updateUserSelection({ key: "selectedCostsOption", value }));
+      dispatch(updateUserSelection({ key: "selectedCostsOption", value })); // check this
+    },
+    changeStatus: function () {
+      dispatch(
+        updateSectionStatus({ section: "costs", leader: selectedLeader }) // check this
+      ); // check this
     },
   };
 
   const data = {
     backgroundColor: menuData.backgroundColor,
-    maxHeight: "550px",
+    // maxHeight: "550px",
   };
 
   const showLeaderTabs = {
@@ -50,16 +64,32 @@ function Team() {
     breakdown: 0,
   };
 
+  function content() {
+    if (selectedOption === "labour")
+      return (
+        <>
+          <LabourTitles />
+          <LabourInfo />
+        </>
+      );
+    //   if (selectedOption === "project") return <ProjectRows />;
+    //   if (selectedOption === "options") return <OptionsRows />;
+  }
+
   return (
     <TableContainer data={data}>
       <div className="displayArea">
         <LeftMenu data={menuData} />
         <div className="content">
           {showLeaderTabs[selectedOption] ? (
-            <LeaderTabs viewCombinedTab={showLeaderTabs[selectedOption] === 4} />
+            <LeaderTabs
+              viewCombinedTab={showLeaderTabs[selectedOption] === 4}
+            />
           ) : null}
-          <CostsTitles />
-          <CostsInfo />
+          <div>
+            {status ? <MarkedComplete /> : null}
+            {content()}
+          </div>
         </div>
       </div>
     </TableContainer>

@@ -21,9 +21,7 @@ function TeamInfo() {
   const employmentGroup = team.filter(
     (person) => person.employment === employmentType
   );
-  const group = employmentGroup.filter((person) => person.leader === leader);
-
-  console.log(employmentType);
+const group = employmentGroup.filter((person) => person.leader === leader);
 
   const max = {
     staff: maxTeamMembers,

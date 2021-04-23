@@ -2,21 +2,23 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getResources } from "../../helpers";
 
-import CostsRow from "./costsRow";
+import LabourRow from "./labourRow";
 import { Container } from "./costsStyling";
 
-function TeamInfo() {
+function LabourInfo() {
   const team = useSelector((state) => state.team.data);
-  // const leader = useSelector((state) => state.user.selectedLeader);
-  const resources = getResources
+  const leader = useSelector((state) => state.user.selectedLeader);
+  const resources = getResources()
   console.log(resources);
 
   return (
     <Container>
+      <div className="rows">
       {team.map((person, index) => {
-        return <CostsRow key={index} person={person} />;
+        return <LabourRow key={index} person={person} />;
       })}
+      </div>
     </Container>
   );
 }
-export default TeamInfo;
+export default LabourInfo;

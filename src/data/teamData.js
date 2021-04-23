@@ -12,7 +12,7 @@ export const team = {
       salary: 50000,
       employment: "staff",
       location: 'UK', // flag if not
-      dayRate: 85,
+      dayRate: 0,
       website: 'intangible-engineering.com',
       linkedIn: 'linkedIn.com/me',
       profile: 'once upon a time...'

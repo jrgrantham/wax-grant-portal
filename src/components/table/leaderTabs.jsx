@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import { updateUserSelection } from "../../store/projectData/user";
-import { tabBottomMargin, tabHeight } from "../../helpers";
+import { fontColorGrey, tabBottomMargin, tabHeight } from "../../helpers";
 
 function LeaderTabs(props) {
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ const PageContainer = styled.div`
   }
   .selectedLeader {
     background-color: white;
-    color: black;
+    color: ${fontColorGrey};
     border-radius: 6px 6px 0 0;
     border-left: 2px solid white;
     border-right: 2px solid white;

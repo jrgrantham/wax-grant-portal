@@ -26,3 +26,20 @@ export function getTotalDaysByPersonId() {
 
   return peoplesDays
 }
+
+export function getDayRateById() {
+  const allTasks = useSelector((state) => state.tasks.data);
+  const people = useSelector((state) => state.team.data);
+  const taskIds = getTaskIds(useSelector((state) => state));
+  const resources = getResources();
+
+  const rates = {};
+  people.forEach((person) => {
+    let dayRate = 0;
+    if (person.dayRate) dayRate = person.dayRate;
+    // get working days per partner
+    // else 
+    rates[person.personId] = person.dayRate;
+  });
+  return rates;
+}

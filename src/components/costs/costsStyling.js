@@ -1,46 +1,34 @@
 import styled from "styled-components";
-import {
-  tableContentSideMargin,
-  teamColor,
-} from "../../helpers";
+import { tableContentSideMargin, warningColor } from "../../helpers";
 
 export const Container = styled.div`
   display: flex;
-  .grabHandle {
-    position: absolute;
-    width: 20px;
-    margin: 0px 5px 0px -23px;
-    padding-top: 4px;
-    cursor: move; /* fallback if grab cursor is unsupported */
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-    &:active {
-      cursor: grabbing;
-      cursor: -moz-grabbing;
-      cursor: -webkit-grabbing;
-    }
+  .labourNameRole {
+    width: 250px;
   }
-  .name {
-    width: 150px;
+  .labourCost {
+    width: 50px;
+    text-align: right;
+    justify-content: flex-end;
   }
-  .acronym {
+  .labourDays {
     width: 100px;
+    text-align: right;
+    justify-content: flex-end;
   }
-  .duplicate {
-    color: red;
-  }
-  .role {
+  .labourOverutilised {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 150px;
+    font-weight: 600;
+    color: ${warningColor};
+    width: 120px;
+    margin-left: 40px;
   }
-  .salary {
-    width: 75px;
-  }
-  .dayRate {
-    width: 90px;
-  }
-  .location {
-    width: 75px;
+  .warning {
+    max-height: 25px;
+    max-width: 25px;
   }
   .deleteIcon {
     width: 18px;
@@ -51,16 +39,7 @@ export const Container = styled.div`
     height: 25px;
     width: 25px;
     margin-top: 15px;
-    margin-left: ${tableContentSideMargin}
-  }
-  img {
-    height: 100%;
-    width: 100%;
-    margin: auto;
-  }
-  .profileButton {
-    background-color: ${teamColor};
-    padding: 5px 10px;
+    margin-left: ${tableContentSideMargin};
   }
   button {
     color: white;

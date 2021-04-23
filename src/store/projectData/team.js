@@ -17,7 +17,7 @@ const slice = createSlice({
       team.data.splice(index, 1);
     },
     updateTeamMember: (team, action) => {
-      const {key, value, personId} = action.payload;
+      const { key, value, personId } = action.payload;
       const index = team.data.findIndex(
         (person) => person.personId === personId
       );

@@ -38,12 +38,6 @@ function Details() {
     },
   };
 
-  function content() {
-    if (selectedOption === "company") return <CompanyRows />;
-    if (selectedOption === "project") return <ProjectRows />;
-    if (selectedOption === "options") return <OptionsRows />;
-  }
-
   const maxHeight = {
     company: "550px",
     project: "350px",
@@ -54,6 +48,13 @@ function Details() {
     backgroundColor: menuData.backgroundColor,
     maxHeight: maxHeight[selectedOption],
   };
+
+  function content() {
+    if (selectedOption === "company") return <CompanyRows />;
+    if (selectedOption === "project") return <ProjectRows />;
+    if (selectedOption === "options") return <OptionsRows />;
+  }
+
   return (
     <TableContainer data={data}>
       <div className="displayArea">

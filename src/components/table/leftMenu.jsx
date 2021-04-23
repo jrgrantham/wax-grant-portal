@@ -1,21 +1,38 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  tabHeight,
-  tableLeftWidth,
-} from "../../helpers";
+import { tabHeight, tableLeftHighlight, tableLeftWidth } from "../../helpers";
 import Button from "./leftMenuButton";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 function LeftMenu(props) {
-  const { menuList, backgroundColor } = props.data;
+  const {
+    menuList,
+    backgroundColor,
+    color,
+    status,
+    changeStatus,
+    section,
+  } = props.data;
+  console.log(props.data);
 
   return (
-    <MenuContainer backgroundColor={backgroundColor}>
-      <div className="spacer"></div>
-      {menuList.map((option, index) => {
-        return <Button option={option} key={index} data={props.data} />;
-      })}
-      <div className="spacer"></div>
+    <MenuContainer backgroundColor={backgroundColor} color={color}>
+      <div className="links">
+        <div className="spacer" />
+        {menuList.map((option, index) => {
+          return <Button option={option} key={index} data={props.data} />;
+        })}
+        <div className="spacer" />
+      </div>
+      <div className="completeDiv">
+        <Tippy content={`Mark "${section}" as complete`}>
+          <button onClick={changeStatus} className="completeButton">
+            {status ? "Edit" : "Complete"}
+          </button>
+        </Tippy>
+        <div className="spacer" />
+      </div>
     </MenuContainer>
   );
 }
@@ -25,17 +42,25 @@ const MenuContainer = styled.div`
   width: ${tableLeftWidth};
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-color: ${(props) => props.backgroundColor};
-  button {
-    border: none;
-    background-color: transparent;
+  .completeDiv {
     display: flex;
-    padding: 15px 10px;
-    color: white;
-    margin-bottom: 10px;
-    border-radius: 0;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .completeButton {
+    margin: 0px 15px;
+    /* border: 1px solid ${(props) => props.color}; */
+    border: none;
+    color: ${(props) => props.color};
+    font-weight: 600;
+    background-color: ${tableLeftHighlight};
   }
   .spacer {
     height: ${tabHeight};
+  }
+  .links {
+    /* width: 100%; */
   }
 `;

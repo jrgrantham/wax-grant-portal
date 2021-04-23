@@ -7,11 +7,11 @@ function MarkedComplete(props) {
 export default MarkedComplete;
 
 const Container = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
+  /* top: 0; */
+  /* left: 0; */
   width: 100%;
-  height: 100vh;
-  background-color: rgba(20, 20, 20, 0.2);
+  height: 100%;
+  background-color: rgba(20, 20, 20, 0.1);
   z-index: 2;
 `;

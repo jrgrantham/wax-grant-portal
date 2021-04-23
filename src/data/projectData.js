@@ -1,13 +1,33 @@
 export const projectData = {
   loading: false,
   data: {
-    settings: {
-      detailsComplete: false,
-      teamComplete: false,
-      ganttComplete: false,
-      costsComplete: false,
-      revenueComplete: false,
-      risksComplete: false,
+    status: {
+      gantt: false,
+      details: {
+        lead: false,
+        pOne: true,
+        pTwo: false,
+      },
+      team: {
+        lead: false,
+        pOne: false,
+        pTwo: false,
+      },
+      costs: {
+        lead: false,
+        pOne: false,
+        pTwo: false,
+      },
+      revenue: {
+        lead: false,
+        pOne: false,
+        pTwo: false,
+      },
+      risks: {
+        lead: false,
+        pOne: false,
+        pTwo: false,
+      },
     },
     details: {
       productPlatformName: "productPlatformName",
@@ -41,6 +61,13 @@ export const projectData = {
       fundingLevel: 10,
       matchFundingSource: "source",
       investorName: "name",
+
+      detailsComplete: false,
+      teamComplete: false,
+      ganttComplete: false,
+      costsComplete: false,
+      revenueComplete: false,
+      risksComplete: false,
     },
     pOne: {
       companyName: "",
@@ -59,6 +86,13 @@ export const projectData = {
       fundingLevel: "",
       matchFundingSource: "",
       investorName: "",
+
+      detailsComplete: false,
+      teamComplete: false,
+      ganttComplete: false,
+      costsComplete: false,
+      revenueComplete: false,
+      risksComplete: false,
     },
     pTwo: {
       companyName: "pTwo company",
@@ -77,6 +111,13 @@ export const projectData = {
       fundingLevel: 10,
       matchFundingSource: "source",
       investorName: "name",
+
+      detailsComplete: false,
+      teamComplete: false,
+      ganttComplete: false,
+      costsComplete: false,
+      revenueComplete: false,
+      risksComplete: false,
     },
   },
   error: "",

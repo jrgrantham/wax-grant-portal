@@ -11,7 +11,7 @@ function Titles() {
   const employmentType = useSelector((state) => state.user.selectedTeamOption);
   return (
     <Container>
-      <div className="row titles">
+      <div className="row titles leaderTabMargin">
         <div className="title name">
           <p>Name</p>
         </div>

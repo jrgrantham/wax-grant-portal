@@ -7,9 +7,14 @@ const slice = createSlice({
   name: "project",
   initialState: projectData,
   reducers: {
-    updateProjectSettings: (project, action) => {
-      const { key, value } = action.payload;
-      project.data.settings[key] = value;
+    updateSectionStatus: (project, action) => {
+      const { section, leader } = action.payload;
+      project.data.status[section][leader] = !project.data.status[section][
+        leader
+      ];
+    },
+    updateGanttStatus: (project) => {
+      project.data.status.gantt = !project.data.status.gantt;
     },
     updateProjectInfo: (project, action) => {
       project.data.details[action.payload.key] = action.payload.value;
@@ -41,7 +46,8 @@ export const {
   updateLeaderInfo,
   setProjectDefaults,
   setCompanyDefaults,
-  updateProjectSettings,
+  updateSectionStatus,
+  updateGanttStatus,
 } = slice.actions;
 export default slice.reducer;
 

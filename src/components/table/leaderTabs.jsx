@@ -56,7 +56,7 @@ const PageContainer = styled.div`
   height: ${tabHeight};
   display: flex;
   background-color: rgba(88, 88, 88, 1);
-  margin-bottom: ${tabBottomMargin};
+  /* margin-bottom: ${tabBottomMargin}; */
 
   .leader {
     flex-grow: 1;

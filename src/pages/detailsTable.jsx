@@ -1,27 +1,38 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserSelection } from "../store/projectData/user";
-import { projectColor, projectFontColor } from "../helpers";
+import { projectColor, projectFontColor } from "../helpers"; // check this 
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
 import { TableContainer } from "../components/table/tableStyling";
 import ProjectRows from "../components/details/projectRows";
 import OptionsRows from "../components/details/optionsRows";
 import CompanyRows from "../components/details/companyRows";
+import MarkedComplete from "../components/modals/markedComplete";
+import { updateSectionStatus } from "../store/projectData/project";
 
-function Team() {
+function Details() {
   const dispatch = useDispatch();
-  const selectedOption = useSelector(
-    (state) => state.user.selectedDetailsOption
+  const selectedLeader = useSelector((state) => state.user.selectedLeader);
+  const status = useSelector(
+    (state) => state.project.data.status.details[selectedLeader]
   );
-  const menuList = ["Company", "Project", "Options"];
+  const selectedOption = useSelector(
+    (state) => state.user.selectedDetailsOption // check this 
+  );
+  const menuList = ["Company", "Project", "Options"]; // check this 
   const menuData = {
+    section: "Details", // check this 
+    status,
     menuList,
     selectedOption,
     color: projectFontColor,
     backgroundColor: projectColor,
     updateOption: function (value) {
-      dispatch(updateUserSelection({ key: "selectedDetailsOption", value }));
+      dispatch(updateUserSelection({ key: "selectedDetailsOption", value })); // check this 
+    },
+    changeStatus: function () {
+      dispatch(updateSectionStatus({section: 'details', leader: selectedLeader})); // check this 
     },
   };
 
@@ -47,10 +58,13 @@ function Team() {
         <LeftMenu data={menuData} />
         <div className="content">
           <LeaderTabs viewCombinedTab={false} />
-          {content()}
+          <div>
+            {status ? <MarkedComplete /> : null}
+            <div className="leaderTabMargin">{content()}</div>
+          </div>
         </div>
       </div>
     </TableContainer>
   );
 }
-export default Team;
+export default Details;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {
   appTop,
   appWidth,
+  tabBottomMargin,
   tableContentSideMargin,
   tableInputUnderline,
   tableMinHeight,
@@ -34,6 +35,9 @@ export const TableContainer = styled.div`
     display: flex;
     flex-direction: column;
   }
+  .leaderTabMargin {
+    margin-top: ${tabBottomMargin};
+  }
   .titles.row {
     min-height: 0;
   }
@@ -54,7 +58,7 @@ export const TableContainer = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-height: ${props => props.data.maxHeight};
+    max-height: ${(props) => props.data.maxHeight};
   }
   .row {
     position: relative;

@@ -8,7 +8,10 @@ import GanttPackWork from "./ganttTaskPackInfo";
 import GanttPackdeadlines from "./ganttDeadlinePackInfo";
 import { addTask } from "../../store/projectData/tasks";
 import { updateUserSelection } from "../../store/projectData/user";
-import { updateProjectSettings } from "../../store/projectData/project";
+import {
+  updateSectionStatus,
+  updateGanttStatus,
+} from "../../store/projectData/project";
 import {
   wpInfoColor,
   delTitleColor,
@@ -26,7 +29,6 @@ function GanttChartLeft(props) {
 
   const {
     taskPackTitles,
-    // groupedTasks,
     workPackages,
     deliverables,
     milestones,
@@ -34,8 +36,7 @@ function GanttChartLeft(props) {
   } = props.data;
 
   const showSummary = useSelector((state) => state.user.showGanttSummary);
-  const { ganttComplete } = useSelector((state) => state.project.data.settings);
-  console.log(ganttComplete);
+  const ganttComplete = useSelector((state) => state.project.data.status.gantt);
   const { maxWorkPackages } = useSelector((state) => state.options.data);
   const projectLength = useSelector(
     (state) => state.project.data.details.projectLength
@@ -57,7 +58,9 @@ function GanttChartLeft(props) {
   }
 
   function complete() {
-    dispatch(updateProjectSettings({ key: "ganttComplete", value: !ganttComplete }));
+    dispatch(updateGanttStatus());
+    if (showSummary)
+      dispatch(updateUserSelection({ key: "showGanttSummary", value: false }));
   }
 
   console.log(workPackages.length);
@@ -69,7 +72,7 @@ function GanttChartLeft(props) {
           Summary
         </button>
         <button onClick={complete} className="complete button">
-          {ganttComplete ? 'Edit': 'Complete'}
+          {ganttComplete ? "Edit" : "Complete"}
         </button>
         <div className="monthHeaderSpacer"></div>
         {workPackages.length

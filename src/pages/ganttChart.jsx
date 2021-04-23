@@ -15,7 +15,7 @@ function GanttChart() {
   const showSummary = useSelector((state) => state.user.showGanttSummary);
   const taskIdKeys = getTaskIds(useSelector((state) => state));
   const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
-  const { ganttComplete } = useSelector((state) => state.project.data.settings);
+  const ganttComplete = useSelector((state) => state.project.data.status.gantt);
 
   const projectLength = useSelector(
     (state) => state.project.data.details.projectLength
@@ -90,8 +90,8 @@ function GanttChart() {
 
   return (
     <PageContainer chartWidth={chartWidth}>
-      {ganttComplete ? <MarkedCompleteModal /> : null}
       <div id="chartArea" className="chartArea">
+      {ganttComplete ? <MarkedCompleteModal /> : null}
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />
       </div>
@@ -117,6 +117,7 @@ const PageContainer = styled.div`
     padding: 0px;
   }
   .chartArea {
+  position: relative;
     margin-bottom: 50px;
     display: flex;
     justify-content: center;

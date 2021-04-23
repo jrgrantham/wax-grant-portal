@@ -9,8 +9,8 @@ function LabourRow(props) {
   const daysById = getTotalDaysByPersonId();
   const dayRateById = getDayRateById(useSelector((state) => state));
   const days = daysById[person.personId];
-  const cost = days * dayRateById[person.personId]
-  console.log(dayRateById);
+  const cost = Math.round(days * dayRateById[person.personId]) // round
+
   return (
     <div className="row">
       <p className="field display labourNameRole">{`${person.name}, ${person.role}`}</p>

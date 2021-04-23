@@ -1,15 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getResources } from "../../helpers";
+import { getResources, getUtilisations } from "../../helpers";
 
 import LabourRow from "./labourRow";
 import { Container } from "./costsStyling";
+import { getTeamIds } from "../../store/projectData/team";
 
 function LabourInfo() {
   const team = useSelector((state) => state.team.data);
   const leader = useSelector((state) => state.user.selectedLeader);
   const resources = getResources()
-  console.log(resources);
+
+  const test = getUtilisations()
 
   return (
     <Container>

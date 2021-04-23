@@ -187,6 +187,7 @@ export const getWorkPackageTitles = (state) => {
   ];
   return titles;
 };
+
 export const getTaskIds = (state) => {
   const list = Object.keys(state.tasks.data);
   const taskIds = list.filter((id) => id !== "taskOrder");

@@ -49,3 +49,11 @@ export const {
   deleteTeamMember,
 } = slice.actions;
 export default slice.reducer;
+
+export const getTeamIds = (state) => {
+  const teamIds = []
+  state.team.data.forEach((person) => {
+    teamIds.push(person.personId);
+  });
+  return teamIds;
+};

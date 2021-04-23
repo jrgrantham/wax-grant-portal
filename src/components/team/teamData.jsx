@@ -1,13 +1,13 @@
 import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import Tippy from "@tippy.js/react";
 
 import TeamInfoRow from "./teamRow";
 import { addTeamMember, reorderTeam } from "../../store/projectData/team";
-import { useSelector } from "react-redux";
 import add from "../../images/addTeam.png";
+import addGrey from "../../images/add-grey.png";
 import { Container } from "./teamStyling";
 import { nextIndexOfGroup } from "../../helpers";
 
@@ -16,11 +16,19 @@ function TeamInfo() {
   const employmentType = useSelector((state) => state.user.selectedTeamOption);
   const team = useSelector((state) => state.team.data);
   const leader = useSelector((state) => state.user.selectedLeader);
+  const { maxTeamMembers, maxSubcontract } = useSelector((state) => state.options.data);
 
   const employmentGroup = team.filter(
     (person) => person.employment === employmentType
   );
   const group = employmentGroup.filter((person) => person.leader === leader);
+
+  console.log(employmentType);
+
+  const max = {
+    staff: maxTeamMembers,
+    subcontract: maxSubcontract,
+  }
 
   function addPerson() {
     const position = nextIndexOfGroup(group, team);
@@ -95,11 +103,19 @@ function TeamInfo() {
             )}
           </Droppable>
         </DragDropContext>
-        <Tippy content="Add team member">
-          <button className="addIcon" onClick={addPerson}>
-            <img src={add} alt="add" />
-          </button>
-        </Tippy>
+        {group.length >= max[employmentType] ? (
+          <Tippy content={`Maximum ${max[employmentType]}`}>
+            <button className="addIcon">
+              <img src={addGrey} alt="add" />
+            </button>
+          </Tippy>
+        ) : (
+          <Tippy content="Add team member">
+            <button className="addIcon" onClick={addPerson}>
+              <img src={add} alt="add" />
+            </button>
+          </Tippy>
+        )}
       </div>
     </Container>
   );

@@ -1,43 +1,44 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserSelection } from "../store/projectData/user";
-import { teamColor, teamFontColor } from "../helpers";
-import TeamData from "../components/team/teamData";
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
-import TeamTitles from "../components/team/teamTitles";
 import { TableContainer } from "../components/table/tableStyling";
 import MarkedComplete from "../components/modals/markedComplete";
 import { updateSectionStatus } from "../store/projectData/project";
+import { teamColor, teamFontColor } from "../helpers"; // check this
+import TeamTitles from "../components/team/teamTitles"; // check this
+import TeamData from "../components/team/teamData"; // check this
 
 function Team() {
   const dispatch = useDispatch();
   const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const status = useSelector(
-    (state) => state.project.data.status.details[selectedLeader]
+    (state) => state.project.data.status.team[selectedLeader] // check this
   );
-  const selectedOption = useSelector((state) => state.user.selectedTeamOption);
-  const menuList = ["Staff", "Subcontract"];
+  const selectedOption = useSelector((state) => state.user.selectedTeamOption); // check this
+  const menuList = ["Staff", "Subcontract"]; // check this
 
   const menuData = {
+    section: "Team", // check this
     status,
     menuList,
     selectedOption,
-    color: teamFontColor,
-    backgroundColor: teamColor,
+    color: teamFontColor, // check this
+    backgroundColor: teamColor, // check this
     updateOption: function (value) {
-      dispatch(updateUserSelection({ key: "selectedTeamOption", value }));
+      dispatch(updateUserSelection({ key: "selectedTeamOption", value })); // check this
     },
     changeStatus: function () {
       dispatch(
-        updateSectionStatus({ section: "details", leader: selectedLeader })
+        updateSectionStatus({ section: "team", leader: selectedLeader })
       );
     },
   };
 
   const data = {
     backgroundColor: menuData.backgroundColor,
-    maxHeight: "550px",
+    maxHeight: null,
   };
 
   return (

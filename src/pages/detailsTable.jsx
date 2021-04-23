@@ -1,38 +1,40 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserSelection } from "../store/projectData/user";
-import { projectColor, projectFontColor } from "../helpers"; // check this 
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
 import { TableContainer } from "../components/table/tableStyling";
-import ProjectRows from "../components/details/projectRows";
-import OptionsRows from "../components/details/optionsRows";
-import CompanyRows from "../components/details/companyRows";
 import MarkedComplete from "../components/modals/markedComplete";
 import { updateSectionStatus } from "../store/projectData/project";
+import { projectColor, projectFontColor } from "../helpers"; // check this
+import ProjectRows from "../components/details/projectRows"; // check this
+import OptionsRows from "../components/details/optionsRows"; // check this
+import CompanyRows from "../components/details/companyRows"; // check this
 
 function Details() {
   const dispatch = useDispatch();
   const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const status = useSelector(
-    (state) => state.project.data.status.details[selectedLeader]
+    (state) => state.project.data.status.details[selectedLeader] // check this
   );
   const selectedOption = useSelector(
-    (state) => state.user.selectedDetailsOption // check this 
+    (state) => state.user.selectedDetailsOption // check this
   );
-  const menuList = ["Company", "Project", "Options"]; // check this 
+  const menuList = ["Company", "Project", "Options"]; // check this
   const menuData = {
-    section: "Details", // check this 
+    section: "Details", // check this
     status,
     menuList,
     selectedOption,
-    color: projectFontColor,
-    backgroundColor: projectColor,
+    color: projectFontColor, // check this
+    backgroundColor: projectColor, // check this
     updateOption: function (value) {
-      dispatch(updateUserSelection({ key: "selectedDetailsOption", value })); // check this 
+      dispatch(updateUserSelection({ key: "selectedDetailsOption", value })); // check this
     },
     changeStatus: function () {
-      dispatch(updateSectionStatus({section: 'details', leader: selectedLeader})); // check this 
+      dispatch(
+        updateSectionStatus({ section: "details", leader: selectedLeader }) // check this
+      ); // check this
     },
   };
 

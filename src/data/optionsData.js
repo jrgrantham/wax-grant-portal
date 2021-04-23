@@ -99,7 +99,7 @@ export const options = {
     years: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029],
     projectLengths: lengths(),
     maxWorkPackages: 10,
-    maxDeadlines: 3,
+    maxDeadlines: 10,
     maxTasksPerPackage: 10,
     maxTeamMembers: 10,
     maxSubcontract: 5,

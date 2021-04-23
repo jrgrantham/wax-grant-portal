@@ -7,14 +7,13 @@ import GanttChartLeft from "../components/gantt/ganttChartLeft";
 import GanttChartRight from "../components/gantt/ganttChartRight";
 import MarkedCompleteModal from "../components/modals/markedComplete";
 import GanttSummaryModal from "../components/modals/ganttSummaryModal";
-import { getTaskIds, getWorkPackageTitles } from "../store/projectData/tasks";
+import { getTaskIds } from "../store/projectData/tasks";
 // import { allResources } from "../store";
 
 function GanttChart() {
   const taskData = useSelector((state) => state.tasks.data);
   const showSummary = useSelector((state) => state.user.showGanttSummary);
   const taskIdKeys = getTaskIds(useSelector((state) => state));
-  const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
   const ganttComplete = useSelector((state) => state.project.data.status.gantt);
 
   const projectLength = useSelector(
@@ -80,7 +79,6 @@ function GanttChart() {
   }, []);
 
   const data = {
-    taskPackTitles,
     workPackages,
     deliverables,
     milestones,

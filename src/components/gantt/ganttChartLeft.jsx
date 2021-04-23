@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import GanttPackWork from "./ganttTaskPackInfo";
 import GanttPackdeadlines from "./ganttDeadlinePackInfo";
-import { addWorkPackage } from "../../store/projectData/tasks";
+import { addWorkPackage, getWorkPackageTitles } from "../../store/projectData/tasks";
 import { updateUserSelection } from "../../store/projectData/user";
 import { updateGanttStatus } from "../../store/projectData/project";
 import {
@@ -26,13 +26,13 @@ function GanttChartLeft(props) {
   const dispatch = useDispatch();
 
   const {
-    taskPackTitles,
     workPackages,
     deliverables,
     milestones,
     totalDays,
   } = props.data;
 
+  const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
   const showSummary = useSelector((state) => state.user.showGanttSummary);
   const ganttComplete = useSelector((state) => state.project.data.status.gantt);
   const { maxWorkPackages } = useSelector((state) => state.options.data);
@@ -40,9 +40,6 @@ function GanttChartLeft(props) {
     (state) => state.project.data.details.projectLength
   );
 
-  const lastTaskId = useSelector((state) =>
-    state.tasks.data.taskOrder.slice(-1)
-  );
   function createNewWorkPackage() {
     dispatch(addWorkPackage({projectLength}));
   }
@@ -53,7 +50,7 @@ function GanttChartLeft(props) {
     );
   }
 
-  function complete() {
+  function toggleComplete() {
     dispatch(updateGanttStatus());
     if (showSummary)
       dispatch(updateUserSelection({ key: "showGanttSummary", value: false }));
@@ -65,7 +62,7 @@ function GanttChartLeft(props) {
         <button onClick={toggleSummary} className="summary button">
           Summary
         </button>
-        <button onClick={complete} className="complete button">
+        <button onClick={toggleComplete} className="complete button">
           {ganttComplete ? "Edit" : "Complete"}
         </button>
         <div className="monthHeaderSpacer"></div>

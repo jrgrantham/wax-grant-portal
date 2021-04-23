@@ -60,7 +60,7 @@ const slice = createSlice({
       const newTask = emptyTask();
       newTask.taskId = newId;
       newTask.workPackageId = uuidv4();
-      newTask.workPackageTitle = `Work Package ${tasks.data.taskOrder.length}`;
+      newTask.workPackageTitle = undefined;
       tasks.data.taskOrder.push(newId);
       for (let i = 1; i < projectLength; i++) {
         newTask.schedule[i] = { barNumber: 0, value: 0 };

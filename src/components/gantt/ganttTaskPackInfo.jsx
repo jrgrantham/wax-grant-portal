@@ -107,7 +107,7 @@ function GanttPackWork(props) {
         ) : (
           <>
             <h3 className="title" onClick={() => setEditTitleWindow(true)}>
-              {`WP${wpNumber} - ${title}`}
+              {`WP${wpNumber} - ${title ? title : 'New Work Package'}`}
             </h3>
             <div className="info">
               <h3 className="resources">Resources</h3>

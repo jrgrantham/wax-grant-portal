@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { taskData2 } from "../../data";
+import { v4 as uuidv4 } from "uuid";
 
 //     case wPFetchRequest.type:
 //       return {
@@ -40,7 +41,7 @@ const slice = createSlice({
         workPackageTitle,
         projectLength,
       } = action.payload;
-      const newId = `task${tasks.data.taskOrder.length + 1}`;
+      const newId = uuidv4();
       const index =
         tasks.data.taskOrder.findIndex((task) => task === lastTaskId) + 1;
       const newTask = emptyTask();
@@ -48,6 +49,19 @@ const slice = createSlice({
       newTask.workPackageId = workPackageId;
       newTask.workPackageTitle = workPackageTitle;
       tasks.data.taskOrder.splice(index, 0, newId);
+      for (let i = 1; i < projectLength; i++) {
+        newTask.schedule[i] = { barNumber: 0, value: 0 };
+      }
+      tasks.data[newId] = newTask;
+    },
+    addWorkPackage: (tasks, action) => {
+      const { projectLength } = action.payload;
+      const newId = uuidv4();
+      const newTask = emptyTask();
+      newTask.taskId = newId;
+      newTask.workPackageId = uuidv4();
+      newTask.workPackageTitle = `Work Package ${tasks.data.taskOrder.length}`;
+      tasks.data.taskOrder.push(newId);
       for (let i = 1; i < projectLength; i++) {
         newTask.schedule[i] = { barNumber: 0, value: 0 };
       }
@@ -158,6 +172,7 @@ export const {
   updateTaskKey,
   updateTask,
   updateNumberOfBars,
+  addWorkPackage,
   // updateTaskDays,
 } = slice.actions;
 export default slice.reducer;

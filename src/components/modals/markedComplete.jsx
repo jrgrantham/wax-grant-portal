@@ -12,6 +12,6 @@ const Container = styled.div`
   /* left: 0; */
   width: 100%;
   height: 100%;
-  background-color: rgba(20, 20, 20, 0.1);
+  background-color: rgba(20, 20, 20, 0.2);
   z-index: 2;
 `;

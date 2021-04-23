@@ -15,8 +15,8 @@ function LeaderTabs(props) {
 
   const tabs = [
     { name: "Lead Applicant", key: "lead" },
-    { name: pOne, key: "pOne" },
-    { name: pTwo, key: "pTwo" },
+    { name: pOne ? pOne : 'Partner One', key: "pOne" },
+    { name: pTwo ? pTwo : 'Partner Two', key: "pTwo" },
     { name: "Combined", key: "combined" },
   ];
 

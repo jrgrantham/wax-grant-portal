@@ -3,15 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
+import { v4 as uuidv4 } from "uuid";
 
 import GanttPackWork from "./ganttTaskPackInfo";
 import GanttPackdeadlines from "./ganttDeadlinePackInfo";
-import { addTask } from "../../store/projectData/tasks";
+import { addWorkPackage } from "../../store/projectData/tasks";
 import { updateUserSelection } from "../../store/projectData/user";
-import {
-  updateSectionStatus,
-  updateGanttStatus,
-} from "../../store/projectData/project";
+import { updateGanttStatus } from "../../store/projectData/project";
 import {
   wpInfoColor,
   delTitleColor,
@@ -41,14 +39,12 @@ function GanttChartLeft(props) {
   const projectLength = useSelector(
     (state) => state.project.data.details.projectLength
   );
+
+  const lastTaskId = useSelector((state) =>
+    state.tasks.data.taskOrder.slice(-1)
+  );
   function createNewWorkPackage() {
-    dispatch(
-      addTask({
-        projectLength,
-        // title: `Work Package ${taskPackTitles.length + 1}`,
-      })
-      // addTask({ projectLength })
-    );
+    dispatch(addWorkPackage({projectLength}));
   }
 
   function toggleSummary() {
@@ -62,8 +58,6 @@ function GanttChartLeft(props) {
     if (showSummary)
       dispatch(updateUserSelection({ key: "showGanttSummary", value: false }));
   }
-
-  console.log(workPackages.length);
 
   return (
     <PageContainer>
@@ -109,7 +103,7 @@ function GanttChartLeft(props) {
 
           <div className="totalDays content">
             <h3>{totalDays ? totalDays : null}</h3>
-            <Tippy content="Total project days. To the right are days per month">
+            <Tippy content="Total days">
               <div className="info">
                 <img src={qMark} alt="info" />
               </div>

@@ -44,15 +44,15 @@ function ResourcesRow(props) {
           <select
             className="person select"
             key={index}
-            value={resources[task.taskId][person.acronym].percent}
+            value={resources[task.taskId][person.personId].percent}
             onChange={(e) =>
               onChangeHandler(
                 parseInt(e.target.value),
                 person.personId,
-                resources[task.taskId][person.acronym].allocationId
+                resources[task.taskId][person.personId].allocationId
               )
             }
-            id={resources[task.taskId][person.acronym].allocationId}
+            id={resources[task.taskId][person.personId].allocationId}
             name="resources"
           >
             {percentages.map((option, index) => {

@@ -6,7 +6,7 @@ import Router from "./router";
 import Navigation from "./navigation";
 import "./App.css";
 
-import background from "./images/background.jpg";
+// import background from "./images/background.jpg";
 
 function App() {
   return (

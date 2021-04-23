@@ -89,7 +89,7 @@ export const Container = styled.div`
     }
   }
   .evenWidth {
-    width: 20px
+    width: 20px;
   }
   .delete {
     margin-left: 5px;

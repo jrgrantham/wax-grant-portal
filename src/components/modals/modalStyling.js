@@ -38,7 +38,6 @@ export const Container = styled.div`
   }
   .formField {
     display: flex;
-    /* justify-content: space-between; */
     align-items: flex-start;
     flex-direction: column;
     width: 95%;
@@ -77,7 +76,4 @@ export const Container = styled.div`
     height: 100%;
     width: 100%;
   }
-  /* .leftB {
-    margin-right: 10px;
-  } */
 `;

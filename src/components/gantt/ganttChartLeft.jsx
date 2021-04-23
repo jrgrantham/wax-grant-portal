@@ -7,6 +7,8 @@ import "tippy.js/dist/tippy.css";
 import GanttPackWork from "./ganttTaskPackInfo";
 import GanttPackdeadlines from "./ganttDeadlinePackInfo";
 import { addTask } from "../../store/projectData/tasks";
+import { updateUserSelection } from "../../store/projectData/user";
+import { updateProjectSettings } from "../../store/projectData/project";
 import {
   wpInfoColor,
   delTitleColor,
@@ -15,11 +17,13 @@ import {
   totalDaysColor,
 } from "../../helpers";
 import add from "../../images/add-white.png";
+import addGrey from "../../images/add-grey.png";
 import qMark from "../../images/qMark.png";
-import { updateUserSelection } from "../../store/projectData/user";
 // import add from "../../images/addTask.png";
 
 function GanttChartLeft(props) {
+  const dispatch = useDispatch();
+
   const {
     taskPackTitles,
     // groupedTasks,
@@ -29,10 +33,13 @@ function GanttChartLeft(props) {
     totalDays,
   } = props.data;
 
+  const showSummary = useSelector((state) => state.user.showGanttSummary);
+  const { ganttComplete } = useSelector((state) => state.project.data.settings);
+  console.log(ganttComplete);
+  const { maxWorkPackages } = useSelector((state) => state.options.data);
   const projectLength = useSelector(
     (state) => state.project.data.details.projectLength
   );
-  const dispatch = useDispatch();
   function createNewWorkPackage() {
     dispatch(
       addTask({
@@ -43,19 +50,26 @@ function GanttChartLeft(props) {
     );
   }
 
-  const showSummary = useSelector((state) => state.user.showGanttSummary);
-
   function toggleSummary() {
     dispatch(
       updateUserSelection({ key: "showGanttSummary", value: !showSummary })
     );
   }
 
+  function complete() {
+    dispatch(updateProjectSettings({ key: "ganttComplete", value: !ganttComplete }));
+  }
+
+  console.log(workPackages.length);
+
   return (
     <PageContainer>
       <div id="details">
-        <button onClick={toggleSummary} className="summary">
+        <button onClick={toggleSummary} className="summary button">
           Summary
+        </button>
+        <button onClick={complete} className="complete button">
+          {ganttComplete ? 'Edit': 'Complete'}
         </button>
         <div className="monthHeaderSpacer"></div>
         {workPackages.length
@@ -73,14 +87,23 @@ function GanttChartLeft(props) {
             })
           : null}
         <div className="divider">
-          <Tippy content="Add a new work package">
-            <button
-              className="totalDays content"
-              onClick={createNewWorkPackage}
-            >
-              <img src={add} alt="add" />
-            </button>
-          </Tippy>
+          {workPackages.length >= maxWorkPackages ? (
+            <Tippy content={`Maximum ${maxWorkPackages} work packages`}>
+              <button className="totalDays content">
+                <img src={addGrey} alt="add" />
+              </button>
+            </Tippy>
+          ) : (
+            <Tippy content="Add a new work package">
+              <button
+                className="totalDays content"
+                onClick={createNewWorkPackage}
+              >
+                <img src={add} alt="add" />
+              </button>
+            </Tippy>
+          )}
+
           <div className="totalDays content">
             <h3>{totalDays ? totalDays : null}</h3>
             <Tippy content="Total project days. To the right are days per month">
@@ -156,14 +179,21 @@ const PageContainer = styled.div`
       width: auto;
     }
   }
-  .summary {
+  .button {
     position: absolute;
     top: 3px;
-    right: 0;
     background-color: ${wpInfoColor};
     border: none;
     color: white;
     font-weight: 600;
+    padding: 5px 15px;
     width: 100px;
+  }
+  .complete {
+    left: 0;
+    z-index: 3;
+  }
+  .summary {
+    right: 0;
   }
 `;

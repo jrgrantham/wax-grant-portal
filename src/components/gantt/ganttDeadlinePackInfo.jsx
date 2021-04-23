@@ -11,6 +11,7 @@ import {
 } from "../../store/projectData/deadlines";
 import addMiles from "../../images/addMilestone.png";
 import addDeads from "../../images/addDeliverable.png";
+import addGrey from "../../images/add-grey.png";
 import { nextIndexOfGroup } from "../../helpers";
 import { Container } from "./ganttPackStyling";
 
@@ -19,6 +20,7 @@ function GanttPackDeadlines(props) {
   const packData = props.workPackData;
   const dispatch = useDispatch();
   const deadlines = useSelector((state) => state.deadlines.data);
+  const { maxDeadlines } = useSelector((state) => state.options.data);
 
   function addNewRow() {
     const newPosition = nextIndexOfGroup(packData, deadlines);
@@ -34,7 +36,7 @@ function GanttPackDeadlines(props) {
     dispatch(reorderDeadline({ deadlineId, movement }));
   }
 
-  const add = title === 'Deliverables' ? addDeads : addMiles;
+  const add = title === "Deliverables" ? addDeads : addMiles;
 
   return (
     <Container titleBarColor={props.titleBarColor}>
@@ -70,11 +72,19 @@ function GanttPackDeadlines(props) {
               })}
               {provided.placeholder}
               <div className="bottom packBackground">
-                <Tippy content={`Add ${title}`}>
-                  <button className="evenWidth" onClick={addNewRow}>
-                    <img src={add} alt="add" />
-                  </button>
-                </Tippy>
+                {packData.length >= maxDeadlines ? (
+                  <Tippy content={`Maximum ${maxDeadlines} ${title}`}>
+                    <button className="evenWidth">
+                      <img src={addGrey} alt="add" />
+                    </button>
+                  </Tippy>
+                ) : (
+                  <Tippy content={`Add ${title}`}>
+                    <button className="evenWidth" onClick={addNewRow}>
+                      <img src={add} alt="add" />
+                    </button>
+                  </Tippy>
+                )}
               </div>
             </div>
           )}

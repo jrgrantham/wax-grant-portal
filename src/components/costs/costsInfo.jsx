@@ -7,8 +7,8 @@ import { Container } from "./costsStyling";
 
 function TeamInfo() {
   const team = useSelector((state) => state.team.data);
-  const leader = useSelector((state) => state.user.selectedLeader);
-  const resources = getResources()
+  // const leader = useSelector((state) => state.user.selectedLeader);
+  const resources = getResources
   console.log(resources);
 
   return (

@@ -1,6 +1,14 @@
 export const projectData = {
   loading: false,
   data: {
+    settings: {
+      detailsComplete: false,
+      teamComplete: false,
+      ganttComplete: false,
+      costsComplete: false,
+      revenueComplete: false,
+      risksComplete: false,
+    },
     details: {
       productPlatformName: "productPlatformName",
       applicationNumber: "123445",
@@ -15,7 +23,6 @@ export const projectData = {
       matchFunding: "funding",
       ganttRef: "ganttRef",
       competitor: "competitor",
-      // dates: [], // array of sequential months
     },
     lead: {
       companyName: "lead company",
@@ -74,20 +81,3 @@ export const projectData = {
   },
   error: "",
 };
-
-// const month = "Feb";
-// const year = 2021;
-
-// const projectStart = moment(`${month} ${year}`, "MMM YYYY");
-// const dateArray = () => {
-//   const years = [];
-//   const dateStart = projectStart;
-//   for (let i = 0; i < projectData.data.projectLength; i++) {
-//     years.push(dateStart.format("MMM YYYY"));
-//     dateStart.add(1, "month");
-//   }
-//   return years;
-// };
-
-// const dateList = dateArray();
-// projectData.data.dates = dateList;

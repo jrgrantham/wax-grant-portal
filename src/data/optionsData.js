@@ -97,7 +97,16 @@ export const options = {
       "Dec",
     ],
     years: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029],
-    projectLengths: lengths()
+    projectLengths: lengths(),
+    maxWorkPackages: 10,
+    maxDeadlines: 3,
+    maxTasksPerPackage: 10,
+    maxTeamMembers: 10,
+    maxSubcontract: 5,
+    maxOverhead: 10,
+    maxMaterials: 10,
+    maxTravel: 10,
+    maxCapex: 10,
   },
   error: "",
 };

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { appTop, appWidth, wpMarginBottom } from "../helpers/";
 import GanttChartLeft from "../components/gantt/ganttChartLeft";
 import GanttChartRight from "../components/gantt/ganttChartRight";
+import MarkedCompleteModal from "../components/modals/markedComplete";
 import GanttSummaryModal from "../components/modals/ganttSummaryModal";
 import { getTaskIds, getWorkPackageTitles } from "../store/projectData/tasks";
 // import { allResources } from "../store";
@@ -14,6 +15,7 @@ function GanttChart() {
   const showSummary = useSelector((state) => state.user.showGanttSummary);
   const taskIdKeys = getTaskIds(useSelector((state) => state));
   const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
+  const { ganttComplete } = useSelector((state) => state.project.data.settings);
 
   const projectLength = useSelector(
     (state) => state.project.data.details.projectLength
@@ -88,6 +90,7 @@ function GanttChart() {
 
   return (
     <PageContainer chartWidth={chartWidth}>
+      {ganttComplete ? <MarkedCompleteModal /> : null}
       <div id="chartArea" className="chartArea">
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />

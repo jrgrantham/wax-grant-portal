@@ -14,18 +14,14 @@ export function getResources() {
   const team = store.getState().team.data;
   const taskData = store.getState().tasks.data;
   const allocations = store.getState().allocations.data;
-  
-  const taskKeys = Object.keys(taskData)
-  const taskIds = taskKeys.filter(key => key !== 'taskOrder')
-
-  team.forEach((person) => {
-    getTeamInitialsById[person.personId] = person.acronym;
-  });
+  const taskKeys = Object.keys(taskData);
+  const taskIds = taskKeys.filter((key) => key !== "taskOrder");
+  const initialsById = getTeamInitialsById();
 
   taskIds.forEach((taskId) => {
     const peopleKeys = {};
     team.forEach((person) => {
-      peopleKeys[person.acronym] = {
+      peopleKeys[person.personId] = {
         allocationId: "new",
         percent: 0,
       };
@@ -34,22 +30,22 @@ export function getResources() {
   });
 
   for (let i = 0; i < allocations.length; i++) {
-    let curTask = allocations[i].taskId;
-    let curPerson = getTeamInitialsById[allocations[i].personId];
+    let taskId = allocations[i].taskId;
+    let personId = allocations[i].personId;
+    let acronym = initialsById[personId]
 
-    if (resources[curTask]["people"].length > 1) {
-      resources[curTask]["people"] =
-        resources[curTask]["people"] + ", " + curPerson;
+    if (resources[taskId]["people"].length > 1) {
+      resources[taskId]["people"] =
+        resources[taskId]["people"] + ", " + acronym;
     } else {
-      resources[curTask]["people"] =
-        resources[curTask]["people"] + curPerson;
+      resources[taskId]["people"] = resources[taskId]["people"] + acronym;
     }
-    resources[curTask]["completion"] =
-      resources[curTask]["completion"] + allocations[i].percent;
+    resources[taskId]["completion"] =
+      resources[taskId]["completion"] + allocations[i].percent;
 
-    resources[curTask][curPerson].percent = allocations[i].percent;
-    resources[curTask][curPerson].personId = allocations[i].personId;
-    resources[curTask][curPerson].allocationId = allocations[i].allocationId;
+    resources[taskId][personId].percent = allocations[i].percent;
+    resources[taskId][personId].acronym = acronym;
+    resources[taskId][personId].allocationId = allocations[i].allocationId;
   }
   return resources;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { monthWidth, navBackground, schedGapColor, wpMarginBottom } from "../../helpers";
+import { monthWidth, schedGapColor, wpMarginBottom } from "../../helpers";
 import GanttWPRowSchedule from "./ganttTaskRowSchedule";
 // import GanttRowSchedule from "./ganttRowSchedule";
 

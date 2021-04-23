@@ -9,7 +9,7 @@ import { Container } from "./ganttPackStyling";
 import {
   reorderTasks,
   addTask,
-  updateTaskPackTitle,
+  // updateTaskPackTitle,
   deleteTask,
   updateTaskKey,
 } from "../../store/projectData/tasks";
@@ -17,6 +17,7 @@ import GanttTaskRowInfo from "./ganttTaskRowInfo";
 import EditModal from "../modals/ganttEditModal";
 import tick from "../../images/tick-white.png";
 import add from "../../images/addTask.png";
+import addGray from "../../images/add-grey.png";
 import bin from "../../images/bin-grey.png";
 import { deleteTaskAllocations } from "../../store/projectData/allocations";
 
@@ -25,6 +26,7 @@ function GanttPackWork(props) {
 
   const { title, index, packData } = props;
   const wpNumber = index + 1;
+  const { maxTasksPerPackage } = useSelector((state) => state.options.data);
 
   const [edit, setEdit] = useState(false);
   const [editTitleWindow, setEditTitleWindow] = useState(false);
@@ -115,7 +117,7 @@ function GanttPackWork(props) {
         )}
       </div>
       <DragDropContext onDragEnd={handleMovingRow}>
-        <Droppable droppableId={title}>
+        <Droppable droppableId={`workPackageNumber${index + 1}`}>
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {packData.map((task, index) => {
@@ -146,11 +148,21 @@ function GanttPackWork(props) {
               {provided.placeholder}
               <div className="bottom packBackground">
                 <div>
-                  <Tippy content="Add tasks">
-                    <button className="evenWidth" onClick={handleAddNewRow}>
-                      <img src={add} alt="add" />
-                    </button>
-                  </Tippy>
+                  {packData.length >= maxTasksPerPackage ? (
+                    <Tippy
+                      content={`Maximum ${maxTasksPerPackage} tasks per work package`}
+                    >
+                      <button className="evenWidth">
+                        <img src={addGray} alt="add" />
+                      </button>
+                    </Tippy>
+                  ) : (
+                    <Tippy content="Add tasks">
+                      <button className="evenWidth" onClick={handleAddNewRow}>
+                        <img src={add} alt="add" />
+                      </button>
+                    </Tippy>
+                  )}
                   <Tippy content="Delete work package (immediate)">
                     <button
                       onClick={() => handleRemovePack()}

@@ -4,17 +4,14 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import { updateUserSelection } from "../../store/projectData/user";
-import {
-  tabBottomMargin,
-  tabHeight,
-} from "../../helpers";
+import { tabBottomMargin, tabHeight } from "../../helpers";
 
 function LeaderTabs(props) {
   const dispatch = useDispatch();
   const leader = useSelector((state) => state.user.selectedLeader);
 
-  const pOne = "Partner One"; // for dynamic
-  const pTwo = "Partner Two"; // for dynamic
+  const pOne = useSelector((state) => state.project.data.pOne.companyName);
+  const pTwo = useSelector((state) => state.project.data.pTwo.companyName);
 
   const tabs = [
     { name: "Lead Applicant", key: "lead" },

@@ -70,7 +70,7 @@ export const projectData = {
       risksComplete: false,
     },
     pOne: {
-      companyName: "",
+      companyName: "Company One",
       companyAcronym: "",
       organisationType: "",
       organisationSize: "",
@@ -95,7 +95,7 @@ export const projectData = {
       risksComplete: false,
     },
     pTwo: {
-      companyName: "pTwo company",
+      companyName: "edit the company name...",
       companyAcronym: "acronym",
       organisationType: "type",
       organisationSize: "size",

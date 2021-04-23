@@ -4,6 +4,7 @@ import { tabHeight, tableLeftHighlight, tableLeftWidth } from "../../helpers";
 import Button from "./leftMenuButton";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
+import { useSelector } from "react-redux";
 
 function LeftMenu(props) {
   const {
@@ -16,6 +17,11 @@ function LeftMenu(props) {
   } = props.data;
   console.log(props.data);
 
+  const leader = useSelector((state) => state.user.selectedLeader);
+  const company = useSelector(
+    (state) => state.project.data[leader].companyName
+  );
+
   return (
     <MenuContainer backgroundColor={backgroundColor} color={color}>
       <div className="links">
@@ -26,7 +32,11 @@ function LeftMenu(props) {
         <div className="spacer" />
       </div>
       <div className="completeDiv">
-        <Tippy content={`Mark "${section}" as complete`}>
+        <Tippy
+          content={
+            status ? 'Edit data' :  `Mark "${section}" as complete for "${company}"`
+          }
+        >
           <button onClick={changeStatus} className="completeButton">
             {status ? "Edit" : "Complete"}
           </button>

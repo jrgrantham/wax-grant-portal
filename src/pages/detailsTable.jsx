@@ -20,7 +20,7 @@ function Details() {
   const selectedOption = useSelector(
     (state) => state.user.selectedDetailsOption // check this
   );
-  const menuList = ["Company", "Project", "Options"]; // check this
+  const menuList = ["Project", "Options", "Company"]; // check this
   const menuData = {
     section: "Details", // check this
     status,
@@ -49,6 +49,12 @@ function Details() {
     maxHeight: maxHeight[selectedOption],
   };
 
+  const showLeaderTabs = {
+    company: 3,
+    project: 0,
+    options: 0,
+  };
+
   function content() {
     if (selectedOption === "company") return <CompanyRows />;
     if (selectedOption === "project") return <ProjectRows />;
@@ -60,7 +66,11 @@ function Details() {
       <div className="displayArea">
         <LeftMenu data={menuData} />
         <div className="content">
-          <LeaderTabs viewCombinedTab={false} />
+        {showLeaderTabs[selectedOption] ? (
+            <LeaderTabs
+              viewCombinedTab={showLeaderTabs[selectedOption] === 4}
+            />
+          ) : null}
           <div>
             {status ? <MarkedComplete /> : null}
             <div className="leaderTabMargin">{content()}</div>

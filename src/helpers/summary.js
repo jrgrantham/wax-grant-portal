@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { getResources } from "./index";
 import { getTaskIds } from "../store/projectData/tasks";
-import { getWorkingDays } from "../store/projectData/project";
-import { getTeamIds } from "../store/projectData/team";
+import { getWorkingDaysPerMonth } from "../store/projectData/project";
+import { getTeamIds, getPersonById } from "../store/projectData/team";
 import { countBy } from "underscore";
 
 export function getTotalDaysByPersonId() {
@@ -33,11 +33,11 @@ export function getDayRateById() {
   const rates = {};
   people.forEach((person) => {
     const { salary, leader, dayRate, personId } = person;
-    const companyDays = getWorkingDays(useSelector((state) => state));
+    const companyDays = getWorkingDaysPerMonth(useSelector((state) => state));
     let rate = 0;
     if (dayRate) rate = dayRate;
     else {
-      rate = salary / companyDays[leader];
+      rate = salary / (companyDays[leader] * 12);
     }
     rates[personId] = rate;
   });
@@ -45,9 +45,12 @@ export function getDayRateById() {
 }
 
 export function getUtilisations() {
+  const state = useSelector((state) => state);
+  const taskIds = getTaskIds(state);
+  const workingDays = getWorkingDaysPerMonth(state);
+  const personById = getPersonById(state);
   const resources = getResources();
   const allTasks = useSelector((state) => state.tasks.data);
-  const taskIds = getTaskIds(useSelector((state) => state));
   const people = useSelector((state) => state.team.data);
   const { projectLength } = useSelector((state) => state.project.data.details);
 
@@ -67,21 +70,25 @@ export function getUtilisations() {
     // console.log(quarter, qEnd);
     taskIds.forEach((taskId) => {
       personIds.forEach((personId) => {
+        const leader = personById[personId].leader;
         const percent = resources[taskId][personId].percent;
         const days = allTasks[taskId].schedule[i].value;
         const contribution = (days * percent) / 100;
-        counter[personId] = counter[personId] + contribution;
-        // if end quarter check if over utilised, if so, push to array
+        const quarterTotal = counter[personId] + contribution;
+        counter[personId] = quarterTotal;
         if (qEnd) {
-          const quarterTotal = counter[personId]
-          if (quarterTotal > 2) utilisations[personId].push(quarter)
-          counter[personId] = 0
-        };
+          if (quarterTotal > workingDays[leader] * 3)
+            utilisations[personId].push(quarter); // set threshold
+          counter[personId] = 0;
+        }
+        if (!qEnd && i === projectLength - 1) {
+          const months = (i + 1) % 3;
+          if (quarterTotal > workingDays[leader] * months)
+            utilisations[personId].push(quarter);
+        }
         // special case for end of project partial quarter
       });
     });
   }
-
-  console.log(utilisations);
   return utilisations;
 }

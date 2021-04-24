@@ -5,13 +5,11 @@ import { getResources, getUtilisations } from "../../helpers";
 import LabourRow from "./labourRow";
 import { Container } from "./costsStyling";
 import { getTeamIds } from "../../store/projectData/team";
+import { getWorkingDays } from "../../store/projectData/project";
 
 function LabourInfo() {
-  const team = useSelector((state) => state.team.data);
   const leader = useSelector((state) => state.user.selectedLeader);
-  const resources = getResources()
-
-  const test = getUtilisations()
+  const team = useSelector((state) => state.team.data).filter(person => person.leader === leader);
 
   return (
     <Container>

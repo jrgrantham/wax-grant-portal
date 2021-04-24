@@ -55,7 +55,7 @@ export const projectData = {
       lastFinancialYear: "year",
       lawyer: "lawyer",
       bankHolidays: 3,
-      annualLeave: 30,
+      annualLeave: 27,
       numEmployees: 10,
       partnerFunding: "",
       fundingLevel: 10,

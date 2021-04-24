@@ -62,7 +62,7 @@ function Team() {
     other: 4,
     summary: 0,
     breakdown: 0,
-  };
+  }; // check this
 
   function content() {
     if (selectedOption === "labour")

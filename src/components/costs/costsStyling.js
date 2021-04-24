@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { tableContentSideMargin, warningColor } from "../../helpers";
+import { fontColorGrey, tableContentSideMargin, warningColor } from "../../helpers";
 
 export const Container = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const Container = styled.div`
     justify-content: flex-end;
   }
   .labourDays {
-    width: 100px;
+    width: 70px;
     text-align: right;
     justify-content: flex-end;
   }
@@ -20,13 +20,26 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 150px;
+    /* width: 150px; */
     font-weight: 600;
     color: ${warningColor};
-    width: 120px;
-    margin-left: 40px;
+    margin-left: 5px;
+  }
+  .notes {
+    margin-left: 15px;
+    display: flex;
+  }
+  .note {
+    margin-right: 5px;
+    font-size: 14px;
+    color: ${fontColorGrey};
+
   }
   .warning {
+    margin-left: 20px;
+    display: flex;
+    min-height: 25px;
+    min-width: 25px;
     max-height: 25px;
     max-width: 25px;
   }

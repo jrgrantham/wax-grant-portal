@@ -17,9 +17,9 @@ function LeftMenu(props) {
   } = props.data;
 
   const leader = useSelector((state) => state.user.selectedLeader);
-  const company = useSelector(
-    (state) => state.project.data[leader].companyName
-  );
+  let company;
+  if ((leader === 'combined')) company = "combined";
+  else company = useSelector((state) => state.project.data[leader].companyName);
 
   return (
     <MenuContainer backgroundColor={backgroundColor} color={color}>
@@ -33,7 +33,9 @@ function LeftMenu(props) {
       <div className="completeDiv">
         <Tippy
           content={
-            status ? 'Edit data' :  `Mark "${section}" as complete for "${company}"`
+            status
+              ? "Edit data"
+              : `Mark "${section}" as complete for "${company}"`
           }
         >
           <button onClick={changeStatus} className="completeButton">

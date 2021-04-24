@@ -68,11 +68,10 @@ export const getProjectDates = (state) => {
   return dateArray();
 };
 
-export const getWorkingDays = (state) => {
-  const allDays = 260;
+export const getWorkingDaysPerMonth = (state) => {
   function workedDays(leader) {
     const { bankHolidays, annualLeave } = state.project.data[leader];
-    return 260 - bankHolidays - annualLeave;
+    return (260 - bankHolidays - annualLeave) / 12;
   }
   const companyDays = {
     lead: workedDays("lead"),

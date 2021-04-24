@@ -57,3 +57,11 @@ export const getTeamIds = (state) => {
   });
   return teamIds;
 };
+
+export const getPersonById = state => {
+  const teamIds = {}
+  state.team.data.forEach((person) => {
+    teamIds[person.personId] = person;
+  });
+  return teamIds;
+}

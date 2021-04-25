@@ -1,11 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getResources, getUtilisations } from "../../helpers";
 
 import LabourRow from "./labourRow";
 import { Container } from "./costsStyling";
-import { getTeamIds } from "../../store/projectData/team";
-import { getWorkingDays } from "../../store/projectData/project";
 
 function LabourInfo() {
   const leader = useSelector((state) => state.user.selectedLeader);

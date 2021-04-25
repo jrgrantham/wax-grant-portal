@@ -17,9 +17,10 @@ function LeftMenu(props) {
   } = props.data;
 
   const leader = useSelector((state) => state.user.selectedLeader);
-  let company;
-  if ((leader === 'combined')) company = "combined";
-  else company = useSelector((state) => state.project.data[leader].companyName);
+  const company = useSelector((state) => {
+    if (leader === 'combined') return 'Combined'
+    else return state.project.data[leader].companyName
+  });
 
   return (
     <MenuContainer backgroundColor={backgroundColor} color={color}>

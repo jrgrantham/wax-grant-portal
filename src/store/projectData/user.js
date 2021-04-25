@@ -9,7 +9,7 @@ const slice = createSlice({
     showGanttSummary: false,
     showComponent: "", // set component identifier
     showLeaderTabs: true,
-    selectedLeader: "lead", // default should be the user
+    selectedLeader: "combined", // default should be the user
     selectedAdminOption: "project",
     selectedDetailsOption: "project",
     selectedTeamOption: "staff",

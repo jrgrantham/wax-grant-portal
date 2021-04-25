@@ -9,39 +9,40 @@ import { fontColorGrey, tabBottomMargin, tabHeight } from "../../helpers";
 function LeaderTabs(props) {
   const dispatch = useDispatch();
   const leader = useSelector((state) => state.user.selectedLeader);
-
   const pOne = useSelector((state) => state.project.data.pOne.companyName);
   const pTwo = useSelector((state) => state.project.data.pTwo.companyName);
 
-  const tabs = [
+  const allTabs = [
     { name: "Lead Applicant", key: "lead" },
-    { name: pOne ? pOne : 'Partner One', key: "pOne" },
-    { name: pTwo ? pTwo : 'Partner Two', key: "pTwo" },
+    { name: pOne ? pOne : "Partner One", key: "pOne" },
+    { name: pTwo ? pTwo : "Partner Two", key: "pTwo" },
     { name: "Combined", key: "combined" },
   ];
 
   // set to leader if combined not relevant
   if (!props.viewCombinedTab) {
     if (leader === "combined") selectLeader("lead");
-    tabs.pop();
+    allTabs.pop();
   }
+
+  const tabWidth = 100 / allTabs.length + "%";
 
   function selectLeader(value) {
     dispatch(updateUserSelection({ key: "selectedLeader", value }));
   }
 
   return (
-    <PageContainer>
-      {tabs.map((tab, index) => {
+    <PageContainer tabWidth={tabWidth}>
+      {allTabs.map((tab, index) => {
         return (
-          <h3
-            key={index}
+          <div
             className={leader === tab.key ? "leader selectedLeader" : "leader"}
             style={index === 0 ? { borderRadius: "0px 6px 0 0" } : null}
+            key={index}
             onClick={() => selectLeader(tab.key)}
           >
-            {tab.name}
-          </h3>
+            <h3>{tab.name}</h3>
+          </div>
         );
       })}
     </PageContainer>
@@ -56,14 +57,20 @@ const PageContainer = styled.div`
   /* margin-bottom: ${tabBottomMargin}; */
 
   .leader {
-    flex-grow: 1;
+    width: ${(props) => props.tabWidth};
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     border-left: 2px solid rgba(64, 64, 64, 1);
     border-right: 2px solid rgba(110, 110, 110, 1);
+    padding: 0 25px;
     cursor: pointer;
+    h3 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
   .selectedLeader {
     background-color: white;

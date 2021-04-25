@@ -7,7 +7,7 @@ export const Container = styled.div`
     width: 250px;
   }
   .labourCost {
-    width: 50px;
+    width: 60px;
     text-align: right;
     justify-content: flex-end;
   }

@@ -6,7 +6,7 @@ function LabourTitles() {
     <Container>
       <div className="row titles leaderTabMargin">
         <p className="title labourNameRole">Name and Role</p>
-        <p className="title labourCost">Cost</p>
+        <p className="title labourCost">Cost (£)</p>
         <p className="title labourDays">Days</p>
       </div>
     </Container>

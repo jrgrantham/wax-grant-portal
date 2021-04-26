@@ -21,7 +21,7 @@ function LabourRow(props) {
   return (
     <div className="row">
       <p className="field display labourNameRole">{`${name} (${role})`}</p>
-      <p className="field display labourCost">{cost}</p>
+      <p className="field display labourCost bold">{cost}</p>
       <p className="field display labourDays">{days}</p>
       {utilisation.length ? (
         <>

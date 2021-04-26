@@ -110,6 +110,15 @@ export const TableContainer = styled.div`
   .field.display {
     border-color: transparent;
   }
+  .bold {
+    font-weight: 800;
+  }
+  .total {
+    display: flex;
+    border-top: 2px solid ${fontColorGrey};
+    border-bottom: 2px solid ${fontColorGrey};
+    padding: 5px 0;
+  }
   .applyDefaults {
     position: absolute;
     bottom: 0;

@@ -1,5 +1,6 @@
 // import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 import { team } from "../../data";
 
 const slice = createSlice({
@@ -50,18 +51,24 @@ export const {
 } = slice.actions;
 export default slice.reducer;
 
-export const getTeamIds = (state) => {
-  const teamIds = []
-  state.team.data.forEach((person) => {
-    teamIds.push(person.personId);
-  });
-  return teamIds;
-};
+export const getTeamIds = createSelector(
+  (state) => state.team,
+  () => {
+    const teamIds = [];
+    team.data.forEach((person) => {
+      teamIds.push(person.personId);
+    });
+    return teamIds;
+  }
+);
 
-export const getPersonById = state => {
-  const teamIds = {}
-  state.team.data.forEach((person) => {
-    teamIds[person.personId] = person;
-  });
-  return teamIds;
-}
+export const getPersonById = createSelector(
+  (state) => state.team,
+  () => {
+    const teamIds = {};
+    team.data.forEach((person) => {
+      teamIds[person.personId] = person;
+    });
+    return teamIds;
+  }
+);

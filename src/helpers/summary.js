@@ -49,10 +49,13 @@ export function getUtilisations() {
   const taskIds = getTaskIds(state);
   const workingDays = getWorkingDaysPerMonth(state);
   const personById = getPersonById(state);
+  const personById2 = getPersonById(state);
   const resources = getResources();
   const allTasks = useSelector((state) => state.tasks.data);
   const people = useSelector((state) => state.team.data);
   const { projectLength } = useSelector((state) => state.project.data.details);
+
+  console.log(personById === personById2);
 
   const utilisations = {};
   const counter = {};

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 import { taskData2 } from "../../data";
 import { v4 as uuidv4 } from "uuid";
 
@@ -176,6 +177,20 @@ export const {
   // updateTaskDays,
 } = slice.actions;
 export default slice.reducer;
+
+// export const getPersonById = createSelector(
+//   (state) => state.tasks,
+//   () => {
+//     const list = Object.keys(tasks.data);
+//     const taskIds = list.filter((id) => id !== "taskOrder");
+//     const titles = [
+//       ...new Set(
+//         taskIds.map((taskId) => state.tasks.data[taskId].workPackageTitle)
+//       ),
+//     ];
+//     return titles;
+//   }
+// );
 
 export const getWorkPackageTitles = (state) => {
   const list = Object.keys(state.tasks.data);

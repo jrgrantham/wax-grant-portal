@@ -1,5 +1,6 @@
 // import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 import { projectData } from "../../data";
 import moment from "moment";
 
@@ -51,8 +52,10 @@ export const {
 } = slice.actions;
 export default slice.reducer;
 
-export const getProjectDates = (state) => {
-  const { projectLength } = state.project.data.details;
+export const getProjectDates = createSelector(
+  state => state.project,
+  (project) => {
+    const { projectLength } = project.data.details;
   const month = "Feb"; // hard coded !!!!!
   const year = 2021; // hard coded !!!!!
   const projectStart = moment(`${month} ${year}`, "MMM YYYY");
@@ -65,8 +68,9 @@ export const getProjectDates = (state) => {
     }
     return years;
   };
-  return dateArray();
-};
+  return dateArray()
+  }
+);
 
 export const getWorkingDaysPerMonth = (state) => {
   function workedDays(leader) {

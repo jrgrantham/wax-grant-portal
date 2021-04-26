@@ -178,36 +178,26 @@ export const {
 } = slice.actions;
 export default slice.reducer;
 
-// export const getPersonById = createSelector(
-//   (state) => state.tasks,
-//   () => {
-//     const list = Object.keys(tasks.data);
-//     const taskIds = list.filter((id) => id !== "taskOrder");
-//     const titles = [
-//       ...new Set(
-//         taskIds.map((taskId) => state.tasks.data[taskId].workPackageTitle)
-//       ),
-//     ];
-//     return titles;
-//   }
-// );
+export const getWorkPackageTitles = createSelector(
+  (state) => state.tasks,
+  (tasks) => {
+    const list = Object.keys(tasks.data);
+    const taskIds = list.filter((id) => id !== "taskOrder");
+    const titles = [
+      ...new Set(taskIds.map((taskId) => tasks.data[taskId].workPackageTitle)),
+    ];
+    return titles;
+  }
+);
 
-export const getWorkPackageTitles = (state) => {
-  const list = Object.keys(state.tasks.data);
-  const taskIds = list.filter((id) => id !== "taskOrder");
-  const titles = [
-    ...new Set(
-      taskIds.map((taskId) => state.tasks.data[taskId].workPackageTitle)
-    ),
-  ];
-  return titles;
-};
-
-export const getTaskIds = (state) => {
-  const list = Object.keys(state.tasks.data);
-  const taskIds = list.filter((id) => id !== "taskOrder");
-  return taskIds;
-};
+export const getTaskIds = createSelector(
+  (state) => state.tasks,
+    (tasks) => {
+      const list = Object.keys(tasks.data);
+      const taskIds = list.filter((id) => id !== "taskOrder");
+      return taskIds;
+    }
+);
 
 export const getCombinedLengthOfBars = (state, taskId) => {
   let length = state.tasks.data[taskId].schedule.length;

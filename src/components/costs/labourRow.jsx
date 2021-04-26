@@ -12,26 +12,19 @@ function LabourRow(props) {
   const cost = Math.round(days * dayRateById[personId]); // rounded
   const utilisation = getUtilisations()[personId];
 
-  let quarters = "Check: ";
-  utilisation.forEach((quarter, index) => {
-    if (index === 0) quarters = quarters + quarter;
-    else quarters = quarters + ", " + quarter;
-  });
+  console.log(utilisation);
 
   return (
     <div className="row">
       <p className="field display labourNameRole">{`${name} (${role})`}</p>
       <p className="field display labourCost bold">{cost}</p>
       <p className="field display labourDays">{days}</p>
-      {utilisation.length ? (
+      {utilisation.overutilised ? (
         <>
           <div className="warning">
             <img src={warning} alt="warning" />
           </div>
           <p className="field display labourOverutilised">Overutilised!</p>
-          <div className="notes">
-            <p className="note">{quarters}</p>
-          </div>
         </>
       ) : null}
     </div>

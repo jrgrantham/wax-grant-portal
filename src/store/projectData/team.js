@@ -53,7 +53,7 @@ export default slice.reducer;
 
 export const getTeamIds = createSelector(
   (state) => state.team,
-  () => {
+  (team) => {
     const teamIds = [];
     team.data.forEach((person) => {
       teamIds.push(person.personId);
@@ -64,7 +64,7 @@ export const getTeamIds = createSelector(
 
 export const getPersonById = createSelector(
   (state) => state.team,
-  () => {
+  (team) => {
     const teamIds = {};
     team.data.forEach((person) => {
       teamIds[person.personId] = person;

@@ -33,12 +33,15 @@ function GanttChartLeft(props) {
   } = props.data;
 
   const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
+  // const taskPackTitles2 = getWorkPackageTitles(useSelector((state) => state));
   const showSummary = useSelector((state) => state.user.showGanttSummary);
   const ganttComplete = useSelector((state) => state.project.data.status.gantt);
   const { maxWorkPackages } = useSelector((state) => state.options.data);
   const projectLength = useSelector(
     (state) => state.project.data.details.projectLength
   );
+
+  // console.log(taskPackTitles === taskPackTitles2);
 
   function createNewWorkPackage() {
     dispatch(addWorkPackage({projectLength}));

@@ -3,14 +3,18 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-import { updateUserSelection } from "../../store/projectData/user";
+import { updateUserSelection } from "../../store/user";
 import { fontColorGrey, tabBottomMargin, tabHeight } from "../../helpers";
 
 function LeaderTabs(props) {
   const dispatch = useDispatch();
   const leader = useSelector((state) => state.user.selectedLeader);
-  const pOne = useSelector((state) => state.project.data.pOne.companyName);
-  const pTwo = useSelector((state) => state.project.data.pTwo.companyName);
+  const pOne = useSelector(
+    (state) => state.entities.project.data.pOne.companyName
+  );
+  const pTwo = useSelector(
+    (state) => state.entities.project.data.pTwo.companyName
+  );
 
   const allTabs = [
     { name: "Lead Applicant", key: "lead" },

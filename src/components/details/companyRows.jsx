@@ -32,7 +32,7 @@ function CompanyRows() {
     matchFundingSources,
     months,
     years,
-  } = useSelector((state) => state.options.data);
+  } = useSelector((state) => state.entities.options.data);
 
   const {
     companyName,
@@ -51,7 +51,7 @@ function CompanyRows() {
     fundingLevel,
     matchFundingSource,
     investorName,
-  } = useSelector((state) => state.project.data[leader]);
+  } = useSelector((state) => state.entities.project.data[leader]);
 
   const defaults = getCompanyDefaults(useSelector((state) => state));
   function applyDefaults() {

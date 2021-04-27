@@ -2,7 +2,7 @@ import {
   getCombinedLengthOfBars,
   resizeTaskBar,
   spreadWork,
-} from "../store/projectData/tasks";
+} from "../store/entities/tasks";
 import { store } from "../store";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

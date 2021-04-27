@@ -55,7 +55,7 @@ export const {
 export default slice.reducer;
 
 export const getTeamIds = createSelector(
-  (state) => state.team,
+  (state) => state.entities.team,
   (team) => {
     console.log("getTeamIds");
     const teamIds = [];
@@ -67,7 +67,7 @@ export const getTeamIds = createSelector(
 );
 
 export const getPersonById = createSelector(
-  (state) => state.team,
+  (state) => state.entities.team,
   (team) => {
     console.log("getPersonById");
     const teamIds = {};
@@ -83,7 +83,7 @@ export const getDayRateById = createSelector(
   (state) => {
     console.log("getDayRateById");
     const rates = {};
-    state.team.data.forEach((person) => {
+    state.entities.team.data.forEach((person) => {
       const { salary, leader, dayRate, personId } = person;
       const daysPerMonth = getWorkingDaysPerMonth(state);
       let rate = 0;
@@ -98,7 +98,7 @@ export const getDayRateById = createSelector(
 );
 
 // export function getDayRateById() {
-//   const people = useSelector((state) => state.team.data);
+//   const people = useSelector((state) => state.entities.team.data);
 //   const rates = {};
 //   people.forEach((person) => {
 //     const { salary, leader, dayRate, personId } = person;
@@ -122,9 +122,9 @@ export const getUtilisations = createSelector(
     const workingDays = getWorkingDaysPerMonth(state);
     const personById = getPersonById(state);
     const resources = getAllocationsByTaskId(state);
-    const allTasks = state.tasks.data;
-    const people = state.team.data;
-    const { projectLength } = state.project.data.details;
+    const allTasks = state.entities.tasks.data;
+    const people = state.entities.team.data;
+    const { projectLength } = state.entities.project.data.details;
     const utilisations = {};
     const utilisationByQuarter = {};
     const counter = {};

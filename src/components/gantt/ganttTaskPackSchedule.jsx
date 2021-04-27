@@ -8,7 +8,7 @@ import GanttWPRowSchedule from "./ganttTaskRowSchedule";
 function GanttWPPackSchedule(props) {
   const { nonWPPrefix, wpNumber } = props;
   const projectLength = useSelector(
-    (state) => state.project.data.details.projectLength
+    (state) => state.entities.project.data.details.projectLength
   );
 
   const scheduleWidth =

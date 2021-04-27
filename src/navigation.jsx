@@ -6,7 +6,7 @@ import Menu from "./components/general/menu";
 import { appTop, appWidth, navBackground, navHighlight } from "./helpers";
 import navHome from "./images/navHome.png";
 import navBurger from "./images/navBurger.png";
-import { updateUserSelection } from "./store/projectData/user";
+import { updateUserSelection } from "./store/user";
 
 function Navigation() {
   const dispatch = useDispatch();

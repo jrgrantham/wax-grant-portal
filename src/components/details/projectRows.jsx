@@ -21,7 +21,7 @@ function ProjectRows() {
   }
 
   const { ipProtections, natures, months, years, projectLengths } = useSelector(
-    (state) => state.options.data
+    (state) => state.entities.options.data
   );
 
   const {
@@ -36,7 +36,7 @@ function ProjectRows() {
     projectManager,
     software,
     funding,
-  } = useSelector((state) => state.project.data.details);
+  } = useSelector((state) => state.entities.project.data.details);
 
   const defaults = getProjectDefaults(useSelector((state) => state));
   function applyDefaults() {

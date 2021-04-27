@@ -1,5 +1,5 @@
 import { store } from "../store";
-import { moveTaskBar } from "../store/projectData/tasks";
+import { moveTaskBar } from "../store/entities/tasks";
 
 export function moveBar(data, bar, e) {
   const {

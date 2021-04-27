@@ -18,7 +18,7 @@ function OptionsRows() {
   }
 
   const { ganttRef, competitor } = useSelector(
-    (state) => state.project.data.details
+    (state) => state.entities.project.data.details
   );
 
   const data = {

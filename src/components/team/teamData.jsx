@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Tippy from "@tippy.js/react";
 
 import TeamInfoRow from "./teamRow";
-import { addTeamMember, reorderTeam } from "../../store/projectData/team";
+import { addTeamMember, reorderTeam } from "../../store/entities/team";
 import add from "../../images/addTeam.png";
 import addGrey from "../../images/add-grey.png";
 import { Container } from "./teamStyling";
@@ -14,19 +14,21 @@ import { nextIndexOfGroup } from "../../helpers";
 function TeamInfo() {
   const dispatch = useDispatch();
   const employmentType = useSelector((state) => state.user.selectedTeamOption);
-  const team = useSelector((state) => state.team.data);
+  const team = useSelector((state) => state.entities.team.data);
   const leader = useSelector((state) => state.user.selectedLeader);
-  const { maxTeamMembers, maxSubcontract } = useSelector((state) => state.options.data);
+  const { maxTeamMembers, maxSubcontract } = useSelector(
+    (state) => state.entities.options.data
+  );
 
   const employmentGroup = team.filter(
     (person) => person.employment === employmentType
   );
-const group = employmentGroup.filter((person) => person.leader === leader);
+  const group = employmentGroup.filter((person) => person.leader === leader);
 
   const max = {
     staff: maxTeamMembers,
     subcontract: maxSubcontract,
-  }
+  };
 
   function addPerson() {
     const position = nextIndexOfGroup(group, team);

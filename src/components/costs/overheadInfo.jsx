@@ -1,20 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalDaysByPersonId } from "../../store/projectData/allocations";
-import {
-  updateLeaderInfo,
-  updateProjectInfo,
-} from "../../store/projectData/project";
+import { getTotalDaysByPersonId } from "../../store/entities/allocations";
+import { updateLeaderInfo } from "../../store/entities/project";
 import { Container } from "./costsStyling";
 
 function LabourInfo() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const leader = state.user.selectedLeader;
-  const { overheadRate } = state.project.data[leader];
+  const { overheadRate } = state.entities.project.data[leader];
   const { days, cost } = getTotalDaysByPersonId(state)[leader];
-  const rateOptions = state.options.data.overheadRates;
-  const overhead = Math.round(cost * overheadRate / 100);
+  const rateOptions = state.entities.options.data.overheadRates;
+  const overhead = Math.round((cost * overheadRate) / 100);
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -32,7 +29,7 @@ function LabourInfo() {
     <Container>
       <div className="overheads">
         <div className="row titles leaderTabMargin">
-          <p className="title labourNameRole">Overhead</p>
+          <p className="title labourNameRole">Overhead (%)</p>
           <p className="title labourCost">Cost (£)</p>
           {/* <p className="title labourDays">Days</p> */}
         </div>
@@ -40,7 +37,7 @@ function LabourInfo() {
           <div className="row">
             <select
               value={overheadRate}
-              name='overheadRate'
+              name="overheadRate"
               onChange={onChangeHandler}
               className="field labourNameRole"
             >

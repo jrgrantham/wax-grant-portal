@@ -179,7 +179,7 @@ export const {
 export default slice.reducer;
 
 export const getWorkPackageTitles = createSelector(
-  (state) => state.tasks,
+  (state) => state.entities.tasks,
   (tasks) => {
     console.log("getWorkPackageTitles");
     const list = Object.keys(tasks.data);
@@ -192,7 +192,7 @@ export const getWorkPackageTitles = createSelector(
 );
 
 export const getTaskIds = createSelector(
-  (state) => state.tasks,
+  (state) => state.entities.tasks,
   (tasks) => {
     console.log("getTaskIds");
     const list = Object.keys(tasks.data);
@@ -202,19 +202,19 @@ export const getTaskIds = createSelector(
 );
 
 export const getCombinedLengthOfBars = (state, taskId) => {
-  let length = state.tasks.data[taskId].schedule.length;
+  let length = state.entities.tasks.data[taskId].schedule.length;
   let result = 0;
   for (let i = 0; i < length; i++) {
-    if (state.tasks.data[taskId].schedule[i].barNumber > 0) result++;
+    if (state.entities.tasks.data[taskId].schedule[i].barNumber > 0) result++;
   }
   return result;
 };
 
 export const getNumberOfBars = (state, taskId) => {
-  let length = state.tasks.data[taskId].schedule.length;
+  let length = state.entities.tasks.data[taskId].schedule.length;
   for (let i = length - 1; i >= 0; i--) {
-    if (state.tasks.data[taskId].schedule[i].barNumber > 0) {
-      return state.tasks.data[taskId].schedule[i].barNumber;
+    if (state.entities.tasks.data[taskId].schedule[i].barNumber > 0) {
+      return state.entities.tasks.data[taskId].schedule[i].barNumber;
     }
   }
 };

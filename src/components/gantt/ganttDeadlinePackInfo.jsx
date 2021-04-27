@@ -8,7 +8,7 @@ import GanttRowdeadlines from "./ganttDeadlineRowInfo";
 import {
   reorderDeadline,
   addDeadline,
-} from "../../store/projectData/deadlines";
+} from "../../store/entities/deadlines";
 import addMiles from "../../images/addMilestone.png";
 import addDeads from "../../images/addDeliverable.png";
 import addGrey from "../../images/add-grey.png";
@@ -19,8 +19,8 @@ function GanttPackDeadlines(props) {
   const title = props.title;
   const packData = props.workPackData;
   const dispatch = useDispatch();
-  const deadlines = useSelector((state) => state.deadlines.data);
-  const { maxDeadlines } = useSelector((state) => state.options.data);
+  const deadlines = useSelector((state) => state.entities.deadlines.data);
+  const { maxDeadlines } = useSelector((state) => state.entities.options.data);
 
   function addNewRow() {
     const newPosition = nextIndexOfGroup(packData, deadlines);

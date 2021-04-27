@@ -5,7 +5,7 @@ import {
   deleteAllocation,
   updateAllocation,
   getAllocationsByTaskId,
-} from "../../store/projectData/allocations";
+} from "../../store/entities/allocations";
 
 function ResourcesRow(props) {
   const dispatch = useDispatch();

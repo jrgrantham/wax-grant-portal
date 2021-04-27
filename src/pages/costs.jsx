@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
 import MarkedComplete from "../components/modals/markedComplete";
-import { updateUserSelection } from "../store/projectData/user";
+import { updateUserSelection } from "../store/user";
 import { TableContainer } from "../components/table/tableStyling";
-import { updateSectionStatus } from "../store/projectData/project";
+import { updateSectionStatus } from "../store/entities/project";
 import { costsColor, costsFontColor } from "../helpers"; // check this
 import LabourTitles from "../components/costs/labourTitles"; // check this
 import LabourInfo from "../components/costs/labourInfo"; // check this
@@ -17,7 +17,7 @@ function Team() {
   const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const selectedOption = useSelector((state) => state.user.selectedCostsOption); // check this
   const status = useSelector(
-    (state) => state.project.data.status.costs[selectedLeader] // check this
+    (state) => state.entities.project.data.status.costs[selectedLeader] // check this
   );
   const menuList = [
     "Labour",

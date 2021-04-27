@@ -1,20 +1,20 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserSelection } from "../store/projectData/user";
+import { updateUserSelection } from "../store/user";
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
 import { TableContainer } from "../components/table/tableStyling";
 import MarkedComplete from "../components/modals/markedComplete";
-import { updateSectionStatus } from "../store/projectData/project";
+import { updateSectionStatus } from "../store/entities/project";
 import { teamColor, teamFontColor } from "../helpers"; // check this
 import TeamTitles from "../components/team/teamTitles"; // check this
-import TeamData from "../components/team/teamData"; // check this
+import TeamInfo from "../components/team/teamData"; // check this
 
 function Team() {
   const dispatch = useDispatch();
   const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const status = useSelector(
-    (state) => state.project.data.status.team[selectedLeader] // check this
+    (state) => state.entities.project.data.status.team[selectedLeader] // check this
   );
   const selectedOption = useSelector((state) => state.user.selectedTeamOption); // check this
   const menuList = ["Staff", "Subcontract"]; // check this
@@ -50,7 +50,7 @@ function Team() {
           <div>
             {status ? <MarkedComplete /> : null}
             <TeamTitles />
-            <TeamData />
+            <TeamInfo />
           </div>
         </div>
       </div>

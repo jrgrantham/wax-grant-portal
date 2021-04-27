@@ -13,13 +13,13 @@ import {
   spreadWork,
   getCombinedLengthOfBars,
   getNumberOfBars,
-} from "../../store/projectData/tasks";
-import { deleteTaskAllocations } from "../../store/projectData/allocations";
+} from "../../store/entities/tasks";
+import { deleteTaskAllocations } from "../../store/entities/allocations";
 import Close from "../general/close";
 import save from "../../images/save-grey.png";
 import bin from "../../images/bin-grey.png";
 import { Container } from "./modalStyling";
-import { updateUserSelection } from "../../store/projectData/user";
+import { updateUserSelection } from "../../store/user";
 import { toastDelay } from "../../helpers";
 
 function EditModal(props) {

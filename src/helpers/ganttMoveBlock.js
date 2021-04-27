@@ -1,5 +1,5 @@
 import { store } from "../store";
-import { updateDeadline } from "../store/projectData/deadlines";
+import { updateDeadline } from "../store/entities/deadlines";
 
 export function moveBlock(data, e, blockDiv, projectLength) {
   console.log('listening');

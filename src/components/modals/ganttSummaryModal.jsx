@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { wpInfoColor } from "../../helpers/";
-import { updateUserSelection } from "../../store/projectData/user";
+import { updateUserSelection } from "../../store/user";
 import { getTotalDaysByPersonId } from "../../store/projectData/allocations";
 
 function GanttSummaryModal() {
   const dispatch = useDispatch();
-  const people = useSelector((state) => state.team.data);
+  const people = useSelector((state) => state.entities.team.data);
   const daysById = getTotalDaysByPersonId(useSelector((state) => state));
 
   function close() {

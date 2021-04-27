@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { appWidth } from "../../helpers";
-import { updateUserSelection } from "../../store/projectData/user";
+import { updateUserSelection } from "../../store/user";
 
 function Navigation() {
   const showMenu = useSelector((state) => state.user.showMenu);

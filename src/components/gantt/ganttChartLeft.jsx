@@ -7,9 +7,12 @@ import { v4 as uuidv4 } from "uuid";
 
 import GanttPackWork from "./ganttTaskPackInfo";
 import GanttPackdeadlines from "./ganttDeadlinePackInfo";
-import { addWorkPackage, getWorkPackageTitles } from "../../store/projectData/tasks";
-import { updateUserSelection } from "../../store/projectData/user";
-import { updateGanttStatus } from "../../store/projectData/project";
+import {
+  addWorkPackage,
+  getWorkPackageTitles,
+} from "../../store/entities/tasks";
+import { updateUserSelection } from "../../store/user";
+import { updateGanttStatus } from "../../store/entities/project";
 import {
   wpInfoColor,
   delTitleColor,
@@ -25,26 +28,25 @@ import qMark from "../../images/qMark.png";
 function GanttChartLeft(props) {
   const dispatch = useDispatch();
 
-  const {
-    workPackages,
-    deliverables,
-    milestones,
-    totalDays,
-  } = props.data;
+  const { workPackages, deliverables, milestones, totalDays } = props.data;
 
   const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
   // const taskPackTitles2 = getWorkPackageTitles(useSelector((state) => state));
   const showSummary = useSelector((state) => state.user.showGanttSummary);
-  const ganttComplete = useSelector((state) => state.project.data.status.gantt);
-  const { maxWorkPackages } = useSelector((state) => state.options.data);
+  const ganttComplete = useSelector(
+    (state) => state.entities.project.data.status.gantt
+  );
+  const { maxWorkPackages } = useSelector(
+    (state) => state.entities.options.data
+  );
   const projectLength = useSelector(
-    (state) => state.project.data.details.projectLength
+    (state) => state.entities.project.data.details.projectLength
   );
 
   // console.log(taskPackTitles === taskPackTitles2);
 
   function createNewWorkPackage() {
-    dispatch(addWorkPackage({projectLength}));
+    dispatch(addWorkPackage({ projectLength }));
   }
 
   function toggleSummary() {

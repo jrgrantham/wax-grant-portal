@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import closeImg from "../../images/close-grey-white.png";
-import { updateUserSelection } from "../../store/projectData/user";
+import { updateUserSelection } from "../../store/user";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastDelay } from "../../helpers";

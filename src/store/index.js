@@ -1,22 +1,26 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 
-import taskReducer from "./projectData/tasks";
-import deadlinesReducer from "./projectData/deadlines";
-import projectReducer from "./projectData/project";
-import teamReducer from "./projectData/team";
-import userReducer from "./projectData/user";
-import allocationsReducer from "./projectData/allocations";
-import optionsReducer from "./projectData/options";
+import taskReducer from "./entities/tasks";
+import deadlinesReducer from "./entities/deadlines";
+import projectReducer from "./entities/project";
+import teamReducer from "./entities/team";
+import userReducer from "./user";
+import allocationsReducer from "./entities/allocations";
+import optionsReducer from "./entities/options";
 
-const rootReducer = combineReducers({
+const entities = combineReducers({
   tasks: taskReducer,
-  user: userReducer,
   deadlines: deadlinesReducer,
   project: projectReducer,
   team: teamReducer,
   allocations: allocationsReducer,
   options: optionsReducer
+})
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  entities
 });
 
 export const store = configureStore({ reducer: rootReducer });

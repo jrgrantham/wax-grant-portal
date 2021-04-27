@@ -7,8 +7,8 @@ import bin from "../../images/bin-grey.png";
 import {
   deleteDeadline,
   updateDeadline,
-} from "../../store/projectData/deadlines";
-import { getProjectDates } from "../../store/projectData/project";
+} from "../../store/entities/deadlines";
+import { getProjectDates } from "../../store/entities/project";
 
 function GanttRowDetails(props) {
   const dispatch = useDispatch();

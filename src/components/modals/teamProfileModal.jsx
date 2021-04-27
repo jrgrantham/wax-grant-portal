@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { updateTeamMember } from "../../store/projectData/team";
+import { updateTeamMember } from "../../store/entities/team";
 import close from "../../images/close-grey.png";
 import { teamColor, tableInputUnderline } from "../../helpers";
 

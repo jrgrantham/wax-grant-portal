@@ -1,8 +1,8 @@
 import React from "react";
 import warning from "../../images/warning.png";
 import { useSelector } from "react-redux";
-import { getUtilisations, getDayRateById } from "../../store/projectData/team";
-import { getTotalDaysByPersonId } from "../../store/projectData/allocations";
+import { getUtilisations, getDayRateById } from "../../store/entities/team";
+import { getTotalDaysByPersonId } from "../../store/entities/allocations";
 
 function LabourRow(props) {
   const { personId, name, role } = props.person;

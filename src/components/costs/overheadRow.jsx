@@ -16,7 +16,7 @@ import DeleteModal from "../modals/teamDeleteModal";
 function OverheadRow(props) {
   const dispatch = useDispatch();
   const { projectRoles, locations } = useSelector(
-    (state) => state.options.data
+    (state) => state.entities.options.data
   );
   const { person, employmentType, provided, acronyms } = props;
   const [showProfile, setShowProfile] = useState(false);
@@ -118,7 +118,7 @@ function OverheadRow(props) {
             className="field dayRate"
           />
           <select
-          selected='UK'
+            selected="UK"
             className="field location"
             id={person.personId + "location"}
             name="location"
@@ -140,13 +140,13 @@ function OverheadRow(props) {
       </button>
       <div className="hidden deleteIcon">
         {/* <Tippy content="All associated data will be lost"> */}
-          <img
-            // className="delete"
-            src={bin}
-            alt="delete"
-            style={{ cursor: "pointer" }}
-            onClick={() => setConfirmDelete(true)}
-          />
+        <img
+          // className="delete"
+          src={bin}
+          alt="delete"
+          style={{ cursor: "pointer" }}
+          onClick={() => setConfirmDelete(true)}
+        />
         {/* </Tippy> */}
       </div>
     </div>

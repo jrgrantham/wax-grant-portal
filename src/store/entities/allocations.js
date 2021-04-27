@@ -65,9 +65,9 @@ export const getAllocationsByTaskId = createSelector(
   (state) => state,
   (state) => {
     console.log("getAllocationsByTaskId");
-    const team = state.team.data;
-    const taskData = state.tasks.data;
-    const allocations = state.allocations.data;
+    const team = state.entities.team.data;
+    const taskData = state.entities.tasks.data;
+    const allocations = state.entities.allocations.data;
     const taskKeys = Object.keys(taskData);
     const taskIds = taskKeys.filter((key) => key !== "taskOrder");
 
@@ -114,8 +114,8 @@ export const getTotalDaysByPersonId = createSelector(
   (state) => state,
   (state) => {
     console.log("getTotalDaysByPersonId");
-    const allTasks = state.tasks.data;
-    const people = state.team.data;
+    const allTasks = state.entities.tasks.data;
+    const people = state.entities.team.data;
     const taskIds = getTaskIds(state);
     const resources = getAllocationsByTaskId(state);
 
@@ -128,7 +128,7 @@ export const getTotalDaysByPersonId = createSelector(
 
     people.forEach((person) => {
       const { personId, leader } = person;
-      const rate = getDayRateById(state)[personId]
+      const rate = getDayRateById(state)[personId];
       peoplesDays[personId] = 0;
       taskIds.forEach((taskId) => {
         const taskDays = allTasks[taskId].days;
@@ -138,7 +138,7 @@ export const getTotalDaysByPersonId = createSelector(
           const days = (taskDays * percentage) / 100;
           peoplesDays[personId] = peoplesDays[personId] + days;
           peoplesDays[leader].days = peoplesDays[leader].days + days;
-          peoplesDays[leader].cost = peoplesDays[leader].cost + days * rate
+          peoplesDays[leader].cost = peoplesDays[leader].cost + days * rate;
         }
       });
     });

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUserSelection } from "../store/projectData/user";
+import { updateUserSelection } from "../store/user";
 import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
 import { TableContainer } from "../components/table/tableStyling";
@@ -15,7 +15,7 @@ function Details() {
   const dispatch = useDispatch();
   const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const status = useSelector(
-    (state) => state.project.data.status.details[selectedLeader] // check this
+    (state) => state.entities.project.data.status.details[selectedLeader] // check this
   );
   const selectedOption = useSelector(
     (state) => state.user.selectedDetailsOption // check this
@@ -66,7 +66,7 @@ function Details() {
       <div className="displayArea">
         <LeftMenu data={menuData} />
         <div className="content">
-        {showLeaderTabs[selectedOption] ? (
+          {showLeaderTabs[selectedOption] ? (
             <LeaderTabs
               viewCombinedTab={showLeaderTabs[selectedOption] === 4}
             />

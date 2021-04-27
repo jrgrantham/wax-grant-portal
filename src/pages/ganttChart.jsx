@@ -11,13 +11,15 @@ import { getTaskIds } from "../store/projectData/tasks";
 // import { allResources } from "../store";
 
 function GanttChart() {
-  const taskData = useSelector((state) => state.tasks.data);
+  const taskData = useSelector((state) => state.entities.tasks.data);
   const showSummary = useSelector((state) => state.user.showGanttSummary);
   const taskIdKeys = getTaskIds(useSelector((state) => state));
-  const ganttComplete = useSelector((state) => state.project.data.status.gantt);
+  const ganttComplete = useSelector(
+    (state) => state.entities.project.data.status.gantt
+  );
 
   const projectLength = useSelector(
-    (state) => state.project.data.details.projectLength
+    (state) => state.entities.project.data.details.projectLength
   );
 
   const workPackageObject = {};
@@ -65,10 +67,10 @@ function GanttChart() {
   const workPackages = generateWorkPackages();
 
   const deliverables = useSelector((state) =>
-    state.deadlines.data.filter((task) => task.type === "deliverable")
+    state.entities.deadlines.data.filter((task) => task.type === "deliverable")
   );
   const milestones = useSelector((state) =>
-    state.deadlines.data.filter((task) => task.type === "milestone")
+    state.entities.deadlines.data.filter((task) => task.type === "milestone")
   );
 
   const [chartWidth, setChartWidth] = useState(0);
@@ -89,7 +91,7 @@ function GanttChart() {
   return (
     <PageContainer chartWidth={chartWidth}>
       <div id="chartArea" className="chartArea">
-      {ganttComplete ? <MarkedCompleteModal /> : null}
+        {ganttComplete ? <MarkedCompleteModal /> : null}
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />
       </div>
@@ -115,7 +117,7 @@ const PageContainer = styled.div`
     padding: 0px;
   }
   .chartArea {
-  position: relative;
+    position: relative;
     margin-bottom: 50px;
     display: flex;
     justify-content: center;

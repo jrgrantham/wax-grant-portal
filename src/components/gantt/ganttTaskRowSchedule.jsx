@@ -8,7 +8,9 @@ import { leadingZero } from "../../helpers";
 function GanttWPRowSchedule(props) {
   const { task, wpNumber, taskNumber } = props;
   const schedule = props.task.schedule;
-  const {projectLength} = useSelector(state => state.project.data.details)
+  const { projectLength } = useSelector(
+    (state) => state.entities.project.data.details
+  );
 
   const bars = [];
   let newBar = false;
@@ -23,12 +25,10 @@ function GanttWPRowSchedule(props) {
   // create an array of bars
   // generate obstruction locations during this loop
   for (let i = 0; i < projectLength; i++) {
-
     // console.log(i, schedule[i]);
     // const currentMonth = schedule[i].status;
     if (!schedule[i]) {
-
-      break
+      break;
     }
     const currentMonth = schedule[i].barNumber > 0;
 
@@ -52,7 +52,7 @@ function GanttWPRowSchedule(props) {
         newBar = false;
       }
 
-      // append start or middle 
+      // append start or middle
       let blockNumber = leadingZero(blockIndex);
       if (blockIndex === 0) blockNumber = blockNumber + "s";
       else blockNumber = blockNumber + "m";

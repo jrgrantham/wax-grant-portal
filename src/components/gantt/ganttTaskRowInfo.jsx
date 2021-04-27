@@ -12,13 +12,13 @@ import {
   spreadWork,
   getNumberOfBars,
   getCombinedLengthOfBars,
-} from "../../store/projectData/tasks";
+} from "../../store/entities/tasks";
 import tick from "../../images/tick-grey.png";
 import { Container } from "./ganttRowStyling";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { updateUserSelection } from "../../store/projectData/user";
-import { getAllocationsByTaskId } from "../../store/projectData/allocations";
+import { updateUserSelection } from "../../store/user";
+import { getAllocationsByTaskId } from "../../store/entities/allocations";
 
 toast.configure();
 

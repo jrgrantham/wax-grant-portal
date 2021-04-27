@@ -18,8 +18,8 @@ function LeftMenu(props) {
 
   const leader = useSelector((state) => state.user.selectedLeader);
   const company = useSelector((state) => {
-    if (leader === 'combined') return 'Combined'
-    else return state.project.data[leader].companyName
+    if (leader === "combined") return "Combined";
+    else return state.entities.project.data[leader].companyName;
   });
 
   return (

@@ -11,7 +11,7 @@ import { getAllocationsByTaskId } from "../../store/entities/allocations";
 
 toast.configure();
 
-function ResourcesModal(props) {
+function UtilisationModal(props) {
   const state = useSelector((state) => state);
   const allPeople = state.entities.team.data;
   const { packData } = props;
@@ -55,7 +55,7 @@ function ResourcesModal(props) {
   );
 }
 
-export default ResourcesModal;
+export default UtilisationModal;
 
 const Container = styled.div`
   position: fixed;

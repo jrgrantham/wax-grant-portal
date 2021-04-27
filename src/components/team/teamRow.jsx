@@ -5,10 +5,10 @@ import "tippy.js/dist/tippy.css";
 import {
   updateTeamMember,
   deleteTeamMember,
-} from "../../store/projectData/team";
+} from "../../store/entities/team";
 import { BiMenu } from "react-icons/bi";
 import { isNumberKey } from "../../helpers";
-import { deletePersonAllocations } from "../../store/projectData/allocations";
+import { deletePersonAllocations } from "../../store/entities/allocations";
 import bin from "../../images/bin-grey.png";
 import ProfileModal from "../modals/teamProfileModal";
 import DeleteModal from "../modals/teamDeleteModal";
@@ -16,7 +16,7 @@ import DeleteModal from "../modals/teamDeleteModal";
 function TeamRow(props) {
   const dispatch = useDispatch();
   const { projectRoles, locations } = useSelector(
-    (state) => state.options.data
+    (state) => state.entities.options.data
   );
   const { person, employmentType, provided, acronyms } = props;
   const [showProfile, setShowProfile] = useState(false);
@@ -118,7 +118,7 @@ function TeamRow(props) {
             className="field dayRate"
           />
           <select
-          selected='UK'
+            selected="UK"
             className="field location"
             id={person.personId + "location"}
             name="location"
@@ -140,13 +140,13 @@ function TeamRow(props) {
       </button>
       <div className="hidden deleteIcon">
         {/* <Tippy content="All associated data will be lost"> */}
-          <img
-            // className="delete"
-            src={bin}
-            alt="delete"
-            style={{ cursor: "pointer" }}
-            onClick={() => setConfirmDelete(true)}
-          />
+        <img
+          // className="delete"
+          src={bin}
+          alt="delete"
+          style={{ cursor: "pointer" }}
+          onClick={() => setConfirmDelete(true)}
+        />
         {/* </Tippy> */}
       </div>
     </div>

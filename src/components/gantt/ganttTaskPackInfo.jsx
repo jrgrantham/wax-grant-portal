@@ -12,27 +12,31 @@ import {
   // updateTaskPackTitle,
   deleteTask,
   updateTaskKey,
-} from "../../store/projectData/tasks";
+} from "../../store/entities/tasks";
 import GanttTaskRowInfo from "./ganttTaskRowInfo";
 import EditModal from "../modals/ganttEditModal";
 import tick from "../../images/tick-white.png";
 import add from "../../images/addTask.png";
 import addGray from "../../images/add-grey.png";
 import bin from "../../images/bin-grey.png";
-import { deleteTaskAllocations } from "../../store/projectData/allocations";
+import { deleteTaskAllocations } from "../../store/entities/allocations";
 
 function GanttPackWork(props) {
   const dispatch = useDispatch();
 
   const { title, index, packData } = props;
   const wpNumber = index + 1;
-  const { maxTasksPerPackage } = useSelector((state) => state.options.data);
+  const { maxTasksPerPackage } = useSelector(
+    (state) => state.entities.options.data
+  );
 
   const [edit, setEdit] = useState(false);
   const [editTitleWindow, setEditTitleWindow] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
 
-  const { projectLength } = useSelector((state) => state.project.data.details);
+  const { projectLength } = useSelector(
+    (state) => state.entities.project.data.details
+  );
   function handleAddNewRow() {
     const [lastTask] = packData.slice(-1);
     const lastTaskId = lastTask.taskId;
@@ -107,7 +111,7 @@ function GanttPackWork(props) {
         ) : (
           <>
             <h3 className="title" onClick={() => setEditTitleWindow(true)}>
-              {`WP${wpNumber} - ${title ? title : 'New Work Package'}`}
+              {`WP${wpNumber} - ${title ? title : "New Work Package"}`}
             </h3>
             <div className="info">
               <h3 className="resources">Resources</h3>

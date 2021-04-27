@@ -53,28 +53,28 @@ export const {
 export default slice.reducer;
 
 export const getProjectDates = createSelector(
-  state => state.project,
+  (state) => state.entities.project,
   (project) => {
     const { projectLength } = project.data.details;
-  const month = "Feb"; // hard coded !!!!!
-  const year = 2021; // hard coded !!!!!
-  const projectStart = moment(`${month} ${year}`, "MMM YYYY");
-  const dateArray = () => {
-    const years = [];
-    const dateStart = projectStart;
-    for (let i = 0; i < projectLength; i++) {
-      years.push(dateStart.format("MMM YYYY"));
-      dateStart.add(1, "month");
-    }
-    return years;
-  };
-  return dateArray()
+    const month = "Feb"; // hard coded !!!!!
+    const year = 2021; // hard coded !!!!!
+    const projectStart = moment(`${month} ${year}`, "MMM YYYY");
+    const dateArray = () => {
+      const years = [];
+      const dateStart = projectStart;
+      for (let i = 0; i < projectLength; i++) {
+        years.push(dateStart.format("MMM YYYY"));
+        dateStart.add(1, "month");
+      }
+      return years;
+    };
+    return dateArray();
   }
 );
 
 export const getWorkingDaysPerMonth = (state) => {
   function workedDays(leader) {
-    const { bankHolidays, annualLeave } = state.project.data[leader];
+    const { bankHolidays, annualLeave } = state.entities.project.data[leader];
     return (260 - bankHolidays - annualLeave) / 12;
   }
   const companyDays = {

@@ -2,14 +2,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import LabourRow from "./labourRow";
 import { Container } from "./costsStyling";
-import { getTotalDaysByPersonId } from "../../store/projectData/allocations";
+import { getTotalDaysByPersonId } from "../../store/entities/allocations";
 
 function LabourInfo() {
   const state = useSelector((state) => state);
   const leader = state.user.selectedLeader;
-  const team = state.team.data.filter((person) => person.leader === leader);
+  const team = state.entities.team.data.filter((person) => person.leader === leader);
   const { days, cost } = getTotalDaysByPersonId(state)[leader];
-  // console.log(total);
 
   return (
     <Container>

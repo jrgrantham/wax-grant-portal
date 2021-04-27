@@ -14,7 +14,7 @@ function LabourInfo() {
     <Container>
       <div className="rows">
         {team.map((person, index) => {
-          return <LabourRow key={index} person={person} />;
+          return <LabourRow key={index} person={person} index={index}/>;
         })}
         {team.length > 0 ? (
           <div className="row">

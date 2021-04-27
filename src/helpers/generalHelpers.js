@@ -22,6 +22,12 @@ export function nextIndexOfGroup(group, array) {
   return position;
 }
 
+export function roundTo(number, decimalPlaces) {
+  const roundBy = Math.pow(10, decimalPlaces)
+  const result = Math.round(number * roundBy) / roundBy
+  return result
+}
+
 // Returns a function, that, as long as it continues to be invoked, will not
 // be triggered. The function will be called after it stops being called for
 // `wait` milliseconds.

@@ -23,7 +23,7 @@ export const Container = styled.div`
     /* width: 150px; */
     font-weight: 600;
     color: ${warningColor};
-    margin-left: 5px;
+    margin-left: 15px;
   }
   .notes {
     margin-left: 15px;
@@ -36,12 +36,19 @@ export const Container = styled.div`
 
   }
   .warning {
-    margin-left: 20px;
+    margin-left: 40px;
     display: flex;
-    min-height: 25px;
-    min-width: 25px;
-    max-height: 25px;
-    max-width: 25px;
+    min-height: 29px;
+    min-width: 29px;
+    max-height: 29px;
+    max-width: 29px;
+    border: 1px solid ${warningColor};
+    border-radius: 6px;
+    padding: 5px;
+    cursor: pointer;
+    img {
+      
+    }
   }
   .deleteIcon {
     width: 18px;

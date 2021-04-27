@@ -3,53 +3,53 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import ResourcesRow from "./ganttResourcesModalRow";
+import UtilisationModalRow from "./utilisationModalRow";
 import Close from "../general/close";
 import { wpInfoColor } from "../../helpers";
-import { getAllocationsByTaskId } from "../../store/entities/allocations";
+import { getUtilisations } from "../../store/entities/team";
 
 toast.configure();
 
-function UtilisationModal(props) {
+function UtilisationModal() {
   const state = useSelector((state) => state);
+  const utilisation = getUtilisations(state);
   const allPeople = state.entities.team.data;
-  const { packData } = props;
-  const taskIds = [...new Set(packData.map((task) => task.taskId))];
-  const resources = getAllocationsByTaskId(state);
+  const selectedLeader = state.user.selectedLeader;
 
-  let closeMessage = false;
-  for (let i = 0; i < taskIds.length; i++) {
-    if (resources[taskIds[i]].completion !== 100) {
-      closeMessage = "All tasks must be 100%";
-      break;
-    }
-  }
+  const filteredPeople = allPeople.filter((person) => {
+    return person.leader === selectedLeader;
+  });
 
   const data = {
-    key: "showTaskAllocationModal",
-    message: closeMessage,
+    key: "showComponent",
+    // message: 'closeMessage',
   };
 
   return (
     <Container id="background">
       <div className="editWindow">
         <Close data={data} />
-        <div className="modalRow title">
-          <h3 className="description">Description</h3>
-          {allPeople.map((person, index) => {
+        <div className="modalRow top">
+          <h3 className="description">Team Member</h3>
+          {utilisation.quarters.map((quarter, index) => {
             return (
-              <h3 key={index} className="person">
-                {person.acronym}
+              <h3 key={index} className="quarter">
+                {quarter}
               </h3>
             );
           })}
-          <h3 className="total">Total</h3>
         </div>
-
-        {packData.map((task, index) => {
-          return <ResourcesRow task={task} key={index} allPeople={allPeople} />;
-        })}
+        <div className="rows">
+          {filteredPeople.map((person, index) => {
+            return (
+              <UtilisationModalRow
+                name={person.name}
+                key={index}
+                utilisation={utilisation[person.personId]}
+              />
+            );
+          })}
+        </div>
       </div>
     </Container>
   );
@@ -81,9 +81,13 @@ const Container = styled.div`
     justify-content: space-between;
 
     padding-bottom: 10px;
-    background-color: white;
     /* border: 1px solid black; */
     border-radius: 6px;
+  }
+  .rows {
+    background-color: white;
+    padding: 10px 0;
+    border-radius: 0 0 6px 6px;
   }
   .modalRow {
     height: 40px;
@@ -96,42 +100,28 @@ const Container = styled.div`
       max-width: 300px;
     }
   }
-  .title {
+  .top {
     height: 50px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     background-color: ${wpInfoColor};
     color: white;
     padding: 0 20px;
     border-radius: 6px 6px 0px 0px;
   }
-  .person {
-    width: 35px;
-    margin-left: 20px;
+  .quarter {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  .person.select {
-    border: 1px solid lightgray;
-    cursor: pointer;
-  }
-  .total {
+    justify-content: center;
     width: 50px;
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    font-weight: 600;
   }
   .under {
     color: orange;
+    font-weight: bold;
   }
   .ok {
     color: green;
   }
   .over {
+    font-weight: bold;
     color: red;
   }
   img {

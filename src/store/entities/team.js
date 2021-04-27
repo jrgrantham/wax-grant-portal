@@ -126,7 +126,7 @@ export const getUtilisations = createSelector(
     const people = state.entities.team.data;
     const { projectLength } = state.entities.project.data.details;
     const utilisations = {};
-    const utilisationByQuarter = {};
+    const utilisationByQuarter = { quarters: [] };
     const counter = {};
     const personIds = [];
     people.forEach((person) => {
@@ -146,8 +146,9 @@ export const getUtilisations = createSelector(
       for (let j = 0; j < taskIds.length; j++) {
         let lastTask = j === taskIds.length - 1;
         let taskId = taskIds[j];
-
-        personIds.forEach((personId) => {
+        for (let k = 0; k < personIds.length; k++) {
+          let personId = personIds[k];
+          // personIds.forEach((personId) => {
           const leader = personById[personId].leader;
           const percent = resources[taskId][personId].percent;
           const days = allTasks[taskId].schedule[i].value;
@@ -156,13 +157,16 @@ export const getUtilisations = createSelector(
           counter[personId] = quarterTotal;
           if ((qEnd && lastTask) || (i === projectLength - 1 && lastTask)) {
             utilisationByQuarter[personId].actualDays.push(counter[personId]);
+            if (k === personIds.length - 1)
+              utilisationByQuarter.quarters.push(quarter);
             if (quarterTotal > workingDays[leader] * 3) {
               utilisationByQuarter[personId].overutilised = true;
               utilisations[personId].push(quarter); // set threshold
             }
             counter[personId] = 0;
           }
-        });
+        }
+        // });
       }
     }
     return utilisationByQuarter;

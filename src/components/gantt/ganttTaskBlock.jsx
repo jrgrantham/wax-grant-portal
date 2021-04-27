@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { updateBlock } from "../../store/projectData/tasks";
+import { updateBlock } from "../../store/entities/tasks";
 import { wpScheduleColor, isNumberKey } from "../../helpers";
 
 function GanttWPBlock(props) {

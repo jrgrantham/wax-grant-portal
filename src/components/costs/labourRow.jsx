@@ -44,7 +44,7 @@ function LabourRow(props) {
               <img src={warning} alt="warning" />
             </div>
           </Tippy>
-          <p className="field display labourOverutilised">Overutilised!</p>
+          <p className="field display labourOverutilised">Overutilised</p>
         </>
       ) : null}
     </div>

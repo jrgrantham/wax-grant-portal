@@ -4,7 +4,7 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { useSelector } from "react-redux";
 import { Container } from "./detailsStyling";
-import { updateProjectInfo } from "../../store/projectData/project";
+import { updateProjectInfo } from "../../store/entities/project";
 import qMark from "../../images/qMark.png";
 
 function OptionsRows() {

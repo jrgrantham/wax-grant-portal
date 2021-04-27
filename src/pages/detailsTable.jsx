@@ -5,7 +5,7 @@ import LeftMenu from "../components/table/leftMenu";
 import LeaderTabs from "../components/table/leaderTabs";
 import { TableContainer } from "../components/table/tableStyling";
 import MarkedComplete from "../components/modals/markedComplete";
-import { updateSectionStatus } from "../store/projectData/project";
+import { updateSectionStatus } from "../store/entities/project";
 import { projectColor, projectFontColor } from "../helpers"; // check this
 import ProjectRows from "../components/details/projectRows"; // check this
 import OptionsRows from "../components/details/optionsRows"; // check this

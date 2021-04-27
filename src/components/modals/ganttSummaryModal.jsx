@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { wpInfoColor } from "../../helpers/";
 import { updateUserSelection } from "../../store/user";
-import { getTotalDaysByPersonId } from "../../store/projectData/allocations";
+import { getTotalDaysByPersonId } from "../../store/entities/allocations";
 
 function GanttSummaryModal() {
   const dispatch = useDispatch();

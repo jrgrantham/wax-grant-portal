@@ -7,7 +7,7 @@ import GanttChartLeft from "../components/gantt/ganttChartLeft";
 import GanttChartRight from "../components/gantt/ganttChartRight";
 import MarkedCompleteModal from "../components/modals/markedComplete";
 import GanttSummaryModal from "../components/modals/ganttSummaryModal";
-import { getTaskIds } from "../store/projectData/tasks";
+import { getTaskIds } from "../store/entities/tasks";
 // import { allResources } from "../store";
 
 function GanttChart() {

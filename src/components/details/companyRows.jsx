@@ -8,8 +8,8 @@ import { Container } from "./detailsStyling";
 import {
   setCompanyDefaults,
   updateLeaderInfo,
-} from "../../store/projectData/project";
-import { getCompanyDefaults } from "../../store/projectData/options";
+} from "../../store/entities/project";
+import { getCompanyDefaults } from "../../store/entities/options";
 import { isNumberKey } from "../../helpers";
 // onKeyDown={(e) => isNumberKey(e)}
 

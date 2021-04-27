@@ -3,12 +3,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Tippy from "@tippy.js/react";
 
-import { getProjectDates } from "../../store/projectData/project";
-import {
-  monthWidth,
-  schedGapColor,
-  wpMarginBottom,
-} from "../../helpers";
+import { getProjectDates } from "../../store/entities/project";
+import { monthWidth, schedGapColor, wpMarginBottom } from "../../helpers";
 
 function GanttScheduleBackground() {
   const dateList = getProjectDates(useSelector((state) => state));

@@ -5,8 +5,8 @@ import "tippy.js/dist/tippy.css";
 import {
   updateProjectInfo,
   setProjectDefaults,
-} from "../../store/projectData/project";
-import { getProjectDefaults } from "../../store/projectData/options";
+} from "../../store/entities/project";
+import { getProjectDefaults } from "../../store/entities/options";
 import qMark from "../../images/qMark.png";
 import { Container } from "./detailsStyling";
 

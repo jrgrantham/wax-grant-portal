@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
-import {
-  updateTeamMember,
-  deleteTeamMember,
-} from "../../store/projectData/team";
+import { updateTeamMember, deleteTeamMember } from "../../store/entities/team";
 import { BiMenu } from "react-icons/bi";
 import { isNumberKey } from "../../helpers";
-import { deletePersonAllocations } from "../../store/projectData/allocations";
+import { deletePersonAllocations } from "../../store/entities/allocations";
 import bin from "../../images/bin-grey.png";
 import ProfileModal from "../modals/teamProfileModal";
 import DeleteModal from "../modals/teamDeleteModal";

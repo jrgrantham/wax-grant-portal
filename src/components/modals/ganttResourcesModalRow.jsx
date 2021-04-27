@@ -1,17 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { getResources } from "../../helpers";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addAllocation,
   deleteAllocation,
   updateAllocation,
+  getAllocationsByTaskId,
 } from "../../store/projectData/allocations";
 
 function ResourcesRow(props) {
   const dispatch = useDispatch();
   const { allPeople, task } = props;
   const { taskId } = task;
-  const resources = getResources();
+  const resources = getAllocationsByTaskId(useSelector((state) => state));
 
   const completion = resources[task.taskId].completion;
   const status =

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { BiMenu, BiDotsHorizontalRounded } from "react-icons/bi";
-import { isNumberKey, getResources, toastDelay } from "../../helpers";
+import { isNumberKey, toastDelay } from "../../helpers";
 import EditModal from "../modals/ganttEditModal";
 import ResourcesModal from "../modals/ganttResourcesModal";
 import {
@@ -18,27 +18,24 @@ import { Container } from "./ganttRowStyling";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateUserSelection } from "../../store/projectData/user";
+import { getAllocationsByTaskId } from "../../store/projectData/allocations";
 
 toast.configure();
 
 function GanttTaskRowInfo(props) {
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
   const { task, provided, packData } = props;
   const { description, days, taskId } = task;
-  const { showComponent } = useSelector((state) => state.user);
-  const resources = getResources();
-  // console.log(resources);
+
+  const showComponent = state.user.showComponent;
+  const resources = getAllocationsByTaskId(state);
+  const numberOfBars = getNumberOfBars(state, taskId);
+  const combinedLength = getCombinedLengthOfBars(state, taskId);
+  
   const buttonContent = resources[taskId].people;
   const [showEditDays, setShowEditDays] = useState(false);
   const [newDays, setNewDays] = useState(days);
-  const numberOfBars = getNumberOfBars(
-    useSelector((state) => state),
-    taskId
-  );
-  const combinedLength = getCombinedLengthOfBars(
-    useSelector((state) => state),
-    taskId
-  );
 
   function handleDescriptionChange(value) {
     dispatch(

@@ -97,7 +97,7 @@ export const TableContainer = styled.div`
   }
   .field {
     margin-right: 20px;
-    padding-left: 0;
+    padding: 5px 0;
     border-radius: 0;
     border-bottom: 2px solid ${tableInputUnderline};
     color: ${fontColorGrey};
@@ -115,8 +115,8 @@ export const TableContainer = styled.div`
   }
   .total {
     display: flex;
-    border-top: 2px solid ${fontColorGrey};
-    border-bottom: 2px solid ${fontColorGrey};
+    border-top: 1px solid ${fontColorGrey};
+    border-bottom: 1px solid ${fontColorGrey};
     padding: 5px 0;
   }
   .applyDefaults {

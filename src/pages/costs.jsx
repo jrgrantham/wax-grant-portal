@@ -10,6 +10,7 @@ import { updateSectionStatus } from "../store/projectData/project";
 import { costsColor, costsFontColor } from "../helpers"; // check this
 import LabourTitles from "../components/costs/labourTitles"; // check this
 import LabourInfo from "../components/costs/labourInfo"; // check this
+import OverheadInfo from "../components/costs/overheadInfo"; // check this
 
 function Team() {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ function Team() {
 
   const showLeaderTabs = {
     labour: 3,
-    overhead: 4,
+    overhead: 3,
     materials: 4,
     travel: 3,
     subcontract: 4,
@@ -72,7 +73,7 @@ function Team() {
           <LabourInfo />
         </>
       );
-    //   if (selectedOption === "project") return <ProjectRows />;
+      if (selectedOption === "overhead") return <OverheadInfo />;
     //   if (selectedOption === "options") return <OptionsRows />;
   }
 

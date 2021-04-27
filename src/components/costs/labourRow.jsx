@@ -1,23 +1,23 @@
 import React from "react";
 import warning from "../../images/warning.png";
 import { useSelector } from "react-redux";
-import { getTotalDaysByPersonId, getUtilisations } from "../../helpers";
-import { getDayRateById } from "../../helpers";
+import { getUtilisations, getDayRateById } from "../../store/projectData/team";
+import { getTotalDaysByPersonId } from "../../store/projectData/allocations";
 
 function LabourRow(props) {
   const { personId, name, role } = props.person;
-  const daysById = getTotalDaysByPersonId();
-  const dayRateById = getDayRateById(useSelector((state) => state));
+  const state = useSelector((state) => state);
+  const daysById = getTotalDaysByPersonId(state);
+  const dayRateById = getDayRateById(state);
+  const utilisation = getUtilisations(state)[personId];
+  
   const days = daysById[personId];
   const cost = Math.round(days * dayRateById[personId]); // rounded
-  const utilisation = getUtilisations()[personId];
-
-  console.log(utilisation);
 
   return (
     <div className="row">
       <p className="field display labourNameRole">{`${name} (${role})`}</p>
-      <p className="field display labourCost bold">{cost}</p>
+      <p className="field display labourCost">{cost}</p>
       <p className="field display labourDays">{days}</p>
       {utilisation.overutilised ? (
         <>

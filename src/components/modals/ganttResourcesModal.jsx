@@ -6,15 +6,17 @@ import "react-toastify/dist/ReactToastify.css";
 
 import ResourcesRow from "./ganttResourcesModalRow";
 import Close from "../general/close";
-import { getResources, wpInfoColor } from "../../helpers";
+import { wpInfoColor } from "../../helpers";
+import {getAllocationsByTaskId} from '../../store/projectData/allocations'
 
 toast.configure();
 
 function ResourcesModal(props) {
-  const allPeople = useSelector((state) => state.team.data);
+  const state = useSelector((state) => state);
+  const allPeople = state.team.data;
   const { packData } = props;
   const taskIds = [...new Set(packData.map((task) => task.taskId))];
-  const resources = getResources();
+  const resources = getAllocationsByTaskId(state);
 
   let closeMessage = false;
   for (let i = 0; i < taskIds.length; i++) {

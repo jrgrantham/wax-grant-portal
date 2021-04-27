@@ -181,6 +181,7 @@ export default slice.reducer;
 export const getWorkPackageTitles = createSelector(
   (state) => state.tasks,
   (tasks) => {
+    console.log("getWorkPackageTitles");
     const list = Object.keys(tasks.data);
     const taskIds = list.filter((id) => id !== "taskOrder");
     const titles = [
@@ -192,11 +193,12 @@ export const getWorkPackageTitles = createSelector(
 
 export const getTaskIds = createSelector(
   (state) => state.tasks,
-    (tasks) => {
-      const list = Object.keys(tasks.data);
-      const taskIds = list.filter((id) => id !== "taskOrder");
-      return taskIds;
-    }
+  (tasks) => {
+    console.log("getTaskIds");
+    const list = Object.keys(tasks.data);
+    const taskIds = list.filter((id) => id !== "taskOrder");
+    return taskIds;
+  }
 );
 
 export const getCombinedLengthOfBars = (state, taskId) => {

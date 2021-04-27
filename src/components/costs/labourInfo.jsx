@@ -1,15 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
 import LabourRow from "./labourRow";
 import { Container } from "./costsStyling";
-import { throttle } from "underscore";
+import { getTotalDaysByPersonId } from "../../store/projectData/allocations";
 
 function LabourInfo() {
-  const leader = useSelector((state) => state.user.selectedLeader);
-  const team = useSelector((state) => state.team.data).filter(
-    (person) => person.leader === leader
-  );
+  const state = useSelector((state) => state);
+  const leader = state.user.selectedLeader;
+  const team = state.team.data.filter((person) => person.leader === leader);
+  const { days, cost } = getTotalDaysByPersonId(state)[leader];
+  // console.log(total);
 
   return (
     <Container>
@@ -17,6 +17,15 @@ function LabourInfo() {
         {team.map((person, index) => {
           return <LabourRow key={index} person={person} />;
         })}
+        {team.length > 0 ? (
+          <div className="row">
+            <p className="field display labourNameRole" />
+            <div className="total">
+              <p className="field display labourCost">{Math.round(cost)}</p>
+              <p className="field display labourDays">{Math.round(days)}</p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </Container>
   );

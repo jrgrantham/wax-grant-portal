@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalDaysByPersonId, wpInfoColor } from "../../helpers/";
+import { wpInfoColor } from "../../helpers/";
 import { updateUserSelection } from "../../store/projectData/user";
+import { getTotalDaysByPersonId } from "../../store/projectData/allocations";
 
 function GanttSummaryModal() {
   const dispatch = useDispatch();
   const people = useSelector((state) => state.team.data);
-  const daysById = getTotalDaysByPersonId()
+  const daysById = getTotalDaysByPersonId(useSelector((state) => state));
 
   function close() {
     dispatch(updateUserSelection({ key: "showGanttSummary", value: false }));
@@ -46,7 +47,7 @@ const Container = styled.div`
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
-  
+
   .person {
     display: flex;
     justify-content: space-between;

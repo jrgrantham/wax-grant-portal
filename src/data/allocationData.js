@@ -36,13 +36,13 @@ export const allocationData = {
       allocationId: 6,
       taskId: "task2",
       personId: "person3",
-      percent: 40,
+      percent: 20,
     },
     {
       allocationId: 7,
       taskId: "task3",
       personId: "person1",
-      percent: 40,
+      percent: 10,
     },
     {
       allocationId: 8,

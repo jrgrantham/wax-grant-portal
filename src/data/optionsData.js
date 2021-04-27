@@ -1,6 +1,14 @@
 function lengths() {
   const length = [];
-  for (let i = 1; i < 37; i++) {
+  for (let i = 1; i <= 36; i++) {
+    length.push(i);
+  }
+  return length;
+}
+
+function overheadRates() {
+  const length = [];
+  for (let i = 0; i <= 100; i = i + 5) {
     length.push(i);
   }
   return length;

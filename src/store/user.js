@@ -9,11 +9,11 @@ const slice = createSlice({
     showGanttSummary: false,
     showComponent: "", // set component identifier
     showLeaderTabs: true,
-    selectedLeader: "combined", // default should be the user
+    selectedLeader: "lead", // default should be the user
     selectedAdminOption: "project",
     selectedDetailsOption: "project",
     selectedTeamOption: "staff",
-    selectedCostsOption: "labour",
+    selectedCostsOption: "materials",
     selectedRevenueOption: "targetMarket",
     userChanges: [] // log changes to be sent at split intervals
     // log the end point, objectId, when the time comes, send the object from state

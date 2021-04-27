@@ -8,9 +8,9 @@ import { updateUserSelection } from "../store/user";
 import { TableContainer } from "../components/table/tableStyling";
 import { updateSectionStatus } from "../store/entities/project";
 import { costsColor, costsFontColor } from "../helpers"; // check this
-import LabourTitles from "../components/costs/labourTitles"; // check this
 import LabourInfo from "../components/costs/labourInfo"; // check this
 import OverheadInfo from "../components/costs/overheadInfo"; // check this
+import MaterialsInfo from "../components/costs/materialsInfo";
 
 function Team() {
   const dispatch = useDispatch();
@@ -66,15 +66,9 @@ function Team() {
   }; // check this
 
   function content() {
-    if (selectedOption === "labour")
-      return (
-        <>
-          <LabourTitles />
-          <LabourInfo />
-        </>
-      );
-      if (selectedOption === "overhead") return <OverheadInfo />;
-    //   if (selectedOption === "options") return <OptionsRows />;
+    if (selectedOption === "labour") return <LabourInfo />;
+    if (selectedOption === "overhead") return <OverheadInfo />;
+    if (selectedOption === "materials") return <MaterialsInfo />;
   }
 
   return (

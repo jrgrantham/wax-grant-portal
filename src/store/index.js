@@ -8,6 +8,7 @@ import teamReducer from "./entities/team";
 import userReducer from "./user";
 import allocationsReducer from "./entities/allocations";
 import optionsReducer from "./entities/options";
+import materialsReducer from "./entities/materials";
 
 const entities = combineReducers({
   tasks: taskReducer,
@@ -15,7 +16,8 @@ const entities = combineReducers({
   project: projectReducer,
   team: teamReducer,
   allocations: allocationsReducer,
-  options: optionsReducer
+  options: optionsReducer,
+  materials: materialsReducer,
 })
 
 const rootReducer = combineReducers({

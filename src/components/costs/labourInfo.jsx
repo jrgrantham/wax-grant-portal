@@ -12,6 +12,12 @@ function LabourInfo() {
 
   return (
     <Container>
+      <div className="labour">
+      <div className="row titles leaderTabMargin">
+        <p className="title labourNameRole">Name and Role</p>
+        <p className="title labourCost">Cost (£)</p>
+        <p className="title labourDays">Days</p>
+      </div>
       <div className="rows">
         {team.map((person, index) => {
           return <LabourRow key={index} person={person} index={index}/>;
@@ -25,6 +31,7 @@ function LabourInfo() {
             </div>
           </div>
         ) : null}
+      </div>
       </div>
     </Container>
   );

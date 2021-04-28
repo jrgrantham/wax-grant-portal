@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalDaysByPersonId } from "../../store/entities/allocations";
+import { getTotalDays } from "../../store/entities/allocations";
 import { updateLeaderInfo } from "../../store/entities/project";
 import { Container } from "./costsStyling";
 
@@ -9,7 +9,7 @@ function LabourInfo() {
   const state = useSelector((state) => state);
   const leader = state.user.selectedLeader;
   const { overheadRate } = state.entities.project.data[leader];
-  const { days, cost } = getTotalDaysByPersonId(state)[leader];
+  const { days, cost } = getTotalDays(state)[leader];
   const rateOptions = state.entities.options.data.overheadRates;
   const overhead = Math.round((cost * overheadRate) / 100);
 

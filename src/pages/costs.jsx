@@ -8,10 +8,12 @@ import { updateUserSelection } from "../store/user";
 import { TableContainer } from "../components/table/tableStyling";
 import { updateSectionStatus } from "../store/entities/project";
 import { costsColor, costsFontColor } from "../helpers"; // check this
-import LabourInfo from "../components/costs/labourInfo"; // check this
+import LabourStaff from "../components/costs/labourStaff"; // check this
 import OverheadInfo from "../components/costs/overheadInfo"; // check this
 import MaterialsInfo from "../components/costs/materialsInfo";
 import TravelInfo from "../components/costs/travelInfo";
+import LabourSubcontract from "../components/costs/labourSubcontract";
+import CapexInfo from "../components/costs/capexInfo";
 
 function Team() {
   const dispatch = useDispatch();
@@ -67,10 +69,12 @@ function Team() {
   }; // check this
 
   function content() {
-    if (selectedOption === "labour") return <LabourInfo />;
+    if (selectedOption === "labour") return <LabourStaff />;
+    // if (selectedOption === "subcontract") return <LabourSubcontract />;
     if (selectedOption === "overhead") return <OverheadInfo />;
     if (selectedOption === "materials") return <MaterialsInfo />;
-    if (selectedOption === "travel") return <TravelInfo />;
+    // if (selectedOption === "travel") return <TravelInfo />;
+    if (selectedOption === "capex") return <CapexInfo />;
   }
 
   return (

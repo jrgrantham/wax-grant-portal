@@ -23,7 +23,7 @@ function MaterialsRow(props) {
     }
     dispatch(
       updateMaterial({
-        materialId: materialId,
+        materialId,
         key,
         value,
       })
@@ -31,7 +31,7 @@ function MaterialsRow(props) {
   }
 
   function handleDeleteMaterial() {
-    dispatch(deleteMaterial({ materialId: materialId }));
+    dispatch(deleteMaterial({ materialId }));
   }
 
   return (
@@ -70,15 +70,12 @@ function MaterialsRow(props) {
         {total ? total : null}
       </p>
       <div className="hidden deleteIcon">
-        {/* <Tippy content="All associated data will be lost"> */}
         <img
-          // className="delete"
           src={bin}
           alt="delete"
           style={{ cursor: "pointer" }}
           onClick={handleDeleteMaterial}
         />
-        {/* </Tippy> */}
       </div>
     </div>
   );

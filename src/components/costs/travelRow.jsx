@@ -23,7 +23,7 @@ function TravelRow(props) {
     }
     dispatch(
       updateTravel({
-        travelId: travelId,
+        travelId,
         key,
         value,
       })
@@ -31,7 +31,7 @@ function TravelRow(props) {
   }
 
   function handleDeleteTravel() {
-    dispatch(deleteTravel({ travelId: travelId }));
+    dispatch(deleteTravel({ travelId }));
   }
 
   return (
@@ -56,7 +56,6 @@ function TravelRow(props) {
         onKeyDown={isNumberKey}
         onChange={onChangeHandler}
         className="field materialsCost"
-        // list={`${travelId}roleList`}
       />
       <input
         id={index + "quantity"}
@@ -68,15 +67,12 @@ function TravelRow(props) {
       />
       <p className="field display materialsTotal">{total ? total : null}</p>
       <div className="hidden deleteIcon">
-        {/* <Tippy content="All associated data will be lost"> */}
         <img
-          // className="delete"
           src={bin}
           alt="delete"
           style={{ cursor: "pointer" }}
           onClick={handleDeleteTravel}
         />
-        {/* </Tippy> */}
       </div>
     </div>
   );

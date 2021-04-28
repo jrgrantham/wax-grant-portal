@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { wpInfoColor } from "../../helpers/";
 import { updateUserSelection } from "../../store/user";
-import { getTotalDaysByPersonId } from "../../store/entities/allocations";
+import { getTotalDays } from "../../store/entities/allocations";
 
 function GanttSummaryModal() {
   const dispatch = useDispatch();
   const people = useSelector((state) => state.entities.team.data);
-  const daysById = getTotalDaysByPersonId(useSelector((state) => state));
+  const daysById = getTotalDays(useSelector((state) => state));
 
   function close() {
     dispatch(updateUserSelection({ key: "showGanttSummary", value: false }));

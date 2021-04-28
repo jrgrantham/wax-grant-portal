@@ -3,6 +3,12 @@ import { fontColorGrey, tableContentSideMargin, warningColor } from "../../helpe
 
 export const Container = styled.div`
   display: flex;
+  .small {
+    width: 70px
+  }
+  .large {
+    width: 150px
+  }
   .labourNameRole {
     width: 250px;
   }

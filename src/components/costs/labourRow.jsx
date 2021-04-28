@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { getUtilisations, getDayRateById } from "../../store/entities/team";
-import { getTotalDaysByPersonId } from "../../store/entities/allocations";
+import { getTotalDays } from "../../store/entities/allocations";
 import { updateUserSelection } from "../../store/user";
 import UtilisationModal from "../modals/utilisationModal";
 
@@ -13,14 +13,14 @@ function LabourRow(props) {
   const { personId, name, role } = props.person;
   const index = props.index;
   const state = useSelector((state) => state);
-  const daysById = getTotalDaysByPersonId(state);
+  const daysById = getTotalDays(state);
   const dayRateById = getDayRateById(state);
   const utilisation = getUtilisations(state)[personId].overutilised;
   const { showComponent, selectedLeader } = state.user;
 
   const days = daysById[personId];
   const cost = Math.round(days * dayRateById[personId]); // rounded
-  const modalId = "utilisationModel" + selectedLeader + index
+  const modalId = "utilisationModel" + selectedLeader + index;
 
   function showDetails() {
     dispatch(

@@ -110,10 +110,10 @@ export const getAllocationsByTaskId = createSelector(
   }
 );
 
-export const getTotalDaysByPersonId = createSelector(
+export const getTotalDays = createSelector(
   (state) => state,
   (state) => {
-    console.log("getTotalDaysByPersonId");
+    console.log("getTotalDays");
     const allTasks = state.entities.tasks.data;
     const people = state.entities.team.data;
     const taskIds = getTaskIds(state);
@@ -121,13 +121,28 @@ export const getTotalDaysByPersonId = createSelector(
 
     const peoplesDays = {
       combined: { cost: 0, days: 0 },
-      lead: { cost: 0, days: 0 },
-      pOne: { cost: 0, days: 0 },
-      pTwo: { cost: 0, days: 0 },
+      lead: {
+        cost: 0,
+        days: 0,
+        staff: { cost: 0, days: 0 },
+        subcontract: { cost: 0, days: 0 },
+      },
+      pOne: {
+        cost: 0,
+        days: 0,
+        staff: { cost: 0, days: 0 },
+        subcontract: { cost: 0, days: 0 },
+      },
+      pTwo: {
+        cost: 0,
+        days: 0,
+        staff: { cost: 0, days: 0 },
+        subcontract: { cost: 0, days: 0 },
+      },
     };
 
     people.forEach((person) => {
-      const { personId, leader } = person;
+      const { personId, leader, employment } = person;
       const rate = getDayRateById(state)[personId];
       peoplesDays[personId] = 0;
       taskIds.forEach((taskId) => {
@@ -139,6 +154,10 @@ export const getTotalDaysByPersonId = createSelector(
           peoplesDays[personId] = peoplesDays[personId] + days;
           peoplesDays[leader].days = peoplesDays[leader].days + days;
           peoplesDays[leader].cost = peoplesDays[leader].cost + days * rate;
+          peoplesDays[leader][employment].cost =
+            peoplesDays[leader][employment].cost + days * rate;
+          peoplesDays[leader][employment].days =
+            peoplesDays[leader][employment].days + days;
         }
       });
     });

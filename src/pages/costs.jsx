@@ -11,6 +11,7 @@ import { costsColor, costsFontColor } from "../helpers"; // check this
 import LabourInfo from "../components/costs/labourInfo"; // check this
 import OverheadInfo from "../components/costs/overheadInfo"; // check this
 import MaterialsInfo from "../components/costs/materialsInfo";
+import TravelInfo from "../components/costs/travelInfo";
 
 function Team() {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ function Team() {
     labour: 3,
     overhead: 3,
     materials: 4,
-    travel: 3,
+    travel: 4,
     subcontract: 4,
     capex: 4,
     other: 4,
@@ -69,6 +70,7 @@ function Team() {
     if (selectedOption === "labour") return <LabourInfo />;
     if (selectedOption === "overhead") return <OverheadInfo />;
     if (selectedOption === "materials") return <MaterialsInfo />;
+    if (selectedOption === "travel") return <TravelInfo />;
   }
 
   return (

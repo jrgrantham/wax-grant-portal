@@ -9,6 +9,7 @@ import userReducer from "./user";
 import allocationsReducer from "./entities/allocations";
 import optionsReducer from "./entities/options";
 import materialsReducer from "./entities/materials";
+import travelReducer from "./entities/travel";
 
 const entities = combineReducers({
   tasks: taskReducer,
@@ -18,6 +19,7 @@ const entities = combineReducers({
   allocations: allocationsReducer,
   options: optionsReducer,
   materials: materialsReducer,
+  travel: travelReducer,
 })
 
 const rootReducer = combineReducers({

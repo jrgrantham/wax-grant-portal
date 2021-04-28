@@ -58,8 +58,9 @@ export const Container = styled.div`
   .addIcon {
     height: 25px;
     width: 25px;
-    margin-top: 15px;
-    margin-left: ${tableContentSideMargin};
+    position: absolute;
+    /* margin-top: 15px; */
+    /* margin-left: ${tableContentSideMargin}; */
   }
   button {
     color: white;

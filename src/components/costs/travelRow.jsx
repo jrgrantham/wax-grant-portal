@@ -5,13 +5,13 @@ import "tippy.js/dist/tippy.css";
 import { BiMenu } from "react-icons/bi";
 import { isNumberKey } from "../../helpers";
 import bin from "../../images/bin-grey.png";
-import { deleteMaterial, updateMaterial } from "../../store/entities/materials";
+import { deleteTravel, updateTravel } from "../../store/entities/travel";
 
-function MaterialsRow(props) {
+function TravelRow(props) {
   const dispatch = useDispatch();
-  const { material, provided, index } = props;
-  const { cost, quantity, materialId, description } = material;
-  const total = cost * quantity
+  const { travel, provided, index } = props;
+  const { cost, quantity, travelId, description } = travel;
+  const total = cost * quantity;
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -22,16 +22,16 @@ function MaterialsRow(props) {
       } else value = 0;
     }
     dispatch(
-      updateMaterial({
-        materialId: materialId,
+      updateTravel({
+        travelId: travelId,
         key,
         value,
       })
     );
   }
 
-  function handleDeleteMaterial() {
-    dispatch(deleteMaterial({ materialId: materialId }));
+  function handleDeleteTravel() {
+    dispatch(deleteTravel({ travelId: travelId }));
   }
 
   return (
@@ -56,7 +56,7 @@ function MaterialsRow(props) {
         onKeyDown={isNumberKey}
         onChange={onChangeHandler}
         className="field materialsCost"
-        // list={`${materialId}roleList`}
+        // list={`${travelId}roleList`}
       />
       <input
         id={index + "quantity"}
@@ -66,9 +66,7 @@ function MaterialsRow(props) {
         onChange={onChangeHandler}
         className="field materialsQuantity"
       />
-      <p className="field display materialsTotal">
-        {total ? total : null}
-      </p>
+      <p className="field display materialsTotal">{total ? total : null}</p>
       <div className="hidden deleteIcon">
         {/* <Tippy content="All associated data will be lost"> */}
         <img
@@ -76,11 +74,11 @@ function MaterialsRow(props) {
           src={bin}
           alt="delete"
           style={{ cursor: "pointer" }}
-          onClick={handleDeleteMaterial}
+          onClick={handleDeleteTravel}
         />
         {/* </Tippy> */}
       </div>
     </div>
   );
 }
-export default MaterialsRow;
+export default TravelRow;

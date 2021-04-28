@@ -6,21 +6,6 @@ import {
 
 export const Container = styled.div`
   display: flex;
-  .grabHandle {
-    position: absolute;
-    width: 20px;
-    margin: 0px 5px 0px -23px;
-    padding-top: 4px;
-    cursor: move; /* fallback if grab cursor is unsupported */
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-    &:active {
-      cursor: grabbing;
-      cursor: -moz-grabbing;
-      cursor: -webkit-grabbing;
-    }
-  }
   .name {
     width: 150px;
   }

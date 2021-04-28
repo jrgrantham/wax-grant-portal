@@ -66,4 +66,13 @@ export const Container = styled.div`
     border: none;
     padding: 0;
   }
-`;
+
+  .materialsDescription {
+    width: 250px;
+  }
+  .materialsCost, .materialsQuantity, .materialsTotal {
+    width: 70px;
+    text-align: right;
+    justify-content: flex-end;
+  }
+  `;

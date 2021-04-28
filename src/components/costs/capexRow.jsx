@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { BiMenu } from "react-icons/bi";
@@ -16,17 +16,25 @@ function CapexRow(props) {
     description,
     depreciation,
     currentValue,
-    residualValue,
+    // residualValue,
     utilisation,
   } = capex;
-  const total = 100; // formula required here
+  const { projectLength } = useSelector(
+    (state) => state.entities.project.data.details
+  );
+  const { utilisations } = useSelector((state) => state.entities.options.data);
+  const residualValue = depreciation === 0 ? 0 : Math.round(
+    (1 - projectLength / depreciation) * currentValue
+  );
+  const netCost =
+    Math.round((currentValue - residualValue) * utilisation) / 100;
 
   function onChangeHandler(e) {
     const key = e.target.name;
     let value = e.target.value;
-    if (key === "cost" || key === "quantity") {
+    if (key === "depreciation" || key === "currentValue") {
       if (e.target.value) {
-        value = parseInt(value.slice(-4));
+        value = parseInt(value.slice(-5));
       } else value = 0;
     }
     dispatch(
@@ -85,23 +93,24 @@ function CapexRow(props) {
         onChange={onChangeHandler}
         className="field small"
       />
-      <input
-        id={index + "residualValue"}
-        name="residualValue"
-        value={residualValue}
-        onKeyDown={isNumberKey}
-        onChange={onChangeHandler}
-        className="field small"
-      />
-      <input
+      <p className="field display small">{residualValue}</p>
+      <select
         id={index + "utilisation"}
         name="utilisation"
         value={utilisation}
         onKeyDown={isNumberKey}
         onChange={onChangeHandler}
         className="field small"
-      />
-      <p className="field display small">{total ? total : null}</p>
+      >
+        {utilisations.map((value, index) => {
+          return (
+            <option key={index} value={value}>
+              {value}
+            </option>
+          );
+        })}
+      </select>
+      <p className="field display small">{netCost ? netCost : null}</p>
       <div className="hidden deleteIcon">
         <img
           src={bin}

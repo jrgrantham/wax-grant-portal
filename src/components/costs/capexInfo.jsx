@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 import {
   addCapex,
   reorderCapex,
@@ -11,7 +12,7 @@ import {
 import add from "../../images/addMaterials.png";
 import addGrey from "../../images/add-grey.png";
 import { Container } from "./costsStyling";
-import { nextIndexOfGroup } from "../../helpers";
+import { nextIndexOfGroup, roundTo } from "../../helpers";
 import CapexRow from "./capexRow";
 
 function CapexInfo() {
@@ -21,6 +22,7 @@ function CapexInfo() {
   const leader = state.user.selectedLeader;
   const { maxCapex } = state.entities.options.data;
   const totals = getCapexCost(state);
+  console.log(totals);
   const combined = leader === "combined";
   const group = combined
     ? capex
@@ -55,10 +57,18 @@ function CapexInfo() {
         <div className="row titles leaderTabMargin">
           <p className="title small">Condition</p>
           <p className="title large">Description</p>
-          <p className="title small">Depreciation</p>
-          <p className="title small">Current Value</p>
-          <p className="title small">Residual Value</p>
-          <p className="title small">Utilisation</p>
+          <Tippy content="Depreciation Period (months)">
+            <p className="title small">Deprec</p>
+          </Tippy>
+          <Tippy content="Current Value">
+            <p className="title small">Current</p>
+          </Tippy>
+          <Tippy content="Residual Value">
+            <p className="title small">Residual</p>
+          </Tippy>
+          <Tippy content="Utilisation">
+            <p className="title small">Util</p>
+          </Tippy>
           <p className="title small">Total</p>
         </div>
         <div className="rows">
@@ -103,7 +113,7 @@ function CapexInfo() {
                 </button>
               </Tippy>
             ) : (
-              <Tippy content="Add materials">
+              <Tippy content="Add CapEx">
                 <button className="addIcon" onClick={handleAddCapex}>
                   <img src={add} alt="add" />
                 </button>
@@ -111,18 +121,16 @@ function CapexInfo() {
             )}
             {group.length > 0 ? (
               <>
-                <p className="title small"/>
-                <p className="title large"/>
-                <p className="title small"/>
-                <p className="title small"/>
-                <p className="title small"/>
-                <p className="title small"/>
+                <p className="title small" />
+                <p className="title large" />
+                <p className="title small" />
+                <p className="title small" />
+                <p className="title small" />
+                <p className="title small" />
                 <div className="total">
-                  <p className="field display materialsTotal">
-                    {totals[leader]}
+                  <p className="field display small">
+                    {roundTo(totals[leader], 2)}
                   </p>
-                  {/* <p className="field display labourCost">{Math.round(cost)}</p> */}
-                  {/* <p className="field display labourDays">{Math.round(days)}</p> */}
                 </div>
               </>
             ) : null}

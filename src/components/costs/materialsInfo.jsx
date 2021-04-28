@@ -89,35 +89,33 @@ function MaterialsInfo() {
               )}
             </Droppable>
           </DragDropContext>
-            <div className="row">
-              {combined ? null : group.length >= maxMaterials ? (
-                <Tippy content={`Maximum ${maxMaterials}`}>
-                  <button className="addIcon">
-                    <img src={addGrey} alt="add" />
-                  </button>
-                </Tippy>
-              ) : (
-                <Tippy content="Add materials">
-                  <button className="addIcon" onClick={handleAddMaterial}>
-                    <img src={add} alt="add" />
-                  </button>
-                </Tippy>
-              )}
-              {group.length > 0 ? (
-                <>
-                  <p className="field display materialsDescription" />
-                  <p className="field display materialsCost" />
-                  <p className="field display materialsQuantity" />
-                  <div className="total">
-                    <p className="field display materialsTotal">
-                      {totals[leader]}
-                    </p>
-                    {/* <p className="field display labourCost">{Math.round(cost)}</p> */}
-                    {/* <p className="field display labourDays">{Math.round(days)}</p> */}
-                  </div>
-                </>
-              ) : null}
-            </div>
+          <div className="row">
+            {combined ? null : group.length >= maxMaterials ? (
+              <Tippy content={`Maximum ${maxMaterials}`}>
+                <button className="addIcon">
+                  <img src={addGrey} alt="add" />
+                </button>
+              </Tippy>
+            ) : (
+              <Tippy content="Add materials">
+                <button className="addIcon" onClick={handleAddMaterial}>
+                  <img src={add} alt="add" />
+                </button>
+              </Tippy>
+            )}
+            {group.length > 0 ? (
+              <>
+                <p className="field display materialsDescription" />
+                <p className="field display materialsCost" />
+                <p className="field display materialsQuantity" />
+                <div className="total">
+                  <p className="field display materialsTotal">
+                    {totals[leader]}
+                  </p>
+                </div>
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
     </Container>

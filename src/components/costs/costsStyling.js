@@ -4,10 +4,14 @@ import { fontColorGrey, tableContentSideMargin, warningColor } from "../../helpe
 export const Container = styled.div`
   display: flex;
   .small {
-    width: 70px
+    display: flex;
+    justify-content: flex-end;
+    width: 65px;
+    text-align: right;
+    text-align-last: right;
   }
   .large {
-    width: 150px
+    width: 200px;
   }
   .labourNameRole {
     width: 250px;

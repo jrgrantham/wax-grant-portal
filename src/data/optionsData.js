@@ -105,6 +105,7 @@ export const options = {
       "Dec",
     ],
     years: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029],
+    utilisations: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     projectLengths: lengths(),
     maxWorkPackages: 10,
     maxDeadlines: 10,

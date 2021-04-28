@@ -8,13 +8,12 @@ const slice = createSlice({
     loading: false,
     data: [
       {
-        capexId: '123',
+        capexId: "123",
         condition: "New",
-        leader: 'lead',
-        description: 'capex number 1',
-        depreciation: 3,
-        currentValue: 1,
-        residualValue: 120,
+        leader: "lead",
+        description: "capex number 1",
+        depreciation: 40,
+        currentValue: 500,
         utilisation: 10,
       },
     ],
@@ -58,9 +57,11 @@ export const {
 export default slice.reducer;
 
 export const getCapexCost = createSelector(
-  (state) => state.entities.capex,
-  (capex) => {
+  (state) => state.entities,
+  (entities) => {
     console.log("getCapexCost");
+    const { project, capex } = entities;
+    const { projectLength } = project.data.details;
     const costs = {
       lead: 0,
       pOne: 0,
@@ -68,9 +69,14 @@ export const getCapexCost = createSelector(
       combined: 0,
     };
     capex.data.forEach((capex) => {
-      const capexCost = capex.cost * capex.quantity;
-      costs[capex.leader] = costs[capex.leader] + capexCost;
-      costs.combined = costs.combined + capexCost
+      const { depreciation, currentValue, utilisation } = capex;
+      const residual = depreciation === 0 ? 0 : Math.round(
+        (1 - projectLength / depreciation) * currentValue
+      );
+      const netCost = Math.round((currentValue - residual) * utilisation) / 100;
+      console.log(currentValue);
+      costs[capex.leader] = costs[capex.leader] + netCost;
+      costs.combined = costs.combined + netCost;
     });
     return costs;
   }

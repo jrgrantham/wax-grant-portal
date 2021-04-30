@@ -46,7 +46,8 @@ export const TableContainer = styled.div`
   .grabHandle {
     position: absolute;
     width: 20px;
-    margin: 0px 5px 0px -23px;
+    /* margin: 0px 5px 0px -23px; */
+    left: -22px;
     padding-top: 4px;
     cursor: move; /* fallback if grab cursor is unsupported */
     cursor: grab;
@@ -130,11 +131,11 @@ export const TableContainer = styled.div`
   }
   .total {
     display: flex;
-    border-top: 1px solid ${fontColorGrey};
-    border-bottom: 1px solid ${fontColorGrey};
+    font-size: 14px;
+    font-weight: bold;
     padding: 5px 0;
   }
-  .applyDefaults {
+  .bottomRightCorner {
     position: absolute;
     bottom: 0;
     right: 0;

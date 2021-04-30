@@ -11,6 +11,7 @@ import optionsReducer from "./entities/options";
 import materialsReducer from "./entities/materials";
 import travelReducer from "./entities/travel";
 import capexReducer from "./entities/capex";
+import otherReducer from "./entities/other";
 
 const entities = combineReducers({
   tasks: taskReducer,
@@ -22,6 +23,7 @@ const entities = combineReducers({
   materials: materialsReducer,
   travel: travelReducer,
   capex: capexReducer,
+  other: otherReducer,
 })
 
 const rootReducer = combineReducers({

@@ -10,7 +10,6 @@ function UtilisationModalRow(props) {
     return 'quarter ok'
   }
 
-  console.log(props);
   return (
     <div className="modalRow">
       <p className="description">{props.name}</p>

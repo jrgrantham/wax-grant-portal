@@ -61,6 +61,8 @@ export const Container = styled.div`
     }
   }
   .deleteIcon {
+    position: absolute;
+    right: -10px;
     width: 18px;
     padding-top: 4px;
     margin-left: 15px;

@@ -3,84 +3,65 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import Tippy from "@tippy.js/react";
-import "tippy.js/dist/tippy.css";
 import {
-  addCapex,
-  reorderCapex,
-  getCapexCost,
-} from "../../store/entities/capex";
+  addOther,
+  reorderOther,
+  getOtherCost,
+} from "../../store/entities/other";
 import add from "../../images/addMaterials.png";
 import addGrey from "../../images/add-grey.png";
 import { Container } from "./costsStyling";
-import { nextIndexOfGroup, roundTo } from "../../helpers";
-import CapexRow from "./capexRow";
+import { nextIndexOfGroup } from "../../helpers";
+import OtherRow from "./otherRow";
 
-function CapexInfo() {
+function OtherInfo() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const capex = state.entities.capex.data;
+  const other = state.entities.other.data;
   const leader = state.user.selectedLeader;
-  const { maxCapex } = state.entities.options.data;
-  const totals = getCapexCost(state);
-  // console.log(totals);
+  const { maxOther } = state.entities.options.data;
+  const totals = getOtherCost(state);
   const combined = leader === "combined";
   const group = combined
-    ? capex
-    : capex.filter((item) => item.leader === leader);
+    ? other
+    : other.filter((item) => item.leader === leader);
 
-  function handleAddCapex() {
-    const position = nextIndexOfGroup(group, capex);
-    const newCapex = {
-      leader,
-      capexId: uuidv4(),
-      condition: "New",
-      description: "New capex",
-      depreciation: 1,
-      currentValue: 1,
-      residualValue: 1,
-      utilisation: 1,
+  function handleAddOther() {
+    const position = nextIndexOfGroup(group, other);
+    const newOther = {
+      otherId: uuidv4(),
+      leader: leader,
+      description: "New journey",
+      cost: 1,
     };
-    dispatch(addCapex({ newCapex, position }));
+    dispatch(addOther({ newOther, position }));
   }
 
   function handleMovingRow(result) {
     if (!result.destination || result.destination.index === result.source.index)
       return;
     const movement = result.destination.index - result.source.index;
-    const capex = group[result.source.index];
-    dispatch(reorderCapex({ capex, movement }));
+    const other = group[result.source.index];
+    dispatch(reorderOther({ other, movement }));
   }
 
   return (
     <Container>
       <div className="materials">
         <div className="row titles leaderTabMargin">
-          <p className="title small">Condition</p>
-          <p className="title large">Description</p>
-          <Tippy content="Depreciation Period (months)">
-            <p className="title small">Deprec</p>
-          </Tippy>
-          <Tippy content="Current Value">
-            <p className="title small">Current</p>
-          </Tippy>
-          <Tippy content="Residual Value">
-            <p className="title small">Residual</p>
-          </Tippy>
-          <Tippy content="Utilisation">
-            <p className="title small">Util</p>
-          </Tippy>
-          <p className="title small">Total</p>
+          <p className="title materialsDescription">Description</p>
+          <p className="title materialsCost">Cost (£)</p>
         </div>
         <div className="rows">
           <DragDropContext onDragEnd={handleMovingRow}>
-            <Droppable droppableId="capex">
+            <Droppable droppableId="other">
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {group.map((capex, index) => {
+                  {group.map((other, index) => {
                     return (
                       <Draggable
-                        key={capex.capexId}
-                        draggableId={capex.capexId}
+                        key={other.otherId}
+                        draggableId={other.otherId}
                         index={index}
                       >
                         {(provided) => (
@@ -89,11 +70,11 @@ function CapexInfo() {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                           >
-                            <CapexRow
+                            <OtherRow
                               provided={provided}
                               index={index}
                               key={index}
-                              capex={capex}
+                              other={other}
                             />
                           </div>
                         )}
@@ -106,30 +87,25 @@ function CapexInfo() {
             </Droppable>
           </DragDropContext>
           <div className="row">
-            {combined ? null : group.length >= maxCapex ? (
-              <Tippy content={`Maximum ${maxCapex}`}>
+            {combined ? null : group.length >= maxOther ? (
+              <Tippy content={`Maximum ${maxOther}`}>
                 <button className="addIcon">
                   <img src={addGrey} alt="add" />
                 </button>
               </Tippy>
             ) : (
-              <Tippy content="Add CapEx">
-                <button className="addIcon" onClick={handleAddCapex}>
+              <Tippy content="Add materials">
+                <button className="addIcon" onClick={handleAddOther}>
                   <img src={add} alt="add" />
                 </button>
               </Tippy>
             )}
             {group.length > 0 ? (
               <>
-                <p className="title small" />
-                <p className="title large" />
-                <p className="title small" />
-                <p className="title small" />
-                <p className="title small" />
-                <p className="title small" />
+                <p className="field display materialsDescription" />
                 <div className="total">
-                  <p className="field display small">
-                    {roundTo(totals[leader], 2)}
+                  <p className="field display materialsCost">
+                    {totals[leader]}
                   </p>
                 </div>
               </>
@@ -140,4 +116,4 @@ function CapexInfo() {
     </Container>
   );
 }
-export default CapexInfo;
+export default OtherInfo;

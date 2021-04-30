@@ -50,7 +50,7 @@ function ProjectRows() {
   return (
     <Container data={data}>
       <div className="rows">
-        <div className="applyDefaults">
+        <div className="bottomRightCorner">
           <button onClick={applyDefaults}>
             <h3>Apply defaults</h3>
           </button>

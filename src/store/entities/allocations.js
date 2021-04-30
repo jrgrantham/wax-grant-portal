@@ -120,7 +120,12 @@ export const getTotalDays = createSelector(
     const resources = getAllocationsByTaskId(state);
 
     const peoplesDays = {
-      combined: { cost: 0, days: 0 },
+      combined: {
+        cost: 0,
+        days: 0,
+        staff: { cost: 0, days: 0 },
+        subcontract: { cost: 0, days: 0 },
+      },
       lead: {
         cost: 0,
         days: 0,
@@ -152,12 +157,20 @@ export const getTotalDays = createSelector(
           percentage = resources[taskId][personId].percent;
           const days = (taskDays * percentage) / 100;
           peoplesDays[personId] = peoplesDays[personId] + days;
+
           peoplesDays[leader].days = peoplesDays[leader].days + days;
           peoplesDays[leader].cost = peoplesDays[leader].cost + days * rate;
+
           peoplesDays[leader][employment].cost =
             peoplesDays[leader][employment].cost + days * rate;
           peoplesDays[leader][employment].days =
             peoplesDays[leader][employment].days + days;
+
+          peoplesDays.combined.cost = peoplesDays.combined.cost + days * rate;
+          peoplesDays.combined[employment].cost =
+            peoplesDays.combined[employment].cost + days * rate;
+          peoplesDays.combined[employment].days =
+            peoplesDays.combined[employment].days + days;
         }
       });
     });

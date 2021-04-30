@@ -14,14 +14,27 @@ import MaterialsInfo from "../components/costs/materialsInfo";
 import TravelInfo from "../components/costs/travelInfo";
 import LabourSubcontract from "../components/costs/labourSubcontract";
 import CapexInfo from "../components/costs/capexInfo";
+import OtherInfo from "../components/costs/otherInfo";
+import OverviewModal from "../components/modals/overviewModal";
+import BreakdownInfo from "../components/costs/breakdown";
 
-function Team() {
+function Costs() {
+  // const dispatch = useDispatch();
+  // const { selectedLeader, selectedOption, showComponent } = useSelector(
+  //   (state) => state.user
+  // );
+  // const status = useSelector(
+  //   (state) => state.entities.project.data.status.costs[selectedLeader] // check this
+  // );
+
   const dispatch = useDispatch();
   const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const selectedOption = useSelector((state) => state.user.selectedCostsOption); // check this
+  const showComponent = useSelector((state) => state.user.showComponent); // check this
   const status = useSelector(
     (state) => state.entities.project.data.status.costs[selectedLeader] // check this
   );
+
   const menuList = [
     "Labour",
     "Overhead",
@@ -30,8 +43,8 @@ function Team() {
     "Subcontract",
     "CapEx",
     "Other",
-    "Summary",
     "Breakdown",
+    "Assignment",
   ]; // check this
 
   const menuData = {
@@ -61,20 +74,26 @@ function Team() {
     overhead: 3,
     materials: 4,
     travel: 4,
-    subcontract: 4,
+    subcontract: 3,
     capex: 4,
     other: 4,
     summary: 0,
     breakdown: 0,
   }; // check this
 
+  function showOverview() {
+    dispatch(updateUserSelection({ key: "showComponent", value: "overview" }));
+  }
+
   function content() {
     if (selectedOption === "labour") return <LabourStaff />;
-    // if (selectedOption === "subcontract") return <LabourSubcontract />;
+    if (selectedOption === "subcontract") return <LabourSubcontract />;
     if (selectedOption === "overhead") return <OverheadInfo />;
-    if (selectedOption === "materials") return <MaterialsInfo />;
+    // if (selectedOption === "materials") return <MaterialsInfo />;
     // if (selectedOption === "travel") return <TravelInfo />;
-    if (selectedOption === "capex") return <CapexInfo />;
+    // if (selectedOption === "capex") return <CapexInfo />;
+    if (selectedOption === "other") return <OtherInfo />;
+    if (selectedOption === "breakdown") return <BreakdownInfo />;
   }
 
   return (
@@ -82,6 +101,12 @@ function Team() {
       <div className="displayArea">
         <LeftMenu data={menuData} />
         <div className="content">
+          <div className="bottomRightCorner">
+            <button onClick={showOverview}>
+              <h3>Show Overview</h3>
+            </button>
+          </div>
+          {showComponent === "overview" ? <OverviewModal /> : null}
           {showLeaderTabs[selectedOption] ? (
             <LeaderTabs
               viewCombinedTab={showLeaderTabs[selectedOption] === 4}
@@ -96,4 +121,4 @@ function Team() {
     </TableContainer>
   );
 }
-export default Team;
+export default Costs;

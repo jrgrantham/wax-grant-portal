@@ -74,7 +74,6 @@ export const getCapexCost = createSelector(
         (1 - projectLength / depreciation) * currentValue
       );
       const netCost = Math.round((currentValue - residual) * utilisation) / 100;
-      console.log(currentValue);
       costs[capex.leader] = costs[capex.leader] + netCost;
       costs.combined = costs.combined + netCost;
     });

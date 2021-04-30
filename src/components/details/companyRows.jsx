@@ -65,7 +65,7 @@ function CompanyRows() {
   return (
     <Container data={data}>
       <div className="rows company">
-        <div className="applyDefaults">
+        <div className="bottomRightCorner">
           <button onClick={applyDefaults}>
             <h3>Apply defaults</h3>
           </button>

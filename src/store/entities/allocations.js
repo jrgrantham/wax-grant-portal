@@ -1,4 +1,5 @@
 // import axios from "axios";
+import {store} from '../index'
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { allocationData } from "../../data";
@@ -62,12 +63,12 @@ export const {
 export default slice.reducer;
 
 export const getAllocationsByTaskId = createSelector(
-  (state) => state,
-  (state) => {
+  (state) => state.entities,
+  (entities) => {
     console.log("getAllocationsByTaskId");
-    const team = state.entities.team.data;
-    const taskData = state.entities.tasks.data;
-    const allocations = state.entities.allocations.data;
+    const team = entities.team.data;
+    const taskData = entities.tasks.data;
+    const allocations = entities.allocations.data;
     const taskKeys = Object.keys(taskData);
     const taskIds = taskKeys.filter((key) => key !== "taskOrder");
 
@@ -111,13 +112,13 @@ export const getAllocationsByTaskId = createSelector(
 );
 
 export const getTotalDays = createSelector(
-  (state) => state,
-  (state) => {
+  (state) => state.entities,
+  (entities) => {
     console.log("getTotalDays");
-    const allTasks = state.entities.tasks.data;
-    const people = state.entities.team.data;
-    const taskIds = getTaskIds(state);
-    const resources = getAllocationsByTaskId(state);
+    const allTasks = entities.tasks.data;
+    const people = entities.team.data;
+    const taskIds = getTaskIds(store.getState());
+    const resources = getAllocationsByTaskId(store.getState());
 
     const peoplesDays = {
       combined: {
@@ -148,7 +149,7 @@ export const getTotalDays = createSelector(
 
     people.forEach((person) => {
       const { personId, leader, employment } = person;
-      const rate = getDayRateById(state)[personId];
+      const rate = getDayRateById(store.getState())[personId];
       peoplesDays[personId] = 0;
       taskIds.forEach((taskId) => {
         const taskDays = allTasks[taskId].days;

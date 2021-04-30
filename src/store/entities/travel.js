@@ -63,6 +63,7 @@ export const getTravelCost = createSelector(
       pOne: 0,
       pTwo: 0,
       combined: 0,
+      category: 'Travel'
     };
     travel.data.forEach((travel) => {
       const travelCost = travel.cost * travel.quantity;

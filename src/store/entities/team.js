@@ -1,4 +1,5 @@
 // import axios from "axios";
+import { store } from "../index";
 import { createSlice } from "@reduxjs/toolkit";
 import { getTaskIds } from "./tasks";
 import { getWorkingDaysPerMonth } from "./project";
@@ -79,13 +80,13 @@ export const getPersonById = createSelector(
 );
 
 export const getDayRateById = createSelector(
-  (state) => state,
-  (state) => {
+  (state) => state.entities.team,
+  (team) => {
     console.log("getDayRateById");
     const rates = {};
-    state.entities.team.data.forEach((person) => {
+    team.data.forEach((person) => {
       const { salary, leader, dayRate, personId } = person;
-      const daysPerMonth = getWorkingDaysPerMonth(state);
+      const daysPerMonth = getWorkingDaysPerMonth(store.getState());
       let rate = 0;
       if (dayRate) rate = dayRate;
       else {
@@ -114,17 +115,17 @@ export const getDayRateById = createSelector(
 // }
 
 export const getUtilisations = createSelector(
-  (state) => state,
-  (state) => {
+  (state) => state.entities,
+  (entities) => {
     console.log("getUtilisations");
     // const state = useSelector((state) => state);
-    const taskIds = getTaskIds(state);
-    const workingDays = getWorkingDaysPerMonth(state);
-    const personById = getPersonById(state);
-    const resources = getAllocationsByTaskId(state);
-    const allTasks = state.entities.tasks.data;
-    const people = state.entities.team.data;
-    const { projectLength } = state.entities.project.data.details;
+    const taskIds = getTaskIds(store.getState());
+    const workingDays = getWorkingDaysPerMonth(store.getState());
+    const personById = getPersonById(store.getState());
+    const resources = getAllocationsByTaskId(store.getState());
+    const allTasks = entities.tasks.data;
+    const people = entities.team.data;
+    const { projectLength } = entities.project.data.details;
     const utilisations = {};
     const utilisationByQuarter = { quarters: [] };
     const counter = {};

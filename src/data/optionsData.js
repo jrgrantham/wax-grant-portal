@@ -6,14 +6,6 @@ function lengths() {
   return length;
 }
 
-function overheadRates() {
-  const length = [];
-  for (let i = 0; i <= 100; i = i + 5) {
-    length.push(i);
-  }
-  return length;
-}
-
 export const options = {
   loading: false,
   data: {
@@ -107,6 +99,7 @@ export const options = {
     years: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029],
     utilisations: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     projectLengths: lengths(),
+
     maxWorkPackages: 10,
     maxDeadlines: 10,
     maxTasksPerPackage: 10,
@@ -116,6 +109,19 @@ export const options = {
     maxMaterials: 10,
     maxTravel: 10,
     maxCapex: 10,
+
+    materialWarn: 25,
+    materialOver: 40,
+    travelWarn: 25,
+    travelOver: 40,
+    subcontractWarn: 25,
+    subcontractOver: 40,
+    capexWarn: 25,
+    capexOver: 40,
+    otherWarn: 25,
+    otherOver: 40,
+    percentWarn: 25,
+    percentOver: 40,
   },
   error: "",
 };

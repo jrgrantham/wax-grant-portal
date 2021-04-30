@@ -63,6 +63,7 @@ export const getMaterialsCost = createSelector(
       pOne: 0,
       pTwo: 0,
       combined: 0,
+      category: "Materials"
     };
     materials.data.forEach((material) => {
       const materialCost = material.cost * material.quantity;

@@ -79,6 +79,7 @@ export const TableContainer = styled.div`
     max-height: ${(props) => props.data.maxHeight};
   }
   .row {
+    max-width: 100%;
     position: relative;
     display: flex;
     align-items: center;

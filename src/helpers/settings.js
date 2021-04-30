@@ -6,6 +6,7 @@ export const toastDelay = 2000;
 
 export const navBackground = "rgba(12, 58, 93, 1)";
 export const navHighlight = "rgba(30, 91, 127, 1)";
+export const okColor = "#98c6ad";
 export const warningColor = "rgba(240,90,40)";
 export const fontColorGrey = "#606060";
 
@@ -29,8 +30,6 @@ export const tabHeight = "40px";
 export const tabBottomMargin = "20px";
 export const tableInputMargin = "5px 20px 5px 0px";
 export const tableInputUnderline = "rgba(234, 234, 234, 1)";
-
-// gantt
 
 export const wpInfoColor = "rgba(47, 86, 151, 1)";
 export const wpScheduleColor = "rgba(144, 39, 142, 1)";

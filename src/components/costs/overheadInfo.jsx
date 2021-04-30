@@ -9,7 +9,7 @@ function LabourInfo() {
   const state = useSelector((state) => state);
   const leader = state.user.selectedLeader;
   const { overheadRate } = state.entities.project.data[leader];
-  const { days, cost } = getTotalDays(state)[leader];
+  const { cost } = getTotalDays(state)[leader];
   const rateOptions = state.entities.options.data.overheadRates;
   const overhead = Math.round((cost * overheadRate) / 100);
 

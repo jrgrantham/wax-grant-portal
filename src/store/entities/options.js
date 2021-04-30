@@ -15,6 +15,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 export const getProjectDefaults = (state) => {
+  console.log('getProjectDefaults');
   const { natureDefault, ipProtectionDefault } = state.entities.options.data;
   const defaults = [
     { key: "nature", value: natureDefault },
@@ -24,6 +25,7 @@ export const getProjectDefaults = (state) => {
 };
 
 export const getCompanyDefaults = (state) => {
+  console.log('getCompanyDefaults');
   const {
     orgTypeDefault,
     orgSizeDefault,

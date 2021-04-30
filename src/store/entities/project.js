@@ -1,8 +1,10 @@
 // import axios from "axios";
+import { store } from "../index";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { projectData } from "../../data";
 import moment from "moment";
+import { getTotalDays } from "./allocations";
 
 const slice = createSlice({
   name: "project",
@@ -72,15 +74,59 @@ export const getProjectDates = createSelector(
   }
 );
 
-export const getWorkingDaysPerMonth = (state) => {
-  function workedDays(leader) {
-    const { bankHolidays, annualLeave } = state.entities.project.data[leader];
-    return (260 - bankHolidays - annualLeave) / 12;
+export const getWorkingDaysPerMonth = createSelector(
+  (state) => state.entities.project.data,
+  (data) => {
+    console.log("getWorkingDaysPerMonth");
+    function workedDays(leader) {
+      const { bankHolidays, annualLeave } = data[leader];
+      return (260 - bankHolidays - annualLeave) / 12;
+    }
+    const companyDays = {
+      lead: workedDays("lead"),
+      pOne: workedDays("pOne"),
+      pTwo: workedDays("pTwo"),
+    };
+    return companyDays;
   }
-  const companyDays = {
-    lead: workedDays("lead"),
-    pOne: workedDays("pOne"),
-    pTwo: workedDays("pTwo"),
-  };
-  return companyDays;
-};
+);
+
+export const getOverheads = createSelector(
+  (state) => state.entities,
+  (entities) => {
+    const totalDays = getTotalDays(store.getState());
+
+    function totalCost(leader) {
+      return entities.project.data[leader].overheadRate;
+    }
+    function overhead(leader) {
+      return totalDays[leader].cost;
+    }
+
+    const overheads = {
+      lead: Math.round((totalCost("lead") * overhead("lead")) / 100),
+      pOne: Math.round((totalCost("pOne") * overhead("pOne")) / 100),
+      pTwo: Math.round((totalCost("pTwo") * overhead("pTwo")) / 100),
+      combined: 0,
+      category: "Overhead",
+    };
+    overheads.combined = overheads.lead + overheads.pOne + overheads.pTwo;
+
+    return overheads;
+  }
+);
+
+export const getGrants = createSelector(
+  (state) => state.entities.project.data,
+  (data) => {
+    const grants = {
+      lead: data.lead.fundingLevel,
+      pOne: data.pOne.fundingLevel,
+      pTwo: data.pTwo.fundingLevel,
+      combined: 0,
+      category: "Grant",
+    };
+    grants.combined = grants.lead + grants.pOne + grants.pTwo;
+    return grants;
+  }
+);

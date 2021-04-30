@@ -17,7 +17,7 @@ function OtherRow(props) {
     let value = e.target.value;
     if (key === "cost" || key === "quantity") {
       if (e.target.value) {
-        value = parseInt(value.slice(-4));
+        value = parseInt(value.slice(-5));
       } else value = 0;
     }
     dispatch(

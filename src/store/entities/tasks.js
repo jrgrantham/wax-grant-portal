@@ -1,3 +1,4 @@
+import { store } from "../index";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { taskData2 } from "../../data";
@@ -202,6 +203,7 @@ export const getTaskIds = createSelector(
 );
 
 export const getCombinedLengthOfBars = (state, taskId) => {
+  console.log('generate an object for lookup');
   let length = state.entities.tasks.data[taskId].schedule.length;
   let result = 0;
   for (let i = 0; i < length; i++) {
@@ -211,6 +213,7 @@ export const getCombinedLengthOfBars = (state, taskId) => {
 };
 
 export const getNumberOfBars = (state, taskId) => {
+  console.log("generate an object for lookup");
   let length = state.entities.tasks.data[taskId].schedule.length;
   for (let i = length - 1; i >= 0; i--) {
     if (state.entities.tasks.data[taskId].schedule[i].barNumber > 0) {

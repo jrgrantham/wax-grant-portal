@@ -1,11 +1,14 @@
+import { store } from "../../store";
 import React from "react";
 import styled from "styled-components";
 import Close from "../general/close";
 import { wpInfoColor } from "../../helpers";
-import { totals } from "../../helpers";
+import { getTotalsByCategory } from "../../helpers";
 
 function OverviewModal() {
-  const { leaders, percents, grants, matchFunding } = totals();
+  const { leaders, percents, grants, matchFunding } = getTotalsByCategory(
+    store.getState()
+  );
 
   return (
     <Container id="background">

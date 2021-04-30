@@ -67,12 +67,14 @@ export const getCapexCost = createSelector(
       pOne: 0,
       pTwo: 0,
       combined: 0,
+      category: "CapEx",
     };
     capex.data.forEach((capex) => {
       const { depreciation, currentValue, utilisation } = capex;
-      const residual = depreciation === 0 ? 0 : Math.round(
-        (1 - projectLength / depreciation) * currentValue
-      );
+      const residual =
+        depreciation === 0
+          ? 0
+          : Math.round((1 - projectLength / depreciation) * currentValue);
       const netCost = Math.round((currentValue - residual) * utilisation) / 100;
       costs[capex.leader] = costs[capex.leader] + netCost;
       costs.combined = costs.combined + netCost;

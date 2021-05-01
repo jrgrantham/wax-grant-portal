@@ -24,7 +24,7 @@ import { deleteTaskAllocations } from "../../store/entities/allocations";
 function GanttPackWork(props) {
   const dispatch = useDispatch();
 
-  const { title, index, packData } = props;
+  const { title, index, packData, workPackageCount } = props;
   const wpNumber = index + 1;
   const { maxTasksPerPackage } = useSelector(
     (state) => state.entities.options.data
@@ -89,6 +89,7 @@ function GanttPackWork(props) {
       dispatch(deleteTaskAllocations({ taskId }));
       dispatch(deleteTask({ taskId }));
     });
+    console.log("delete cost associations");
     // setConfirmDelete(false);
   }
 
@@ -139,7 +140,7 @@ function GanttPackWork(props) {
                       >
                         <GanttTaskRowInfo
                           packData={packData}
-                          taskPackTitles={props.taskPackTitles}
+                          // taskPackTitles={taskPackTitles}
                           provided={provided}
                           key={index}
                           task={task}
@@ -167,16 +168,18 @@ function GanttPackWork(props) {
                       </button>
                     </Tippy>
                   )}
-                  <Tippy content="Delete work package (immediate)">
-                    <button
-                      onClick={() => handleRemovePack()}
-                      className="evenWidth delete"
-                    >
-                      <img src={bin} alt="delete" />
-                    </button>
-                  </Tippy>
+                  {workPackageCount === 1 ? null : (
+                    <Tippy content="Delete work package (immediate)">
+                      <button
+                        onClick={() => handleRemovePack()}
+                        className="evenWidth delete"
+                      >
+                        <img src={bin} alt="delete" />
+                      </button>
+                    </Tippy>
+                  )}
                 </div>
-                <div className="evenWidth">
+                <div className="">
                   <p className="days">{calculateDays()}</p>
                 </div>
               </div>

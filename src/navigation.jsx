@@ -95,7 +95,7 @@ const Container = styled.nav`
 
   .navBar {
     width: 100%;
-    max-width: ${(props) => props.appWidth};
+    max-width: 920px;
     /* height: 100%; */
     display: flex;
     justify-content: space-between;

@@ -192,6 +192,28 @@ export const getWorkPackageTitles = createSelector(
   }
 );
 
+// export const getWorkPackageTitlesById = createSelector(
+//   (state) => state.entities.tasks,
+//   (tasks) => {
+//     console.log("*** getWorkPackageTitlesById ***");
+//     const result = new Set();
+//     const taskList = Object.keys(tasks.data);
+//     taskList.forEach((id) => {
+//       const wp = {
+//         [tasks.data[id].workPackageId]: tasks.data[id].workPackageTitle,
+//       };
+//       console.log(wp);
+//       result.add(wp)
+//     });
+//     const taskIds = taskList.filter((id) => id !== "taskOrder");
+//     const titles = [
+//       ...new Set(taskIds.map((taskId) => tasks.data[taskId].workPackageId)),
+//     ];
+//     console.log(result);
+//     return titles;
+//   }
+// );
+
 export const getTaskIds = createSelector(
   (state) => state.entities.tasks,
   (tasks) => {
@@ -202,8 +224,8 @@ export const getTaskIds = createSelector(
   }
 );
 
-export const getCombinedLengthOfBars = (state, taskId) => {
-  console.log('generate an object for lookup');
+export const getCombinedLengthOfBarsOld = (state, taskId) => {
+  console.log("generate an object for lookup");
   let length = state.entities.tasks.data[taskId].schedule.length;
   let result = 0;
   for (let i = 0; i < length; i++) {
@@ -212,7 +234,28 @@ export const getCombinedLengthOfBars = (state, taskId) => {
   return result;
 };
 
-export const getNumberOfBars = (state, taskId) => {
+export const getCombinedLengthOfBars = createSelector(
+  (state) => state.entities.tasks,
+  (tasks) => {
+    console.log("getCombinedLengthOfBars");
+    const state = store.getState();
+    const length = state.entities.project.data.details.projectLength;
+    const taskIds = getTaskIds(state);
+    const result = {};
+
+    taskIds.forEach((taskId) => {
+      let count = 0;
+      for (let i = 0; i < length; i++) {
+        if (tasks.data[taskId].schedule[i].barNumber > 0) count++;
+      }
+      result[taskId] = count;
+    });
+
+    return result;
+  }
+);
+
+export const getNumberOfBarsOld = (state, taskId) => {
   console.log("generate an object for lookup");
   let length = state.entities.tasks.data[taskId].schedule.length;
   for (let i = length - 1; i >= 0; i--) {
@@ -221,3 +264,23 @@ export const getNumberOfBars = (state, taskId) => {
     }
   }
 };
+
+export const getNumberOfBars = createSelector(
+  (state) => state.entities.tasks.data,
+  (data) => {
+    console.log("getNumberOfBars");
+    const state = store.getState();
+    const length = state.entities.project.data.details.projectLength;
+    const taskIds = getTaskIds(state);
+    const result = {};
+    taskIds.forEach((taskId) => {
+      for (let i = length - 1; i >= 0; i--) {
+        if (data[taskId].schedule[i].barNumber > 0) {
+          result[taskId] = data[taskId].schedule[i].barNumber;
+          break;
+        }
+      }
+    });
+    return result;
+  }
+);

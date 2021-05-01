@@ -93,7 +93,7 @@ export function resizeBar(data, barDiv, e) {
 
   function handleNewSize() {
     console.log(store.getState());
-    combinedLength = getCombinedLengthOfBars(store.getState(), taskId) + change;
+    combinedLength = getCombinedLengthOfBars(store.getState())[taskId] + change;
     if (combinedLength > task.days) {
       toast.info("Increased number of days", {
         position: toast.POSITION.TOP_RIGHT,

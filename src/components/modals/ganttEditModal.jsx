@@ -24,18 +24,15 @@ import { toastDelay } from "../../helpers";
 
 function EditModal(props) {
   const dispatch = useDispatch();
-  const { task } = props;
+  const { task, packData } = props;
+  console.log(packData);
   const { dayLoading, days, description, schedule } = task;
   const taskId = task.taskId;
   const barLimit = Math.ceil(schedule.length / 2);
-  const bars = getNumberOfBars(
-    useSelector((state) => state),
+  const bars = getNumberOfBars(useSelector((state) => state))[taskId];
+  const combinedLength = getCombinedLengthOfBars(useSelector((state) => state))[
     taskId
-  );
-  const combinedLength = getCombinedLengthOfBars(
-    useSelector((state) => state),
-    taskId
-  );
+  ];
 
   const validationSchema = Yup.object({
     description: Yup.string().required("Required"),
@@ -123,6 +120,7 @@ function EditModal(props) {
   function handleDelete(taskId) {
     dispatch(deleteTask({ taskId }));
     dispatch(deleteTaskAllocations({ taskId }));
+    if (packData.length === 1) console.log("delete associated costs");
   }
 
   const closeData = {
@@ -199,11 +197,13 @@ function EditModal(props) {
             <button className="leftB" onClick={resetBars}>
               Reset Bars
             </button>
-            <button onClick={() => handleDelete(task.taskId)}>
-              <div className="image">
-                <img src={bin} alt="delete" />
-              </div>
-            </button>
+            {packData.length === 1 ? null : (
+              <button onClick={() => handleDelete(task.taskId)}>
+                <div className="image">
+                  <img src={bin} alt="delete" />
+                </div>
+              </button>
+            )}
             <button type="submit">
               <div className="image">
                 <img src={save} alt="save" />

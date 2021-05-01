@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 import GanttPackWork from "./ganttTaskPackInfo";
 import GanttPackdeadlines from "./ganttDeadlinePackInfo";
 import {
   addWorkPackage,
   getWorkPackageTitles,
+  // getWorkPackageTitlesById,
 } from "../../store/entities/tasks";
 import { updateUserSelection } from "../../store/user";
 import { updateGanttStatus } from "../../store/entities/project";
@@ -23,14 +24,15 @@ import {
 import add from "../../images/add-white.png";
 import addGrey from "../../images/add-grey.png";
 import qMark from "../../images/qMark.png";
-// import add from "../../images/addTask.png";
 
 function GanttChartLeft(props) {
   const dispatch = useDispatch();
 
   const { workPackages, deliverables, milestones, totalDays } = props.data;
+  const workPackageCount = workPackages.length
 
   const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
+  // getWorkPackageTitlesById(useSelector((state) => state));
   // const taskPackTitles2 = getWorkPackageTitles(useSelector((state) => state));
   const showSummary = useSelector((state) => state.user.showGanttSummary);
   const ganttComplete = useSelector(
@@ -78,9 +80,10 @@ function GanttChartLeft(props) {
                   key={index}
                   index={index}
                   packData={task}
+                  workPackageCount={workPackageCount}
                   titleBarColor={wpInfoColor}
                   title={taskPackTitles[index]}
-                  taskPackTitles={taskPackTitles}
+                  // taskPackTitles={taskPackTitles}
                 />
               );
             })

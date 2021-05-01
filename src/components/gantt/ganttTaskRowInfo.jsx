@@ -30,9 +30,9 @@ function GanttTaskRowInfo(props) {
 
   const showComponent = state.user.showComponent;
   const resources = getAllocationsByTaskId(state);
-  const numberOfBars = getNumberOfBars(state, taskId);
-  const combinedLength = getCombinedLengthOfBars(state, taskId);
-  
+  const numberOfBars = getNumberOfBars(state)[taskId];
+  const combinedLength = getCombinedLengthOfBars(state)[taskId];
+
   const buttonContent = resources[taskId].people;
   const [showEditDays, setShowEditDays] = useState(false);
   const [newDays, setNewDays] = useState(days);
@@ -85,7 +85,9 @@ function GanttTaskRowInfo(props) {
 
   return (
     <Container>
-      {showComponent === taskId + "edit" ? <EditModal task={task} /> : null}
+      {showComponent === taskId + "edit" ? (
+        <EditModal packData={packData} task={task} />
+      ) : null}
       {showComponent === taskId + "resources" ? (
         <ResourcesModal packData={packData} />
       ) : null}

@@ -22,13 +22,14 @@ function GanttWPBlock(props) {
     } else {
       number = 0;
     }
-    dispatch(
-      updateBlock({
-        taskId: task.taskId,
-        blockIndex,
-        value: number,
-      })
-    );
+    if (number || number === 0)
+      dispatch(
+        updateBlock({
+          taskId: task.taskId,
+          blockIndex,
+          value: number,
+        })
+      );
   }
 
   return (

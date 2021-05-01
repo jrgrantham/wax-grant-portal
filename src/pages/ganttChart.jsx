@@ -63,9 +63,9 @@ function GanttChart() {
     }
     return groupedTasks;
   }
-
+  
   const workPackages = generateWorkPackages();
-
+  
   const deliverables = useSelector((state) =>
     state.entities.deadlines.data.filter((task) => task.type === "deliverable")
   );

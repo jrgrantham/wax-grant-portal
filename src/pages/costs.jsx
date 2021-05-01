@@ -17,6 +17,7 @@ import CapexInfo from "../components/costs/capexInfo";
 import OtherInfo from "../components/costs/otherInfo";
 import OverviewModal from "../components/modals/overviewModal";
 import BreakdownInfo from "../components/costs/breakdown";
+import AssignmentInfo from "../components/costs/assignment";
 
 function Costs() {
   // const dispatch = useDispatch();
@@ -94,6 +95,7 @@ function Costs() {
     // if (selectedOption === "capex") return <CapexInfo />;
     if (selectedOption === "other") return <OtherInfo />;
     if (selectedOption === "breakdown") return <BreakdownInfo />;
+    if (selectedOption === "assignment") return <AssignmentInfo />;
   }
 
   return (

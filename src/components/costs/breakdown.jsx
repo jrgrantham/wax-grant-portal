@@ -11,7 +11,7 @@ function BreakdownInfo() {
   console.log(lead, pOne, pTwo, combined);
 
   function percent(index, value, total) {
-    if (index < 7 && total) {
+    if (index < 7 && total && value) {
       const result = Math.round((value / total) * 100);
       const className =
         result > percentOver
@@ -19,9 +19,8 @@ function BreakdownInfo() {
           : result > percentWarn
           ? "percent warn"
           : "percent ok";
-      return <p className={className}>{result}</p>;
+      return <p className={className}>{result}%</p>;
     }
-    // <p className={className}>{result}</p>
   }
 
   return (
@@ -29,30 +28,40 @@ function BreakdownInfo() {
       <div className="breakdownTable">
         <div className="row titles leaderTabMargin">
           <p className="title column category">Category</p>
-          <p className="title column">Lead</p>
-          <p className="title column">Partner 1</p>
-          <p className="title column">Partner 2</p>
-          <p className="title column">Total</p>
+          <p className="title column center">Lead</p>
+          <p className="title column center">Partner 1</p>
+          {/* {pTwo ?  */}
+          <p className="title column center">Partner 2</p>
+          {/*  : null} */}
+          <p className="title column center">Total</p>
         </div>
         <div className="rows">
           {totals.array.map((row, index) => {
             return (
-              <div key={index} className="row">
+              <div key={index} className={index === 7 ? 'row total' : 'row'}>
                 <p className="field display column category">{row.category} </p>
-                <div className="column content">
-                  <p className="field display">{row.lead}</p>
+                <div className="column">
+                  <p className="field display double">
+                    {row.lead ? row.lead : null}
+                  </p>
                   {percent(index, row.lead, lead)}
                 </div>
-                <div className="column content">
-                  <p className="field display">{row.pOne}</p>
+                <div className="column">
+                  <p className="field display double">
+                    {row.pOne ? row.pOne : null}
+                  </p>
                   {percent(index, row.pOne, pOne)}
                 </div>
-                <div className="column content">
-                  <p className="field display">{row.pTwo}</p>
-                  {percent(index, row.pTwo, pTwo)}
-                </div>
-                <div className="column content">
-                  <p className="field display">{row.combined}</p>
+                {/* {pTwo ? ( */}
+                  <div className="column">
+                    <p className="field display double">
+                      {row.pTwo ? row.pTwo : null}
+                    </p>
+                    {percent(index, row.pTwo, pTwo)}
+                  </div>
+                {/* ) : null} */}
+                <div className="column">
+                  <p className="field display double">{row.combined}</p>
                   {percent(index, row.combined, combined)}
                 </div>
               </div>

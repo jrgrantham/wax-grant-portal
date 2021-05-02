@@ -3,9 +3,6 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
-
-import { Container } from "./ganttPackStyling";
-
 import {
   reorderTasks,
   addTask,
@@ -20,6 +17,8 @@ import add from "../../images/addTask.png";
 import addGray from "../../images/add-grey.png";
 import bin from "../../images/bin-grey.png";
 import { deleteTaskAllocations } from "../../store/entities/allocations";
+import { Container } from "./ganttPackStyling";
+import { updateUserSelection } from "../../store/user";
 
 function GanttPackWork(props) {
   const dispatch = useDispatch();
@@ -30,8 +29,9 @@ function GanttPackWork(props) {
     (state) => state.entities.options.data
   );
 
+  const {showComponent} = useSelector((state) => state.user);
+
   const [edit, setEdit] = useState(false);
-  const [editTitleWindow, setEditTitleWindow] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
 
   const { projectLength } = useSelector(
@@ -80,7 +80,7 @@ function GanttPackWork(props) {
         );
       });
     // dispatch(updateTaskPackTitle({ oldTitle: title, newTitle: newTitle }));
-    setEditTitleWindow(false);
+    dispatch(updateUserSelection({ key: "showComponent", value: "" }));
   }
 
   function handleRemovePack() {
@@ -93,11 +93,13 @@ function GanttPackWork(props) {
     // setConfirmDelete(false);
   }
 
+  console.log(showComponent);
+
   return (
-    <Container titleBarColor={props.titleBarColor}>
+    <Container titleBarColor={props.titleBarColor} className="applyShadow">
       {edit ? <EditModal setEdit={setEdit} /> : null}
       <div className="titleBar">
-        {editTitleWindow ? (
+        {showComponent === "workPackage" + index ? (
           <>
             <input
               className="title"
@@ -111,7 +113,14 @@ function GanttPackWork(props) {
           </>
         ) : (
           <>
-            <h3 className="title" onClick={() => setEditTitleWindow(true)}>
+            <h3
+              className="title"
+              onClick={() =>
+                dispatch(
+                  updateUserSelection({ key: "showComponent", value: "workPackage" + index })
+                )
+              }
+            >
               {`WP${wpNumber} - ${title ? title : "New Work Package"}`}
             </h3>
             <div className="info">

@@ -157,6 +157,9 @@ export const Container = styled.div`
     .total {
       font-weight: bold;
     }
+    .grey {
+      color: rgba(88, 88, 88, 1)
+    }
     .column {
       /* border: 1px solid red; */
       flex-grow: 1;

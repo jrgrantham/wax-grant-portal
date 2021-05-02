@@ -52,12 +52,12 @@ function GanttWPBlock(props) {
         <div id={leftHandle} className="dragHandle left" />
       ) : null}
       {blockPosition === "e" ? (
-        <div id={rightHandle} className="dragHandle right" />
+        <div id={rightHandle} className="dragHandle right applyShadow" />
       ) : null}
-      {blockPosition === "x" ? (
+    {blockPosition === "x" ? (
         <>
           <div id={leftHandle} className="dragHandle left" />
-          <div id={rightHandle} className="dragHandle right" />
+          <div id={rightHandle} className="dragHandle right applyShadow" />
         </>
       ) : null}
     </Container>

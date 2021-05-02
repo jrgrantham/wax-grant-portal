@@ -27,14 +27,12 @@ function GanttTaskRowInfo(props) {
   const state = useSelector((state) => state);
   const { task, provided, packData } = props;
   const { description, days, taskId } = task;
-
   const showComponent = state.user.showComponent;
   const resources = getAllocationsByTaskId(state);
   const numberOfBars = getNumberOfBars(state)[taskId];
   const combinedLength = getCombinedLengthOfBars(state)[taskId];
 
   const buttonContent = resources[taskId].people;
-  const [showEditDays, setShowEditDays] = useState(false);
   const [newDays, setNewDays] = useState(days);
 
   function handleDescriptionChange(value) {
@@ -57,7 +55,7 @@ function GanttTaskRowInfo(props) {
   }
 
   function acceptNewDays() {
-    setShowEditDays(false);
+    updateUser("showComponent", "")
     console.log(newDays);
     if (newDays >= numberOfBars) {
       if (newDays !== days) {
@@ -115,7 +113,7 @@ function GanttTaskRowInfo(props) {
           {buttonContent}
         </button>
 
-        {showEditDays ? (
+        {showComponent === taskId + 'days' ? (
           <div className="editDays">
             <input
               autoFocus
@@ -133,7 +131,7 @@ function GanttTaskRowInfo(props) {
         ) : (
           <button
             className="days highlight packBackground"
-            onClick={() => setShowEditDays(true)}
+            onClick={() => updateUser("showComponent", taskId + "days")}
           >
             {days}
           </button>

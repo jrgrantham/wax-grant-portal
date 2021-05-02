@@ -40,7 +40,7 @@ function GanttDMRowSchedule(props) {
   return (
     <Container blockColor={blockColor} position={position}>
       <div className="block" id={blockId}>
-        <p className="active">{reference}</p>
+        <p className="active applyShadow">{reference}</p>
       </div>
     </Container>
   );

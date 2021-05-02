@@ -2,26 +2,15 @@ import React from "react";
 import { store } from "../../store";
 import { Container } from "./costsStyling";
 import { getTotalsByLeader } from "../../helpers";
+import AssignmentRow from './assignmentRow'
 
 function AssignmentInfo() {
   const state = store.getState();
   const totals = getTotalsByLeader(state);
-  const { percentWarn, percentOver } = state.entities.options.data;
   const { lead, pOne, pTwo, combined } = totals.object.totals;
   console.log(lead, pOne, pTwo, combined);
 
-  function percent(index, value, total) {
-    if (index < 7 && total && value) {
-      const result = Math.round((value / total) * 100);
-      const className =
-        result > percentOver
-          ? "percent over"
-          : result > percentWarn
-          ? "percent warn"
-          : "percent ok";
-      return <p className={className}>{result}%</p>;
-    }
-  }
+  const wps = [1, 2, 3, 4, 5]
 
   return (
     <Container>
@@ -31,15 +20,17 @@ function AssignmentInfo() {
           <p className="title column center">Materials</p>
           <p className="title column center">Travel</p>
           <p className="title column center">CapEx</p>
-          <p className="title column center">Other 1</p>
-          <p className="title column center">Other 2</p>
-          <p className="title column center">Other 3</p>
-          <p className="title column center">Other 4</p>
-          <p className="title column center">Other 5</p>
-          <p className="title column center">Cost</p>
+          <p className="title column center grey">Other 1</p>
+          <p className="title column center grey">Other 2</p>
+          <p className="title column center grey">Other 3</p>
+          <p className="title column center grey">Other 4</p>
+          <p className="title column center grey">Other 5</p>
+          <p className="title column center ">Cost</p>
         </div>
         <div className="rows">
-          
+          {wps.map((pack, index) => {
+            return <AssignmentRow key={index} pack={pack}/>
+          })}
         </div>
       </div>
     </Container>

@@ -55,7 +55,7 @@ function GanttWPBar(props) {
   });
 
   return (
-    <Container id={barId} startPosition={startPosition}>
+    <Container className='applyShadow' id={barId} startPosition={startPosition}>
       {bar.map((block, index) => (
         <WPBlock
           key={index}

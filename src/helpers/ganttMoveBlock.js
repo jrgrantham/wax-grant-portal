@@ -8,7 +8,7 @@ export function moveBlock(data, e, blockDiv, projectLength) {
 
   const { blockWidth, position, deadlineId } = data;
   const leftObstruction = 0;
-  const rightObstruction = store.getState().project.data.details.projectLength - 1;
+  const rightObstruction = store.getState().entities.project.data.details.projectLength - 1;
 
   let offset = blockDiv.offsetLeft - e.clientX;
   let mousePosition;

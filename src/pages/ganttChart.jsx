@@ -131,4 +131,7 @@ const PageContainer = styled.div`
       border-bottom: 0;
     }
   }
+  .applyShadow {
+    box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
+  }
 `;

@@ -39,7 +39,7 @@ function GanttPackDeadlines(props) {
   const add = title === "Deliverables" ? addDeads : addMiles;
 
   return (
-    <Container titleBarColor={props.titleBarColor}>
+    <Container titleBarColor={props.titleBarColor} className='applyShadow'>
       <div className="titleBar">
         <h3>{title}</h3>
       </div>

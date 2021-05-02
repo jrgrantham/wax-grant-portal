@@ -78,8 +78,8 @@ function Costs() {
     subcontract: 3,
     capex: 4,
     other: 4,
-    summary: 0,
     breakdown: 0,
+    assignment: 3,
   }; // check this
 
   function showOverview() {

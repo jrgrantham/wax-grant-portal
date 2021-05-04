@@ -90,7 +90,7 @@ function Costs() {
     if (selectedOption === "labour") return <LabourStaff />;
     if (selectedOption === "subcontract") return <LabourSubcontract />;
     if (selectedOption === "overhead") return <OverheadInfo />;
-    // if (selectedOption === "materials") return <MaterialsInfo />;
+    if (selectedOption === "materials") return <MaterialsInfo />;
     // if (selectedOption === "travel") return <TravelInfo />;
     // if (selectedOption === "capex") return <CapexInfo />;
     if (selectedOption === "other") return <OtherInfo />;

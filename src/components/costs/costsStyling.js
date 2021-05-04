@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {
+  costsColor,
   fontColorGrey,
   navBackground,
   okColor,
@@ -147,40 +148,38 @@ export const Container = styled.div`
   }
   .assignmentTable {
     width: 100%;
-    /* .row {
-      margin-right: 10px
-    } */
-    .column.center {
-      display: flex;
+    .row {
+      /* border-bottom: 1px solid black */
+      margin-left: 0
+    }
+    .assign {
+      width: 64px;
+      border-radius: 6px;
+      padding-left: 17px;
+      text-align: center;
       justify-content: center;
     }
-    .total {
-      font-weight: bold;
+    .title {
+      padding: 0;
+      background-color: white;
     }
     .grey {
-      color: rgba(88, 88, 88, 1)
+      color: rgba(88, 88, 88, 1);
+      background-color: rgba(88, 88, 88, 1);
     }
-    .column {
-      /* border: 1px solid red; */
-      flex-grow: 1;
-      flex-basis: 0;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      margin-right: 25px;
-      max-width: 140px;
-      /* border-right: 1px solid black */
+    .group {
+      color: rgba(88, 88, 88, 1);
+      background-color: ${costsColor};
     }
-    .percent {
-      font-size: 12px;
-      font-weight: bold;
-      background-color: lightgray;
+    .title {
+      padding: 0;
+      background-color: white;
+    }
+    select.grey {
       color: white;
-      padding: 2px;
-      border-radius: 6px;
-      width: 55px;
-      text-align: center;
+    }
+    select.group {
+      color: white;
     }
     .double {
       margin-right: 0;
@@ -188,18 +187,6 @@ export const Container = styled.div`
     .category {
       font-weight: bold;
       /* flex-basis: 20px; */
-    }
-    .value {
-      width: 150px;
-    }
-    .ok {
-      background-color: ${okColor};
-    }
-    .warn {
-      background-color: orange;
-    }
-    .over {
-      background-color: ${warningColor};
     }
   }
 `;

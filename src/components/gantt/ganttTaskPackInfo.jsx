@@ -6,7 +6,6 @@ import "tippy.js/dist/tippy.css";
 import {
   reorderTasks,
   addTask,
-  // updateTaskPackTitle,
   deleteTask,
   updateTaskKey,
 } from "../../store/entities/tasks";
@@ -22,21 +21,19 @@ import { updateUserSelection } from "../../store/user";
 
 function GanttPackWork(props) {
   const dispatch = useDispatch();
-
   const { title, index, packData, workPackageCount } = props;
-  const wpNumber = index + 1;
+  const { showComponent } = useSelector((state) => state.user);
   const { maxTasksPerPackage } = useSelector(
     (state) => state.entities.options.data
   );
-
-  const {showComponent} = useSelector((state) => state.user);
-
-  const [edit, setEdit] = useState(false);
-  const [newTitle, setNewTitle] = useState(title);
-
   const { projectLength } = useSelector(
     (state) => state.entities.project.data.details
   );
+
+  const [newTitle, setNewTitle] = useState(title);
+  const [edit, setEdit] = useState(false);
+  const wpNumber = index + 1;
+
   function handleAddNewRow() {
     const [lastTask] = packData.slice(-1);
     const lastTaskId = lastTask.taskId;
@@ -93,7 +90,7 @@ function GanttPackWork(props) {
     // setConfirmDelete(false);
   }
 
-  console.log(showComponent);
+  console.log('packInfo');
 
   return (
     <Container titleBarColor={props.titleBarColor} className="applyShadow">
@@ -117,7 +114,10 @@ function GanttPackWork(props) {
               className="title"
               onClick={() =>
                 dispatch(
-                  updateUserSelection({ key: "showComponent", value: "workPackage" + index })
+                  updateUserSelection({
+                    key: "showComponent",
+                    value: "workPackage" + index,
+                  })
                 )
               }
             >

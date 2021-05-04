@@ -16,20 +16,20 @@ function AssignmentInfo() {
     <Container>
       <div className="assignmentTable">
         <div className="row titles leaderTabMargin">
-          <p className="title column center">WP</p>
-          <p className="title column center">Materials</p>
-          <p className="title column center">Travel</p>
-          <p className="title column center">CapEx</p>
-          <p className="title column center grey">Other 1</p>
-          <p className="title column center grey">Other 2</p>
-          <p className="title column center grey">Other 3</p>
-          <p className="title column center grey">Other 4</p>
-          <p className="title column center grey">Other 5</p>
-          <p className="title column center ">Cost</p>
+          <p className="title assign">WP</p>
+          <p className="title assign">Materials</p>
+          <p className="title assign">Travel</p>
+          <p className="title assign">CapEx</p>
+          <p className="title assign grey">Other 1</p>
+          <p className="title assign grey">Other 2</p>
+          <p className="title assign grey">Other 3</p>
+          <p className="title assign grey">Other 4</p>
+          <p className="title assign grey">Other 5</p>
+          <p className="title">Cost</p>
         </div>
         <div className="rows">
           {wps.map((pack, index) => {
-            return <AssignmentRow key={index} pack={pack}/>
+            return <AssignmentRow key={index} index={index} pack={pack}/>
           })}
         </div>
       </div>

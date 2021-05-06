@@ -31,7 +31,7 @@ function OtherInfo() {
     const newOther = {
       otherId: uuidv4(),
       leader: leader,
-      description: "New journey",
+      description: "New other",
       cost: 1,
     };
     dispatch(addOther({ newOther, position }));

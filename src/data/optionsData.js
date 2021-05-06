@@ -109,6 +109,7 @@ export const options = {
     maxMaterials: 10,
     maxTravel: 10,
     maxCapex: 10,
+    maxOther: 5,
 
     materialWarn: 25,
     materialOver: 40,

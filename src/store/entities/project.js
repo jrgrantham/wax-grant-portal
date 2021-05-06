@@ -116,7 +116,7 @@ export const getOverheads = createSelector(
   }
 );
 
-export const getGrants = createSelector(
+export const getFundingLevel = createSelector(
   (state) => state.entities.project.data,
   (data) => {
     const grants = {

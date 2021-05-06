@@ -14,6 +14,10 @@ function AssignmentInfo() {
   const leader = state.user.selectedLeader;
   const others = totals.other[leader];
 
+  const hasMaterials = totals.object.materialsCost[leader] > 0;
+  const hasTravel = totals.object.travelCost[leader] > 0;
+  const hasCapex = totals.object.capexCost[leader] > 0;
+
   function assignAll(other, index) {
     return (
       <div key={index} className="selectAll title assign">
@@ -26,9 +30,6 @@ function AssignmentInfo() {
       </div>
     );
   }
-  const hasMaterials = totals.object.materialsCost[leader] > 0;
-  const hasTravel = totals.object.travelCost[leader] > 0;
-  const hasCapex = totals.object.capexCost[leader] > 0;
 
   function categoryCost(category, index) {
     const value = Math.round(totals.object[category][leader]);

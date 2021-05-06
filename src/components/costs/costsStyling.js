@@ -126,11 +126,11 @@ export const Container = styled.div`
       color: white;
       padding: 2px;
       border-radius: 6px;
-      width: 55px;
+      width: 60px;
       text-align: center;
     }
     .double {
-      margin-right: 0;
+      text-align: right;
     }
     .category {
       font-weight: bold;
@@ -147,6 +147,9 @@ export const Container = styled.div`
     }
     .over {
       background-color: ${warningColor};
+    }
+    .empty {
+      background-color: transparent;
     }
   }
   .assignmentTable {

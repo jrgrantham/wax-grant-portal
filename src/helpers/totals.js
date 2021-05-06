@@ -6,7 +6,8 @@ import { getMaterialsCost } from "../store/entities/materials";
 import { getTravelCost } from "../store/entities/travel";
 import { getCapexCost } from "../store/entities/capex";
 import { getOtherCost } from "../store/entities/other";
-import { getGrants, getOverheads } from "../store/entities/project";
+import { getFundingLevel, getOverheads } from "../store/entities/project";
+import { costsColor } from "./settings";
 
 export const getTotalsByCategory = createSelector(
   (state) => state.entities,
@@ -91,7 +92,7 @@ export const getTotalsByLeader = createSelector(
     const travelCost = getTravelCost(state);
     const capexCost = getCapexCost(state);
     const otherCost = getOtherCost(state);
-    const grants = getGrants(state);
+    const funding = getFundingLevel(state);
 
     const totals = {
       lead: 0,
@@ -111,10 +112,12 @@ export const getTotalsByLeader = createSelector(
       totals[leader] = total;
     });
 
-    grants.lead = Math.floor((grants.lead * totals.lead) / 100);
-    grants.pOne = Math.floor((grants.pOne * totals.pOne) / 100);
-    grants.pTwo = Math.floor((grants.pTwo * totals.pTwo) / 100);
+    const grants = {};
+    grants.lead = Math.floor((funding.lead * totals.lead) / 100);
+    grants.pOne = Math.floor((funding.pOne * totals.pOne) / 100);
+    grants.pTwo = Math.floor((funding.pTwo * totals.pTwo) / 100);
     grants.combined = grants.lead + grants.pOne + grants.pTwo;
+    grants.category = "Grant";
 
     function people(employment, category) {
       const total = {
@@ -148,14 +151,14 @@ export const getTotalsByLeader = createSelector(
       otherCost,
       totals,
       grants,
-    }
-    const {lead, pOne, pTwo} = otherCost.breakdown
-    const other = {lead, pOne, pTwo}
+    };
+    const { lead, pOne, pTwo } = otherCost.breakdown;
+    const other = { lead, pOne, pTwo };
     const summary = {
       array,
       object,
       other,
-    }
+    };
     return summary;
   }
 );

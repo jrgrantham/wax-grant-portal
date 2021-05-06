@@ -94,7 +94,7 @@ function OtherInfo() {
                 </button>
               </Tippy>
             ) : (
-              <Tippy content="Add materials">
+              <Tippy content="Add other">
                 <button className="addIcon" onClick={handleAddOther}>
                   <img src={add} alt="add" />
                 </button>

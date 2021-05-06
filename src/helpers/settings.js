@@ -9,6 +9,8 @@ export const navHighlight = "rgba(30, 91, 127, 1)";
 export const okColor = "#98c6ad";
 export const warningColor = "rgba(240,90,40)";
 export const fontColorGrey = "#606060";
+export const selectedYes = "rgba(139, 197, 63, 1)";
+export const selectedNo = "#b1b1b1"
 
 export const adminColor = "rgba(162,84,198)";
 export const adminFontColor = "rgba(110,57,135)";

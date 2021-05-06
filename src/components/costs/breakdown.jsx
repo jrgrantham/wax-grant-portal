@@ -10,6 +10,8 @@ function BreakdownInfo() {
   const { lead, pOne, pTwo, combined } = totals.object.totals;
   console.log(lead, pOne, pTwo, combined);
 
+  console.log(totals);
+
   function percent(index, value, total) {
     if (index < 7 && total && value) {
       const result = Math.round((value / total) * 100);

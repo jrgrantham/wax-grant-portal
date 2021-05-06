@@ -63,11 +63,18 @@ export const getOtherCost = createSelector(
       pTwo: 0,
       combined: 0,
       category: "Other",
+      breakdown: {
+        lead: [],
+        pOne: [],
+        pTwo: [],
+      },
     };
     other.data.forEach((other) => {
-      // const otherCost = other.cost * other.quantity;
-      costs[other.leader] = costs[other.leader] + other.cost;
-      costs.combined = costs.combined + other.cost;
+      console.log(other);
+      const { cost, leader, description } = other;
+      costs[leader] = costs[leader] + cost;
+      costs.combined = costs.combined + cost;
+      costs.breakdown[leader].push({ description, cost });
     });
     return costs;
   }

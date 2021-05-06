@@ -92,7 +92,7 @@ function Costs() {
     if (selectedOption === "overhead") return <OverheadInfo />;
     if (selectedOption === "materials") return <MaterialsInfo />;
     if (selectedOption === "travel") return <TravelInfo />;
-    // if (selectedOption === "capex") return <CapexInfo />;
+    if (selectedOption === "capex") return <CapexInfo />;
     if (selectedOption === "other") return <OtherInfo />;
     // if (selectedOption === "breakdown") return <BreakdownInfo />;
     // if (selectedOption === "assignment") return <AssignmentInfo />;

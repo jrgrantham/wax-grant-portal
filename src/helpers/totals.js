@@ -93,6 +93,8 @@ export const getTotalsByLeader = createSelector(
     const otherCost = getOtherCost(state);
     const grants = getGrants(state);
 
+    console.log(otherCost);
+
     const totals = {
       lead: 0,
       pOne: 0,

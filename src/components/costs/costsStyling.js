@@ -4,7 +4,10 @@ import {
   fontColorGrey,
   navBackground,
   okColor,
+  selectedNo,
+  selectedYes,
   tableContentSideMargin,
+  teamColor,
   warningColor,
 } from "../../helpers";
 
@@ -150,7 +153,7 @@ export const Container = styled.div`
     width: 100%;
     .row {
       /* border-bottom: 1px solid black */
-      margin-left: 0
+      margin-left: 0;
     }
     .assign {
       width: 64px;
@@ -163,30 +166,29 @@ export const Container = styled.div`
       padding: 0;
       background-color: white;
     }
-    .grey {
-      color: rgba(88, 88, 88, 1);
-      background-color: rgba(88, 88, 88, 1);
-    }
-    .group {
-      color: rgba(88, 88, 88, 1);
-      background-color: ${costsColor};
-    }
     .title {
       padding: 0;
       background-color: white;
     }
-    select.grey {
+    select.assign {
+      /* background-color: ${teamColor}; */
+      background-color: ${selectedNo};
       color: white;
     }
-    select.group {
+    select.selected {
+      background-color: ${selectedYes};
       color: white;
     }
-    .double {
-      margin-right: 0;
+    button {
+      background-color: red;
+      padding: 2px 9px;
+      margin: 0 2px;
     }
-    .category {
-      font-weight: bold;
-      /* flex-basis: 20px; */
+    button.all {
+      background-color: ${selectedYes};
+    }
+    button.none {
+      background-color: ${selectedNo};
     }
   }
 `;

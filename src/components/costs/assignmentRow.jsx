@@ -1,38 +1,31 @@
 import React from "react";
+import Tippy from "@tippy.js/react";
 
-function combined(value) {
+function selector(value) {
   return (
-    <select value={value} className="field display assign group">
+    <select value={value} className="field display assign">
       <option value="Yes">Yes</option>
       <option value="No">No</option>
     </select>
   );
 }
 
-function separate(value) {
-  return (
-    <select value={value} className="field display assign grey">
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  );
-}
 function AssignmentRow(props) {
-  console.log(index);
-  const { index } = props;
+  const { index, pack } = props;
+  console.log(pack);
   return (
     <div className="row ">
-      <p className="field display assign">WP{index}</p>
-      {combined()}
-      {combined()}
-      {combined()}
-
-      {separate()}
-      {separate()}
-      {separate()}
-      {separate()}
-      {separate()}
-
+      <Tippy content={pack}>
+        <p className="field display assign">WP{index + 1}</p>
+      </Tippy>
+      {selector()}
+      {selector()}
+      {selector()}
+      {selector()}
+      {selector()}
+      {selector()}
+      {selector()}
+      {selector()}
       <p className="field display">1500</p>
     </div>
   );

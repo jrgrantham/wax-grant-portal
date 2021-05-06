@@ -1,7 +1,7 @@
 import React from "react";
 import { store } from "../../store";
 import { Container } from "./costsStyling";
-import { getTotalsByCategory, getTotalsByLeader } from "../../helpers";
+import { getTotalsByLeader } from "../../helpers";
 import AssignmentRow from "./assignmentRow";
 import Tippy from "@tippy.js/react";
 import qMark from "../../images/qMark.png";
@@ -9,11 +9,10 @@ import { getWorkPackageTitles } from "../../store/entities/tasks";
 
 function AssignmentInfo() {
   const state = store.getState();
-  const totals2 = getTotalsByLeader(state)
+  const totals = getTotalsByLeader(state);
   const wps = getWorkPackageTitles(state);
-  const leader = state.user.selectedLeader
-  // const test = Math.round(totals2.labour[leader].cost)
-  console.log(totals2.object);
+  const leader = state.user.selectedLeader;
+  const others = totals.other[leader];
 
   function assignAll() {
     return (
@@ -29,11 +28,15 @@ function AssignmentInfo() {
   }
 
   function categoryCost(category) {
-    const value = Math.round(totals2.object[category][leader])
-    return <div className="field display assign">
-      <p>{value}</p>
-    </div>
+    const value = Math.round(totals.object[category][leader]);
+    return (
+      <div className="field display assign">
+        <p>{value}</p>
+      </div>
+    );
   }
+
+  function other() {}
 
   return (
     <Container>
@@ -43,73 +46,52 @@ function AssignmentInfo() {
           <p className="title assign">Materials</p>
           <p className="title assign">Travel</p>
           <p className="title assign">CapEx</p>
-          <div className="title assign grey">
-            <p>Other</p>
-            <Tippy content="Description here">
-              <div className="info">
-                <img src={qMark} alt="add" />
+          {others.map((other, index) => {
+            return (
+              <div key={index} className="title assign">
+                <p>Other</p>
+                <Tippy content={other.description}>
+                  <div className="info">
+                    <img src={qMark} alt="add" />
+                  </div>
+                </Tippy>
               </div>
-            </Tippy>
-          </div>
-          <div className="title assign grey">
-            <p>Other</p>
-            <Tippy content="Description here">
-              <div className="info">
-                <img src={qMark} alt="add" />
-              </div>
-            </Tippy>
-          </div>
-          <div className="title assign grey">
-            <p>Other</p>
-            <Tippy content="Description here">
-              <div className="info">
-                <img src={qMark} alt="add" />
-              </div>
-            </Tippy>
-          </div>
-          <div className="title assign grey">
-            <p>Other</p>
-            <Tippy content="Description here">
-              <div className="info">
-                <img src={qMark} alt="add" />
-              </div>
-            </Tippy>
-          </div>
-          <div className="title assign grey">
-            <p>Other</p>
-            <Tippy content="Description here">
-              <div className="info">
-                <img src={qMark} alt="add" />
-              </div>
-            </Tippy>
-          </div>
+            );
+          })}
           <p className="title">Cost</p>
         </div>
         <div className="rows">
           {wps.map((pack, index) => {
-            return <AssignmentRow key={index} index={index} pack={pack} />;
+            return (
+              <AssignmentRow
+                key={index}
+                index={index}
+                pack={pack}
+                others={others}
+              />
+            );
           })}
           <div className="row">
             <p className="title assign"></p>
             {assignAll()}
             {assignAll()}
             {assignAll()}
-            {assignAll()}
-            {assignAll()}
-            {assignAll()}
-            {assignAll()}
-            {assignAll()}
+            {others.map((other, index) => {
+              {
+                return assignAll(other, index)
+              }
+            })}
           </div>
           <div className="row">
             <p className="title assign"></p>
-            {categoryCost('materialsCost')}
-            {categoryCost('travelCost')}
-            {categoryCost('capexCost')}
-            {assignAll()}
-            {assignAll()}
-            {assignAll()}
-            {assignAll()}
-            {assignAll()}
+            {categoryCost("materialsCost")}
+            {categoryCost("travelCost")}
+            {categoryCost("capexCost")}
+            {others.map((other, index) => {
+              {
+                // return assignAll();
+              }
+            })}
           </div>
         </div>
       </div>

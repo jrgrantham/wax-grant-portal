@@ -93,8 +93,6 @@ export const getTotalsByLeader = createSelector(
     const otherCost = getOtherCost(state);
     const grants = getGrants(state);
 
-    console.log(otherCost);
-
     const totals = {
       lead: 0,
       pOne: 0,
@@ -151,9 +149,12 @@ export const getTotalsByLeader = createSelector(
       totals,
       grants,
     }
+    const {lead, pOne, pTwo} = otherCost.breakdown
+    const other = {lead, pOne, pTwo}
     const summary = {
       array,
       object,
+      other,
     }
     return summary;
   }

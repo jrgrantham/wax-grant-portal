@@ -94,8 +94,8 @@ function Costs() {
     if (selectedOption === "travel") return <TravelInfo />;
     if (selectedOption === "capex") return <CapexInfo />;
     if (selectedOption === "other") return <OtherInfo />;
-    // if (selectedOption === "breakdown") return <BreakdownInfo />;
-    // if (selectedOption === "assignment") return <AssignmentInfo />;
+    if (selectedOption === "breakdown") return <BreakdownInfo />;
+    if (selectedOption === "assignment") return <AssignmentInfo />;
   }
 
   return (

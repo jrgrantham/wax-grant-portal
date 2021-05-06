@@ -9,23 +9,23 @@ function selector(value) {
     </select>
   );
 }
-
 function AssignmentRow(props) {
-  const { index, pack } = props;
-  console.log(pack);
+  const { index, pack, others } = props;
+  // console.log(pack);
+  console.log(others);
   return (
     <div className="row ">
       <Tippy content={pack}>
         <p className="field display assign">WP{index + 1}</p>
       </Tippy>
-      {selector()}
-      {selector()}
-      {selector()}
-      {selector()}
-      {selector()}
-      {selector()}
-      {selector()}
-      {selector()}
+      {selector()} {/* materials */}
+      {selector()} {/* travel */}
+      {selector()} {/* capex */}
+      {others.map((other, index) => {
+        {
+          return selector();
+        }
+      })}
       <p className="field display">1500</p>
     </div>
   );

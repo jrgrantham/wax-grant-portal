@@ -14,9 +14,9 @@ function AssignmentInfo() {
   const leader = state.user.selectedLeader;
   const others = totals.other[leader];
 
-  function assignAll() {
+  function assignAll(other, index) {
     return (
-      <div className="selectAll title assign">
+      <div key={index} className="selectAll title assign">
         <Tippy content="Select all">
           <button className="all">Y</button>
         </Tippy>
@@ -26,26 +26,27 @@ function AssignmentInfo() {
       </div>
     );
   }
+  const hasMaterials = totals.object.materialsCost[leader] > 0;
+  const hasTravel = totals.object.travelCost[leader] > 0;
+  const hasCapex = totals.object.capexCost[leader] > 0;
 
-  function categoryCost(category) {
+  function categoryCost(category, index) {
     const value = Math.round(totals.object[category][leader]);
     return (
-      <div className="field display assign">
+      <div key={index} className="field display assign">
         <p>{value}</p>
       </div>
     );
   }
-
-  function other() {}
 
   return (
     <Container>
       <div className="assignmentTable">
         <div className="row titles leaderTabMargin">
           <p className="title assign"></p>
-          <p className="title assign">Materials</p>
-          <p className="title assign">Travel</p>
-          <p className="title assign">CapEx</p>
+          {hasMaterials ? <p className="title assign">Materials</p> : null}
+          {hasTravel ? <p className="title assign">Travel</p> : null}
+          {hasCapex ? <p className="title assign">CapEx</p> : null}
           {others.map((other, index) => {
             return (
               <div key={index} className="title assign">
@@ -68,17 +69,21 @@ function AssignmentInfo() {
                 index={index}
                 pack={pack}
                 others={others}
+                hasCapex={hasCapex}
+                hasMaterials={hasMaterials}
+                hasTravel={hasTravel}
               />
             );
           })}
+
           <div className="row">
             <p className="title assign"></p>
-            {assignAll()}
-            {assignAll()}
-            {assignAll()}
+            {hasMaterials ? assignAll("materialsCost") : null}
+            {hasTravel ? assignAll("travelCost") : null}
+            {hasCapex ? assignAll("capexCost") : null}
             {others.map((other, index) => {
               {
-                return assignAll(other, index)
+                return assignAll(other, index);
               }
             })}
           </div>
@@ -89,7 +94,7 @@ function AssignmentInfo() {
             {categoryCost("capexCost")}
             {others.map((other, index) => {
               {
-                // return assignAll();
+                return assignAll(other, index);
               }
             })}
           </div>

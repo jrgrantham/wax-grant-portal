@@ -90,8 +90,6 @@ function GanttPackWork(props) {
     // setConfirmDelete(false);
   }
 
-  console.log('packInfo');
-
   return (
     <Container titleBarColor={props.titleBarColor} className="applyShadow">
       {edit ? <EditModal setEdit={setEdit} /> : null}

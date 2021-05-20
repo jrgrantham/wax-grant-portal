@@ -39,10 +39,10 @@ function Costs() {
   const menuList = [
     "Labour",
     "Overhead",
-    "Materials",
-    "Travel",
     "Subcontract",
     "CapEx",
+    "Materials",
+    "Travel",
     "Other",
     "Assignment",
     "Breakdown",

@@ -5,14 +5,20 @@ import { getTotalsByLeader } from "../../helpers";
 import AssignmentRow from "./assignmentRow";
 import Tippy from "@tippy.js/react";
 import qMark from "../../images/qMark.png";
-import { getWorkPackageTitles } from "../../store/entities/tasks";
+import { getWorkPackageIds, getWorkPackageTitles } from "../../store/entities/tasks";
+import { getWorkPackageLabourCost } from "../../store/entities/allocations";
 
 function AssignmentInfo() {
   const state = store.getState();
   const totals = getTotalsByLeader(state);
-  const wps = getWorkPackageTitles(state);
+  const titles = getWorkPackageTitles(state);
+  const ids = getWorkPackageIds(state);
   const leader = state.user.selectedLeader;
   const others = totals.other[leader];
+
+  const workPackageCost = getWorkPackageLabourCost(state)
+  console.log(workPackageCost);
+  console.log('no of packs for dividing costs:', ids.length);
 
   const hasMaterials = totals.object.materialsCost[leader] > 0;
   const hasTravel = totals.object.travelCost[leader] > 0;
@@ -33,6 +39,15 @@ function AssignmentInfo() {
 
   function categoryCost(category, index) {
     const value = Math.round(totals.object[category][leader]);
+    return (
+      <div key={index} className="field display assign">
+        <p>{value}</p>
+      </div>
+    );
+  }
+
+  function otherCost(other, index) {
+    const value = Math.round(other.cost);
     return (
       <div key={index} className="field display assign">
         <p>{value}</p>
@@ -63,7 +78,7 @@ function AssignmentInfo() {
           <p className="title">Cost</p>
         </div>
         <div className="rows">
-          {wps.map((pack, index) => {
+          {ids.map((pack, index) => {
             return (
               <AssignmentRow
                 key={index}
@@ -95,7 +110,8 @@ function AssignmentInfo() {
             {categoryCost("capexCost")}
             {others.map((other, index) => {
               {
-                return assignAll(other, index);
+                
+                return otherCost(other, index);
               }
             })}
           </div>

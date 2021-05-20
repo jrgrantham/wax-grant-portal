@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { store } from "../store";
 import { createSelector } from "reselect";
 import { getTotalDays } from "../store/entities/allocations";
@@ -7,7 +6,6 @@ import { getTravelCost } from "../store/entities/travel";
 import { getCapexCost } from "../store/entities/capex";
 import { getOtherCost } from "../store/entities/other";
 import { getFundingLevel, getOverheads } from "../store/entities/project";
-import { costsColor } from "./settings";
 
 export const getTotalsByCategory = createSelector(
   (state) => state.entities,
@@ -162,3 +160,21 @@ export const getTotalsByLeader = createSelector(
     return summary;
   }
 );
+
+// export const getWorkPackageCost = createSelector(
+//   (state) => state.entities,
+//   () => {
+//     console.log("getWorkPackageCost");
+//     const state = store.getState();
+//     const labour = getTotalDays(state);
+//     const overheads = getOverheads(state);
+//     const materialsCost = getMaterialsCost(state);
+//     const travelCost = getTravelCost(state);
+//     const capexCost = getCapexCost(state);
+//     const otherCost = getOtherCost(state);
+//     const funding = getFundingLevel(state);
+
+//     const summary = 9;
+//     return summary;
+//   }
+// );

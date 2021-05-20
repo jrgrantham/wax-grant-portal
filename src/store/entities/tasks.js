@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { taskData2 } from "../../data";
 import { v4 as uuidv4 } from "uuid";
+import {getAllocationsByTaskId} from './allocations'
 
 //     case wPFetchRequest.type:
 //       return {
@@ -192,27 +193,18 @@ export const getWorkPackageTitles = createSelector(
   }
 );
 
-// export const getWorkPackageTitlesById = createSelector(
-//   (state) => state.entities.tasks,
-//   (tasks) => {
-//     console.log("*** getWorkPackageTitlesById ***");
-//     const result = new Set();
-//     const taskList = Object.keys(tasks.data);
-//     taskList.forEach((id) => {
-//       const wp = {
-//         [tasks.data[id].workPackageId]: tasks.data[id].workPackageTitle,
-//       };
-//       console.log(wp);
-//       result.add(wp)
-//     });
-//     const taskIds = taskList.filter((id) => id !== "taskOrder");
-//     const titles = [
-//       ...new Set(taskIds.map((taskId) => tasks.data[taskId].workPackageId)),
-//     ];
-//     console.log(result);
-//     return titles;
-//   }
-// );
+export const getWorkPackageIds = createSelector(
+  (state) => state.entities.tasks,
+  (tasks) => {
+    console.log("getWorkPackageIds");
+    const list = Object.keys(tasks.data);
+    const taskIds = list.filter((id) => id !== "taskOrder");
+    const wpIds = [
+      ...new Set(taskIds.map((taskId) => tasks.data[taskId].workPackageId)),
+    ];
+    return wpIds;
+  }
+);
 
 export const getTaskIds = createSelector(
   (state) => state.entities.tasks,
@@ -223,16 +215,6 @@ export const getTaskIds = createSelector(
     return taskIds;
   }
 );
-
-// export const getCombinedLengthOfBarsOld = (state, taskId) => {
-//   console.log("generate an object for lookup");
-//   let length = state.entities.tasks.data[taskId].schedule.length;
-//   let result = 0;
-//   for (let i = 0; i < length; i++) {
-//     if (state.entities.tasks.data[taskId].schedule[i].barNumber > 0) result++;
-//   }
-//   return result;
-// };
 
 export const getCombinedLengthOfBars = createSelector(
   (state) => state.entities.tasks,
@@ -254,16 +236,6 @@ export const getCombinedLengthOfBars = createSelector(
     return result;
   }
 );
-
-// export const getNumberOfBarsOld = (state, taskId) => {
-//   console.log("generate an object for lookup");
-//   let length = state.entities.tasks.data[taskId].schedule.length;
-//   for (let i = length - 1; i >= 0; i--) {
-//     if (state.entities.tasks.data[taskId].schedule[i].barNumber > 0) {
-//       return state.entities.tasks.data[taskId].schedule[i].barNumber;
-//     }
-//   }
-// };
 
 export const getNumberOfBars = createSelector(
   (state) => state.entities.tasks.data,

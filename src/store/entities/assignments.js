@@ -1,5 +1,5 @@
 // import axios from "axios";
-import {store} from '../index'
+import { store } from "../index";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { allocationData } from "../../data";
@@ -7,9 +7,42 @@ import { getTaskIds } from "./tasks";
 import { getDayRateById } from "./team";
 import { v4 as uuidv4 } from "uuid";
 
+const initialState = {
+  lead: {
+    materials: [],
+    travel: [],
+    capex: [],
+    other1: [],
+    other2: [],
+    other3: [],
+    other4: [],
+    other5: [],
+  },
+  pOne: {
+    materials: [],
+    travel: [],
+    capex: [],
+    other1: [],
+    other2: [],
+    other3: [],
+    other4: [],
+    other5: [],
+  },
+  pTwo: {
+    materials: [],
+    travel: [],
+    capex: [],
+    other1: [],
+    other2: [],
+    other3: [],
+    other4: [],
+    other5: [],
+  },
+};
+
 const slice = createSlice({
   name: "assignments",
-  initialState: allocationData,
+  initialState,
   reducers: {
     addAllocation: (assignments, action) => {
       const { taskId, personId, value } = action.payload;

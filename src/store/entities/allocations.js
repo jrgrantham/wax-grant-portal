@@ -1,9 +1,9 @@
 // import axios from "axios";
-import {store} from '../index'
+import { store } from "../index";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 import { allocationData } from "../../data";
-import { getTaskIds } from "./tasks";
+import { getTaskIds, getWorkPackageIds } from "./tasks";
 import { getDayRateById } from "./team";
 import { v4 as uuidv4 } from "uuid";
 
@@ -176,5 +176,30 @@ export const getTotalDays = createSelector(
       });
     });
     return peoplesDays;
+  }
+);
+
+export const getWorkPackageLabourCost = createSelector(
+  (state) => state.entities,
+  (entities) => {
+    console.log("getWorkPackageCost");
+    const allTasks = entities.tasks.data;
+    const wpIds = getWorkPackageIds(store.getState());
+    const dayRateById = getDayRateById(store.getState());
+
+    const workPackageCost = {};
+    wpIds.forEach((task) => {
+      workPackageCost[task] = 0;
+    });
+
+    entities.allocations.data.forEach((allocation) => {
+      const { percent, personId, taskId } = allocation;
+      const days = (allTasks[taskId].days * percent) / 100;
+      const cost = Math.round(days * dayRateById[personId]);
+      const workPackage = allTasks[taskId].workPackageId;
+      workPackageCost[workPackage] = workPackageCost[workPackage] + cost;
+    });
+
+    return workPackageCost;
   }
 );

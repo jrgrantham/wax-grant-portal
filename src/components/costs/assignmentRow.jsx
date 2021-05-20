@@ -1,5 +1,7 @@
 import React from "react";
 import Tippy from "@tippy.js/react";
+import { getWorkPackageLabourCost } from "../../store/entities/allocations";
+import { store } from "../../store";
 
 function selector(other, index) {
   return (
@@ -10,9 +12,12 @@ function selector(other, index) {
     </select>
   );
 }
+
 function AssignmentRow(props) {
   const { index, pack, others, hasMaterials, hasTravel, hasCapex } = props;
-  // console.log(pack);
+  const state = store.getState()
+  const workPackageCost = getWorkPackageLabourCost(state)[pack]
+  console.log(pack, workPackageCost);
   // console.log(others);
   return (
     <div className="row ">
@@ -27,7 +32,7 @@ function AssignmentRow(props) {
           return selector(other, index);
         }
       })}
-      <p className="field display">1500</p>
+      <p className="field display">{workPackageCost}</p>
     </div>
   );
 }

@@ -1,11 +1,14 @@
 import React from "react";
 import { store } from "../../store";
 import { Container } from "./costsStyling";
-import { getTotalsByLeader } from "../../helpers";
+import { getTotalsByLeader, getWPCost } from "../../helpers";
 import AssignmentRow from "./assignmentRow";
 import Tippy from "@tippy.js/react";
 import qMark from "../../images/qMark.png";
-import { getWorkPackageIds, getWorkPackageTitles } from "../../store/entities/tasks";
+import {
+  getWorkPackageIds,
+  getWorkPackageTitles,
+} from "../../store/entities/tasks";
 import { getWorkPackageLabourCost } from "../../store/entities/allocations";
 
 function AssignmentInfo() {
@@ -15,10 +18,11 @@ function AssignmentInfo() {
   const ids = getWorkPackageIds(state);
   const leader = state.user.selectedLeader;
   const others = totals.other[leader];
+  const wpCounts = state.entities.assignments.data[leader];
 
-  const workPackageCost = getWorkPackageLabourCost(state)
-  console.log(workPackageCost);
-  console.log('no of packs for dividing costs:', ids.length);
+  const workPackageCost = getWorkPackageLabourCost(state);
+  // console.log(workPackageCost);
+  // console.log("no of packs for dividing costs:", ids.length);
 
   const hasMaterials = totals.object.materialsCost[leader] > 0;
   const hasTravel = totals.object.travelCost[leader] > 0;
@@ -37,11 +41,11 @@ function AssignmentInfo() {
     );
   }
 
-  function categoryCost(category, index) {
-    const value = Math.round(totals.object[category][leader]);
+  function categoryCost(categoryCost, category) {
+    const value = Math.round(totals.object[categoryCost][leader]);
     return (
-      <div key={index} className="field display assign">
-        <p>{value}</p>
+      <div className="field display assign">
+        <p>£{value / wpCounts[category].length}/ea</p>
       </div>
     );
   }
@@ -54,6 +58,8 @@ function AssignmentInfo() {
       </div>
     );
   }
+
+  const test = getWPCost(state)
 
   return (
     <Container>
@@ -105,12 +111,11 @@ function AssignmentInfo() {
           </div>
           <div className="row">
             <p className="title assign"></p>
-            {categoryCost("materialsCost")}
-            {categoryCost("travelCost")}
-            {categoryCost("capexCost")}
+            {categoryCost("materialsCost", "materials")}
+            {categoryCost("travelCost", "travel")}
+            {categoryCost("capexCost", "capex")}
             {others.map((other, index) => {
               {
-                
                 return otherCost(other, index);
               }
             })}

@@ -6,6 +6,7 @@ import { getTravelCost } from "../store/entities/travel";
 import { getCapexCost } from "../store/entities/capex";
 import { getOtherCost } from "../store/entities/other";
 import { getFundingLevel, getOverheads } from "../store/entities/project";
+import { getWorkPackageIds } from "../store/entities/tasks";
 
 export const getTotalsByCategory = createSelector(
   (state) => state.entities,
@@ -161,20 +162,80 @@ export const getTotalsByLeader = createSelector(
   }
 );
 
-// export const getWorkPackageCost = createSelector(
-//   (state) => state.entities,
-//   () => {
-//     console.log("getWorkPackageCost");
-//     const state = store.getState();
-//     const labour = getTotalDays(state);
-//     const overheads = getOverheads(state);
-//     const materialsCost = getMaterialsCost(state);
-//     const travelCost = getTravelCost(state);
-//     const capexCost = getCapexCost(state);
-//     const otherCost = getOtherCost(state);
-//     const funding = getFundingLevel(state);
+export const getWPCost = createSelector(
+  (state) => state.entities,
+  () => {
+    console.log("getWPCost");
+    const state = store.getState();
+    const wps = getWorkPackageIds(state);
+    const assignments = state.entities.assignments.data;
 
-//     const summary = 9;
-//     return summary;
-//   }
-// );
+    // function getAssignedWPs(leader) {
+    //   const packs = {
+    //     materials: assignments[leader].materials,
+    //     travel: assignments[leader].travel,
+    //     capex: assignments[leader].capex,
+    //     other1: assignments[leader].other1,
+    //     other2: assignments[leader].other2,
+    //     other3: assignments[leader].other3,
+    //     other4: assignments[leader].other4,
+    //     other5: assignments[leader].other5,
+    //   };
+    //   // return state.entities.assignments.data[leader][category];
+    //   return packs;
+    // }
+
+    function getCategoryCosts(leader) {
+      const costs = {
+        materials: getMaterialsCost(state)[leader],
+        travel: getTravelCost(state)[leader],
+        capex: getCapexCost(state)[leader],
+      };
+      const otherCount = getOtherCost(state).breakdown[leader].length;
+      for (let i = 0; i < otherCount; i++) {
+        const key = "other" + (i + 1);
+        costs[key] = getOtherCost(state).breakdown[leader][i].cost;
+      }
+      return costs;
+    }
+
+    const result = {};
+    wps.forEach((wp) => {
+      result[wp] = {
+        combined: 0,
+        lead: 0,
+        pOne: 0,
+        pTwo: 0,
+      };
+    });
+
+    const leaders = ["lead", "pOne", "pTwo"];
+    const categories = [
+      "materials",
+      "travel",
+      "capex",
+      "other1",
+      "other2",
+      "other3",
+      "other4",
+      "other5",
+    ];
+
+    leaders.forEach((leader) => {
+      const costs = getCategoryCosts(leader);
+      categories.forEach((category) => {
+        const categoryCost = costs[category];
+        const packs = assignments[leader][category];
+        const packCount = packs.length ? packs.length : 1;
+        const share = Math.round(categoryCost / packCount);
+        packs.forEach((pack) => {
+          result[pack].combined = result[pack].combined + share;
+          result[pack][leader] = result[pack][leader] + share;
+        });
+      });
+    });
+
+    console.log(result);
+    return result;
+  }
+);

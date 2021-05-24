@@ -182,7 +182,7 @@ export const getTotalDays = createSelector(
 export const getWorkPackageLabourCost = createSelector(
   (state) => state.entities,
   (entities) => {
-    console.log("getWorkPackageCost");
+    console.log("getWorkPackageLabourCost");
     const allTasks = entities.tasks.data;
     const wpIds = getWorkPackageIds(store.getState());
     const dayRateById = getDayRateById(store.getState());

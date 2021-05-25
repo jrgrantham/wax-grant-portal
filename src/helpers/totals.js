@@ -170,20 +170,17 @@ export const getWPCost = createSelector(
     const wps = getWorkPackageIds(state);
     const assignments = state.entities.assignments.data;
 
-    // function getAssignedWPs(leader) {
-    //   const packs = {
-    //     materials: assignments[leader].materials,
-    //     travel: assignments[leader].travel,
-    //     capex: assignments[leader].capex,
-    //     other1: assignments[leader].other1,
-    //     other2: assignments[leader].other2,
-    //     other3: assignments[leader].other3,
-    //     other4: assignments[leader].other4,
-    //     other5: assignments[leader].other5,
-    //   };
-    //   // return state.entities.assignments.data[leader][category];
-    //   return packs;
-    // }
+    const leaders = ["lead", "pOne", "pTwo"];
+    const categories = [
+      "materials",
+      "travel",
+      "capex",
+      "other1",
+      "other2",
+      "other3",
+      "other4",
+      "other5",
+    ];
 
     function getCategoryCosts(leader) {
       const costs = {
@@ -191,10 +188,11 @@ export const getWPCost = createSelector(
         travel: getTravelCost(state)[leader],
         capex: getCapexCost(state)[leader],
       };
-      const otherCount = getOtherCost(state).breakdown[leader].length;
-      for (let i = 0; i < otherCount; i++) {
+      const others = getOtherCost(state).breakdown[leader];
+      const count = others.length;
+      for (let i = 0; i < count; i++) {
         const key = "other" + (i + 1);
-        costs[key] = getOtherCost(state).breakdown[leader][i].cost;
+        costs[key] = others[i].cost;
       }
       return costs;
     }
@@ -209,24 +207,12 @@ export const getWPCost = createSelector(
       };
     });
 
-    const leaders = ["lead", "pOne", "pTwo"];
-    const categories = [
-      "materials",
-      "travel",
-      "capex",
-      "other1",
-      "other2",
-      "other3",
-      "other4",
-      "other5",
-    ];
-
     leaders.forEach((leader) => {
       const costs = getCategoryCosts(leader);
       categories.forEach((category) => {
         const categoryCost = costs[category];
         const packs = assignments[leader][category];
-        const packCount = packs.length ? packs.length : 1;
+        const packCount = packs.length;
         const share = Math.round(categoryCost / packCount);
         packs.forEach((pack) => {
           result[pack].combined = result[pack].combined + share;
@@ -234,8 +220,6 @@ export const getWPCost = createSelector(
         });
       });
     });
-
-    console.log(result);
     return result;
   }
 );

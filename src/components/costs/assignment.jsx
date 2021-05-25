@@ -60,6 +60,7 @@ function AssignmentInfo() {
   }
 
   const test = getWPCost(state)
+  console.log(test);
 
   return (
     <Container>
@@ -106,17 +107,6 @@ function AssignmentInfo() {
             {others.map((other, index) => {
               {
                 return assignAll(other, index);
-              }
-            })}
-          </div>
-          <div className="row">
-            <p className="title assign"></p>
-            {categoryCost("materialsCost", "materials")}
-            {categoryCost("travelCost", "travel")}
-            {categoryCost("capexCost", "capex")}
-            {others.map((other, index) => {
-              {
-                return otherCost(other, index);
               }
             })}
           </div>

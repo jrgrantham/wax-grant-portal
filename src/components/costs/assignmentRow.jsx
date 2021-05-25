@@ -4,15 +4,18 @@ import { useDispatch } from "react-redux";
 import { getWorkPackageLabourCost } from "../../store/entities/allocations";
 import { store } from "../../store";
 import { getWPCost } from "../../helpers";
-import { addAssignment } from "../../store/entities/assignments";
+import { toggleAssignment } from "../../store/entities/assignments";
+import { getWorkPackageTitles } from "../../store/entities/tasks";
 
 function AssignmentRow(props) {
+  console.log('AssignmentRow');
   const { index, pack, others, hasMaterials, hasTravel, hasCapex } = props;
   const state = store.getState();
   const dispatch = useDispatch();
   const { selectedLeader } = state.user;
   const assigned = state.entities.assignments.data[selectedLeader];
 
+  const titles = getWorkPackageTitles(state);
   const labourCosts = getWorkPackageLabourCost(state)[pack];
   const additionalCosts = getWPCost(state)[pack].combined;
   const totalCost = labourCosts + additionalCosts;
@@ -20,10 +23,10 @@ function AssignmentRow(props) {
   function toggleAssign(category) {
     console.log("toggle");
     dispatch(
-      addAssignment({
+      toggleAssignment({
         leader: selectedLeader,
         category,
-        workPackageId: 0,
+        workPackageId: pack,
       })
     );
   }
@@ -31,7 +34,11 @@ function AssignmentRow(props) {
   function assignButton(category, index) {
     const status = assigned[category].includes(pack);
     return (
-      <p key={index} onClick={toggleAssign} className="field display assign">
+      <p
+        key={index}
+        onClick={() => toggleAssign(category)}
+        className="field display assign"
+      >
         {status ? "Yes" : "No"}
       </p>
     );
@@ -39,7 +46,7 @@ function AssignmentRow(props) {
 
   return (
     <div className="row">
-      <Tippy content={pack}>
+      <Tippy content={titles[index]}>
         <p className="field display assign">WP{index + 1}</p>
       </Tippy>
       {hasMaterials ? assignButton("materials") : null}

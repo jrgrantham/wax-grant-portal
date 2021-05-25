@@ -1,28 +1,21 @@
 import React from "react";
-import { store } from "../../store";
+import { useSelector } from "react-redux";
 import { Container } from "./costsStyling";
-import { getTotalsByLeader, getWPCost } from "../../helpers";
+import { getTotalsByLeader } from "../../helpers";
 import AssignmentRow from "./assignmentRow";
 import Tippy from "@tippy.js/react";
 import qMark from "../../images/qMark.png";
 import {
   getWorkPackageIds,
-  getWorkPackageTitles,
 } from "../../store/entities/tasks";
-import { getWorkPackageLabourCost } from "../../store/entities/allocations";
 
 function AssignmentInfo() {
-  const state = store.getState();
+  console.log('AssignmentInfo');
+  const state = useSelector((state) => state);
   const totals = getTotalsByLeader(state);
-  const titles = getWorkPackageTitles(state);
   const ids = getWorkPackageIds(state);
   const leader = state.user.selectedLeader;
   const others = totals.other[leader];
-  const wpCounts = state.entities.assignments.data[leader];
-
-  const workPackageCost = getWorkPackageLabourCost(state);
-  // console.log(workPackageCost);
-  // console.log("no of packs for dividing costs:", ids.length);
 
   const hasMaterials = totals.object.materialsCost[leader] > 0;
   const hasTravel = totals.object.travelCost[leader] > 0;
@@ -40,27 +33,6 @@ function AssignmentInfo() {
       </div>
     );
   }
-
-  function categoryCost(categoryCost, category) {
-    const value = Math.round(totals.object[categoryCost][leader]);
-    return (
-      <div className="field display assign">
-        <p>£{value / wpCounts[category].length}/ea</p>
-      </div>
-    );
-  }
-
-  function otherCost(other, index) {
-    const value = Math.round(other.cost);
-    return (
-      <div key={index} className="field display assign">
-        <p>{value}</p>
-      </div>
-    );
-  }
-
-  const test = getWPCost(state)
-  console.log(test);
 
   return (
     <Container>

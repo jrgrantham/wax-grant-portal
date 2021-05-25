@@ -1,7 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createSelector } from "reselect";
-import { getTotalsByLeader } from "../../helpers";
-import { store } from "../../store";
 
 const initialState = {
   loading: false,
@@ -44,26 +41,20 @@ const slice = createSlice({
   name: "assignments",
   initialState,
   reducers: {
-    addAssignment: (assignments, action) => {
+    toggleAssignment: (assignments, action) => {
       const { leader, category, workPackageId } = action.payload;
-      assignments.data[leader][category].push(workPackageId);
-    },
-    deleteAssignment: (assignments, action) => {
-      const { workPackageId } = action.payload;
-      const index = assignments.data.findIndex(
-        (assignment) => assignment === workPackageId
-      );
-      assignments.data.splice(index, 1);
+      const index = assignments.data[leader][category].indexOf(workPackageId)
+      if (index < 0) {
+        assignments.data[leader][category].push(workPackageId);
+      } else {
+        assignments.data[leader][category].splice(index, 1);
+      }
     },
     // delete workPackage - remove from all...
   },
 });
 
 export const {
-  addAssignment,
-  updateAllocation,
-  deleteAssignment,
-  deleteTaskassignments,
-  deletePersonassignments,
+  toggleAssignment,
 } = slice.actions;
 export default slice.reducer;

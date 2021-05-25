@@ -183,7 +183,7 @@ export const Container = styled.div`
       color: white;
     }
     button {
-      background-color: red;
+      /* background-color: red; */
       padding: 2px 9px;
       margin: 0 2px;
     }

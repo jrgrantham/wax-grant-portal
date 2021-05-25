@@ -1,19 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Container } from "./costsStyling";
 import { getTotalsByLeader } from "../../helpers";
+import {
+  assignToCategory,
+  resetAssignments,
+} from "../../store/entities/assignments";
 import AssignmentRow from "./assignmentRow";
 import Tippy from "@tippy.js/react";
 import qMark from "../../images/qMark.png";
-import {
-  getWorkPackageIds,
-} from "../../store/entities/tasks";
+import { getWorkPackageIds } from "../../store/entities/tasks";
 
 function AssignmentInfo() {
-  console.log('AssignmentInfo');
+  console.log("AssignmentInfo");
   const state = useSelector((state) => state);
+  const dispatch = useDispatch();
   const totals = getTotalsByLeader(state);
-  const ids = getWorkPackageIds(state);
+  const workPackageIds = getWorkPackageIds(state);
   const leader = state.user.selectedLeader;
   const others = totals.other[leader];
 
@@ -21,14 +24,27 @@ function AssignmentInfo() {
   const hasTravel = totals.object.travelCost[leader] > 0;
   const hasCapex = totals.object.capexCost[leader] > 0;
 
-  function assignAll(other, index) {
+  function assignAll(category) {
+    dispatch(
+      assignToCategory({
+        leader,
+        category,
+        workPackageIds,
+      })
+    );
+  }
+
+  function reset() {
+    dispatch(resetAssignments( leader ));
+  }
+
+  function assignAllButton(category, index) {
     return (
       <div key={index} className="selectAll title assign">
-        <Tippy content="Select all">
-          <button className="all">Y</button>
-        </Tippy>
-        <Tippy content="Select none">
-          <button className="none">N</button>
+        <Tippy content={`Assign ${category} cost to all WPs`}>
+          <button onClick={() => assignAll(category)} className="all">
+            All
+          </button>
         </Tippy>
       </div>
     );
@@ -37,6 +53,11 @@ function AssignmentInfo() {
   return (
     <Container>
       <div className="assignmentTable">
+        <div className="bottomLeftCorner">
+          <button onClick={reset}>
+            <h3>Reset assigned costs</h3>
+          </button>
+        </div>
         <div className="row titles leaderTabMargin">
           <p className="title assign"></p>
           {hasMaterials ? <p className="title assign">Materials</p> : null}
@@ -57,7 +78,7 @@ function AssignmentInfo() {
           <p className="title">Cost</p>
         </div>
         <div className="rows">
-          {ids.map((pack, index) => {
+          {workPackageIds.map((pack, index) => {
             return (
               <AssignmentRow
                 key={index}
@@ -73,12 +94,13 @@ function AssignmentInfo() {
 
           <div className="row">
             <p className="title assign"></p>
-            {hasMaterials ? assignAll("materialsCost") : null}
-            {hasTravel ? assignAll("travelCost") : null}
-            {hasCapex ? assignAll("capexCost") : null}
-            {others.map((other, index) => {
+            {hasMaterials ? assignAllButton("materials") : null}
+            {hasTravel ? assignAllButton("travel") : null}
+            {hasCapex ? assignAllButton("capex") : null}
+            {others.map((_, index) => {
               {
-                return assignAll(other, index);
+                const category = "other" + (index + 1);
+                return assignAllButton(category, index);
               }
             })}
           </div>

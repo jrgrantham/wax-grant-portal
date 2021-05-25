@@ -31,6 +31,7 @@ export const TableContainer = styled.div`
     box-shadow: 8px 8px 12px rgba(1, 1, 1, 0.5);
   }
   .content {
+    position: relative;
     width: ${tableRightWidth};
     background-color: white;
     display: flex;
@@ -144,6 +145,19 @@ export const TableContainer = styled.div`
     justify-content: flex-end;
     padding: 20px 30px;
     button {
+      border: none;
+      color: gray;
+    }
+  }
+  .bottomLeftCorner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px 30px;
+    button {
+      background-color: transparent;
       border: none;
       color: gray;
     }

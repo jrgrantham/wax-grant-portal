@@ -16,6 +16,7 @@ import add from "../../images/addTask.png";
 import addGray from "../../images/add-grey.png";
 import bin from "../../images/bin-grey.png";
 import { deleteTaskAllocations } from "../../store/entities/allocations";
+import { deletePackAssignments } from "../../store/entities/assignments";
 import { Container } from "./ganttPackStyling";
 import { updateUserSelection } from "../../store/user";
 
@@ -33,6 +34,7 @@ function GanttPackWork(props) {
   const [newTitle, setNewTitle] = useState(title);
   const [edit, setEdit] = useState(false);
   const wpNumber = index + 1;
+  // const workPackageId =
 
   function handleAddNewRow() {
     const [lastTask] = packData.slice(-1);
@@ -82,12 +84,14 @@ function GanttPackWork(props) {
 
   function handleRemovePack() {
     const taskList = [...new Set(packData.map((task) => task.taskId))];
+    const workPackageId = packData[0].workPackageId;
+    console.log(workPackageId);
+    dispatch(deletePackAssignments({ workPackageId }));
     taskList.forEach((taskId) => {
       dispatch(deleteTaskAllocations({ taskId }));
       dispatch(deleteTask({ taskId }));
     });
     console.log("delete cost associations");
-    // setConfirmDelete(false);
   }
 
   return (

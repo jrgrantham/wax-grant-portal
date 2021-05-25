@@ -23,9 +23,26 @@ export function nextIndexOfGroup(group, array) {
 }
 
 export function roundTo(number, decimalPlaces) {
-  const roundBy = Math.pow(10, decimalPlaces)
-  const result = Math.round(number * roundBy) / roundBy
-  return result
+  const roundBy = Math.pow(10, decimalPlaces);
+  const result = Math.round(number * roundBy) / roundBy;
+  return result;
+}
+
+export function numberToCurrency(number) {
+  if (number) {
+    let formattedCost = number.toString();
+    let result = "";
+    let counter = 0;
+    for (let i = formattedCost.length - 1; i >= 0; i--) {
+      const character = formattedCost.charAt(i);
+      if (counter > 0 && counter % 3 === 0) {
+        result = "," + result;
+      }
+      result = character + result;
+      counter++;
+    }
+    return result;
+  } else return 0;
 }
 
 // Returns a function, that, as long as it continues to be invoked, will not

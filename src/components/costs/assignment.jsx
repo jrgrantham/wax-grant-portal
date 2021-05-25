@@ -35,13 +35,14 @@ function AssignmentInfo() {
   }
 
   function reset() {
-    dispatch(resetAssignments( leader ));
+    dispatch(resetAssignments( {leader} ));
   }
 
   function assignAllButton(category, index) {
+    const text = category.charAt(0) === 'o' ? 'other' : category;
     return (
-      <div key={index} className="selectAll title assign">
-        <Tippy content={`Assign ${category} cost to all WPs`}>
+      <div key={index} className="select title assign">
+        <Tippy content={`Assign ${text} cost to all WPs`}>
           <button onClick={() => assignAll(category)} className="all">
             All
           </button>

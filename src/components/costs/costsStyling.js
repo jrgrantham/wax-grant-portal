@@ -161,7 +161,6 @@ export const Container = styled.div`
     .assign {
       width: 64px;
       border-radius: 6px;
-      padding-left: 17px;
       text-align: center;
       justify-content: center;
     }
@@ -185,12 +184,19 @@ export const Container = styled.div`
     button {
       /* background-color: red; */
       padding: 2px 9px;
-      margin: 0 2px;
+      /* margin: 0 2px; */
     }
     button.all {
+      color: white;
       background-color: ${selectedYes};
     }
-    button.none {
+    button.yes {
+      color: white;
+      background-color: ${selectedYes};
+
+    }
+    button.no {
+      color: white;
       background-color: ${selectedNo};
     }
   }

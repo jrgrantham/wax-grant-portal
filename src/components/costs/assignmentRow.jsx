@@ -34,13 +34,13 @@ function AssignmentRow(props) {
   function assignButton(category, index) {
     const status = assigned[category].includes(pack);
     return (
-      <p
+      <button
         key={index}
         onClick={() => toggleAssign(category)}
-        className="field display assign"
+        className={status ? "field display assign yes" : "field display assign no"}
       >
         {status ? "Yes" : "No"}
-      </p>
+      </button>
     );
   }
 

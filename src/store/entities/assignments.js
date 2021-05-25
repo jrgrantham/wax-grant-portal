@@ -79,8 +79,7 @@ const slice = createSlice({
       });
     },
     resetAssignments: (assignments, action) => {
-      const leader = action.payload;
-      console.log(leader);
+      const { leader } = action.payload;
       const categories = [
         "materials",
         "travel",

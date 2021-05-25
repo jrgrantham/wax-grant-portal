@@ -173,18 +173,14 @@ export const Container = styled.div`
       background-color: white;
     }
     button {
-      /* background-color: red; */
       padding: 2px 9px;
-      /* margin: 0 2px; */
     }
     button.all {
-      color: white;
       background-color: ${selectedYes};
     }
     button.yes {
       color: white;
       background-color: ${selectedYes};
-
     }
     button.no {
       color: white;

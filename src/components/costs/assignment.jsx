@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Container } from "./costsStyling";
 import { getTotalsByLeader, getWPStatus } from "../../helpers";
 import {
-  assignToCategory,
+  assignAllToCategory,
+  assignNoneToCategory,
   resetAssignments,
 } from "../../store/entities/assignments";
 import AssignmentRow from "./assignmentRow";
@@ -20,13 +21,22 @@ function AssignmentInfo() {
   const leader = state.user.selectedLeader;
   const status = getWPStatus(state)[leader];
   const others = totals.other[leader];
+  const assignments = state.entities.assignments.data;
 
   function assignAll(category) {
     dispatch(
-      assignToCategory({
+      assignAllToCategory({
         leader,
         category,
         workPackageIds,
+      })
+    );
+  }
+  function resetCategory(category) {
+    dispatch(
+      assignNoneToCategory({
+        leader,
+        category,
       })
     );
   }
@@ -34,15 +44,30 @@ function AssignmentInfo() {
   function reset() {
     dispatch(resetAssignments({ leader }));
   }
+
   function assignAllButton(category, index) {
+    const assignedCount = assignments[leader][category].length;
+    const wpCount = workPackageIds.length;
+    const all = assignedCount === wpCount;
     const text = category.charAt(0) === "o" ? "other" : category;
     return (
       <div key={index} className="select title assign">
-        <Tippy content={`Assign ${text} cost to all WPs`}>
-          <button onClick={() => assignAll(category)} className="all">
-            All
-          </button>
-        </Tippy>
+        {all ? (
+          <Tippy content={`Remove ${text} cost from all WPs`}>
+            <button
+              onClick={() => resetCategory(category)}
+              className="no"
+            >
+              None
+            </button>
+          </Tippy>
+        ) : (
+          <Tippy content={`Assign ${text} cost to all WPs`}>
+            <button onClick={() => assignAll(category)} className="yes">
+              All
+            </button>
+          </Tippy>
+        )}
       </div>
     );
   }

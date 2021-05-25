@@ -50,9 +50,13 @@ const slice = createSlice({
         assignments.data[leader][category].splice(index, 1);
       }
     },
-    assignToCategory: (assignments, action) => {
+    assignAllToCategory: (assignments, action) => {
       const { leader, category, workPackageIds } = action.payload;
       assignments.data[leader][category] = workPackageIds;
+    },
+    assignNoneToCategory: (assignments, action) => {
+      const { leader, category } = action.payload;
+      assignments.data[leader][category] = [];
     },
     deletePackAssignments: (assignments, action) => {
       const { workPackageId } = action.payload;
@@ -99,7 +103,8 @@ const slice = createSlice({
 
 export const {
   toggleAssignment,
-  assignToCategory,
+  assignAllToCategory,
+  assignNoneToCategory,
   deletePackAssignments,
   resetAssignments,
 } = slice.actions;

@@ -162,4 +162,20 @@ export const TableContainer = styled.div`
       color: gray;
     }
   }
+  .bottomMiddle {
+    position: absolute;
+    bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    /* padding: 20px 30px; */
+    width: 40px;
+    height: 40px;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
 `;

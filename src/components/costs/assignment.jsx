@@ -9,6 +9,7 @@ import {
 import AssignmentRow from "./assignmentRow";
 import Tippy from "@tippy.js/react";
 import qMark from "../../images/qMark.png";
+import warning from "../../images/warning.png";
 import { getWorkPackageIds } from "../../store/entities/tasks";
 
 function AssignmentInfo() {
@@ -34,6 +35,8 @@ function AssignmentInfo() {
     dispatch(resetAssignments({ leader }));
   }
 
+  console.log(status.anyUnassigned);
+
   function assignAllButton(category, index) {
     const text = category.charAt(0) === "o" ? "other" : category;
     return (
@@ -55,6 +58,13 @@ function AssignmentInfo() {
             <h3>Reset assigned costs</h3>
           </button>
         </div>
+        {status.anyUnassigned ? (
+          <div className="bottomMiddle">
+            <Tippy content="Costs must be assigned to a work package">
+              <img src={warning} alt="warning" />
+            </Tippy>
+          </div>
+        ) : null}
         <div className="row titles leaderTabMargin">
           <p className="title assign"></p>
           {status.hasMaterials ? (

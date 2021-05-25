@@ -34,9 +34,6 @@ function AssignmentInfo() {
   function reset() {
     dispatch(resetAssignments({ leader }));
   }
-
-  console.log(status.anyUnassigned);
-
   function assignAllButton(category, index) {
     const text = category.charAt(0) === "o" ? "other" : category;
     return (
@@ -60,7 +57,7 @@ function AssignmentInfo() {
         </div>
         {status.anyUnassigned ? (
           <div className="bottomMiddle">
-            <Tippy content="Costs must be assigned to a work package">
+            <Tippy content="All costs must be assigned to a work package">
               <img src={warning} alt="warning" />
             </Tippy>
           </div>

@@ -8,9 +8,6 @@ function BreakdownInfo() {
   const totals = getTotalsByLeader(state);
   const { percentWarn, percentOver } = state.entities.options.data;
   const { lead, pOne, pTwo, combined } = totals.object.totals;
-  console.log(lead, pOne, pTwo, combined);
-
-  console.log(totals.array);
 
   function percent(index, value, total) {
     if (total && value) {

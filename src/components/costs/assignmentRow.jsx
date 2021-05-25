@@ -20,7 +20,6 @@ function AssignmentRow(props) {
   const totalCost = labourCosts + additionalCosts;
 
   function toggleAssign(category) {
-    console.log("toggle");
     dispatch(
       toggleAssignment({
         leader: selectedLeader,

@@ -172,15 +172,6 @@ export const Container = styled.div`
       padding: 0;
       background-color: white;
     }
-    select.assign {
-      /* background-color: ${teamColor}; */
-      background-color: ${selectedNo};
-      color: white;
-    }
-    select.selected {
-      background-color: ${selectedYes};
-      color: white;
-    }
     button {
       /* background-color: red; */
       padding: 2px 9px;

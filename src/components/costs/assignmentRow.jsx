@@ -8,7 +8,6 @@ import { toggleAssignment } from "../../store/entities/assignments";
 import { getWorkPackageTitles } from "../../store/entities/tasks";
 
 function AssignmentRow(props) {
-  console.log('AssignmentRow');
   const { index, pack, others, hasMaterials, hasTravel, hasCapex } = props;
   const state = store.getState();
   const dispatch = useDispatch();

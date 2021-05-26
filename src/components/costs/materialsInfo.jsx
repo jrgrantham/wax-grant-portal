@@ -11,7 +11,7 @@ import {
 import add from "../../images/addMaterials.png";
 import addGrey from "../../images/add-grey.png";
 import { Container } from "./costsStyling";
-import { nextIndexOfGroup } from "../../helpers";
+import { nextIndexOfGroup, numberToCurrency } from "../../helpers";
 import MaterialsRow from "./materialsRow";
 
 function MaterialsInfo() {
@@ -20,7 +20,8 @@ function MaterialsInfo() {
   const materials = state.entities.materials.data;
   const leader = state.user.selectedLeader;
   const { maxMaterials } = state.entities.options.data;
-  const totals = getMaterialsCost(state);
+  const total = getMaterialsCost(state)[leader];
+  const formattedCost = numberToCurrency(total)
   const combined = leader === "combined";
   const group = combined
     ? materials
@@ -110,7 +111,7 @@ function MaterialsInfo() {
                 <p className="field display materialsQuantity" />
                 <div className="total">
                   <p className="field display materialsTotal">
-                    {totals[leader]}
+                    {formattedCost}
                   </p>
                 </div>
               </>

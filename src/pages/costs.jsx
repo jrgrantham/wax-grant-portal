@@ -82,8 +82,8 @@ function Costs() {
     assignment: 3,
   }; // check this
 
-  function showOverview() {
-    dispatch(updateUserSelection({ key: "showComponent", value: "overview" }));
+  function showOverview(value) {
+    dispatch(updateUserSelection({ key: "showComponent", value }));
   }
 
   function content() {
@@ -104,11 +104,16 @@ function Costs() {
         <LeftMenu data={menuData} />
         <div className="content">
           <div className="bottomRightCorner">
-            <button onClick={showOverview}>
-              <h3>Show Overview</h3>
-            </button>
+            {showComponent === "overview" ? (
+              <button onClick={() => showOverview("")}>
+                <h3>Hide Overview</h3>
+              </button>
+            ) : (
+              <button onClick={() => showOverview("overview")}>
+                <h3>Show Overview</h3>
+              </button>
+            )}
           </div>
-          {showComponent === "overview" ? <OverviewModal /> : null}
           {showLeaderTabs[selectedOption] ? (
             <LeaderTabs
               viewCombinedTab={showLeaderTabs[selectedOption] === 4}
@@ -117,6 +122,7 @@ function Costs() {
           <div>
             {status ? <MarkedComplete /> : null}
             {content()}
+            {showComponent === "overview" ? <OverviewModal /> : null}
           </div>
         </div>
       </div>

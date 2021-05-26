@@ -12,7 +12,7 @@ import {
 import add from "../../images/addMaterials.png";
 import addGrey from "../../images/add-grey.png";
 import { Container } from "./costsStyling";
-import { nextIndexOfGroup, roundTo } from "../../helpers";
+import { nextIndexOfGroup, numberToCurrency, roundTo } from "../../helpers";
 import CapexRow from "./capexRow";
 
 function CapexInfo() {
@@ -21,7 +21,8 @@ function CapexInfo() {
   const capex = state.entities.capex.data;
   const leader = state.user.selectedLeader;
   const { maxCapex } = state.entities.options.data;
-  const totals = getCapexCost(state);
+  const total = getCapexCost(state)[leader];
+  const formattedCost = numberToCurrency(total)
   // console.log(totals);
   const combined = leader === "combined";
   const group = combined
@@ -66,9 +67,9 @@ function CapexInfo() {
           <Tippy content="Residual Value">
             <p className="title small">Residual</p>
           </Tippy>
-          <Tippy content="Utilisation">
-            <p className="title small">Util</p>
-          </Tippy>
+          {/* <Tippy content="Utilisation"> */}
+            <p className="title small">Utilisation</p>
+          {/* </Tippy> */}
           <p className="title small">Total</p>
         </div>
         <div className="rows">
@@ -129,7 +130,7 @@ function CapexInfo() {
                 <p className="title small" />
                 <div className="total">
                   <p className="field display small">
-                    {roundTo(totals[leader], 2)}
+                    {formattedCost}
                   </p>
                 </div>
               </>

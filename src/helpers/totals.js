@@ -233,9 +233,18 @@ export const getWPStatus = createSelector(
     const assigned = entities.assignments.data;
     const leaders = ["lead", "pOne", "pTwo"];
     const result = {
-      lead: {},
-      pOne: {},
-      pTwo: {},
+      lead: {
+        has: {},
+        unassigned: {},
+      },
+      pOne: {
+        has: {},
+        unassigned: {},
+      },
+      pTwo: {
+        has: {},
+        unassigned: {},
+      },
     };
 
     leaders.forEach((leader) => {
@@ -253,55 +262,56 @@ export const getWPStatus = createSelector(
       const hasOther5 =
         totals.object.otherCost.breakdown[leader][4] !== undefined;
 
-      result[leader].hasMaterials = hasMaterials;
-      result[leader].hasTravel = hasTravel;
-      result[leader].hasCapex = hasCapex;
-      result[leader].hasOther1 = hasOther1;
-      result[leader].hasOther2 = hasOther2;
-      result[leader].hasOther3 = hasOther3;
-      result[leader].hasOther4 = hasOther4;
-      result[leader].hasOther5 = hasOther5;
+      result[leader].has.materials = hasMaterials;
+      result[leader].has.travel = hasTravel;
+      result[leader].has.capex = hasCapex;
+      result[leader].has.other1 = hasOther1;
+      result[leader].has.other2 = hasOther2;
+      result[leader].has.other3 = hasOther3;
+      result[leader].has.other4 = hasOther4;
+      result[leader].has.other5 = hasOther5;
 
-      result[leader].unassignedMaterials =
+      result[leader].unassigned.materials =
         hasMaterials && assigned[leader].materials.length === 0;
 
-      result[leader].unassignedTravel =
+      result[leader].unassigned.travel =
         hasTravel && assigned[leader].travel.length === 0;
 
-      result[leader].unassignedCapex =
+      result[leader].unassigned.capex =
         hasCapex && assigned[leader].capex.length === 0;
 
-      result[leader].unassignedOther1 = assigned[leader].other1
+      result[leader].unassigned.other1 = assigned[leader].other1
         ? hasOther1 && assigned[leader].other1.length === 0
         : false;
 
-      result[leader].unassignedOther2 = assigned[leader].other2
+      result[leader].unassigned.other2 = assigned[leader].other2
         ? hasOther2 && assigned[leader].other2.length === 0
         : false;
 
-      result[leader].unassignedOther3 = assigned[leader].other3
+      result[leader].unassigned.other3 = assigned[leader].other3
         ? hasOther3 && assigned[leader].other3.length === 0
         : false;
 
-      result[leader].unassignedOther4 = assigned[leader].other4
+      result[leader].unassigned.other4 = assigned[leader].other4
         ? hasOther4 && assigned[leader].other4.length === 0
         : false;
 
-      result[leader].unassignedOther5 = assigned[leader].other5
+      result[leader].unassigned.other5 = assigned[leader].other5
         ? hasOther5 && assigned[leader].other5.length === 0
         : false;
 
       const anyUnassigned =
-        result[leader].unassignedMaterials ||
-        result[leader].unassignedTravel ||
-        result[leader].unassignedCapex ||
-        result[leader].unassignedOther1 ||
-        result[leader].unassignedOther2 ||
-        result[leader].unassignedOther3 ||
-        result[leader].unassignedOther4 ||
-        result[leader].unassignedOther5;
-      result[leader].anyUnassigned = anyUnassigned
+        result[leader].unassigned.materials ||
+        result[leader].unassigned.travel ||
+        result[leader].unassigned.capex ||
+        result[leader].unassigned.other1 ||
+        result[leader].unassigned.other2 ||
+        result[leader].unassigned.other3 ||
+        result[leader].unassigned.other4 ||
+        result[leader].unassigned.other5;
+      result[leader].unassigned.any = anyUnassigned;
     });
+    console.log(result);
     return result;
   }
 );

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import LabourRow from "./labourRow";
 import { Container } from "./costsStyling";
 import { getTotalDays } from "../../store/entities/allocations";
+import { numberToCurrency } from "../../helpers";
 
 function LabourStaff() {
   const state = useSelector((state) => state);
@@ -11,13 +12,14 @@ function LabourStaff() {
     (person) => person.leader === leader && person.employment === "staff"
   );
   const {cost, days} = getTotalDays(state)[leader].staff;
+  const formattedCost = numberToCurrency(cost)
 
   return (
     <Container>
       <div className="labour">
         <div className="row titles leaderTabMargin">
           <p className="title labourNameRole">Name and Role</p>
-          <p className="title labourCost">Cost (£)</p>
+          <p className="title labourCost">Cost</p>
           <p className="title labourDays">Days</p>
         </div>
         <div className="rows">
@@ -28,7 +30,7 @@ function LabourStaff() {
             <div className="row">
               <p className="field display labourNameRole" />
               <div className="total">
-                <p className="field display labourCost">{Math.round(cost)}</p>
+                <p className="field display labourCost">{formattedCost}</p>
                 <p className="field display labourDays">{Math.round(days)}</p>
               </div>
             </div>

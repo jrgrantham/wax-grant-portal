@@ -137,6 +137,12 @@ export const TableContainer = styled.div`
     font-weight: bold;
     padding: 5px 0;
   }
+  .cost {
+    justify-content: flex-end;
+    text-align: right;
+    width: 80px;
+    font-weight: bold;
+  }
   .bottomRightCorner {
     position: absolute;
     bottom: 0;

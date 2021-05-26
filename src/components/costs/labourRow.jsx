@@ -7,6 +7,7 @@ import { getUtilisations, getDayRateById } from "../../store/entities/team";
 import { getTotalDays } from "../../store/entities/allocations";
 import { updateUserSelection } from "../../store/user";
 import UtilisationModal from "../modals/utilisationModal";
+import { numberToCurrency } from "../../helpers";
 
 function LabourRow(props) {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function LabourRow(props) {
 
   const days = daysById[personId];
   const cost = Math.round(days * dayRateById[personId]); // rounded
+  const formattedCost = numberToCurrency(cost)
   const modalId = "utilisationModel" + selectedLeader + index;
 
   function showDetails() {
@@ -35,7 +37,7 @@ function LabourRow(props) {
     <div className="row">
       {showComponent === modalId ? <UtilisationModal /> : null}
       <p className="field display labourNameRole">{`${name} (${role})`}</p>
-      <p className="field display labourCost">{cost}</p>
+      <p className="field display labourCost">{formattedCost}</p>
       <p className="field display labourDays">{days}</p>
       {utilisation ? (
         <>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { BiMenu } from "react-icons/bi";
-import { isNumberKey } from "../../helpers";
+import { isNumberKey, numberToCurrency } from "../../helpers";
 import bin from "../../images/bin-grey.png";
 import { deleteCapex, updateCapex } from "../../store/entities/capex";
 
@@ -28,6 +28,7 @@ function CapexRow(props) {
   );
   const netCost =
     Math.round((currentValue - residualValue) * utilisation) / 100;
+    const formattedCost = numberToCurrency(netCost)
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -61,9 +62,8 @@ function CapexRow(props) {
         id={index + "condition"}
         name="condition"
         value={condition}
-        onKeyDown={isNumberKey}
         onChange={onChangeHandler}
-        className="field small"
+        className="field small left"
       >
         <option value="New">New</option>
         <option value="Existing">Existing</option>
@@ -110,7 +110,7 @@ function CapexRow(props) {
           );
         })}
       </select>
-      <p className="field display small">{netCost ? netCost : null}</p>
+      <p className="field display small">{formattedCost ? formattedCost : null}</p>
       <div className="hidden deleteIcon">
         <img
           src={bin}

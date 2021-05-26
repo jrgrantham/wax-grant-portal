@@ -71,7 +71,7 @@ function AssignmentRow(props) {
   return (
     <div className="row">
       <Tippy content={titles[index]}>
-        <p className="field display assign">WP{index + 1}</p>
+        <p className="field display assign pack">WP{index + 1}</p>
       </Tippy>
       {hasMaterials ? assignButton("materials") : null}
       {hasTravel ? assignButton("travel") : null}
@@ -82,7 +82,7 @@ function AssignmentRow(props) {
           return assignButton(category, index);
         }
       })}
-      <p className="field display">{`£ ${formattedCost}`}</p>
+      <p className="field display cost">{formattedCost}</p>
     </div>
   );
 }

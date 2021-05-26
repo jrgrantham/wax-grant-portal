@@ -11,7 +11,7 @@ import {
 import add from "../../images/addMaterials.png";
 import addGrey from "../../images/add-grey.png";
 import { Container } from "./costsStyling";
-import { nextIndexOfGroup } from "../../helpers";
+import { nextIndexOfGroup, numberToCurrency } from "../../helpers";
 import TravelRow from "./travelRow";
 
 function TravelInfo() {
@@ -20,7 +20,8 @@ function TravelInfo() {
   const travel = state.entities.travel.data;
   const leader = state.user.selectedLeader;
   const { maxTravel } = state.entities.options.data;
-  const totals = getTravelCost(state);
+  const total = getTravelCost(state)[leader];
+  const formattedCost = numberToCurrency(total)
   const combined = leader === "combined";
   const group = combined
     ? travel
@@ -110,7 +111,7 @@ function TravelInfo() {
                 <p className="field display materialsQuantity" />
                 <div className="total">
                   <p className="field display materialsTotal">
-                    {totals[leader]}
+                    {formattedCost}
                   </p>
                 </div>
               </>

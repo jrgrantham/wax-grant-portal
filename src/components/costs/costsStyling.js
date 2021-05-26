@@ -20,6 +20,11 @@ export const Container = styled.div`
     text-align: right;
     text-align-last: right;
   }
+  .left {
+    justify-content: flex-start;
+    text-align: left;
+    text-align-last: left;
+  }
   .large {
     width: 200px;
   }
@@ -27,7 +32,7 @@ export const Container = styled.div`
     width: 250px;
   }
   .labourCost {
-    width: 60px;
+    width: 70px;
     text-align: right;
     justify-content: flex-end;
   }
@@ -155,7 +160,6 @@ export const Container = styled.div`
   .assignmentTable {
     width: 100%;
     .row {
-      /* border-bottom: 1px solid black */
       margin-left: 0;
     }
     .assign {
@@ -168,15 +172,21 @@ export const Container = styled.div`
       padding: 0;
       background-color: white;
     }
-    .title {
-      padding: 0;
-      background-color: white;
+    .pack {
+      text-align: right;
+      padding-right: 5px;
+      font-weight: bold;
     }
     button {
-      padding: 2px 9px;
+      padding: 2px 7px;
     }
-    button.all {
+    /* button.all {
       background-color: ${selectedYes};
+    } */
+    button.theme {
+      background-color: ${costsColor};
+      font-size: 12px;
+      font-weight: bold;
     }
     button.yes {
       color: white;
@@ -185,6 +195,20 @@ export const Container = styled.div`
     button.no {
       color: white;
       background-color: ${selectedNo};
+    }
+    .warn {
+      color: ${warningColor};
+    }
+    .message {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      font-weight: bold;
+      .icon {
+        margin: 0 15px;
+        height: 22px;
+        width: 22px;
+      }
     }
   }
 `;

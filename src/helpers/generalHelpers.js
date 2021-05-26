@@ -30,7 +30,8 @@ export function roundTo(number, decimalPlaces) {
 
 export function numberToCurrency(number) {
   if (number) {
-    let formattedCost = number.toString();
+    const rounded = Math.round(number)
+    let formattedCost = rounded.toString();
     let result = "";
     let counter = 0;
     for (let i = formattedCost.length - 1; i >= 0; i--) {
@@ -41,6 +42,7 @@ export function numberToCurrency(number) {
       result = character + result;
       counter++;
     }
+    result = "£ " + result
     return result;
   } else return 0;
 }

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { BiMenu } from "react-icons/bi";
-import { isNumberKey } from "../../helpers";
+import { isNumberKey, numberToCurrency } from "../../helpers";
 import bin from "../../images/bin-grey.png";
 import { deleteTravel, updateTravel } from "../../store/entities/travel";
 
@@ -12,6 +12,7 @@ function TravelRow(props) {
   const { travel, provided, index } = props;
   const { cost, quantity, travelId, description } = travel;
   const total = cost * quantity;
+  const formattedCost = numberToCurrency(total)
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -65,7 +66,7 @@ function TravelRow(props) {
         onChange={onChangeHandler}
         className="field materialsQuantity"
       />
-      <p className="field display materialsTotal">{total ? total : null}</p>
+      <p className="field display materialsTotal">{formattedCost ? formattedCost : null}</p>
       <div className="hidden deleteIcon">
         <img
           src={bin}

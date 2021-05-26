@@ -54,16 +54,13 @@ function AssignmentInfo() {
       <div key={index} className="select title assign">
         {all ? (
           <Tippy content={`Remove ${text} cost from all WPs`}>
-            <button
-              onClick={() => resetCategory(category)}
-              className="no"
-            >
+            <button onClick={() => resetCategory(category)} className="theme">
               None
             </button>
           </Tippy>
         ) : (
           <Tippy content={`Assign ${text} cost to all WPs`}>
-            <button onClick={() => assignAll(category)} className="yes">
+            <button onClick={() => assignAll(category)} className="theme">
               All
             </button>
           </Tippy>
@@ -80,23 +77,47 @@ function AssignmentInfo() {
             <h3>Reset assigned costs</h3>
           </button>
         </div>
-        {status.anyUnassigned ? (
-          <div className="bottomMiddle">
-            <Tippy content="All costs must be assigned to a work package">
-              <img src={warning} alt="warning" />
-            </Tippy>
-          </div>
-        ) : null}
         <div className="row titles leaderTabMargin">
-          <p className="title assign"></p>
-          {status.hasMaterials ? (
-            <p className="title assign">Materials</p>
+          <p className="title assign" />
+          {status.has.materials ? (
+            <p
+              className={
+                status.unassigned.materials
+                  ? "title assign warn"
+                  : "title assign"
+              }
+            >
+              Materials
+            </p>
           ) : null}
-          {status.hasTravel ? <p className="title assign">Travel</p> : null}
-          {status.hasCapex ? <p className="title assign">CapEx</p> : null}
+          {status.has.travel ? (
+            <p
+              className={
+                status.unassigned.travel ? "title assign warn" : "title assign"
+              }
+            >
+              Travel
+            </p>
+          ) : null}
+          {status.has.capex ? (
+            <p
+              className={
+                status.unassigned.capex ? "title assign warn" : "title assign"
+              }
+            >
+              CapEx
+            </p>
+          ) : null}
           {others.map((other, index) => {
             return (
-              <div key={index} className="title assign">
+              <div
+                key={index}
+                className={
+                  status.unassigned["other" + (index + 1)]
+                    ? "title assign warn"
+                    : "title assign"
+                }
+              >
                 <p>Other</p>
                 <Tippy content={other.description}>
                   <div className="info">
@@ -106,7 +127,7 @@ function AssignmentInfo() {
               </div>
             );
           })}
-          <p className="title">Cost</p>
+          <p className="title cost">Cost</p>
         </div>
         <div className="rows">
           {workPackageIds.map((pack, index) => {
@@ -116,18 +137,18 @@ function AssignmentInfo() {
                 index={index}
                 pack={pack}
                 others={others}
-                hasCapex={status.hasCapex}
-                hasMaterials={status.hasMaterials}
-                hasTravel={status.hasTravel}
+                hasCapex={status.has.capex}
+                hasMaterials={status.has.materials}
+                hasTravel={status.has.travel}
               />
             );
           })}
 
           <div className="row">
             <p className="title assign"></p>
-            {status.hasMaterials ? assignAllButton("materials") : null}
-            {status.hasTravel ? assignAllButton("travel") : null}
-            {status.hasCapex ? assignAllButton("capex") : null}
+            {status.has.materials ? assignAllButton("materials") : null}
+            {status.has.travel ? assignAllButton("travel") : null}
+            {status.has.capex ? assignAllButton("capex") : null}
             {others.map((_, index) => {
               {
                 const category = "other" + (index + 1);
@@ -135,6 +156,13 @@ function AssignmentInfo() {
               }
             })}
           </div>
+          {status.unassigned.any ? (
+            <div className="warn message">
+              {/* <div className="icon"><img src={warning} alt="warning"/></div> */}
+              <p>All costs must be assigned to at least one work package</p>
+              {/* <div className="icon"><img src={warning} alt="warning"/></div> */}
+            </div>
+          ) : null}
         </div>
       </div>
     </Container>

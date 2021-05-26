@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { BiMenu } from "react-icons/bi";
-import { isNumberKey } from "../../helpers";
+import { isNumberKey, numberToCurrency } from "../../helpers";
 import bin from "../../images/bin-grey.png";
 import { deleteMaterial, updateMaterial } from "../../store/entities/materials";
 
@@ -12,6 +12,7 @@ function MaterialsRow(props) {
   const { material, provided, index } = props;
   const { cost, quantity, materialId, description } = material;
   const total = cost * quantity
+  const formattedCost = numberToCurrency(total)
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -67,7 +68,7 @@ function MaterialsRow(props) {
         className="field materialsQuantity"
       />
       <p className="field display materialsTotal">
-        {total ? total : null}
+        {formattedCost ? formattedCost : null}
       </p>
       <div className="hidden deleteIcon">
         <img

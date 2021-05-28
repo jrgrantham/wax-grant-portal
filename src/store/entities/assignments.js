@@ -50,6 +50,26 @@ const slice = createSlice({
         assignments.data[leader][category].splice(index, 1);
       }
     },
+    // ------------------
+    addAssignment: (assignments, action) => {
+      const { leader, category, workPackageId } = action.payload;
+      const index = assignments.data[leader][category].indexOf(workPackageId);
+      if (index < 0) {
+        assignments.data[leader][category].push(workPackageId);
+      } else {
+        assignments.data[leader][category].splice(index, 1);
+      }
+    },
+    deleteAssignment: (assignments, action) => {
+      const { leader, category, workPackageId } = action.payload;
+      const index = assignments.data[leader][category].indexOf(workPackageId);
+      if (index < 0) {
+        assignments.data[leader][category].push(workPackageId);
+      } else {
+        assignments.data[leader][category].splice(index, 1);
+      }
+    },
+    // ------------------
     assignAllToCategory: (assignments, action) => {
       const { leader, category, workPackageIds } = action.payload;
       assignments.data[leader][category] = workPackageIds;

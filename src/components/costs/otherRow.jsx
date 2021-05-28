@@ -1,15 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 import { BiMenu } from "react-icons/bi";
 import { isNumberKey, numberToCurrency } from "../../helpers";
 import bin from "../../images/bin-grey.png";
 import { deleteOther, updateOther } from "../../store/entities/other";
+import { toggleAssignment } from "../../store/entities/assignments";
 
 function OtherRow(props) {
   const dispatch = useDispatch();
-  const { other, provided, index } = props;
+  const { other, provided, index, leader } = props;
   const { cost, otherId, description } = other;
   const formattedCost = numberToCurrency(cost)
 
@@ -32,13 +33,14 @@ function OtherRow(props) {
 
   function handleDeleteOther() {
     dispatch(deleteOther({ otherId }));
+    dispatch(toggleAssignment({leader, }))
   }
 
   return (
     <div className="row">
       <Tippy content="Drag to reorder rows">
         <div {...provided.dragHandleProps} className="hidden grabHandle">
-          <BiMenu />
+          {/* <BiMenu /> */}
         </div>
       </Tippy>
       <input

@@ -1,15 +1,15 @@
 import React from "react";
 import Tippy from "@tippy.js/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getWorkPackageLabourCost } from "../../store/entities/allocations";
-import { store } from "../../store";
 import { getWPCost, numberToCurrency } from "../../helpers";
 import { toggleAssignment } from "../../store/entities/assignments";
 import { getWorkPackageTitles } from "../../store/entities/tasks";
 
 function AssignmentRow(props) {
+  console.log('AssignmentRow');
   const { index, pack, others, hasMaterials, hasTravel, hasCapex } = props;
-  const state = store.getState();
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { selectedLeader } = state.user;
   const assigned = state.entities.assignments.data[selectedLeader];
@@ -18,32 +18,10 @@ function AssignmentRow(props) {
   const labourCosts = getWorkPackageLabourCost(state)[pack];
   const additionalCosts = getWPCost(state)[pack].combined;
   const totalCost = labourCosts + additionalCosts;
+  const formattedCost = numberToCurrency(totalCost);
 
-  // function formattedCost() {
-  //   let formattedCost = totalCost.toString();
-  //   console.log(formattedCost.length);
-  //   // totalCost.splice(',', 3)
-  //   // const lastThree = formattedCost.slice(-3);
-  //   // const lastThree = formattedCost.substr(formattedCost.length - 3)
-  //   let result = "";
-  //   for (let i = formattedCost.length - 1; i >= 0; i--) {
-  //     const character = formattedCost.charAt(i);
-  //     console.log(character);
-  //     if (
-  //       (i !== formattedCost.length - 1 && result.length % 3 === 0) ||
-  //       (i < formattedCost.length - 1 && result.length % (3 + 1) === 0)
-  //     ) {
-  //       result = "," + result;
-  //     }
-  //     result = character + result;
-  //   }
-  //   console.log(result);
-  //   return result;
-  // }
-
-  const formattedCost = numberToCurrency(totalCost)
-
-  function toggleAssign(category) {
+  function toggleAssign(category, other) {
+    console.log(other);
     dispatch(
       toggleAssignment({
         leader: selectedLeader,
@@ -53,12 +31,12 @@ function AssignmentRow(props) {
     );
   }
 
-  function assignButton(category, index) {
+  function assignButton(category, index, other) {
     const status = assigned[category].includes(pack);
     return (
       <button
         key={index}
-        onClick={() => toggleAssign(category)}
+        onClick={() => toggleAssign(category, other)}
         className={
           status ? "field display assign yes" : "field display assign no"
         }
@@ -76,10 +54,10 @@ function AssignmentRow(props) {
       {hasMaterials ? assignButton("materials") : null}
       {hasTravel ? assignButton("travel") : null}
       {hasCapex ? assignButton("capex") : null}
-      {others.map((_, index) => {
+      {others.map((other, index) => {
         {
           const category = "other" + (index + 1);
-          return assignButton(category, index);
+          return assignButton(category, index, other);
         }
       })}
       <p className="field display cost">{formattedCost}</p>

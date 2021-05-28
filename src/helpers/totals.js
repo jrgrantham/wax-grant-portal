@@ -19,7 +19,7 @@ export const getTotalsByCategory = createSelector(
     const capexCost = getCapexCost(state);
     const otherCost = getOtherCost(state);
 
-    const columns = ["lead", "pOne", "pTwo", "combined"];
+    const leaderList = ["lead", "pOne", "pTwo", "combined"];
 
     const leaders = [];
     const staff = [];
@@ -27,7 +27,7 @@ export const getTotalsByCategory = createSelector(
     const travel = [];
     const other = [];
     const capex = [];
-    columns.forEach((leader) => {
+    leaderList.forEach((leader) => {
       const total =
         Math.round(labour[leader].cost) +
         Math.round(materialsCost[leader]) +
@@ -100,8 +100,8 @@ export const getTotalsByLeader = createSelector(
       combined: 0,
       category: "Total",
     };
-    const columns = ["lead", "pOne", "pTwo", "combined"];
-    columns.forEach((leader) => {
+    const leaderList = ["lead", "pOne", "pTwo", "combined"];
+    leaderList.forEach((leader) => {
       const total =
         Math.round(labour[leader].cost) +
         Math.round(materialsCost[leader]) +
@@ -171,6 +171,8 @@ export const getWPCost = createSelector(
     const assignments = state.entities.assignments.data;
 
     const leaders = ["lead", "pOne", "pTwo"];
+
+
     const categories = [
       "materials",
       "travel",
@@ -182,6 +184,8 @@ export const getWPCost = createSelector(
       "other5",
     ];
 
+    // get otherID for each leader and apply assign to categories
+
     function getCategoryCosts(leader) {
       const costs = {
         materials: getMaterialsCost(state)[leader],
@@ -192,7 +196,7 @@ export const getWPCost = createSelector(
       const count = others.length;
       for (let i = 0; i < count; i++) {
         const key = "other" + (i + 1);
-        costs[key] = others[i].cost;
+        costs[key] = others[i].cost; 
       }
       return costs;
     }
@@ -220,6 +224,7 @@ export const getWPCost = createSelector(
         });
       });
     });
+    console.log(result);
     return result;
   }
 );

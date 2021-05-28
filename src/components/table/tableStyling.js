@@ -37,6 +37,12 @@ export const TableContainer = styled.div`
     display: flex;
     flex-direction: column;
   }
+  .table {
+    position: relative;
+    flex-grow: 1;
+    margin-bottom: ${props => props.data.marginBottom};
+    transition: margin-bottom 0.3s;
+  }
   .leaderTabMargin {
     margin-top: ${tabBottomMargin};
   }
@@ -73,7 +79,7 @@ export const TableContainer = styled.div`
     height: 16px;
   }
   .rows {
-    margin-bottom: 25px;
+    margin-bottom: 60px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

@@ -32,6 +32,7 @@ export const tabHeight = "40px";
 export const tabBottomMargin = "20px";
 export const tableInputMargin = "5px 20px 5px 0px";
 export const tableInputUnderline = "rgba(234, 234, 234, 1)";
+export const costOverviewMargin = "190px";
 
 export const wpInfoColor = "rgba(47, 86, 151, 1)";
 export const wpScheduleColor = "rgba(144, 39, 142, 1)";

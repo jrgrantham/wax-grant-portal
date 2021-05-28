@@ -23,6 +23,8 @@ function AssignmentInfo() {
   const others = totals.other[leader];
   const assignments = state.entities.assignments.data;
 
+  console.log(others[0]);
+
   function assignAll(category) {
     dispatch(
       assignAllToCategory({
@@ -72,11 +74,11 @@ function AssignmentInfo() {
   return (
     <Container>
       <div className="assignmentTable">
-        <div className="bottomLeftCorner">
+        {/* <div className="bottomLeftCorner">
           <button onClick={reset}>
             <h3>Reset assigned costs</h3>
           </button>
-        </div>
+        </div> */}
         <div className="row titles leaderTabMargin">
           <p className="title assign" />
           {status.has.materials ? (

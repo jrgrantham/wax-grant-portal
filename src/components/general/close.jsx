@@ -39,10 +39,10 @@ export default Close;
 
 const Container = styled.div`
   position: absolute;
-  top: -11px;
-  right: -11px;
-  height: 30px;
-  width: 30px;
+  top: -10px;
+  right: -10px;
+  height: 25px;
+  width: 25px;
   cursor: pointer;
   img {
     width: 100%;

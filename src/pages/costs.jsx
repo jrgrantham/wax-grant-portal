@@ -68,6 +68,7 @@ function Costs() {
   const data = {
     backgroundColor: menuData.backgroundColor,
     // maxHeight: "550px",
+    marginBottom: showComponent === "" ? "-190px " : "0px",
   };
 
   const showLeaderTabs = {
@@ -82,8 +83,12 @@ function Costs() {
     assignment: 3,
   }; // check this
 
-  function showOverview(value) {
-    dispatch(updateUserSelection({ key: "showComponent", value }));
+  function showOverview() {
+    if (showComponent === "")
+      dispatch(
+        updateUserSelection({ key: "showComponent", value: "overview" })
+      );
+    else dispatch(updateUserSelection({ key: "showComponent", value: "" }));
   }
 
   function content() {
@@ -103,27 +108,16 @@ function Costs() {
       <div className="displayArea">
         <LeftMenu data={menuData} />
         <div className="content">
-          <div className="bottomRightCorner">
-            {showComponent === "overview" ? (
-              <button onClick={() => showOverview("")}>
-                <h3>Hide Overview</h3>
-              </button>
-            ) : (
-              <button onClick={() => showOverview("overview")}>
-                <h3>Show Overview</h3>
-              </button>
-            )}
-          </div>
-          {showLeaderTabs[selectedOption] ? (
-            <LeaderTabs
-              viewCombinedTab={showLeaderTabs[selectedOption] === 4}
-            />
-          ) : null}
-          <div>
+          <div className="table">
             {status ? <MarkedComplete /> : null}
+            {showLeaderTabs[selectedOption] ? (
+              <LeaderTabs
+                viewCombinedTab={showLeaderTabs[selectedOption] === 4}
+              />
+            ) : null}
             {content()}
-            {showComponent === "overview" ? <OverviewModal /> : null}
           </div>
+          <OverviewModal />
         </div>
       </div>
     </TableContainer>

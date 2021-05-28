@@ -70,11 +70,12 @@ export const getOtherCost = createSelector(
       },
     };
     other.data.forEach((other) => {
-      const { cost, leader, description } = other;
+      const { cost, leader, description, otherId } = other;
       costs[leader] = costs[leader] + cost;
       costs.combined = costs.combined + cost;
-      costs.breakdown[leader].push({ description, cost });
+      costs.breakdown[leader].push({ description, cost, otherId });
     });
+    console.log(costs);
     return costs;
   }
 );

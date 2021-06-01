@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {
   costsColor,
+  costsFontColor,
   fontColorGrey,
   navBackground,
   okColor,
@@ -13,10 +14,16 @@ import {
 
 export const Container = styled.div`
   display: flex;
+  .total {
+    p {
+      font-size: 18px;
+      color: ${costsColor};
+    }
+  }
   .small {
     display: flex;
     justify-content: flex-end;
-    width: 65px;
+    width: 75px;
     text-align: right;
     text-align-last: right;
   }
@@ -32,7 +39,7 @@ export const Container = styled.div`
     width: 250px;
   }
   .labourCost {
-    width: 70px;
+    width: 80px;
     text-align: right;
     justify-content: flex-end;
   }
@@ -48,7 +55,7 @@ export const Container = styled.div`
     /* width: 150px; */
     font-weight: 600;
     color: ${warningColor};
-    margin-left: 15px;
+    margin: 0 5px;
   }
   .notes {
     margin-left: 15px;
@@ -59,19 +66,20 @@ export const Container = styled.div`
     font-size: 14px;
     color: ${fontColorGrey};
   }
-  .warning {
+  .warningButton {
+    border: 1px solid ${warningColor};
     margin-left: 40px;
+    display: flex;
+    padding: 2px 15px;
+  }
+  .warningIcon {
     display: flex;
     min-height: 29px;
     min-width: 29px;
     max-height: 29px;
     max-width: 29px;
-    border: 1px solid ${warningColor};
     border-radius: 6px;
     padding: 5px;
-    cursor: pointer;
-    img {
-    }
   }
   .deleteIcon {
     position: absolute;
@@ -111,31 +119,40 @@ export const Container = styled.div`
     }
     .total {
       font-weight: bold;
+      height: 45px;
     }
     .column {
-      flex-grow: 1;
-      flex-basis: 0;
+      /* flex-grow: 1; */
+      /* flex-basis: 0; */
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      margin-right: 20px;
-      padding-right: 35px;
+      /* margin-right: 20px; */
+      /* padding-right: 35px; */
       max-width: 140px;
-      /* border-right: 1px solid black */
+      border-right: 1px solid #c1c1c1;
+      margin: 0;
+      height: 45px;
+    }
+    .row {
+      margin-top: 0;
+      margin-bottom: 0;
     }
     .percent {
       font-size: 12px;
       font-weight: bold;
-      background-color: lightgray;
+      /* background-color: lightgray; */
       color: white;
       padding: 2px;
       border-radius: 6px;
       width: 60px;
+      margin-right: 10px;
       text-align: center;
     }
     .double {
       text-align: right;
+      margin-right: 10px;
     }
     .category {
       font-weight: bold;
@@ -159,6 +176,10 @@ export const Container = styled.div`
   }
   .assignmentTable {
     width: 100%;
+    &:hover .hidden {
+      transition: opacity 0.3s;
+      opacity: 1;
+    }
     .row {
       margin-left: 0;
     }
@@ -168,25 +189,32 @@ export const Container = styled.div`
       text-align: center;
       justify-content: center;
     }
+    .unassigned {
+      position: absolute;
+      height: 18px;
+      bottom: -13px;
+    }
     .title {
       padding: 0;
       background-color: white;
+      height: 30px;
     }
     .pack {
-      text-align: right;
-      padding-right: 5px;
+      text-align: left;
+      padding-left: 20px;
       font-weight: bold;
     }
     button {
       padding: 2px 7px;
     }
-    /* button.all {
-      background-color: ${selectedYes};
-    } */
+    .hidden {
+      opacity: 0;
+    }
     button.theme {
       background-color: ${costsColor};
       font-size: 12px;
       font-weight: bold;
+      height: 20px;
     }
     button.yes {
       color: white;

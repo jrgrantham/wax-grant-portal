@@ -3,18 +3,15 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserSelection } from "../../store/user";
 import styled from "styled-components";
-import Close from "../general/close";
-import {
-  costsColor,
-  costsFontColor,
-  numberToCurrency,
-  wpInfoColor,
-} from "../../helpers";
+import { costsColor, costsFontColor, numberToCurrency } from "../../helpers";
 import { getTotalsByCategory } from "../../helpers";
+import Close from "../general/close";
 
 function OverviewModal() {
   const dispatch = useDispatch();
   const showComponent = useSelector((state) => state.user.showComponent); // check this
+  const breakdownComponent =
+    useSelector((state) => state.user.selectedCostsOption) === "breakdown"; // check this
   const { leaders, percents, grants, matchFunding } = getTotalsByCategory(
     store.getState()
   );
@@ -27,16 +24,24 @@ function OverviewModal() {
     } else dispatch(updateUserSelection({ key: "showComponent", value: "" }));
   }
 
-  const offset = showComponent === "" ? "-190px" : "0px";
+  const offset =
+    showComponent === "overview" && !breakdownComponent ? "0px" : "-190px";
+
+  const closeData = {
+    key: "showTaskEditModal",
+  };
 
   return (
     <Container offset={offset}>
-      {/* <Container id="background"> */}
-      {/* <Close data={{ key: "showComponent" }} /> */}
-      <div className="aboveRight">
-        <button onClick={showOverview}>
-          <h3>{showComponent === "" ? "Show" : "Hide"} Overview</h3>
-        </button>
+      {!breakdownComponent && showComponent === "" ? (
+        <div className="aboveRight">
+          <button onClick={showOverview}>
+            <h3>Show Overview</h3>
+          </button>
+        </div>
+      ) : null}
+      <div className="close">
+        <Close data={closeData} />
       </div>
       <div className="modalRow top">
         <h3 className="category">Overview</h3>
@@ -105,13 +110,18 @@ const Container = styled.div`
       color: gray;
     }
   }
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
   .modalRow {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 7px 20px;
-  padding: 7px 80px;
+    padding: 7px 80px;
   }
   .category {
     font-weight: bold;

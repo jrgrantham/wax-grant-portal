@@ -96,7 +96,7 @@ function OtherInfo() {
                 </button>
               </Tippy>
             ) : (
-              <Tippy content="Add other">
+              <Tippy content="Add other item">
                 <button className="addIcon" onClick={handleAddOther}>
                   <img src={add} alt="add" />
                 </button>
@@ -107,7 +107,7 @@ function OtherInfo() {
                 <p className="field display materialsDescription" />
                 <div className="total">
                   <p className="field display materialsCost">
-                    {total}
+                    {numberToCurrency(total)}
                   </p>
                 </div>
               </>

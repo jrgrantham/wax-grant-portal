@@ -34,6 +34,7 @@ function AssignmentInfo() {
       })
     );
   }
+
   function resetCategory(category) {
     dispatch(
       assignNoneToCategory({
@@ -43,9 +44,9 @@ function AssignmentInfo() {
     );
   }
 
-  function reset() {
-    dispatch(resetAssignments({ leader }));
-  }
+  // function reset() {
+  //   dispatch(resetAssignments({ leader }));
+  // }
 
   function assignAllButton(category, index) {
     const assignedCount = assignments[leader][category].length;
@@ -53,7 +54,7 @@ function AssignmentInfo() {
     const all = assignedCount === wpCount;
     const text = category.charAt(0) === "o" ? "other" : category;
     return (
-      <div key={index} className="select title assign">
+      <div key={index} className="select title assign hidden">
         {all ? (
           <Tippy content={`Remove ${text} cost from all WPs`}>
             <button onClick={() => resetCategory(category)} className="theme">
@@ -71,66 +72,51 @@ function AssignmentInfo() {
     );
   }
 
+  function heading(title, index, description) {
+    let key = title.toLowerCase();
+    if (title === "Other") key = key + (index + 1);
+    const hasCost = status.has[key];
+    const unassigned = status.unassigned[key];
+    if (hasCost) {
+      return (
+        <div
+          key={index}
+          className={unassigned ? "title assign warn" : "title assign"}
+        >
+            <p>{title}</p>
+            {title === "Other" ? (
+              <Tippy content={description}>
+                <div className="info">
+                  <img src={qMark} alt="add" />
+                </div>
+              </Tippy>
+            ) : null}
+          {unassigned ? (
+            <Tippy content="Costs must be assigned to a work package">
+              <div className="unassigned">
+                <img src={warning} alt="warning" />
+              </div>
+            </Tippy>
+          ) : null}
+        </div>
+      );
+    }
+  }
+
   return (
     <Container>
       <div className="assignmentTable">
-        {/* <div className="bottomLeftCorner">
-          <button onClick={reset}>
-            <h3>Reset assigned costs</h3>
-          </button>
-        </div> */}
         <div className="row titles leaderTabMargin">
           <p className="title assign" />
-          {status.has.materials ? (
-            <p
-              className={
-                status.unassigned.materials
-                  ? "title assign warn"
-                  : "title assign"
-              }
-            >
-              Materials
-            </p>
-          ) : null}
-          {status.has.travel ? (
-            <p
-              className={
-                status.unassigned.travel ? "title assign warn" : "title assign"
-              }
-            >
-              Travel
-            </p>
-          ) : null}
-          {status.has.capex ? (
-            <p
-              className={
-                status.unassigned.capex ? "title assign warn" : "title assign"
-              }
-            >
-              CapEx
-            </p>
-          ) : null}
+          {heading("Materials")}
+          {heading("Travel")}
+          {heading("CapEx")}
           {others.map((other, index) => {
-            return (
-              <div
-                key={index}
-                className={
-                  status.unassigned["other" + (index + 1)]
-                    ? "title assign warn"
-                    : "title assign"
-                }
-              >
-                <p>Other</p>
-                <Tippy content={other.description}>
-                  <div className="info">
-                    <img src={qMark} alt="add" />
-                  </div>
-                </Tippy>
-              </div>
-            );
+            return heading("Other", index, other.description);
           })}
           <p className="title cost">Cost</p>
         </div>
+
         <div className="rows">
           {workPackageIds.map((pack, index) => {
             return (
@@ -158,13 +144,6 @@ function AssignmentInfo() {
               }
             })}
           </div>
-          {status.unassigned.any ? (
-            <div className="warn message">
-              {/* <div className="icon"><img src={warning} alt="warning"/></div> */}
-              <p>All costs must be assigned to at least one work package</p>
-              {/* <div className="icon"><img src={warning} alt="warning"/></div> */}
-            </div>
-          ) : null}
         </div>
       </div>
     </Container>

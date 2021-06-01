@@ -98,7 +98,7 @@ function TravelInfo() {
                 </button>
               </Tippy>
             ) : (
-              <Tippy content="Add travel">
+              <Tippy content="Add travel item">
                 <button className="addIcon" onClick={handleAddTravel}>
                   <img src={add} alt="add" />
                 </button>

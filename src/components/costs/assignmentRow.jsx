@@ -7,7 +7,7 @@ import { toggleAssignment } from "../../store/entities/assignments";
 import { getWorkPackageTitles } from "../../store/entities/tasks";
 
 function AssignmentRow(props) {
-  console.log('AssignmentRow');
+  console.log("AssignmentRow");
   const { index, pack, others, hasMaterials, hasTravel, hasCapex } = props;
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -34,15 +34,17 @@ function AssignmentRow(props) {
   function assignButton(category, index, other) {
     const status = assigned[category].includes(pack);
     return (
-      <button
-        key={index}
-        onClick={() => toggleAssign(category, other)}
-        className={
-          status ? "field display assign yes" : "field display assign no"
-        }
-      >
-        {status ? "Yes" : "No"}
-      </button>
+      <div className='hover'>
+        <button
+          key={index}
+          onClick={() => toggleAssign(category, other)}
+          className={
+            status ? "field display assign yes" : "field display assign no"
+          }
+        >
+          {status ? "Yes" : "No"}
+        </button>
+      </div>
     );
   }
 

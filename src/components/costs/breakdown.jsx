@@ -1,7 +1,7 @@
 import React from "react";
 import { store } from "../../store";
 import { Container } from "./costsStyling";
-import { getTotalsByLeader } from "../../helpers";
+import { getTotalsByLeader, numberToCurrency } from "../../helpers";
 
 function BreakdownInfo() {
   const state = store.getState();
@@ -28,12 +28,10 @@ function BreakdownInfo() {
     <Container>
       <div className="breakdownTable">
         <div className="row titles leaderTabMargin">
-          <p className="title column category">Category</p>
+          <p className="title column category"></p>
           <p className="title column center">Lead</p>
           <p className="title column center">Partner 1</p>
-          {/* {pTwo ?  */}
           <p className="title column center">Partner 2</p>
-          {/*  : null} */}
           <p className="title column center">Total</p>
         </div>
         <div className="rows">
@@ -43,26 +41,26 @@ function BreakdownInfo() {
                 <p className="field display column category">{row.category}</p>
                 <div className="column">
                   <p className="field display double">
-                    {row.lead ? Math.round(row.lead) : null}
+                    {row.lead ? numberToCurrency(row.lead) : null}
                   </p>
                   {percent(index, row.lead, lead)}
                 </div>
                 <div className="column">
                   <p className="field display double">
-                    {row.pOne ? Math.round(row.pOne) : null}
+                    {row.pOne ? numberToCurrency(row.pOne) : null}
                   </p>
                   {percent(index, row.pOne, pOne)}
                 </div>
                 {/* {pTwo ? ( */}
                 <div className="column">
                   <p className="field display double">
-                    {row.pTwo ? Math.round(row.pTwo) : null}
+                    {row.pTwo ? numberToCurrency(row.pTwo) : null}
                   </p>
                   {percent(index, row.pTwo, pTwo)}
                 </div>
                 {/* ) : null} */}
                 <div className="column">
-                  <p className="field display double">{Math.round(row.combined)}</p>
+                  <p className="field display double">{numberToCurrency(row.combined)}</p>
                   {percent(index, row.combined, combined)}
                 </div>
               </div>

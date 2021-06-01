@@ -83,13 +83,13 @@ function Costs() {
     assignment: 3,
   }; // check this
 
-  function showOverview() {
-    if (showComponent === "")
-      dispatch(
-        updateUserSelection({ key: "showComponent", value: "overview" })
-      );
-    else dispatch(updateUserSelection({ key: "showComponent", value: "" }));
-  }
+  // function showOverview() {
+  //   if (showComponent === "")
+  //     dispatch(
+  //       updateUserSelection({ key: "showComponent", value: "overview" })
+  //     );
+  //   else dispatch(updateUserSelection({ key: "showComponent", value: "" }));
+  // }
 
   function content() {
     if (selectedOption === "labour") return <LabourStaff />;

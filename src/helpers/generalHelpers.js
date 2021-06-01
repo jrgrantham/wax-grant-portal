@@ -42,7 +42,7 @@ export function numberToCurrency(number) {
       result = character + result;
       counter++;
     }
-    result = "£ " + result
+    result = "£" + result
     return result;
   } else return 0;
 }

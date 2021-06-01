@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UtilisationModalRow from "./utilisationModalRow";
 import Close from "../general/close";
-import { wpInfoColor } from "../../helpers";
+import { costsColor, wpInfoColor } from "../../helpers";
 import { getUtilisations } from "../../store/entities/team";
 
 toast.configure();
@@ -103,7 +103,7 @@ const Container = styled.div`
   .top {
     height: 50px;
     /* margin-bottom: 10px; */
-    background-color: ${wpInfoColor};
+    background-color: ${costsColor};
     color: white;
     padding: 0 20px;
     border-radius: 6px 6px 0px 0px;

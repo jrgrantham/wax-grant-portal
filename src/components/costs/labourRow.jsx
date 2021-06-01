@@ -21,7 +21,7 @@ function LabourRow(props) {
 
   const days = daysById[personId];
   const cost = Math.round(days * dayRateById[personId]); // rounded
-  const formattedCost = numberToCurrency(cost)
+  const formattedCost = numberToCurrency(cost);
   const modalId = "utilisationModel" + selectedLeader + index;
 
   function showDetails() {
@@ -40,16 +40,19 @@ function LabourRow(props) {
       <p className="field display labourCost">{formattedCost}</p>
       <p className="field display labourDays">{days}</p>
       {utilisation ? (
-        <>
-          <Tippy content="Click here for details">
-            <div onClick={showDetails} className="warning">
+        <Tippy content="Click here for details">
+          <button onClick={showDetails} className="warningButton">
+            <div className="warningIcon">
               <img src={warning} alt="warning" />
             </div>
-          </Tippy>
-          <p className="field display labourOverutilised">Overutilised</p>
-        </>
+            <span className="field display labourOverutilised">
+              Overutilised
+            </span>
+          </button>
+        </Tippy>
       ) : null}
     </div>
   );
 }
+
 export default LabourRow;

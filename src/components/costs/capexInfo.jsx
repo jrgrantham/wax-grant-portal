@@ -56,20 +56,20 @@ function CapexInfo() {
     <Container>
       <div className="materials">
         <div className="row titles leaderTabMargin">
-          <p className="title small">Condition</p>
+          <p className="title small left">Condition</p>
           <p className="title large">Description</p>
           <Tippy content="Depreciation Period (months)">
-            <p className="title small">Deprec</p>
+            <p className="title small">Depreciation</p>
           </Tippy>
           <Tippy content="Current Value">
-            <p className="title small">Current</p>
+            <p className="title small">Value</p>
           </Tippy>
           <Tippy content="Residual Value">
             <p className="title small">Residual</p>
           </Tippy>
-          {/* <Tippy content="Utilisation"> */}
+          <Tippy content="Utilisation %">
             <p className="title small">Utilisation</p>
-          {/* </Tippy> */}
+          </Tippy>
           <p className="title small">Total</p>
         </div>
         <div className="rows">
@@ -114,7 +114,7 @@ function CapexInfo() {
                 </button>
               </Tippy>
             ) : (
-              <Tippy content="Add CapEx">
+              <Tippy content="Add capex item">
                 <button className="addIcon" onClick={handleAddCapex}>
                   <img src={add} alt="add" />
                 </button>

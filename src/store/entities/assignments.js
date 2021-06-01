@@ -43,33 +43,17 @@ const slice = createSlice({
   reducers: {
     toggleAssignment: (assignments, action) => {
       const { leader, category, workPackageId } = action.payload;
+      if (!assignments.data[leader][category])
+        assignments.data[leader][category] = [];
       const index = assignments.data[leader][category].indexOf(workPackageId);
       if (index < 0) {
         assignments.data[leader][category].push(workPackageId);
       } else {
         assignments.data[leader][category].splice(index, 1);
       }
+      // const otherIndex = assignments.data[leader][category].indexOf(workPackageId);
+      // assignments.data[leader][otherId] = [workPackageId];
     },
-    // ------------------
-    addAssignment: (assignments, action) => {
-      const { leader, category, workPackageId } = action.payload;
-      const index = assignments.data[leader][category].indexOf(workPackageId);
-      if (index < 0) {
-        assignments.data[leader][category].push(workPackageId);
-      } else {
-        assignments.data[leader][category].splice(index, 1);
-      }
-    },
-    deleteAssignment: (assignments, action) => {
-      const { leader, category, workPackageId } = action.payload;
-      const index = assignments.data[leader][category].indexOf(workPackageId);
-      if (index < 0) {
-        assignments.data[leader][category].push(workPackageId);
-      } else {
-        assignments.data[leader][category].splice(index, 1);
-      }
-    },
-    // ------------------
     assignAllToCategory: (assignments, action) => {
       const { leader, category, workPackageIds } = action.payload;
       assignments.data[leader][category] = workPackageIds;

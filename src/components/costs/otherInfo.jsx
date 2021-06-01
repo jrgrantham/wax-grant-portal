@@ -60,17 +60,17 @@ function OtherInfo() {
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {group.map((other, index) => {
                     return (
-                      // <Draggable
-                      //   key={other.otherId}
-                      //   draggableId={other.otherId}
-                      //   index={index}
-                      // >
-                      //   {(provided) => (
-                      //     <div
-                      //       className="MonthContainer packBackground"
-                      //       ref={provided.innerRef}
-                      //       {...provided.draggableProps}
-                      //     >
+                      <Draggable
+                        key={other.otherId}
+                        draggableId={other.otherId}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            className="MonthContainer packBackground"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                          >
                             <OtherRow
                               provided={provided}
                               index={index}
@@ -78,9 +78,9 @@ function OtherInfo() {
                               other={other}
                               leader={leader}
                             />
-                      //     </div>
-                      //   )}
-                      // </Draggable>
+                          </div>
+                        )}
+                      </Draggable>
                     );
                   })}
                   {provided.placeholder}

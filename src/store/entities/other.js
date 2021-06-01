@@ -75,7 +75,24 @@ export const getOtherCost = createSelector(
       costs.combined = costs.combined + cost;
       costs.breakdown[leader].push({ description, cost, otherId });
     });
-    console.log(costs);
     return costs;
+  }
+);
+
+export const getOtherIds = createSelector(
+  (state) => state.entities.other,
+  (other) => {
+    console.log("getOtherIds");
+    const ids = {
+      lead: [],
+      pOne: [],
+      pTwo: [],
+    };
+    other.data.forEach((other) => {
+      const { leader, otherId } = other;
+      ids[leader].push(otherId);
+    });
+    console.log(ids);
+    return ids;
   }
 );

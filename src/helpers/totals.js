@@ -4,7 +4,7 @@ import { getTotalDays } from "../store/entities/allocations";
 import { getMaterialsCost } from "../store/entities/materials";
 import { getTravelCost } from "../store/entities/travel";
 import { getCapexCost } from "../store/entities/capex";
-import { getOtherCost } from "../store/entities/other";
+import { getOtherCost, getOtherIds } from "../store/entities/other";
 import { getFundingLevel, getOverheads } from "../store/entities/project";
 import { getWorkPackageIds } from "../store/entities/tasks";
 
@@ -171,20 +171,16 @@ export const getWPCost = createSelector(
     const assignments = state.entities.assignments.data;
 
     const leaders = ["lead", "pOne", "pTwo"];
-
-
     const categories = [
       "materials",
       "travel",
       "capex",
-      "other1",
-      "other2",
-      "other3",
-      "other4",
-      "other5",
+      // "other1",
+      // "other2",
+      // "other3",
+      // "other4",
+      // "other5",
     ];
-
-    // get otherID for each leader and apply assign to categories
 
     function getCategoryCosts(leader) {
       const costs = {
@@ -193,11 +189,10 @@ export const getWPCost = createSelector(
         capex: getCapexCost(state)[leader],
       };
       const others = getOtherCost(state).breakdown[leader];
-      const count = others.length;
-      for (let i = 0; i < count; i++) {
-        const key = "other" + (i + 1);
-        costs[key] = others[i].cost; 
-      }
+      others.forEach((other) => {
+        const key = other.otherId;
+        costs[key] = other.cost;
+      });
       return costs;
     }
 
@@ -213,16 +208,25 @@ export const getWPCost = createSelector(
 
     leaders.forEach((leader) => {
       const costs = getCategoryCosts(leader);
-      categories.forEach((category) => {
+      const otherIds = getOtherIds(state)[leader];
+      const leaderCategories = [...categories, ...otherIds];
+
+      leaderCategories.forEach((category) => {
         const categoryCost = costs[category];
-        const packs = assignments[leader][category];
-        const packCount = packs.length;
+        let packsAssigned = [];
+        if (assignments[leader][category])
+          packsAssigned = assignments[leader][category];
+        const packCount = packsAssigned.length;
         const share = Math.round(categoryCost / packCount);
-        packs.forEach((pack) => {
-          result[pack].combined = result[pack].combined + share;
-          result[pack][leader] = result[pack][leader] + share;
-        });
+        if (share && share !== Infinity) {
+          packsAssigned.forEach((pack) => {
+            result[pack].combined = result[pack].combined + share;
+            result[pack][leader] = result[pack][leader] + share;
+          });
+        }
       });
+
+      otherIds.forEach((other) => {});
     });
     console.log(result);
     return result;
@@ -316,7 +320,6 @@ export const getWPStatus = createSelector(
         result[leader].unassigned.other5;
       result[leader].unassigned.any = anyUnassigned;
     });
-    console.log(result);
     return result;
   }
 );

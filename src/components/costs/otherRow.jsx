@@ -40,7 +40,7 @@ function OtherRow(props) {
     <div className="row">
       <Tippy content="Drag to reorder rows">
         <div {...provided.dragHandleProps} className="hidden grabHandle">
-          {/* <BiMenu /> */}
+          <BiMenu />
         </div>
       </Tippy>
       <input

@@ -20,21 +20,24 @@ function AssignmentRow(props) {
   const totalCost = labourCosts + additionalCosts;
   const formattedCost = numberToCurrency(totalCost);
 
-  function toggleAssign(category, other) {
-    console.log(other);
+  function toggleAssign(providedCategory, other) {
+    let category = providedCategory;
+    if (other) category = other.otherId;
     dispatch(
       toggleAssignment({
         leader: selectedLeader,
         category,
         workPackageId: pack,
+        other,
       })
     );
   }
 
   function assignButton(category, index, other) {
-    const status = assigned[category].includes(pack);
+    let status = false;
+    if (assigned[category]) status = assigned[category].includes(pack);
     return (
-      <div className='hover'>
+      <div className="hover">
         <button
           key={index}
           onClick={() => toggleAssign(category, other)}
@@ -58,8 +61,7 @@ function AssignmentRow(props) {
       {hasCapex ? assignButton("capex") : null}
       {others.map((other, index) => {
         {
-          const category = "other" + (index + 1);
-          return assignButton(category, index, other);
+          return assignButton(other.otherId, index, other);
         }
       })}
       <p className="field display cost">{formattedCost}</p>

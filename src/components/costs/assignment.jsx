@@ -23,8 +23,6 @@ function AssignmentInfo() {
   const others = totals.other[leader];
   const assignments = state.entities.assignments.data;
 
-  console.log(others[0]);
-
   function assignAll(category) {
     dispatch(
       assignAllToCategory({
@@ -43,10 +41,6 @@ function AssignmentInfo() {
       })
     );
   }
-
-  // function reset() {
-  //   dispatch(resetAssignments({ leader }));
-  // }
 
   function assignAllButton(category, index) {
     const assignedCount = assignments[leader][category].length;

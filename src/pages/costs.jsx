@@ -20,14 +20,6 @@ import BreakdownInfo from "../components/costs/breakdown";
 import AssignmentInfo from "../components/costs/assignment";
 
 function Costs() {
-  // const dispatch = useDispatch();
-  // const { selectedLeader, selectedOption, showComponent } = useSelector(
-  //   (state) => state.user
-  // );
-  // const status = useSelector(
-  //   (state) => state.entities.project.data.status.costs[selectedLeader] // check this
-  // );
-
   const dispatch = useDispatch();
   const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const selectedOption = useSelector((state) => state.user.selectedCostsOption); // check this
@@ -68,7 +60,10 @@ function Costs() {
   const data = {
     backgroundColor: menuData.backgroundColor,
     // maxHeight: "550px",
-    marginBottom: showComponent === "" ? "-190px " : "0px",
+    marginBottom:
+      showComponent === "" || selectedOption === "breakdown"
+        ? "-190px "
+        : "0px",
   };
 
   const showLeaderTabs = {
@@ -81,15 +76,7 @@ function Costs() {
     other: 4,
     breakdown: 0,
     assignment: 3,
-  }; // check this
-
-  // function showOverview() {
-  //   if (showComponent === "")
-  //     dispatch(
-  //       updateUserSelection({ key: "showComponent", value: "overview" })
-  //     );
-  //   else dispatch(updateUserSelection({ key: "showComponent", value: "" }));
-  // }
+  };
 
   function content() {
     if (selectedOption === "labour") return <LabourStaff />;

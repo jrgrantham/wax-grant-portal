@@ -43,7 +43,8 @@ function AssignmentInfo() {
   }
 
   function assignAllButton(category, index) {
-    const assignedCount = assignments[leader][category].length;
+    let assignedCount = []
+    if (assignments[leader][category]) assignedCount = assignments[leader][category].length;
     const wpCount = workPackageIds.length;
     const all = assignedCount === wpCount;
     const text = category.charAt(0) === "o" ? "other" : category;
@@ -66,10 +67,12 @@ function AssignmentInfo() {
     );
   }
 
-  function heading(title, index, description) {
+  console.log(status);
+
+  function heading(title, index, other) {
     let key = title.toLowerCase();
-    if (title === "Other") key = key + (index + 1);
-    const hasCost = status.has[key];
+    if (title === "Other") key = other.otherId;
+    const hasCost = status.has[key] || index;
     const unassigned = status.unassigned[key];
     if (hasCost) {
       return (
@@ -79,7 +82,7 @@ function AssignmentInfo() {
         >
             <p>{title}</p>
             {title === "Other" ? (
-              <Tippy content={description}>
+              <Tippy content={other.description}>
                 <div className="info">
                   <img src={qMark} alt="add" />
                 </div>
@@ -106,7 +109,7 @@ function AssignmentInfo() {
           {heading("Travel")}
           {heading("CapEx")}
           {others.map((other, index) => {
-            return heading("Other", index, other.description);
+            return heading("Other", index + 1, other);
           })}
           <p className="title cost">Cost</p>
         </div>
@@ -131,10 +134,10 @@ function AssignmentInfo() {
             {status.has.materials ? assignAllButton("materials") : null}
             {status.has.travel ? assignAllButton("travel") : null}
             {status.has.capex ? assignAllButton("capex") : null}
-            {others.map((_, index) => {
+            {others.map((other, index) => {
               {
                 const category = "other" + (index + 1);
-                return assignAllButton(category, index);
+                return assignAllButton(other.otherId, index);
               }
             })}
           </div>

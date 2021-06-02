@@ -171,16 +171,7 @@ export const getWPCost = createSelector(
     const assignments = state.entities.assignments.data;
 
     const leaders = ["lead", "pOne", "pTwo"];
-    const categories = [
-      "materials",
-      "travel",
-      "capex",
-      // "other1",
-      // "other2",
-      // "other3",
-      // "other4",
-      // "other5",
-    ];
+    const categories = ["materials", "travel", "capex"];
 
     function getCategoryCosts(leader) {
       const costs = {
@@ -225,10 +216,7 @@ export const getWPCost = createSelector(
           });
         }
       });
-
-      otherIds.forEach((other) => {});
     });
-    console.log(result);
     return result;
   }
 );
@@ -239,8 +227,10 @@ export const getWPStatus = createSelector(
     console.log("getWPStatus");
     const state = store.getState();
     const totals = getTotalsByLeader(state);
-    const assigned = entities.assignments.data;
+    const allAssigned = entities.assignments.data;
     const leaders = ["lead", "pOne", "pTwo"];
+    const categories = ["materials", "travel", "capex"];
+
     const result = {
       lead: {
         has: {},
@@ -257,68 +247,27 @@ export const getWPStatus = createSelector(
     };
 
     leaders.forEach((leader) => {
-      const hasMaterials = totals.object.materialsCost[leader] > 0;
-      const hasTravel = totals.object.travelCost[leader] > 0;
-      const hasCapex = totals.object.capexCost[leader] > 0;
-      const hasOther1 =
-        totals.object.otherCost.breakdown[leader][0] !== undefined;
-      const hasOther2 =
-        totals.object.otherCost.breakdown[leader][1] !== undefined;
-      const hasOther3 =
-        totals.object.otherCost.breakdown[leader][2] !== undefined;
-      const hasOther4 =
-        totals.object.otherCost.breakdown[leader][3] !== undefined;
-      const hasOther5 =
-        totals.object.otherCost.breakdown[leader][4] !== undefined;
-
-      result[leader].has.materials = hasMaterials;
-      result[leader].has.travel = hasTravel;
-      result[leader].has.capex = hasCapex;
-      result[leader].has.other1 = hasOther1;
-      result[leader].has.other2 = hasOther2;
-      result[leader].has.other3 = hasOther3;
-      result[leader].has.other4 = hasOther4;
-      result[leader].has.other5 = hasOther5;
-
-      result[leader].unassigned.materials =
-        hasMaterials && assigned[leader].materials.length === 0;
-
-      result[leader].unassigned.travel =
-        hasTravel && assigned[leader].travel.length === 0;
-
-      result[leader].unassigned.capex =
-        hasCapex && assigned[leader].capex.length === 0;
-
-      result[leader].unassigned.other1 = assigned[leader].other1
-        ? hasOther1 && assigned[leader].other1.length === 0
-        : false;
-
-      result[leader].unassigned.other2 = assigned[leader].other2
-        ? hasOther2 && assigned[leader].other2.length === 0
-        : false;
-
-      result[leader].unassigned.other3 = assigned[leader].other3
-        ? hasOther3 && assigned[leader].other3.length === 0
-        : false;
-
-      result[leader].unassigned.other4 = assigned[leader].other4
-        ? hasOther4 && assigned[leader].other4.length === 0
-        : false;
-
-      result[leader].unassigned.other5 = assigned[leader].other5
-        ? hasOther5 && assigned[leader].other5.length === 0
-        : false;
-
-      const anyUnassigned =
-        result[leader].unassigned.materials ||
-        result[leader].unassigned.travel ||
-        result[leader].unassigned.capex ||
-        result[leader].unassigned.other1 ||
-        result[leader].unassigned.other2 ||
-        result[leader].unassigned.other3 ||
-        result[leader].unassigned.other4 ||
-        result[leader].unassigned.other5;
-      result[leader].unassigned.any = anyUnassigned;
+      const otherIds = getOtherIds(state)[leader];
+      categories.forEach((category) => {
+        const key = category + "Cost";
+        const hasCategory = totals.object[key][leader] > 0;
+        let unassigned = false;
+        if (totals.object[key]) {
+          unassigned = allAssigned[leader][category].length === 0;
+        }
+        result[leader].has[category] = hasCategory;
+        result[leader].unassigned[category] = hasCategory && unassigned;
+      });
+      otherIds.forEach((otherId) => {
+        let unassigned = false;
+        if (
+          allAssigned[leader][otherId] === undefined ||
+          allAssigned[leader][otherId].length === 0
+        )
+          unassigned = true;
+        result[leader].has[otherId] = true;
+        result[leader].unassigned[otherId] = unassigned
+      });
     });
     return result;
   }

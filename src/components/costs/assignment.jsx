@@ -43,11 +43,12 @@ function AssignmentInfo() {
   }
 
   function assignAllButton(category, index) {
+    console.log(index);
     let assignedCount = []
     if (assignments[leader][category]) assignedCount = assignments[leader][category].length;
     const wpCount = workPackageIds.length;
     const all = assignedCount === wpCount;
-    const text = category.charAt(0) === "o" ? "other" : category;
+    const text = index > 3 ? "other" : category;
     return (
       <div key={index} className="select title assign hidden">
         {all ? (
@@ -66,8 +67,6 @@ function AssignmentInfo() {
       </div>
     );
   }
-
-  console.log(status);
 
   function heading(title, index, other) {
     let key = title.toLowerCase();
@@ -131,13 +130,12 @@ function AssignmentInfo() {
 
           <div className="row">
             <p className="title assign"></p>
-            {status.has.materials ? assignAllButton("materials") : null}
-            {status.has.travel ? assignAllButton("travel") : null}
-            {status.has.capex ? assignAllButton("capex") : null}
+            {status.has.materials ? assignAllButton("materials", 1) : null}
+            {status.has.travel ? assignAllButton("travel", 2) : null}
+            {status.has.capex ? assignAllButton("capex", 3) : null}
             {others.map((other, index) => {
               {
-                const category = "other" + (index + 1);
-                return assignAllButton(other.otherId, index);
+                return assignAllButton(other.otherId, index + 4);
               }
             })}
           </div>

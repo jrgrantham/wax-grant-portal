@@ -37,7 +37,7 @@ function AssignmentRow(props) {
     let status = false;
     if (assigned[category]) status = assigned[category].includes(pack);
     return (
-      <div className="hover">
+      <div key={index} className="hover">
         <button
           key={index}
           onClick={() => toggleAssign(category, other)}

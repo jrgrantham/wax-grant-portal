@@ -20,6 +20,12 @@ export const Container = styled.div`
       color: ${costsColor};
     }
   }
+  .highlight {
+    background-color: #e1e1e1;
+    font-weight: bold;
+    margin-left: 0;
+    padding-left: 30px;
+  }
   .small {
     display: flex;
     justify-content: flex-end;

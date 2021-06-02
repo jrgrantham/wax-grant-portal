@@ -37,7 +37,7 @@ function BreakdownInfo() {
         <div className="rows">
           {totals.array.map((row, index) => {
             return (
-              <div key={index} className={index === 7 ? "row total" : "row"}>
+              <div key={index} className={index === 7 ? "row highlight" : "row"}>
                 <p className="field display column category">{row.category}</p>
                 <div className="column">
                   <p className="field display double">
@@ -60,7 +60,9 @@ function BreakdownInfo() {
                 </div>
                 {/* ) : null} */}
                 <div className="column">
-                  <p className="field display double">{numberToCurrency(row.combined)}</p>
+                  <p className="field display double">
+                    {numberToCurrency(row.combined)}
+                  </p>
                   {percent(index, row.combined, combined)}
                 </div>
               </div>

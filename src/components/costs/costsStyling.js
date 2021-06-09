@@ -10,6 +10,7 @@ import {
   tableContentSideMargin,
   teamColor,
   warningColor,
+  warningColorBack,
 } from "../../helpers";
 
 export const Container = styled.div`
@@ -24,7 +25,7 @@ export const Container = styled.div`
     background-color: #e1e1e1;
     font-weight: bold;
     margin-left: 0;
-    padding-left: 30px;
+    padding-left: ${tableContentSideMargin};
   }
   .small {
     display: flex;
@@ -74,9 +75,10 @@ export const Container = styled.div`
   }
   .warningButton {
     border: 1px solid ${warningColor};
-    margin-left: 40px;
+    margin-left: 20px;
     display: flex;
     padding: 2px 15px;
+    background-color: ${warningColorBack};
   }
   .warningIcon {
     display: flex;
@@ -137,9 +139,11 @@ export const Container = styled.div`
       /* margin-right: 20px; */
       /* padding-right: 35px; */
       max-width: 140px;
-      border-right: 1px solid #c1c1c1;
       margin: 0;
       height: 45px;
+    }
+    .border {
+      border-right: 1px solid #c1c1c1;
     }
     .row {
       margin-top: 0;
@@ -151,8 +155,8 @@ export const Container = styled.div`
       /* background-color: lightgray; */
       color: white;
       padding: 2px;
-      border-radius: 6px;
-      width: 60px;
+      border-radius: 8px;
+      width: 65px;
       margin-right: 10px;
       text-align: center;
     }
@@ -183,8 +187,11 @@ export const Container = styled.div`
   .assignmentTable {
     width: 100%;
     &:hover .hidden {
-      transition: opacity 0.3s;
       opacity: 1;
+    }
+    .hidden {
+      transition: opacity 0.3s;
+      opacity: 0;
     }
     .row {
       margin-left: 0;
@@ -202,7 +209,6 @@ export const Container = styled.div`
     }
     .title {
       padding: 0;
-      background-color: white;
       height: 30px;
     }
     .pack {
@@ -212,9 +218,6 @@ export const Container = styled.div`
     }
     button {
       padding: 2px 7px;
-    }
-    .hidden {
-      opacity: 0;
     }
     button.theme {
       background-color: ${costsColor};

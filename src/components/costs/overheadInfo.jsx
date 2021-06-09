@@ -51,7 +51,10 @@ function OverheadInfo() {
                 );
               })}
             </select>
+            <div className="total">
+
             <p className="field display labourCost">{formattedValue}</p>
+            </div>
           </div>
         </div>
       </div>

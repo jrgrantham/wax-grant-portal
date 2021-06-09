@@ -9,7 +9,8 @@ import HomePage from "./pages/homePage";
 import NoResult from "./pages/noResult";
 import Team from "./pages/teamTable";
 import Costs from "./pages/costs";
-import Revenue from "./pages/revenue";
+// import Revenue from "./pages/revenue";
+import Revenue from "./pages/revenueTable";
 import Risks from "./pages/risks";
 
 // function protectedRoute(Component, props) {

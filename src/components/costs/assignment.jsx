@@ -43,9 +43,9 @@ function AssignmentInfo() {
   }
 
   function assignAllButton(category, index) {
-    console.log(index);
-    let assignedCount = []
-    if (assignments[leader][category]) assignedCount = assignments[leader][category].length;
+    let assignedCount = [];
+    if (assignments[leader][category])
+      assignedCount = assignments[leader][category].length;
     const wpCount = workPackageIds.length;
     const all = assignedCount === wpCount;
     const text = index > 3 ? "other" : category;
@@ -75,20 +75,17 @@ function AssignmentInfo() {
     const unassigned = status.unassigned[key];
     if (hasCost) {
       return (
-        <div
-          key={index}
-          className={unassigned ? "title assign warn" : "title assign"}
-        >
-            <p>{title}</p>
-            {title === "Other" ? (
-              <Tippy content={other.description}>
-                <div className="info">
-                  <img src={qMark} alt="add" />
-                </div>
-              </Tippy>
-            ) : null}
+        <div key={index} className="title assign ">
+          <p>{title}</p>
+          {title === "Other" ? (
+            <Tippy content={other.description}>
+              <div className="info">
+                <img src={qMark} alt="add" />
+              </div>
+            </Tippy>
+          ) : null}
           {unassigned ? (
-            <Tippy content="Costs must be assigned to a work package">
+            <Tippy content="Cost must be assigned to at least one work package">
               <div className="unassigned">
                 <img src={warning} alt="warning" />
               </div>

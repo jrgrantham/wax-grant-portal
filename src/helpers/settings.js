@@ -11,7 +11,8 @@ export const warningColor = "rgba(240,90,40)";
 export const warningColorBack = "rgba(240,90,40, 0.1)";
 export const fontColorGrey = "#606060";
 export const selectedYes = "rgba(139, 197, 63, 1)";
-export const selectedNo = "#b1b1b1"
+export const selectedNo = "#b1b1b1";
+export const questionColor = "rgba(145,145,145)";
 
 export const adminColor = "rgba(162,84,198)";
 export const adminFontColor = "rgba(110,57,135)";
@@ -21,8 +22,13 @@ export const teamColor = "rgba(139, 197, 63, 1)";
 export const teamFontColor = "rgba(0, 147, 69, 1)";
 export const costsColor = "rgba(38,169,224)";
 export const costsFontColor = "rgba(27,117,187)";
-export const revenueColor = "rgba(250,172,24)";
-export const revenueFontColor = "rgba(226,120,23)";
+export const revenueColor = "rgba(139, 197, 63, 1)";
+export const revenueFontColor = "rgba(0, 147, 69, 1)";
+export const revenueStream = "rgba(139, 197, 63, 0.15)";
+export const revenueTotal = "rgba(133, 133, 133, 0.15)";
+
+export const settingsColor2 = "rgba(250,172,24)";
+export const settingsFontColor2 = "rgba(226,120,23)";
 
 export const tableLeftWidth = "120px";
 export const tableRightWidth = "850px";

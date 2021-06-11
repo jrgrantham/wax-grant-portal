@@ -52,6 +52,7 @@ export default LeftMenu;
 
 const MenuContainer = styled.div`
   width: ${tableLeftWidth};
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

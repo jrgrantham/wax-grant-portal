@@ -43,6 +43,9 @@ export const TableContainer = styled.div`
     margin-bottom: ${props => props.data.marginBottom};
     transition: margin-bottom 0.3s;
   }
+  .relative {
+    position: relative;
+  }
   .leaderTabMargin {
     margin-top: ${tabBottomMargin};
   }

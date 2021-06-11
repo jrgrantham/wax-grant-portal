@@ -1,63 +1,43 @@
 import React from "react";
-import Tippy from "@tippy.js/react";
-import qMark from "../../images/qMark.png";
-// import "tippy.js/dist/tippy.css";
-// import "react-tippy/dist/tippy.css";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 import { Container } from "./revenueStyling";
 
-function Titles() {
-  const employmentType = useSelector((state) => state.user.selectedTeamOption);
+function TargetMarketTitles() {
+  const dispatch = useDispatch();
+
+  const revenueStart = useSelector(
+    (state) => state.entities.revenue.data.revenueStart
+  );
+
   return (
     <Container>
       <div className="row titles leaderTabMargin">
-        <div className="title name">
-          <p>Name</p>
+        <div className="title market" />
+        <div className="title year">
+          <p>Y1&nbsp;</p>
+          <p className='subtle'>{revenueStart}</p>
         </div>
-        <div className="title acronym">
-          <p>Acronym</p>
-          <Tippy content="Identifies the team member on the Gantt Chart (red text indicates duplicate)">
-            <div className="info">
-              <img src={qMark} alt="add" />
-            </div>
-          </Tippy>
+        <div className="title year">
+          <p>Y2&nbsp;</p>
+          <p className='subtle'>{revenueStart + 1}</p>
         </div>
-        <div className="title role">
-          <p>Role</p>
-          <Tippy content="Project role (not necessarily job title)">
-            <div className="info">
-              <img src={qMark} alt="add" />
-            </div>
-          </Tippy>
+        <div className="title year">
+          <p>Y3&nbsp;</p>
+          <p className='subtle'>{revenueStart + 2}</p>
         </div>
-        {employmentType === "staff" ? (
-          <div className="title salary">
-            <p>Salary</p>
-            <Tippy content="Gross salary including company NI, company pension contribution and life insurance (£)">
-              <div className="info">
-                <img src={qMark} alt="add" />
-              </div>
-            </Tippy>
-          </div>
-        ) : (
-          <>
-            <div className="title dayRate">
-              <p>Day rate</p>
-              <Tippy content="Day rate (£)">
-                <div className="info">
-                  <img src={qMark} alt="add" />
-                </div>
-              </Tippy>
-            </div>
-            <div className="title location">
-              <p>Location</p>
-            </div>
-          </>
-        )}
-        <div className="delete"></div>
+        <div className="title year">
+          <p>Y4&nbsp;</p>
+          <p className='subtle'>{revenueStart + 3}</p>
+        </div>
+        <div className="title year">
+          <p>Y5&nbsp;</p>
+          <p className='subtle'>{revenueStart + 4}</p>
+        </div>
+        <div>
+          <p className='subtle'>Revenue Per Unit</p>
+        </div>
       </div>
     </Container>
   );
 }
-export default Titles;
+export default TargetMarketTitles;

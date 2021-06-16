@@ -6,7 +6,7 @@ function lengths() {
   return length;
 }
 
-export const  options = {
+export const options = {
   loading: false,
   data: {
     projectRoles: [
@@ -125,9 +125,7 @@ export const  options = {
     percentWarn: 25,
     percentOver: 40,
 
-    marketOptions: [
-      'UK Market', "US Market", "Asia Market"
-    ],
+    marketOptions: ["US Market", "Asia Market"],
   },
   error: "",
 };

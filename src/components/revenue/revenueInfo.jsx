@@ -6,14 +6,15 @@ import Titles from "./revenueTitles";
 import RevenueTotal from "./revenueTotal";
 
 function RevenueInfo() {
-  const { markets } = useSelector((state) => state.entities.revenue.data);
+  const { markets, streams } = useSelector((state) => state.entities.revenue.data);
 
+  console.log(streams);
   return (
     <Container>
       <Titles />
       <div className="rows">
-        {markets.map((market, index) => {
-          return <RevenueStream market={market} index={index} key={index} />;
+        {streams.map((stream, index) => {
+          return <RevenueStream stream={stream} index={index} key={index} />;
         })}
         <RevenueTotal />
       </div>

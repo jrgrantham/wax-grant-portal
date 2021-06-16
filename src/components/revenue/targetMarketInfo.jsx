@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import addGrey from "../../images/add-grey.png";
 import add from "../../images/addMarket.png";
-import RevenueRow from "./targetMarketRow";
+import TargetMarketRow from "./targetMarketRow";
 import { Container } from "./revenueStyling";
 import Titles from "./targetMarketTitles";
 import { addMarket } from "../../store/entities/revenue";
@@ -11,22 +11,16 @@ import Tippy from "@tippy.js/react";
 function TargetMarketInfo() {
   const dispatch = useDispatch();
   const { markets } = useSelector((state) => state.entities.revenue.data);
-
   const max = useSelector((state) => state.entities.options.data.maxMarkets);
-
-  function addNew() {
-    console.log("first");
-    dispatch(addMarket(0));
-  }
 
   return (
     <Container>
       <Titles />
       <div className="rows">
         {markets.map((market, index) => {
+          console.log(market);
           return (
-            <RevenueRow
-              markets={markets}
+            <TargetMarketRow
               market={market}
               index={index}
               key={index}

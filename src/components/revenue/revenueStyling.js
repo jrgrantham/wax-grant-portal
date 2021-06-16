@@ -16,6 +16,7 @@ export const Container = styled.div`
     align-items: flex-start;
     justify-content: flex-end;
     select {
+      background-color: transparent;
       color: ${revenueFontColor};
       padding: 0;
     }
@@ -31,14 +32,16 @@ export const Container = styled.div`
   }
   .revenueStream {
     background-color: ${revenueStream};
+    // to equal the margin left variable of 30px, 15 + 15
     padding: 15px;
-    margin: 5px 10px;
+    margin: 5px 15px;
     border-radius: 5px;
     .stream {
       color: ${questionColor};
       font-size: 12px;
       font-weight: bold;
       margin-bottom: 5px;
+      margin-right: 20px;
     }
     .revenueRow {
       display: flex;
@@ -54,9 +57,9 @@ export const Container = styled.div`
     margin-top: 15px;
     margin-left: ${tableContentSideMargin};
   }
-  .total {
-    display: flex;
-    flex-direction: column;
+  .revenueTotal {
+    /* display: flex; */
+    /* flex-direction: column; */
     background-color: ${revenueTotal};
   }
   .market {

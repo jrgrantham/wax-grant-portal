@@ -36,7 +36,7 @@ button {
 select,
 input {
   border-color: transparent;
-  background-color: none;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -49,6 +49,7 @@ img {
   max-width: 100%;
 }
 .dropdown {
+  /* z-index: -1; */
   position: absolute;
   right: 20px;
   bottom: 15px;

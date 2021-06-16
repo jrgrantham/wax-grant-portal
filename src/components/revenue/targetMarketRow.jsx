@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { isNumberKey, roundTo } from "../../helpers";
 import { updateMarket, deleteMarket } from "../../store/entities/revenue";
 import bin from "../../images/bin-grey.png";
-import dropdown1 from "../../images/dropArrow1.png";
 import dropdown2 from "../../images/dropArrow2.png";
 
 function TargetMarketRow(props) {
-  const { name, start, growth } = props.market;
-  const { index, markets } = props;
+  let { name, start, growth } = props.market;
+  const { index } = props;
   const dispatch = useDispatch();
   const { marketOptions } = useSelector((state) => state.entities.options.data);
   const values = name && start && growth;
@@ -16,6 +15,8 @@ function TargetMarketRow(props) {
   const year3 = values ? roundTo(year2 + (year2 * growth) / 100, 0) : null;
   const year4 = values ? roundTo(year3 + (year3 * growth) / 100, 0) : null;
   const year5 = values ? roundTo(year4 + (year4 * growth) / 100, 0) : null;
+
+  if (index === 0) name = "UK Market";
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -31,27 +32,33 @@ function TargetMarketRow(props) {
   return (
     <div className="row">
       <div className="relative">
-        <select
-          id={index + "name"}
-          name="name"
-          value={name}
-          onChange={onChangeHandler}
-          className="field market"
-        >
-          <option hidden value="">
-            select option
-          </option>
-          {marketOptions.map((market, index) => {
-            return (
-              <option key={index} value={market}>
-                {market}
+        {index === 0 ? (
+          <p className="field market display">{name}</p>
+        ) : (
+          <>
+            <select
+              id={index + "name"}
+              name="name"
+              value={name}
+              onChange={onChangeHandler}
+              className="field market"
+            >
+              <option hidden value="">
+                select option
               </option>
-            );
-          })}
-        </select>
-        <div className="dropdown">
-          <img src={dropdown2} alt="option" />
-        </div>
+              {marketOptions.map((market, index) => {
+                return (
+                  <option key={index} value={market}>
+                    {market}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="dropdown">
+              <img src={dropdown2} alt="option" />
+            </div>
+          </>
+        )}
       </div>
 
       <input
@@ -75,17 +82,16 @@ function TargetMarketRow(props) {
       />
 
       <button className="profileButton">Source</button>
-      <div className="hidden deleteIcon">
-        {/* <Tippy content="All associated data will be lost"> */}
-        <img
-          // className="delete"
-          src={bin}
-          alt="delete"
-          style={{ cursor: "pointer" }}
-          onClick={() => dispatch(deleteMarket({ index }))}
-        />
-        {/* </Tippy> */}
-      </div>
+      {index === 0 ? null : (
+        <div className="hidden deleteIcon">
+          <img
+            src={bin}
+            alt="delete"
+            style={{ cursor: "pointer" }}
+            onClick={() => dispatch(deleteMarket({ index }))}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -8,7 +8,7 @@ function RevenueTotal(props) {
   function onChangeHandler(e) {}
 
   return (
-    <div className="revenueStream total">
+    <div className="revenueStream revenueTotal">
       <div className="revenueRow">
         <p className="field market">Sales </p>
         <input

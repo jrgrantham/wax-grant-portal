@@ -37,6 +37,7 @@ select,
 input {
   border-color: transparent;
   background-color: none;
+  cursor: pointer;
 }
 
 input:focus {
@@ -46,4 +47,11 @@ input:focus {
 img {
   max-height: 100%;
   max-width: 100%;
+}
+.dropdown {
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+  max-height: 14px;
+  max-width: 14px;
 }

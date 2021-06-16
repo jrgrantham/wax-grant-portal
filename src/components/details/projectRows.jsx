@@ -9,6 +9,8 @@ import {
 import { getProjectDefaults } from "../../store/entities/options";
 import qMark from "../../images/qMark.png";
 import { Container } from "./detailsStyling";
+import dropdown1 from '../../images/dropArrow1.png'
+import dropdown2 from '../../images/dropArrow2.png'
 
 function ProjectRows() {
   const dispatch = useDispatch();
@@ -87,7 +89,7 @@ function ProjectRows() {
           />
         </div>
 
-        <div className="row column">
+        <div className="row column relative">
           <div className="title">
             <p>Nature of Product or Service</p>
           </div>
@@ -105,6 +107,9 @@ function ProjectRows() {
               );
             })}
           </select>
+          <div className='dropdown'>
+            <img src={dropdown1} alt="option"/>
+          </div>
         </div>
 
         <div className="row column">
@@ -125,6 +130,9 @@ function ProjectRows() {
               );
             })}
           </select>
+          <div className='dropdown'>
+            <img src={dropdown2} alt="option"/>
+          </div>
         </div>
 
         <div className="row column">

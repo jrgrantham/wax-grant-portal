@@ -1,10 +1,7 @@
 import React from "react";
 import Tippy from "@tippy.js/react";
 import qMark from "../../images/qMark.png";
-// import "tippy.js/dist/tippy.css";
-// import "react-tippy/dist/tippy.css";
 import { useSelector } from "react-redux";
-
 import { Container } from "./teamStyling";
 
 function Titles() {

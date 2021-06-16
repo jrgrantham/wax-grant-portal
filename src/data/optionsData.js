@@ -6,7 +6,7 @@ function lengths() {
   return length;
 }
 
-export const options = {
+export const  options = {
   loading: false,
   data: {
     projectRoles: [
@@ -110,6 +110,7 @@ export const options = {
     maxTravel: 10,
     maxCapex: 10,
     maxOther: 5,
+    maxMarkets: 3,
 
     materialWarn: 25,
     materialOver: 40,
@@ -123,6 +124,10 @@ export const options = {
     otherOver: 40,
     percentWarn: 25,
     percentOver: 40,
+
+    marketOptions: [
+      'UK Market', "US Market", "Asia Market"
+    ],
   },
   error: "",
 };

@@ -10,18 +10,25 @@ const slice = createSlice({
   name: "revenue",
   initialState: {
     loading: false,
-    error: '',
+    error: "",
     data: {
       revenueStart: 2022,
-      markets: [
-        {name: "US"},
-        {name: "UK"},
-      ],
-
-    }
+      markets: [{ name: "UK Market", growth: 10, start: 500 }, {}],
+    },
   },
   reducers: {
-    updateRevenueStart: (revenue, action) => {
+    updateMarket: (revenue, action) => {
+      const { index, key, value } = action.payload;
+      revenue.data.markets[index][key] = value;
+    },
+    addMarket: (revenue) => {
+      revenue.data.markets.push({});
+    },
+    deleteMarket: (revenue, action) => {
+      const { index } = action.payload;
+      revenue.data.markets.splice(index, 1);
+    },
+    updateStart: (revenue, action) => {
       revenue.data.revenueStart = action.payload.year
     },
     addRevenueMember: (revenue, action) => {
@@ -61,6 +68,10 @@ const slice = createSlice({
 });
 
 export const {
+  updateMarket,
+  addMarket,
+  deleteMarket,
+  updateStart,
   updateRevenueStart,
   reorderRevenue,
   updateRevenueMember,

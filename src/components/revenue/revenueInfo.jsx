@@ -14,7 +14,6 @@ function RevenueInfo() {
   const { streams } = useSelector((state) => state.entities.revenue.data);
   const max = useSelector((state) => state.entities.options.data.maxStreams);
 
-  console.log(streams.length, max);
   return (
     <Container>
       <Titles />
@@ -24,13 +23,13 @@ function RevenueInfo() {
         })}
 
         {streams.length >= max ? (
-          <Tippy content={`Maximum ${max} markets`}>
+          <Tippy content={`Maximum ${max} streams`}>
             <button className="addIcon">
               <img src={addGrey} alt="add" />
             </button>
           </Tippy>
         ) : (
-          <Tippy content="Add another market">
+          <Tippy content="Add another stream">
             <button className="addIcon" onClick={() => dispatch(addStream())}>
               <img src={add} alt="add" />
             </button>

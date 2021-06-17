@@ -17,15 +17,15 @@ const slice = createSlice({
       streams: [
         {
           name: "Rubber Toys",
+          unitRevenue: 5,
           "UK Market": { y1: 10, y2: 20 },
           "US Market": {},
           "Asia Market": {},
         },
         {
           name: "Rubber Toys",
+          unitRevenue: 7,
           "UK Market": { y1: 10, y2: 20 },
-          "US Market": {},
-          "Asia Market": {},
         },
       ],
       total: [],
@@ -50,8 +50,10 @@ const slice = createSlice({
     },
     updateStream: (revenue, action) => {
       const { streamIndex, market, year, value } = action.payload;
+      const streams = revenue.data.streams;
       console.log(streamIndex, market, value);
-      revenue.data.streams[streamIndex][market][year] = value;
+      if (!streams[streamIndex][market]) streams[streamIndex][market] = {};
+      streams[streamIndex][market][year] = value;
     },
     addStream: (revenue) => {
       revenue.data.streams.push({});
@@ -97,18 +99,43 @@ export const getStreamTotals = createSelector(
     const result = [];
 
     for (let i = 0; i < streams.length; i++) {
+      const { unitRevenue } = streams[i];
       const summary = {};
+
       years.forEach((year) => {
-        let total = 0;
+        let sales = 0;
         markets.forEach((market) => {
-          const value = streams[i][market][year] || 0;
-          total = total + value;
+          const checkMarket = streams[i][market] && streams[i][market][year];
+          const value = checkMarket ? streams[i][market][year] : 0;
+          sales = sales + value;
         });
-        summary[year] = total;
+        const revenue = sales * unitRevenue
+        const data = {sales, revenue}
+        summary[year] = data;
       });
       result.push(summary);
     }
-    console.log(result);
+    return result;
+  }
+);
+
+export const getTotalRevenue = createSelector(
+  (state) => state.entities.revenue,
+  () => {
+    console.log("getTotalRevenue");
+    const streams = getStreamTotals(store.getState());
+    const years = ["y1", "y2", "y3", "y4", "y5"];
+
+    const result = {};
+    years.forEach((year) => {
+      let total = 0;
+      for (let i = 0; i < streams.length; i++) {
+        const count = streams[i][year].revenue || 0;
+        total = total + count;
+      }
+      result[year] = total;
+    });
+
     return result;
   }
 );

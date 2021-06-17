@@ -111,7 +111,7 @@ export const options = {
     maxCapex: 10,
     maxOther: 5,
     maxMarkets: 3,
-    maxStreams: 3,
+    maxStreams: 4,
 
     materialWarn: 25,
     materialOver: 40,

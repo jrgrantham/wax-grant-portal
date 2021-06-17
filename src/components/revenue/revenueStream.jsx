@@ -28,7 +28,7 @@ function RevenueStream(props) {
         <input
           id={stream.name + "revenue"}
           name="revenue"
-          placeholder={stream.revenue}
+          value={stream.unitRevenue}
           onChange={onChangeHandler}
           className="field year"
         />
@@ -47,11 +47,11 @@ function RevenueStream(props) {
       })}
       <div className="revenueRow">
       <p className="field market display">Global</p>
-      < p className="field year display">{total.y1}</p>
-      < p className="field year display">{total.y2}</p>
-      < p className="field year display">{total.y3}</p>
-      < p className="field year display">{total.y4}</p>
-      < p className="field year display">{total.y5}</p>
+      < p className="field year display">{total.y1.sales}</p>
+      < p className="field year display">{total.y2.sales}</p>
+      < p className="field year display">{total.y3.sales}</p>
+      < p className="field year display">{total.y4.sales}</p>
+      < p className="field year display">{total.y5.sales}</p>
     </div>
       <button
         onClick={() => dispatch(deleteStream({ index }))}

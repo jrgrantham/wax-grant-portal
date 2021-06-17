@@ -10,7 +10,9 @@ function TargetMarketRow(props) {
   const { index } = props;
   const dispatch = useDispatch();
   const { marketOptions } = useSelector((state) => state.entities.options.data);
-  const values = name && start && growth;
+  
+  const values = name && start;
+  growth = growth ? growth : 0;
   const year2 = values ? roundTo(start + (start * growth) / 100, 0) : null;
   const year3 = values ? roundTo(year2 + (year2 * growth) / 100, 0) : null;
   const year4 = values ? roundTo(year3 + (year3 * growth) / 100, 0) : null;

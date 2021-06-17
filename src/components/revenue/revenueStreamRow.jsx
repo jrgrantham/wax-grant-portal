@@ -13,8 +13,6 @@ function RevenueStreamRow(props) {
     dispatch(updateStream({ streamIndex, market: name, year, value }));
   }
 
-  console.log(stream);
-
   const streamMarketData = useSelector(
     (state) => state.entities.revenue.data.streams[streamIndex][name]
   );

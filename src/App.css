@@ -37,7 +37,6 @@ select,
 input {
   border-color: transparent;
   background-color: transparent;
-  cursor: pointer;
 }
 
 input:focus {

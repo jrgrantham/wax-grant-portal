@@ -32,7 +32,7 @@ function TargetMarketRow(props) {
   return (
     <div className="row">
       <div className="relative">
-        {index === 0 ? (
+        {name === 'UK Market' || name === 'Global' ? (
           <p className="field market display">{name}</p>
         ) : (
           <>
@@ -82,7 +82,7 @@ function TargetMarketRow(props) {
       />
 
       <button className="profileButton">Source</button>
-      {index === 0 ? null : (
+      {index === 0 || name === 'Global' ? null : (
         <div className="hidden deleteIcon">
           <img
             src={bin}

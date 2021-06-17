@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import {
   costsColor,
-  costsFontColor,
   fontColorGrey,
-  navBackground,
   okColor,
   selectedNo,
   selectedYes,
   tableContentSideMargin,
-  teamColor,
   warningColor,
   warningColorBack,
 } from "../../helpers";

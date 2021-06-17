@@ -1,40 +1,37 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Container } from "./revenueStyling";
 
 function TargetMarketTitles() {
-  const dispatch = useDispatch();
-
   const revenueStart = useSelector(
     (state) => state.entities.revenue.data.revenueStart
   );
-
   return (
     <Container>
       <div className="row titles leaderTabMargin">
         <div className="title market" />
         <div className="title year">
           <p>Y1&nbsp;</p>
-          <p className='subtle'>{revenueStart}</p>
+          <p className="subtle">{revenueStart}</p>
         </div>
         <div className="title year">
           <p>Y2&nbsp;</p>
-          <p className='subtle'>{revenueStart + 1}</p>
+          <p className="subtle">{revenueStart + 1}</p>
         </div>
         <div className="title year">
           <p>Y3&nbsp;</p>
-          <p className='subtle'>{revenueStart + 2}</p>
+          <p className="subtle">{revenueStart + 2}</p>
         </div>
         <div className="title year">
           <p>Y4&nbsp;</p>
-          <p className='subtle'>{revenueStart + 3}</p>
+          <p className="subtle">{revenueStart + 3}</p>
         </div>
         <div className="title year">
           <p>Y5&nbsp;</p>
-          <p className='subtle'>{revenueStart + 4}</p>
+          <p className="subtle">{revenueStart + 4}</p>
         </div>
         <div className="title ">
-          <p className='subtle'>Unit revenue</p>
+          <p className="subtle">Unit revenue</p>
         </div>
       </div>
     </Container>

@@ -12,7 +12,7 @@ import {
 import add from "../../images/addMaterials.png";
 import addGrey from "../../images/add-grey.png";
 import { Container } from "./costsStyling";
-import { nextIndexOfGroup, numberToCurrency, roundTo } from "../../helpers";
+import { nextIndexOfGroup, numberToCurrency } from "../../helpers";
 import CapexRow from "./capexRow";
 
 function CapexInfo() {

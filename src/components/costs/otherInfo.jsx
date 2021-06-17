@@ -21,7 +21,6 @@ function OtherInfo() {
   const leader = state.user.selectedLeader;
   const { maxOther } = state.entities.options.data;
   const total = getOtherCost(state)[leader];
-  const formattedCost = numberToCurrency(total)
   const combined = leader === "combined";
   const group = combined
     ? other

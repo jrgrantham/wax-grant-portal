@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserSelection } from "../../store/user";
 import styled from "styled-components";
-import { costsColor, costsFontColor, numberToCurrency } from "../../helpers";
+import { costsFontColor, numberToCurrency } from "../../helpers";
 import { getTotalsByCategory } from "../../helpers";
 import Close from "../general/close";
 

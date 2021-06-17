@@ -60,9 +60,7 @@ function AssignmentRow(props) {
       {hasTravel ? assignButton("travel") : null}
       {hasCapex ? assignButton("capex") : null}
       {others.map((other, index) => {
-        {
-          return assignButton(other.otherId, index, other);
-        }
+        return assignButton(other.otherId, index, other);
       })}
       <p className="field display cost">{formattedCost}</p>
     </div>

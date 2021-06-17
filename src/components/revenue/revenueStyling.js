@@ -42,13 +42,19 @@ export const Container = styled.div`
       font-weight: bold;
       margin-bottom: 5px;
       margin-right: 20px;
+      // market width + 5 x year width + margins
+      width: 570px;
     }
     .revenueRow {
       display: flex;
+      align-items: center;
     }
     input {
       background-color: transparent;
       border-bottom-color: red;
+    }
+    &:hover .hidden {
+      opacity: 1;
     }
   }
   .addIcon {
@@ -60,6 +66,7 @@ export const Container = styled.div`
   .revenueTotal {
     /* display: flex; */
     /* flex-direction: column; */
+    margin-top: 20px;
     background-color: ${revenueTotal};
   }
   .market {
@@ -95,5 +102,12 @@ export const Container = styled.div`
     width: 18px;
     padding-top: 4px;
     margin-left: 15px;
+  }
+  .streamDelete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 18px;
+    cursor: pointer;
   }
 `;

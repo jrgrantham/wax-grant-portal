@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 function RevenueTotal(props) {
-  const { market, index } = props;
-  const dispatch = useDispatch();
+  // const { market, index } = props;
+  // const dispatch = useDispatch();
 
   function onChangeHandler(e) {}
 

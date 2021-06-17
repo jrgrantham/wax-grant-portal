@@ -16,7 +16,7 @@ function Revenue() {
     (state) => state.entities.project.data.status.team[selectedLeader] // check this
   );
   const selectedOption = useSelector((state) => state.user.selectedRevenueOption); // check this
-  const menuList = ["Target Market", "Revenue", "R&D", "Details"]; // check this
+  const menuList = ["Target Market", "Streams", "R&D", "Details"]; // check this
 
   const menuData = {
     section: "Revenue", // check this
@@ -42,7 +42,7 @@ function Revenue() {
 
   function content() {
     if (selectedOption === "target market") return <TargetMarket />;
-    if (selectedOption === "revenue") return <RevenueInfo />;
+    if (selectedOption === "streams") return <RevenueInfo />;
   }
 
   return (

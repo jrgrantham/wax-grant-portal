@@ -7,14 +7,10 @@ function RevenueStreamRow(props) {
   const { name, index, streamIndex, stream } = props;
   const dispatch = useDispatch();
   function onChangeHandler(e) {
-    const key = e.target.name;
+    const year = e.target.name;
     let value = e.target.value;
-    if (key === "start" || key === "growth") {
-      if (e.target.value) {
-        value = parseInt(value.slice(-6));
-      } else value = 0;
-    }
-    dispatch(updateStream({ streamIndex, market: name, value }));
+    if (value) value = parseInt(value.slice(-6));
+    dispatch(updateStream({ streamIndex, market: name, year, value }));
   }
 
   console.log(stream);

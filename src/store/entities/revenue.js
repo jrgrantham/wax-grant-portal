@@ -21,6 +21,12 @@ const slice = createSlice({
           "US Market": {},
           "Asia Market": {},
         },
+        {
+          name: "Rubber Toys",
+          "UK Market": { y1: 10, y2: 20 },
+          "US Market": {},
+          "Asia Market": {},
+        },
       ],
       total: [],
     },
@@ -43,9 +49,9 @@ const slice = createSlice({
       revenue.data.revenueStart = action.payload.year;
     },
     updateStream: (revenue, action) => {
-      const { streamIndex, market, value } = action.payload;
+      const { streamIndex, market, year, value } = action.payload;
       console.log(streamIndex, market, value);
-      revenue.data.streams[streamIndex][market] = value;
+      revenue.data.streams[streamIndex][market][year] = value;
     },
     addStream: (revenue) => {
       revenue.data.streams.push({});
@@ -68,21 +74,41 @@ export const {
 } = slice.actions;
 export default slice.reducer;
 
+export const getSelectedMarkets = createSelector(
+  (state) => state.entities.revenue,
+  (revenue) => {
+    console.log("getSelectedMarkets");
+    const markets = [];
+    revenue.data.markets.forEach((market) => {
+      if (market.name === "Global") return;
+      markets.push(market.name);
+    });
+    return markets;
+  }
+);
+
 export const getStreamTotals = createSelector(
   (state) => state.entities.revenue,
   (revenue) => {
-    console.log("getTotalRevenue");
+    console.log("getStreamTotals");
+    const { streams } = revenue.data;
+    const markets = getSelectedMarkets(store.getState());
+    const years = ["y1", "y2", "y3", "y4", "y5"];
+    const result = [];
 
-    const markets = [];
-    revenue.data.markets.forEach((market) => {
-      markets.push(market.name);
-    });
-
-    const result = []
-    const years = [ "y1", "y2", "y3", "y4", "y5" ];
-    revenue.data.streams.forEach((stream) => {
-    });
-
+    for (let i = 0; i < streams.length; i++) {
+      const summary = {};
+      years.forEach((year) => {
+        let total = 0;
+        markets.forEach((market) => {
+          const value = streams[i][market][year] || 0;
+          total = total + value;
+        });
+        summary[year] = total;
+      });
+      result.push(summary);
+    }
+    console.log(result);
     return result;
   }
 );

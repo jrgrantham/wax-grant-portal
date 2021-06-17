@@ -16,7 +16,7 @@ function RevenueStream(props) {
 
   function onChangeHandler(e) {}
 
-  const test = getStreamTotals(state)
+  const total = getStreamTotals(state)[index]
 
   let title = `Revenue Stream ${index + 1}`;
   if (stream.name) title = title + ` - ${stream.name}`;
@@ -47,11 +47,11 @@ function RevenueStream(props) {
       })}
       <div className="revenueRow">
       <p className="field market display">Global</p>
-      < p className="field year display">x</p>
-      < p className="field year display">x</p>
-      < p className="field year display">x</p>
-      < p className="field year display">x</p>
-      < p className="field year display">x</p>
+      < p className="field year display">{total.y1}</p>
+      < p className="field year display">{total.y2}</p>
+      < p className="field year display">{total.y3}</p>
+      < p className="field year display">{total.y4}</p>
+      < p className="field year display">{total.y5}</p>
     </div>
       <button
         onClick={() => dispatch(deleteStream({ index }))}

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RevenueStreamRow from "./revenueStreamRow";
 import bin from "../../images/bin-grey.png";
+import qMark from "../../images/qMark.png";
 import add from "../../images/add-grey.png";
 import { deleteStream, getStreamTotals } from "../../store/entities/revenue";
 import { store } from "../../store";
@@ -15,11 +16,8 @@ function RevenueStream(props) {
   const streamIndex = index;
 
   const display = markets.filter((market) => market.name !== "Global");
-
   function onChangeHandler(e) {}
-
   const total = getStreamTotals(state)[index];
-
   let title = `Revenue Stream ${index + 1}`;
   if (stream.name) title = title + ` - ${stream.name}`;
 
@@ -30,7 +28,7 @@ function RevenueStream(props) {
         {stream.name ? null : (
           <Tippy content="Add stream description">
             <div className="addTitle">
-              <img src={add} alt="add" />
+              <img src={qMark} alt="add" />
             </div>
           </Tippy>
         )}

@@ -43,7 +43,7 @@ export const Container = styled.div`
       margin-bottom: 5px;
       margin-right: 20px;
       // market width + 5 x year width + margins
-      width: 570px;
+      width: 600px;
     }
     .revenueRow {
       display: flex;
@@ -77,7 +77,7 @@ export const Container = styled.div`
     background-color: ${revenueTotal};
   }
   .market {
-    width: 120px;
+    width: 150px;
   }
   .year {
     width: 70px;
@@ -96,9 +96,13 @@ export const Container = styled.div`
     width: 100%;
     margin: auto;
   }
-  .profileButton {
+  .textButton {
     background-color: ${teamColor};
     padding: 5px 10px;
+    padding: 5px 10px;
+  }
+  .marginLeft {
+    margin-left: 20px;
   }
   button {
     color: white;

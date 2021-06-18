@@ -2,6 +2,7 @@
 import { store } from "../index";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
+import { roundTo } from "../../helpers";
 
 const slice = createSlice({
   name: "revenue",
@@ -10,13 +11,15 @@ const slice = createSlice({
     error: "",
     data: {
       revenueStart: 2022,
+      profit: 55,
+      taxRate: 25,
       markets: [
         { name: "UK Market", growth: 10, start: 500 },
         { name: "Global", growth: 10, start: 500 },
       ],
       streams: [
         {
-          name: "Rubber Toys",
+          marketName: "Rubber Toys",
           unitRevenue: 5,
           "UK Market": { y1: 10, y2: 20 },
           "US Market": {},
@@ -24,7 +27,7 @@ const slice = createSlice({
         },
         {
           // name: "Rubber Toys",
-          unitRevenue: 7,
+          unitRevenue: 5,
           "UK Market": { y1: 10, y2: 20 },
         },
       ],
@@ -76,10 +79,10 @@ export const {
 } = slice.actions;
 export default slice.reducer;
 
-export const getSelectedMarkets = createSelector(
+export const getSelectedMarketsList = createSelector(
   (state) => state.entities.revenue,
   (revenue) => {
-    console.log("getSelectedMarkets");
+    console.log("getSelectedMarketsList");
     const markets = [];
     revenue.data.markets.forEach((market) => {
       if (market.name === "Global") return;
@@ -89,12 +92,33 @@ export const getSelectedMarkets = createSelector(
   }
 );
 
+export const getMarketData = createSelector(
+  (state) => state.entities.revenue,
+  (revenue) => {
+    console.log("getMarketData");
+    const { markets } = revenue.data;
+    const result = {};
+    markets.forEach((market) => {
+      let { name, start, growth } = market;
+      const values = name && start;
+      growth = growth ? growth : 0;
+      const y1 = start;
+      const y2 = values ? roundTo(y1 + (y1 * growth) / 100, 0) : null;
+      const y3 = values ? roundTo(y2 + (y2 * growth) / 100, 0) : null;
+      const y4 = values ? roundTo(y3 + (y3 * growth) / 100, 0) : null;
+      const y5 = values ? roundTo(y4 + (y4 * growth) / 100, 0) : null;
+      result[name] = { y1, y2, y3, y4, y5 };
+    });
+    return result;
+  }
+);
+
 export const getStreamTotals = createSelector(
   (state) => state.entities.revenue,
   (revenue) => {
     console.log("getStreamTotals");
     const { streams } = revenue.data;
-    const markets = getSelectedMarkets(store.getState());
+    const markets = getSelectedMarketsList(store.getState());
     const years = ["y1", "y2", "y3", "y4", "y5"];
     const result = [];
 
@@ -109,12 +133,53 @@ export const getStreamTotals = createSelector(
           const value = checkMarket ? streams[i][market][year] : 0;
           sales = sales + value;
         });
-        const revenue = sales * unitRevenue
-        const data = {sales, revenue}
+        const revenue = sales * unitRevenue;
+        const data = { sales, revenue };
         summary[year] = data;
       });
       result.push(summary);
     }
+    return result;
+  }
+);
+
+export const getUKRevenue = createSelector(
+  (state) => state.entities.revenue,
+  (revenue) => {
+    console.log("getUKRevenue");
+
+    const { streams } = revenue.data;
+    const markets = getSelectedMarketsList(store.getState());
+    const years = ["y1", "y2", "y3", "y4", "y5"];
+    const result = [];
+
+    for (let i = 0; i < streams.length; i++) {
+      const { unitRevenue } = streams[i];
+      const summary = {};
+
+      years.forEach((year) => {
+        let sales = 0;
+        markets.forEach((market) => {
+          const checkMarket = streams[i][market] && streams[i][market][year];
+          const value = checkMarket ? streams[i][market][year] : 0;
+          sales = sales + value;
+        });
+        const revenue = sales * unitRevenue;
+        const data = { sales, revenue };
+        summary[year] = data;
+      });
+      result.push(summary);
+    }
+
+    // const result = {};
+    // years.forEach((year) => {
+    //   let total = 0;
+    //   streams.forEach((stream) => {
+    //     const count = stream[year].revenue || 0;
+    //     total = total + count;
+    //   });
+    //   result[year] = total;
+    // });
     return result;
   }
 );
@@ -125,17 +190,15 @@ export const getTotalRevenue = createSelector(
     console.log("getTotalRevenue");
     const streams = getStreamTotals(store.getState());
     const years = ["y1", "y2", "y3", "y4", "y5"];
-
     const result = {};
     years.forEach((year) => {
       let total = 0;
-      for (let i = 0; i < streams.length; i++) {
-        const count = streams[i][year].revenue || 0;
+      streams.forEach((stream) => {
+        const count = stream[year].revenue || 0;
         total = total + count;
-      }
+      });
       result[year] = total;
     });
-
     return result;
   }
 );

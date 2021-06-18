@@ -4,23 +4,21 @@ import { updateUserSelection } from "../store/user";
 import LeftMenu from "../components/table/leftMenu";
 import { TableContainer } from "../components/table/tableStyling";
 import MarkedComplete from "../components/modals/markedComplete";
-import { updateRevenueStatus, updateSectionStatus } from "../store/entities/project";
+import { updateRevenueStatus } from "../store/entities/project";
 import { revenueColor, revenueFontColor } from "../helpers"; // check this
 import TargetMarket from "../components/revenue/targetMarketInfo"; // check this
 import RevenueInfo from "../components/revenue/revenueInfo"; // check this
+import { getMarketData } from "../store/entities/revenue";
 
 function Revenue() {
   const dispatch = useDispatch();
-  const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const status = useSelector(
     (state) => state.entities.project.data.status.revenue // check this
   );
   const selectedOption = useSelector(
     (state) => state.user.selectedRevenueOption
   ); // check this
-  const menuList = ["Target Market", "Streams", "R&D", "Details"]; // check this
-
-  console.log(status, selectedLeader);
+  const menuList = ["Target Market", "Sales", "R&D", "Details"]; // check this
 
   const menuData = {
     section: "Revenue", // check this
@@ -44,7 +42,7 @@ function Revenue() {
 
   function content() {
     if (selectedOption === "target market") return <TargetMarket />;
-    if (selectedOption === "streams") return <RevenueInfo />;
+    if (selectedOption === "sales") return <RevenueInfo />;
   }
 
   return (

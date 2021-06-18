@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isNumberKey, roundTo } from "../../helpers";
-import { updateMarket, deleteMarket } from "../../store/entities/revenue";
+import { isNumberKey } from "../../helpers";
+import {
+  updateMarket,
+  deleteMarket,
+  getMarketData,
+} from "../../store/entities/revenue";
 import bin from "../../images/bin-grey.png";
 import dropdown2 from "../../images/dropArrow2.png";
 
@@ -9,16 +13,9 @@ function TargetMarketRow(props) {
   let { name, start, growth } = props.market;
   const { index } = props;
   const dispatch = useDispatch();
-  const { marketOptions } = useSelector((state) => state.entities.options.data);
-  
-  const values = name && start;
-  growth = growth ? growth : 0;
-  const year2 = values ? roundTo(start + (start * growth) / 100, 0) : null;
-  const year3 = values ? roundTo(year2 + (year2 * growth) / 100, 0) : null;
-  const year4 = values ? roundTo(year3 + (year3 * growth) / 100, 0) : null;
-  const year5 = values ? roundTo(year4 + (year4 * growth) / 100, 0) : null;
-
-  if (index === 0) name = "UK Market";
+  const state = useSelector((state) => state);
+  const { marketOptions } = state.entities.options.data;
+  const market = getMarketData(state)[name];
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -34,7 +31,7 @@ function TargetMarketRow(props) {
   return (
     <div className="row">
       <div className="relative">
-        {name === 'UK Market' || name === 'Global' ? (
+        {name === "UK Market" || name === "Global" ? (
           <p className="field market display">{name}</p>
         ) : (
           <>
@@ -71,10 +68,10 @@ function TargetMarketRow(props) {
         onChange={onChangeHandler}
         className="field year"
       />
-      <p className="field display year">{year2}</p>
-      <p className="field display year">{year3}</p>
-      <p className="field display year">{year4}</p>
-      <p className="field display year">{year5}</p>
+      <p className="field display year">{market.y2}</p>
+      <p className="field display year">{market.y3}</p>
+      <p className="field display year">{market.y4}</p>
+      <p className="field display year">{market.y5}</p>
       <input
         id={index + "growth"}
         name="growth"
@@ -83,8 +80,8 @@ function TargetMarketRow(props) {
         className="field year"
       />
 
-      <button className="profileButton">Source</button>
-      {index === 0 || name === 'Global' ? null : (
+      <button className="textButton">Source</button>
+      {index === 0 || name === "Global" ? null : (
         <div className="hidden deleteIcon">
           <img
             src={bin}

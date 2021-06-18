@@ -23,7 +23,7 @@ const slice = createSlice({
           "Asia Market": {},
         },
         {
-          name: "Rubber Toys",
+          // name: "Rubber Toys",
           unitRevenue: 7,
           "UK Market": { y1: 10, y2: 20 },
         },

@@ -4,7 +4,6 @@ import qMark from "../../images/qMark.png";
 import { useSelector, useDispatch } from "react-redux";
 import { Container } from "./revenueStyling";
 import { updateStart } from "../../store/entities/revenue";
-import dropdown1 from '../../images/dropArrow1.png'
 import dropdown2 from '../../images/dropArrow2.png'
 
 function TargetMarketTitles() {

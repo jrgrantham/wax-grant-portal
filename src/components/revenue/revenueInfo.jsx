@@ -29,7 +29,7 @@ function RevenueInfo() {
             </button>
           </Tippy>
         ) : (
-          <Tippy content="Add another stream">
+          <Tippy content="Add another revenue stream">
             <button className="addIcon" onClick={() => dispatch(addStream())}>
               <img src={add} alt="add" />
             </button>

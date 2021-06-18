@@ -4,7 +4,7 @@ import { isNumberKey } from "../../helpers";
 import { updateStream } from "../../store/entities/revenue";
 
 function RevenueStreamRow(props) {
-  const { name, index, streamIndex, stream } = props;
+  const { name, streamIndex } = props;
   const dispatch = useDispatch();
   function onChangeHandler(e) {
     const year = e.target.name;

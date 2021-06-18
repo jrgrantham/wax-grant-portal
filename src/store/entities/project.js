@@ -19,6 +19,9 @@ const slice = createSlice({
     updateGanttStatus: (project) => {
       project.data.status.gantt = !project.data.status.gantt;
     },
+    updateRevenueStatus: (project) => {
+      project.data.status.revenue = !project.data.status.revenue;
+    },
     updateProjectInfo: (project, action) => {
       project.data.details[action.payload.key] = action.payload.value;
     },
@@ -51,6 +54,7 @@ export const {
   setCompanyDefaults,
   updateSectionStatus,
   updateGanttStatus,
+  updateRevenueStatus,
 } = slice.actions;
 export default slice.reducer;
 

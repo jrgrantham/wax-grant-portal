@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UtilisationModalRow from "./utilisationModalRow";
 import Close from "../general/close";
-import { costsColor, wpInfoColor } from "../../helpers";
+import { costsColor } from "../../helpers";
 import { getUtilisations } from "../../store/entities/team";
 
 toast.configure();

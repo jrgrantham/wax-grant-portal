@@ -35,8 +35,8 @@ function LeftMenu(props) {
         <Tippy
           content={
             status
-              ? "Edit data"
-              : `Mark "${section}" as complete for "${company}"`
+              ? `Edit ${section}`
+              : `Mark ${section} as complete`
           }
         >
           <button onClick={changeStatus} className="completeButton">

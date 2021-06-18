@@ -5,7 +5,6 @@ import { getTotalsByLeader, getWPStatus } from "../../helpers";
 import {
   assignAllToCategory,
   assignNoneToCategory,
-  resetAssignments,
 } from "../../store/entities/assignments";
 import AssignmentRow from "./assignmentRow";
 import Tippy from "@tippy.js/react";
@@ -131,9 +130,7 @@ function AssignmentInfo() {
             {status.has.travel ? assignAllButton("travel", 2) : null}
             {status.has.capex ? assignAllButton("capex", 3) : null}
             {others.map((other, index) => {
-              {
-                return assignAllButton(other.otherId, index + 4);
-              }
+              return assignAllButton(other.otherId, index + 4);
             })}
           </div>
         </div>

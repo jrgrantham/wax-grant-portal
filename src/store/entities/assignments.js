@@ -49,6 +49,7 @@ const slice = createSlice({
     },
     deletePackAssignments: (assignments, action) => {
       const { workPackageId } = action.payload;
+      console.log(workPackageId);
       const leaders = ["lead", "pOne", "pTwo"];
       const categories = [
         "materials",
@@ -62,9 +63,9 @@ const slice = createSlice({
       ];
       leaders.forEach((leader) => {
         categories.forEach((category) => {
-          const index = assignments.data[leader][category].indexOf(
-            workPackageId
-          );
+          const index = assignments.data[leader][category]
+            ? assignments.data[leader][category].indexOf(workPackageId)
+            : -1;
           if (index > -1) {
             assignments.data[leader][category].splice(index, 1);
           }

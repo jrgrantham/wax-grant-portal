@@ -4,7 +4,7 @@ import { updateUserSelection } from "../store/user";
 import LeftMenu from "../components/table/leftMenu";
 import { TableContainer } from "../components/table/tableStyling";
 import MarkedComplete from "../components/modals/markedComplete";
-import { updateSectionStatus } from "../store/entities/project";
+import { updateRevenueStatus, updateSectionStatus } from "../store/entities/project";
 import { revenueColor, revenueFontColor } from "../helpers"; // check this
 import TargetMarket from "../components/revenue/targetMarketInfo"; // check this
 import RevenueInfo from "../components/revenue/revenueInfo"; // check this
@@ -13,10 +13,14 @@ function Revenue() {
   const dispatch = useDispatch();
   const selectedLeader = useSelector((state) => state.user.selectedLeader);
   const status = useSelector(
-    (state) => state.entities.project.data.status.team[selectedLeader] // check this
+    (state) => state.entities.project.data.status.revenue // check this
   );
-  const selectedOption = useSelector((state) => state.user.selectedRevenueOption); // check this
+  const selectedOption = useSelector(
+    (state) => state.user.selectedRevenueOption
+  ); // check this
   const menuList = ["Target Market", "Streams", "R&D", "Details"]; // check this
+
+  console.log(status, selectedLeader);
 
   const menuData = {
     section: "Revenue", // check this
@@ -29,9 +33,7 @@ function Revenue() {
       dispatch(updateUserSelection({ key: "selectedRevenueOption", value })); // check this
     },
     changeStatus: function () {
-      dispatch(
-        updateSectionStatus({ section: "revenue", leader: selectedLeader }) // check this
-      );
+      dispatch(updateRevenueStatus()); // check this
     },
   };
 

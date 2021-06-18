@@ -33,8 +33,8 @@ export const Container = styled.div`
   .revenueStream {
     background-color: ${revenueStream};
     // to equal the margin left variable of 30px, 15 + 15
-    padding: 15px;
-    margin: 5px 15px;
+    padding: 10px 20px;
+    margin: 5px 10px;
     border-radius: 5px;
     .stream {
       color: ${questionColor};
@@ -56,6 +56,13 @@ export const Container = styled.div`
     &:hover .hidden {
       opacity: 1;
     }
+  }
+  .addTitle {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    left: 120px;
+    bottom: 12px;
   }
   .addIcon {
     height: 25px;

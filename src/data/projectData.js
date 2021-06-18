@@ -18,11 +18,7 @@ export const projectData = {
         pOne: false,
         pTwo: false,
       },
-      revenue: {
-        lead: false,
-        pOne: false,
-        pTwo: false,
-      },
+      revenue: false,
       risks: {
         lead: false,
         pOne: false,

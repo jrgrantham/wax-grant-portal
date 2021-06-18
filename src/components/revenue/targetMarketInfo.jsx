@@ -18,7 +18,6 @@ function TargetMarketInfo() {
       <Titles />
       <div className="rows">
         {markets.map((market, index) => {
-          console.log(market);
           return <TargetMarketRow market={market} index={index} key={index} />;
         })}
         {markets.length >= max + 1 ? (

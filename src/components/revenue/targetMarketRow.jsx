@@ -25,7 +25,7 @@ function TargetMarketRow(props) {
     let value = e.target.value;
     if (key === "start" || key === "growth") {
       if (e.target.value) {
-        value = parseInt(value.slice(-6));
+        value = parseInt(value.slice(-7));
       } else value = 0;
     }
     dispatch(updateMarket({ index, key, value }));

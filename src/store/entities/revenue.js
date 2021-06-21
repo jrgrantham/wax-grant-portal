@@ -47,7 +47,7 @@ const slice = createSlice({
       revenue.data.markets.splice(index, 1);
     },
     updateRevenueKey: (revenue, action) => {
-      const {key, value} = action.payload
+      const { key, value } = action.payload;
       revenue.data[key] = value;
     },
     updateProfitMargin: (revenue, action) => {
@@ -140,22 +140,25 @@ export const getStreamTotals = createSelector(
     const result = [];
 
     for (let i = 0; i < streams.length; i++) {
-      const { unitRevenue } = streams[i];
+      // const { unitRevenue } = streams[i];
       const summary = {};
 
       years.forEach((year) => {
         let sales = 0;
+        let revenue = 0;
         markets.forEach((market) => {
           const checkMarket = streams[i][market] && streams[i][market][year];
           const value = checkMarket ? streams[i][market][year] : 0;
+          const unitRevenue = checkMarket ? streams[i][market].unitRevenue : 0;
           sales = sales + value;
+          revenue = revenue + sales * unitRevenue;
         });
-        const revenue = sales * unitRevenue;
         const data = { sales, revenue };
         summary[year] = data;
       });
       result.push(summary);
     }
+    console.log(result[0].y1);
     return result;
   }
 );
@@ -164,17 +167,17 @@ export const getUKRevenue = createSelector(
   (state) => state.entities.revenue,
   (revenue) => {
     console.log("getUKRevenue");
-    console.log(revenue.data.streams);
     const years = ["y1", "y2", "y3", "y4", "y5"];
     const result = {};
     years.forEach((year) => {
       let value = 0;
+      let unitRevenue = 0;
       revenue.data.streams.forEach((stream) => {
-        const unitRevenue = stream.unitRevenue || 0;
         let quantity = 0;
-        // const quantity = stream["UK Market"][year] || 0;
-        if (stream["UK Market"] && stream["UK Market"][year])
+        if (stream["UK Market"] && stream["UK Market"][year]) {
+          unitRevenue = stream["UK Market"].unitRevenue || 0;
           quantity = stream["UK Market"][year];
+        }
         const combined = quantity * unitRevenue;
         value = value + combined;
       });
@@ -190,6 +193,7 @@ export const getAnnualRevenue = createSelector(
   () => {
     console.log("getAnnualRevenue");
     const streams = getStreamTotals(store.getState());
+    console.log(streams);
     const years = ["y1", "y2", "y3", "y4", "y5"];
     const result = {};
     years.forEach((year) => {

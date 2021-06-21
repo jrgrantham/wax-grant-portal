@@ -8,6 +8,8 @@ import {
 } from "../../store/entities/revenue";
 import bin from "../../images/bin-grey.png";
 import dropdown2 from "../../images/dropArrow2.png";
+import TargetMarketModal from "../modals/targetMarketModal";
+import { updateUserSelection } from "../../store/user";
 
 function TargetMarketRow(props) {
   let { name, start, growth } = props.market;
@@ -16,6 +18,8 @@ function TargetMarketRow(props) {
   const state = useSelector((state) => state);
   const { marketOptions } = state.entities.options.data;
   const market = getMarketData(state)[name];
+  const { showComponent } = state.user;
+  const modalName = "modal" + name;
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -28,8 +32,17 @@ function TargetMarketRow(props) {
     dispatch(updateMarket({ index, key, value }));
   }
 
+  console.log(showComponent === modalName);
+
+  function showModal() {
+    const key = "showComponent";
+    const value = showComponent === modalName ? "" : modalName;
+    dispatch(updateUserSelection({ key, value }));
+  }
+
   return (
     <div className="row">
+      {showComponent === modalName ? <TargetMarketModal name={name} /> : null}
       <div className="relative">
         {name === "UK Market" || name === "Global" ? (
           <p className="field market display">{name}</p>
@@ -80,7 +93,9 @@ function TargetMarketRow(props) {
         className="field year"
       />
 
-      <button className="textButton">Source</button>
+      <button onClick={showModal} className="textButton">
+        Source
+      </button>
       {index === 0 || name === "Global" ? null : (
         <div className="hidden deleteIcon">
           <img

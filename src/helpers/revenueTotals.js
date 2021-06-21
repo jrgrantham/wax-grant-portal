@@ -21,6 +21,8 @@ export const getAllRevenueData = createSelector(
     const leadMatch = leadTotal - ukInvest;
     const { profitMargin, taxRate } = state.entities.revenue.data;
 
+    console.log(revenue);
+
     const summary = {
       revenue,
       profit: {},
@@ -61,7 +63,7 @@ export const getAllRevenueData = createSelector(
       );
       summary.roiLead[year] = leadRoi;
     });
-    console.log(summary.roiLead);
+    // console.log(summary.roiLead);
     return summary;
   }
 );

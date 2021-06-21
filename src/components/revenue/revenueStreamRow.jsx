@@ -46,8 +46,6 @@ function RevenueStreamRow(props) {
     dispatch(updateStreamUnit({streamIndex, markets, value: tempUnit}))
   }
 
-  console.log(showComponent);
-
   return (
     <div className="revenueRow">
       <p className="field market display">{name}</p>

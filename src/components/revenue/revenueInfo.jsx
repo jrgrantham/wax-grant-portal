@@ -23,7 +23,7 @@ function RevenueInfo() {
         })}
 
         {streams.length >= max ? (
-          <Tippy content={`Maximum ${max} streams`}>
+          <Tippy content={`Maximum ${max} revenue streams`}>
             <button className="addIcon">
               <img src={addGrey} alt="add" />
             </button>

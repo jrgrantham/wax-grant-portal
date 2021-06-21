@@ -3,8 +3,8 @@ import Tippy from "@tippy.js/react";
 import qMark from "../../images/qMark.png";
 import { useSelector, useDispatch } from "react-redux";
 import { Container } from "./revenueStyling";
-import { updateStart } from "../../store/entities/revenue";
-import dropdown2 from '../../images/dropArrow2.png'
+import { updateRevenueKey } from "../../store/entities/revenue";
+import dropdown2 from "../../images/dropArrow2.png";
 
 function TargetMarketTitles() {
   const dispatch = useDispatch();
@@ -16,8 +16,9 @@ function TargetMarketTitles() {
   );
 
   function changeYear(e) {
-    const year = parseInt(e.target.value);
-    dispatch(updateStart({ year }));
+    const key = "revenueStart";
+    const value = parseInt(e.target.value);
+    dispatch(updateRevenueKey({ key, value }));
   }
 
   return (
@@ -44,8 +45,8 @@ function TargetMarketTitles() {
             <option value={projectStart + 3}>{projectStart + 3}</option>
             <option value={projectStart + 4}>{projectStart + 4}</option>
           </select>
-          <div className='dropdown'>
-            <img src={dropdown2} alt="option"/>
+          <div className="dropdown">
+            <img src={dropdown2} alt="option" />
           </div>
         </div>
         <div className="title year">

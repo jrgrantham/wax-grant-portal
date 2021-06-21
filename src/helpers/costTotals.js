@@ -9,7 +9,14 @@ import { getFundingLevel, getOverheads } from "../store/entities/project";
 import { getWorkPackageIds } from "../store/entities/tasks";
 
 export const getTotalsByCategory = createSelector(
-  (state) => state.entities,
+  (state) => state.entities.tasks,
+  (state) => state.entities.project,
+  (state) => state.entities.team,
+  (state) => state.entities.options,
+  (state) => state.entities.materials,
+  (state) => state.entities.travel,
+  (state) => state.entities.capex,
+  (state) => state.entities.other,
   () => {
     console.log("getTotalsByCategory");
     const state = store.getState();

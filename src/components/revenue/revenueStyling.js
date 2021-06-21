@@ -40,29 +40,36 @@ export const Container = styled.div`
       color: ${questionColor};
       font-size: 12px;
       font-weight: bold;
-      margin-bottom: 5px;
-      margin-right: 20px;
+      margin-right: 10px;
       // market width + 5 x year width + margins
-      width: 600px;
+      /* width: 600px; */
     }
     .revenueRow {
       display: flex;
       align-items: center;
+      min-height: 30px;
     }
     input {
       background-color: transparent;
-      border-bottom-color: red;
+      /* border-bottom-color: red; */
     }
     &:hover .hidden {
       opacity: 1;
     }
   }
-  .addTitle {
-    position: absolute;
+  .editTitle {
+    /* position: absolute; */
     height: 15px;
     width: 15px;
-    left: 120px;
-    bottom: 12px;
+    /* margin-bottom: 3px; */
+    /* left: 120px; */
+    /* bottom: 12px; */
+  }
+  .streamTitle {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-start;
+    /* align-items: center; */
   }
   .addIcon {
     height: 25px;
@@ -101,8 +108,29 @@ export const Container = styled.div`
     padding: 5px 10px;
     padding: 5px 10px;
   }
+
   .marginLeft {
     margin-left: 20px;
+  }
+  .hiddenInput {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    background-color: green;
+    border-radius: 6px;
+    position: absolute;
+    right: 10px;
+    button {
+      margin-right: 10px;
+    }
+    input {
+      border: none;
+      background-color: white;
+      border-radius: 6px;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding-right: 10px;
+    }
   }
   button {
     color: white;

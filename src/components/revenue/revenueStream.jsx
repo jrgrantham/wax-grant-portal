@@ -3,47 +3,78 @@ import { useDispatch, useSelector } from "react-redux";
 import RevenueStreamRow from "./revenueStreamRow";
 import bin from "../../images/bin-grey.png";
 import qMark from "../../images/qMark.png";
-import add from "../../images/add-grey.png";
-import { deleteStream, getStreamTotals } from "../../store/entities/revenue";
-import { store } from "../../store";
+import {
+  deleteStream,
+  getStreamTotals,
+  updateStreamName,
+} from "../../store/entities/revenue";
 import Tippy from "@tippy.js/react";
+import { updateUserSelection } from "../../store/user";
 
 function RevenueStream(props) {
   const { stream, index } = props;
-  const state = store.getState();
-  const dispatch = useDispatch();
-  const { markets } = useSelector((state) => state.entities.revenue.data);
-  const streamIndex = index;
-
-  const display = markets.filter((market) => market.name !== "Global");
-  function onChangeHandler(e) {}
+  const state = useSelector((state) => state);
   const total = getStreamTotals(state)[index];
+  const { markets } = state.entities.revenue.data;
+  const display = markets.filter((market) => market.name !== "Global");
+  const streamIndex = index;
+  const streamName = "stream" + index;
+  const { showComponent } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  function setEditName(value) {
+    const key = "showComponent";
+    dispatch(updateUserSelection({ key, value }));
+  }
+
+  function onChangeHandler(e) {
+    const key = "streamName";
+    const value = e.target.value;
+    dispatch(updateStreamName({ streamIndex, key, value }));
+  }
+
   let title = `Revenue Stream ${index + 1}`;
-  if (stream.name) title = title + ` - ${stream.name}`;
+  if (stream.streamName) title = title + ` - ${stream.streamName}`;
 
   return (
     <div className="revenueStream relative">
-      <div className="revenueRow relative">
-        <p className="stream">{title}</p>
-        {stream.name ? null : (
-          <Tippy content="Add stream description">
-            <div className="addTitle">
+      {showComponent === streamName ? (
+        <div className="streamTitle">
+          <input
+            id={"unitRevenue" + index}
+            name="unitRevenue"
+            value={stream.streamName}
+            onChange={onChangeHandler}
+            className="field"
+          />
+          <button onClick={() => setEditName("")} className="textButton">
+            close
+          </button>
+        </div>
+      ) : (
+        <div className="streamTitle">
+          <p className="stream">{title}</p>
+
+          <Tippy content="click to edit stream description">
+            <button
+              onClick={() => setEditName(streamName)}
+              className="editTitle"
+            >
               <img src={qMark} alt="add" />
-            </div>
+            </button>
           </Tippy>
-        )}
-        <input
-          id={"unitRevenue" + index}
-          name="unitRevenue"
-          value={stream.unitRevenue}
-          onChange={onChangeHandler}
-          className="field year"
-        />
-      </div>
+        </div>
+      )}
 
       {display.map(({ name }, index) => {
         return (
-          <RevenueStreamRow name={name} key={index} streamIndex={streamIndex} />
+          <RevenueStreamRow
+            name={name}
+            key={index}
+            index={index}
+            streamIndex={streamIndex}
+            streamName={streamName}
+          />
         );
       })}
       <div className="revenueRow">

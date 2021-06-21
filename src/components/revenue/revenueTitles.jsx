@@ -30,9 +30,6 @@ function TargetMarketTitles() {
           <p>Y5&nbsp;</p>
           <p className="subtle">{revenueStart + 4}</p>
         </div>
-        <div className="title ">
-          <p className="subtle">Unit revenue</p>
-        </div>
       </div>
     </Container>
   );

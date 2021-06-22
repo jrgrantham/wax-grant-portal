@@ -6,7 +6,7 @@ const slice = createSlice({
   initialState: {
     admin: true,
     showMenu: false,
-    showComponent: "orgType", // set component identifier
+    showComponent: "", // set component identifier
     selectedLeader: "lead", // default should be the user
     selectedAdminOption: "project",
     selectedDetailsOption: "project",

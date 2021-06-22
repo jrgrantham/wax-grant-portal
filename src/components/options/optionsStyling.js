@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   
   .description {
-    width: 250px;
+    width: 300px;
   }
   .value {
     width: 70px;
@@ -14,7 +14,7 @@ export const Container = styled.div`
   }
   .showButton {
     position: absolute;
-    left: 190px;
+    left: 240px;
   }
   .list {
     display: flex;

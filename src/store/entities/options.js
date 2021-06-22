@@ -5,17 +5,27 @@ import { options } from "../../data";
 const slice = createSlice({
   name: "options",
   initialState: options,
-  // reducers: {
-
-  // },
+  reducers: {
+    addToList: (options, action) => {
+      const { key, value } = action.payload;
+      options.data[key].push(value);
+    },
+    removeFromList: (options, action) => {
+      const { key, index } = action.payload;
+      options.data[key].splice(index, 1)
+    },
+    setDefault: (options, action) => {
+      const { key, value } = action.payload;
+      options.data[key] = value
+    },
+  },
 });
 
-// export const {
-// } = slice.actions;
+export const { addToList, removeFromList, setDefault } = slice.actions;
 export default slice.reducer;
 
 export const getProjectDefaults = (state) => {
-  console.log('getProjectDefaults');
+  console.log("getProjectDefaults");
   const { natureDefault, ipProtectionDefault } = state.entities.options.data;
   const defaults = [
     { key: "nature", value: natureDefault },
@@ -25,7 +35,7 @@ export const getProjectDefaults = (state) => {
 };
 
 export const getCompanyDefaults = (state) => {
-  console.log('getCompanyDefaults');
+  console.log("getCompanyDefaults");
   const {
     orgTypeDefault,
     orgSizeDefault,

@@ -11,7 +11,7 @@ function GanttSummaryModal() {
   const daysById = getTotalDays(useSelector((state) => state));
 
   function close() {
-    dispatch(updateUserSelection({ key: "showGanttSummary", value: false }));
+    dispatch(updateUserSelection({ key: "showComponent", value: '' }));
   }
 
   return (
@@ -21,7 +21,7 @@ function GanttSummaryModal() {
         return (
           <div key={index} className="person">
             <span>{person.acronym}:</span>
-            <span>{daysById[person.personId].toFixed(1)}</span>
+            <span>{daysById[person.personId].toFixed(0)}</span>
           </div>
         );
       })}

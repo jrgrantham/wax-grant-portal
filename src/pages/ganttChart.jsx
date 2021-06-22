@@ -12,7 +12,7 @@ import { getTaskIds } from "../store/entities/tasks";
 
 function GanttChart() {
   const taskData = useSelector((state) => state.entities.tasks.data);
-  const showSummary = useSelector((state) => state.user.showGanttSummary);
+  const showSummary = useSelector((state) => state.user.showComponent);
   const taskIdKeys = getTaskIds(useSelector((state) => state));
   const ganttComplete = useSelector(
     (state) => state.entities.project.data.status.gantt
@@ -95,7 +95,7 @@ function GanttChart() {
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />
       </div>
-      {showSummary ? <GanttSummaryModal /> : null}
+      {showSummary === 'ganttSummary' ? <GanttSummaryModal /> : null}
     </PageContainer>
   );
 }

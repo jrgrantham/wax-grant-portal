@@ -19,6 +19,7 @@ export const projectData = {
         pTwo: false,
       },
       revenue: false,
+      options: false,
       risks: {
         lead: false,
         pOne: false,

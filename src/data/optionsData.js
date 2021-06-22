@@ -1,6 +1,6 @@
-function lengths() {
+function lengths(start = 1, end = 36, increment = 1) {
   const length = [];
-  for (let i = 1; i <= 36; i++) {
+  for (let i = start; i <= end; i = i + increment) {
     length.push(i);
   }
   return length;
@@ -98,7 +98,7 @@ export const options = {
     ],
     years: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029],
     utilisations: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-    projectLengths: lengths(),
+    projectLengths: lengths(1, 36, 1),
 
     maxWorkPackages: 10,
     maxDeadlines: 10,

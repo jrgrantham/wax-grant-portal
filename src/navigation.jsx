@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Menu from "./components/general/menu";
 import { appTop, appWidth, navBackground, navHighlight } from "./helpers";
@@ -10,9 +10,13 @@ import { updateUserSelection } from "./store/user";
 
 function Navigation() {
   const dispatch = useDispatch();
+  const { admin, showComponent } = useSelector((state) => state.user);
+  
   function openMenu() {
-    dispatch(updateUserSelection({ key: "showMenu", value: true }));
+    const value = showComponent === 'menu' ? '' : 'menu'
+    dispatch(updateUserSelection({ key: "showComponent", value }));
   }
+
   return (
     <Container appWidth={appWidth}>
       <Menu />
@@ -70,6 +74,16 @@ function Navigation() {
           >
             <h3>Risks</h3>
           </NavLink>
+          {admin ? (
+            <NavLink
+              exact
+              to="/options"
+              className="navButton"
+              activeClassName="selected"
+            >
+              <h3>Options</h3>
+            </NavLink>
+          ) : null}
         </div>
 
         <div className="icon burger" onClick={openMenu}>

@@ -5,17 +5,19 @@ import { appWidth } from "../../helpers";
 import { updateUserSelection } from "../../store/user";
 
 function Navigation() {
-  const showMenu = useSelector((state) => state.user.showMenu);
+  const showComponent = useSelector((state) => state.user.showComponent);
   const dispatch = useDispatch();
+
   function closeMenu() {
     console.log("close");
-    dispatch(updateUserSelection({ key: "showMenu", value: false }));
+    dispatch(updateUserSelection({ key: "showComponent", value: "" }));
   }
+
   const data = {
     menuWidth: "200px",
-    offset: "-200px",
-    showMenu,
+    offset: showComponent === "menu" ? 0 : "-200px",
   };
+
   return (
     <Container appWidth={appWidth} data={data} onClick={closeMenu} id="menu">
       <div className="topButtons">
@@ -36,7 +38,7 @@ export default Navigation;
 
 const Container = styled.nav`
   position: fixed;
-  right: ${(props) => (props.data.showMenu ? "0" : props.data.offset)};
+  right: ${(props) => props.data.offset};
   top: 0;
   transition: right 0.3s;
   width: ${(props) => props.data.menuWidth};

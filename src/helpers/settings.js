@@ -27,8 +27,8 @@ export const revenueFontColor = "rgba(0, 147, 69, 1)";
 export const revenueStream = "rgba(139, 197, 63, 0.15)";
 export const revenueTotal = "rgba(133, 133, 133, 0.15)";
 
-export const settingsColor2 = "rgba(250,172,24)";
-export const settingsFontColor2 = "rgba(226,120,23)";
+export const settingsColor = "rgba(250,172,24)";
+export const settingsFontColor = "rgba(226,120,23)";
 
 export const tableLeftWidth = "120px";
 export const tableRightWidth = "850px";

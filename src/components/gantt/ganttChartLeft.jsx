@@ -29,12 +29,10 @@ function GanttChartLeft(props) {
   const dispatch = useDispatch();
 
   const { workPackages, deliverables, milestones, totalDays } = props.data;
-  const workPackageCount = workPackages.length
+  const workPackageCount = workPackages.length;
 
   const taskPackTitles = getWorkPackageTitles(useSelector((state) => state));
-  // getWorkPackageTitlesById(useSelector((state) => state));
-  // const taskPackTitles2 = getWorkPackageTitles(useSelector((state) => state));
-  const showSummary = useSelector((state) => state.user.showGanttSummary);
+  const showSummary = useSelector((state) => state.user.showComponent);
   const ganttComplete = useSelector(
     (state) => state.entities.project.data.status.gantt
   );
@@ -52,15 +50,14 @@ function GanttChartLeft(props) {
   }
 
   function toggleSummary() {
-    dispatch(
-      updateUserSelection({ key: "showGanttSummary", value: !showSummary })
-    );
+    const value = showSummary === "ganttSummary" ? "" : "ganttSummary";
+    dispatch(updateUserSelection({ key: "showComponent", value }));
   }
 
   function toggleComplete() {
     dispatch(updateGanttStatus());
-    if (showSummary)
-      dispatch(updateUserSelection({ key: "showGanttSummary", value: false }));
+    if (showSummary === "ganttSummary")
+      dispatch(updateUserSelection({ key: "showComponent", value: "" }));
   }
 
   return (

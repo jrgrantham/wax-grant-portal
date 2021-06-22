@@ -75,22 +75,6 @@ function RevenueTotal() {
         )}
       </div>
       <div className="revenueRow">
-        <p className="field market">UK Market Share</p>
-        <p className="field year">{ukShare.y1}%</p>
-        <p className="field year">{ukShare.y2}%</p>
-        <p className="field year">{ukShare.y3}%</p>
-        <p className="field year">{ukShare.y4}%</p>
-        <p className="field year">{ukShare.y5}%</p>
-      </div>
-      <div className="revenueRow">
-        <p className="field market">Global Market Share</p>
-        <p className="field year">{globalShare.y1}%</p>
-        <p className="field year">{globalShare.y2}%</p>
-        <p className="field year">{globalShare.y3}%</p>
-        <p className="field year">{globalShare.y4}%</p>
-        <p className="field year">{globalShare.y5}%</p>
-      </div>
-      <div className="revenueRow">
         <p className="field market">Corporation Tax</p>
         <p className="field year">{numberToCurrency(corpTax.y1)}</p>
         <p className="field year">{numberToCurrency(corpTax.y2)}</p>
@@ -127,12 +111,28 @@ function RevenueTotal() {
         <p className="field year">{numberToCurrency(cumulativeCorpTax.y5)}</p>
       </div>
       <div className="revenueRow">
+        <p className="field market">UK Market Share</p>
+        <p className="field year">{ukShare.y1}%</p>
+        <p className="field year">{ukShare.y2}%</p>
+        <p className="field year">{ukShare.y3}%</p>
+        <p className="field year">{ukShare.y4}%</p>
+        <p className="field year">{ukShare.y5}%</p>
+      </div>
+      <div className="revenueRow">
+        <p className="field market">Global Market Share</p>
+        <p className="field year">{globalShare.y1}%</p>
+        <p className="field year">{globalShare.y2}%</p>
+        <p className="field year">{globalShare.y3}%</p>
+        <p className="field year">{globalShare.y4}%</p>
+        <p className="field year">{globalShare.y5}%</p>
+      </div>
+      <div className="revenueRow">
         <p className="field market">ROI Innovate UK</p>
-        <p className="field year">{roiInnovate.y1}</p>
-        <p className="field year">{roiInnovate.y2}</p>
-        <p className="field year">{roiInnovate.y3}</p>
-        <p className="field year">{roiInnovate.y4}</p>
-        <p className="field year">{roiInnovate.y5}</p>
+        <p className="field year">{roiInnovate.y1}%</p>
+        <p className="field year">{roiInnovate.y2}%</p>
+        <p className="field year">{roiInnovate.y3}%</p>
+        <p className="field year">{roiInnovate.y4}%</p>
+        <p className="field year">{roiInnovate.y5}%</p>
       </div>
       <div className="revenueRow">
         <p className="field market">ROI Lead</p>
@@ -140,7 +140,7 @@ function RevenueTotal() {
         <p className="field year" />
         <p className="field year" />
         <p className="field year" />
-        <p className="field year">{roiLead.y5}</p>
+        <p className="field year">{roiLead.y5}%</p>
       </div>
     </div>
   );

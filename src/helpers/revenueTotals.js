@@ -54,12 +54,15 @@ export const getAllRevenueData = createSelector(
       cumulativeCorpTax = cumulativeCorpTax + tax;
       summary.cumulativeCorpTax[year] = cumulativeCorpTax;
 
-      const ukRoi = roundTo((cumulativeCorpTax - ukInvest) / ukInvest, 2);
+      const ukRoi = roundTo(
+        ((cumulativeCorpTax - ukInvest) / ukInvest) * 100,
+        0
+      );
       summary.roiInnovate[year] = ukRoi;
 
       const leadRoi = roundTo(
-        (summary.profit[year] - leadMatch) / leadMatch,
-        2
+        ((summary.profit[year] - leadMatch) / leadMatch) * 100,
+        0
       );
       summary.roiLead[year] = leadRoi;
     });

@@ -30,7 +30,7 @@ export function roundTo(number, decimalPlaces) {
 
 export function numberToCurrency(number) {
   if (number) {
-    const rounded = Math.round(number)
+    const rounded = Math.round(number);
     let formattedCost = rounded.toString();
     let result = "";
     let counter = 0;
@@ -42,9 +42,17 @@ export function numberToCurrency(number) {
       result = character + result;
       counter++;
     }
-    result = "£" + result
+    result = "£" + result;
     return result;
   } else return 0;
+}
+
+export function generateArray(start = 1, end = 1, increment = 1) {
+  const length = [];
+  for (let i = start; i <= end; i = i + increment) {
+    length.push(i);
+  }
+  return length;
 }
 
 // Returns a function, that, as long as it continues to be invoked, will not

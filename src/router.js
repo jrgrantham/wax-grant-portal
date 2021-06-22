@@ -9,7 +9,7 @@ import Details from "./pages/detailsTable";
 import HomePage from "./pages/homePage";
 import NoResult from "./pages/noResult";
 import Team from "./pages/teamTable";
-import Costs from "./pages/costs";
+import Costs from "./pages/costsTable";
 import Revenue from "./pages/revenueTable";
 import Options from "./pages/optionsTable";
 import Risks from "./pages/risks";

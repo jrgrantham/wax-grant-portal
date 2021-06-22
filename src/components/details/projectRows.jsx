@@ -11,6 +11,7 @@ import qMark from "../../images/qMark.png";
 import { Container } from "./detailsStyling";
 import dropdown1 from '../../images/dropArrow1.png'
 import dropdown2 from '../../images/dropArrow2.png'
+import { generateArray } from "../../helpers";
 
 function ProjectRows() {
   const dispatch = useDispatch();
@@ -22,9 +23,11 @@ function ProjectRows() {
     dispatch(updateProjectInfo({ key, value }));
   }
 
-  const { ipProtections, natures, months, years, projectLengths } = useSelector(
+  const { ipProtections, natures, months, years, maxProjectLength } = useSelector(
     (state) => state.entities.options.data
   );
+
+  const projectLengths = generateArray(1, maxProjectLength, 1)
 
   const {
     productPlatformName,

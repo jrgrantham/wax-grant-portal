@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
-import {
-  updateTeamMember,
-  deleteTeamMember,
-} from "../../store/entities/team";
+import { updateTeamMember, deleteTeamMember } from "../../store/entities/team";
 import { BiMenu } from "react-icons/bi";
 import { isNumberKey } from "../../helpers";
 import { deletePersonAllocations } from "../../store/entities/allocations";
@@ -139,15 +136,12 @@ function TeamRow(props) {
         Profile
       </button>
       <div className="hidden deleteIcon">
-        {/* <Tippy content="All associated data will be lost"> */}
         <img
-          // className="delete"
           src={bin}
           alt="delete"
           style={{ cursor: "pointer" }}
           onClick={() => setConfirmDelete(true)}
         />
-        {/* </Tippy> */}
       </div>
     </div>
   );

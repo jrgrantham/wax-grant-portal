@@ -7,6 +7,9 @@ import MarkedComplete from "../components/modals/markedComplete";
 import { updateOptionsStatus } from "../store/entities/project";
 import { settingsColor, settingsFontColor } from "../helpers"; // check this
 import ProjectRows from "../components/details/projectRows"; // check this
+import ProjectOptions from "../components/options/projectOptions"; // check this
+import FinanceOptions from "../components/options/financeOptions"; // check this
+import TeamOptions from "../components/options/teamOptions";
 
 function Options() {
   const dispatch = useDispatch();
@@ -16,7 +19,7 @@ function Options() {
   const selectedOption = useSelector(
     (state) => state.user.selectedOptionsOption // check this
   );
-  const menuList = ["Project", "Team", "Finance", "General"]; // check this
+  const menuList = ["Details", "Team", "Finance", "General"]; // check this
   const menuData = {
     section: "Options", // check this
     status,
@@ -33,9 +36,9 @@ function Options() {
   };
 
   const maxHeight = {
-    company: "550px",
-    project: "350px",
-    options: "550px", // min height applies
+    company: null,
+    project: null,
+    options: null, // min height applies
   };
 
   const data = {
@@ -44,7 +47,10 @@ function Options() {
   };
 
   const table = {
-    project: <ProjectRows />,
+    details: <ProjectOptions />,
+    team: <TeamOptions />,
+    finance: <FinanceOptions />,
+    general: <ProjectRows />,
   };
 
   return (
@@ -52,10 +58,9 @@ function Options() {
       <div className="displayArea">
         <LeftMenu data={menuData} />
         <div className="content">
-          <div>
-            {status ? <MarkedComplete /> : null}
-            <div className="leaderTabMargin">{table[selectedOption]}</div>
-          </div>
+          {status ? <MarkedComplete /> : null}
+          {table[selectedOption]}
+          {/* <div className="leaderTabMargin">{table[selectedOption]}</div> */}
         </div>
       </div>
     </TableContainer>

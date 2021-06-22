@@ -7,13 +7,14 @@ import projectReducer from "./entities/project";
 import teamReducer from "./entities/team";
 import userReducer from "./user";
 import allocationsReducer from "./entities/allocations";
-import optionsReducer from "./entities/options";
 import materialsReducer from "./entities/materials";
 import travelReducer from "./entities/travel";
 import capexReducer from "./entities/capex";
 import otherReducer from "./entities/other";
 import assignmentsReducer from "./entities/assignments";
 import revenueReducer from './entities/revenue'
+import optionsReducer from "./entities/options";
+import globalReducer from "./entities/global";
 
 const entities = combineReducers({
   tasks: taskReducer,
@@ -21,13 +22,14 @@ const entities = combineReducers({
   project: projectReducer,
   team: teamReducer,
   allocations: allocationsReducer,
-  options: optionsReducer,
   materials: materialsReducer,
   travel: travelReducer,
   capex: capexReducer,
   other: otherReducer,
   assignments: assignmentsReducer,
   revenue: revenueReducer,
+  options: optionsReducer,
+  global: globalReducer,
 })
 
 const rootReducer = combineReducers({

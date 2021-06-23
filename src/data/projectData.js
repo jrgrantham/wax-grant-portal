@@ -1,6 +1,7 @@
 export const projectData = {
   loading: false,
   data: {
+    partners: 3,
     status: {
       gantt: false,
       details: {

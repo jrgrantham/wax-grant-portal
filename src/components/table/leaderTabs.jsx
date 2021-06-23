@@ -8,6 +8,7 @@ import { fontColorGrey, tabBottomMargin, tabHeight } from "../../helpers";
 
 function LeaderTabs(props) {
   const dispatch = useDispatch();
+  const { partners } = useSelector((state) => state.entities.project.data);
   const leader = useSelector((state) => state.user.selectedLeader);
   const pOne = useSelector(
     (state) => state.entities.project.data.pOne.companyName
@@ -29,11 +30,14 @@ function LeaderTabs(props) {
     allTabs.pop();
   }
 
-  const tabWidth = 100 / allTabs.length + "%";
-
   function selectLeader(value) {
     dispatch(updateUserSelection({ key: "selectedLeader", value }));
   }
+
+  if (partners === 1) return null;
+  if (partners === 2) allTabs.splice(2, 1);
+
+  const tabWidth = 100 / allTabs.length + "%";
 
   return (
     <PageContainer tabWidth={tabWidth}>

@@ -1,8 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 function HomePage() {
+  const { gantt, details, team, costs, revenue, options } = useSelector(
+    (state) => state.entities.project.data.status
+  );
 
+  // combined status
+  // gantt, revenue, options
+
+  // individual
+  // details, team, costs
+  
   return (
     <Container>
       <h2>Grant Portal</h2>

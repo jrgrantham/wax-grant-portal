@@ -5,7 +5,6 @@ const slice = createSlice({
   name: "user",
   initialState: {
     admin: true,
-    showMenu: false,
     showComponent: "", // set component identifier
     selectedLeader: "lead", // default should be the user
     selectedAdminOption: "project",
@@ -13,7 +12,7 @@ const slice = createSlice({
     selectedTeamOption: "staff",
     selectedCostsOption: "labour",
     selectedRevenueOption: "target market",
-    selectedOptionsOption: "details",
+    selectedOptionsOption: "project",
     userChanges: [] // log changes to be sent at split intervals
     // log the end point, objectId, when the time comes, send the object from state
   },

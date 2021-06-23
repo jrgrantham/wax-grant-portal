@@ -8,7 +8,8 @@ import { updateOptionsStatus } from "../store/entities/project";
 import { settingsColor, settingsFontColor } from "../helpers"; // check this
 import ProjectRows from "../components/details/projectRows"; // check this
 import ProjectOptions from "../components/options/projectOptions"; // check this
-import FinanceOptions from "../components/options/financeOptions"; // check this
+import CostsOptions from "../components/options/costsOptions"; // check this
+// import RevenueOptions from "../components/options/revenueOptions"; // check this
 import TeamOptions from "../components/options/teamOptions";
 
 function Options() {
@@ -19,7 +20,7 @@ function Options() {
   const selectedOption = useSelector(
     (state) => state.user.selectedOptionsOption // check this
   );
-  const menuList = ["Details", "Team", "Finance", "General"]; // check this
+  const menuList = ["Project", "Team", "Finance"]; // check this
   const menuData = {
     section: "Options", // check this
     status,
@@ -47,10 +48,9 @@ function Options() {
   };
 
   const table = {
-    details: <ProjectOptions />,
+    project: <ProjectOptions />,
     team: <TeamOptions />,
-    finance: <FinanceOptions />,
-    general: <ProjectRows />,
+    finance: <CostsOptions />,
   };
 
   return (

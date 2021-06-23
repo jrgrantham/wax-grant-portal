@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { costsColor, tableContentSideMargin } from "../../helpers";
+import { costsColor, questionColor, tableContentSideMargin } from "../../helpers";
 
 export const Container = styled.div`
   display: flex;
@@ -12,21 +12,34 @@ export const Container = styled.div`
     text-align: right;
     justify-content: flex-end;
   }
+  .text {
+    width: 340px;
+    text-align: right;
+    justify-content: flex-end;
+  }
   .showButton {
+    font-weight: bold;
     position: absolute;
     left: 240px;
   }
   .list {
+    margin: 10px 20px;
+    width: 330px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #f4f4f4;
+    border-radius: 6px;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
   .listRow {
     position: relative;
-    margin-left: ${tableContentSideMargin};
+    margin: 3px 10px 3px 10px;
     /* margin: 1px 40px; */
     width: 250px;
-    height: 33px;
+    /* height: 33px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,12 +55,12 @@ export const Container = styled.div`
   button {
     min-width: 60px;
     font-size: 12px;
-    background-color: grey;
+    background-color: white;
+    color: ${questionColor};
     border: none;
-    color: white;
   }
   .add {
-    padding: 0;
+    padding: 3px;
   }
   .imageButton {
     margin-right: 10px;
@@ -57,6 +70,11 @@ export const Container = styled.div`
     min-width: 30px;
   }
   .selected {
+    color: white;
     background-color: green;
+  }
+  .select {
+    text-align: right;
+    justify-content: flex-end;
   }
 `;

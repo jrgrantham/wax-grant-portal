@@ -12,16 +12,25 @@ const slice = createSlice({
     },
     removeFromList: (options, action) => {
       const { key, index } = action.payload;
-      options.data[key].splice(index, 1)
+      options.data[key].splice(index, 1);
     },
     setDefault: (options, action) => {
       const { key, value } = action.payload;
-      options.data[key] = value
+      options.data[key] = value;
+    },
+    updateValue: (options, action) => {
+      const { key, value } = action.payload;
+      options.data[key] = value;
     },
   },
 });
 
-export const { addToList, removeFromList, setDefault } = slice.actions;
+export const {
+  addToList,
+  removeFromList,
+  setDefault,
+  updateValue,
+} = slice.actions;
 export default slice.reducer;
 
 export const getProjectDefaults = (state) => {

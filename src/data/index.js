@@ -5,3 +5,4 @@ export * from "./projectData";
 export * from "./teamData";
 export * from "./allocationData";
 export * from "./optionsData";
+export * from "./globalData";

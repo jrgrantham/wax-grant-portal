@@ -2,10 +2,13 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { isNumberKey } from "../../helpers";
 import { updateValue } from "../../store/entities/options";
+import Tippy from "@tippy.js/react";
+import warning from "../../images/warning.png";
+import Global from "./globalIndicator";
 
 function OptionsInput(props) {
   const dispatch = useDispatch();
-  const { title, field, value, multiple, characters = 2 } = props;
+  const { title, field, value, multiple, characters = 2, global } = props;
 
   function handleChange(e) {
     let value = e.target.value;
@@ -17,6 +20,7 @@ function OptionsInput(props) {
 
   const row = (
     <div className="row">
+      {global ? <Global /> : null}
       <p className="field display description">{title}</p>
       <input
         type="text"
@@ -42,7 +46,7 @@ function OptionsInput(props) {
     />
   );
 
-  if (multiple) return input
-  else return row
+  if (multiple) return input;
+  else return row;
 }
 export default OptionsInput;

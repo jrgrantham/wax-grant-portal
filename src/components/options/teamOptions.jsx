@@ -3,33 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import OptionsInput from "./optionsInput";
 import ListOption from "./optionsList";
 import { Container } from "./optionsStyling";
+import Global from './globalIndicator';
+
 // import MaterialsRow from "./optionsRow";
 
 function TeamOptions() {
   const dispatch = useDispatch();
 
   const {
-    maxProjectLength,
-    maxWorkPackages,
-    maxTasksPerPackage,
-    maxDeadlines,
-    orgTypes,
-    orgTypeDefault,
-    orgSizes,
-    orgSizeDefault,
-    natures,
-    natureDefault,
-    ipProtections,
-    ipProtectionDefault,
     maxTeamMembers,
     maxSubcontract,
-    maxOverhead,
-    maxMaterials,
-    maxTravel,
-    maxCapex,
-    maxOther,
-    maxMarkets,
-    maxStreams,
     amberSalary,
     redSalary,
     amberDayRate,
@@ -101,7 +84,8 @@ function TeamOptions() {
             />
           </div>
 
-          <div className="row">
+          {/* <div className="row">
+          <Global />
             <p className="field display description">Overutilisation</p>
             <OptionsInput
               multiple={true}
@@ -113,7 +97,7 @@ function TeamOptions() {
               field={"redOverUtil"}
               value={redOverUtil}
             />
-          </div>
+          </div> */}
 
           <div className="row titles leaderTabMargin">
             <p className="title description">Team Options</p>
@@ -121,6 +105,7 @@ function TeamOptions() {
 
           <ListOption
             title="Project Roles"
+            global={true}
             list={projectRoles}
             defaultOption={projectRoleDefault}
             listKey="projectRoles"
@@ -129,6 +114,7 @@ function TeamOptions() {
 
           <ListOption
             title="Subcontractor Locations"
+            global={true}
             list={locations}
             defaultOption={locationDefault}
             listKey="locations"

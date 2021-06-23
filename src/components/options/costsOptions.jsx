@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container } from "./optionsStyling";
-// import MaterialsRow from "./optionsRow";
 import OptionsInput from "./optionsInput";
-import ListOption from "./optionsList";
 import { generateArray } from "../../helpers";
 import { updateValue } from "../../store/entities/options";
 import OptionsList from "./optionsList";
+import Global from './globalIndicator';
 
 function CostsOptions() {
   const dispatch = useDispatch();
@@ -17,14 +16,6 @@ function CostsOptions() {
     maxOther,
     maxMarkets,
     maxStreams,
-    fundingLevelMin,
-    fundingLevelMax,
-    fundingLevelInc,
-    fundingLevelDefault,
-    overheadRateMin,
-    overheadRateMax,
-    overheadRateInc,
-    overheadRateDefault,
     materialWarn,
     materialOver,
     travelWarn,
@@ -36,7 +27,20 @@ function CostsOptions() {
     matchFundingSources,
     matchFundingSourceDefault,
     marketOptions,
+    businessWarn,
+    academicWarn,
   } = useSelector((state) => state.entities.options.data);
+
+  const {
+    fundingLevelMin,
+    fundingLevelMax,
+    fundingLevelInc,
+    fundingLevelDefault,
+    overheadRateMin,
+    overheadRateMax,
+    overheadRateInc,
+    overheadRateDefault,
+  } = useSelector((state) => state.entities.global.data);
 
   const funding = generateArray(
     fundingLevelMin,
@@ -70,6 +74,7 @@ function CostsOptions() {
 
           <div className="row">
             <p className="field display description">Funding Levels</p>
+            <Global />
             <OptionsInput
               multiple={true}
               field={"fundingLevelMin"}
@@ -105,6 +110,7 @@ function CostsOptions() {
 
           <div className="row">
             <p className="field display description">Overhead Rates</p>
+            <Global />
             <OptionsInput
               multiple={true}
               field={"overheadRateMin"}
@@ -140,6 +146,7 @@ function CostsOptions() {
 
           <OptionsList
             title="Match Funding"
+            global={true}
             list={matchFundingSources}
             defaultOption={matchFundingSourceDefault}
             listKey="matchFundingSources"
@@ -149,6 +156,7 @@ function CostsOptions() {
           <OptionsList
             title="Markets"
             list={marketOptions}
+            global={true}
             // defaultOption={matchFundingSourceDefault}
             listKey="marketOptions"
             // defaultKey="matchFundingSourceDefault"
@@ -167,14 +175,12 @@ function CostsOptions() {
             <div className="field display value" />
             <div className="field display value" />
             <div className="field display value" />
-            <input
-              type="text"
-              id={"cost"}
-              name="cost"
-              value={0}
-              // onKeyDown={isNumberKey}
-              // onChange={onChangeHandler}
-              className="field value"
+
+            <OptionsInput
+              multiple={true}
+              field={"businessWarn"}
+              value={businessWarn}
+              // characters={3}
             />
           </div>
 
@@ -183,14 +189,11 @@ function CostsOptions() {
             <div className="field display value" />
             <div className="field display value" />
             <div className="field display value" />
-            <input
-              type="text"
-              id={"cost"}
-              name="cost"
-              value={0}
-              // onKeyDown={isNumberKey}
-              // onChange={onChangeHandler}
-              className="field value"
+            <OptionsInput
+              multiple={true}
+              field={"academicWarn"}
+              value={academicWarn}
+              // characters={3}
             />
           </div>
 

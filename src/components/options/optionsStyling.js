@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { costsColor, questionColor, tableContentSideMargin } from "../../helpers";
+import { questionColor } from "../../helpers";
 
 export const Container = styled.div`
   display: flex;

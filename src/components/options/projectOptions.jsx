@@ -58,6 +58,7 @@ function ProjectOptions() {
         </div>
 
         <ListOption
+          global={true}
           title="Organisation Types"
           list={orgTypes}
           defaultOption={orgTypeDefault}
@@ -67,6 +68,7 @@ function ProjectOptions() {
 
         <ListOption
           title="Organisation Sizes"
+          global={true}
           list={orgSizes}
           defaultOption={orgSizeDefault}
           listKey="orgSizes"
@@ -79,6 +81,7 @@ function ProjectOptions() {
 
         <ListOption
           title="Product / Platform Natures"
+          global={true}
           list={natures}
           defaultOption={natureDefault}
           listKey="natures"
@@ -87,6 +90,7 @@ function ProjectOptions() {
 
         <ListOption
           title="IP Protection Strategies"
+          global={true}
           list={ipProtections}
           defaultOption={ipProtectionDefault}
           listKey="ipProtections"

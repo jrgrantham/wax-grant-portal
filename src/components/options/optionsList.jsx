@@ -8,6 +8,7 @@ import {
   removeFromList,
   setDefault,
 } from "../../store/entities/options";
+import Global from "./globalIndicator";
 // import {addToList}
 
 function OptionsList(props) {
@@ -15,7 +16,7 @@ function OptionsList(props) {
   const state = useSelector((state) => state);
 
   const { showComponent } = useSelector((state) => state.user);
-  const { title, list, defaultOption, listKey, defaultKey } = props;
+  const { title, list, defaultOption, listKey, defaultKey, global } = props;
 
   const [value, setValue] = useState("");
 
@@ -51,6 +52,7 @@ function OptionsList(props) {
   return (
     <>
       <div className="row">
+        {global ? <Global /> : null}
         <p className="field display description">{title}</p>
         <input
           type="text"

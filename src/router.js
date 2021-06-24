@@ -11,7 +11,7 @@ import NoResult from "./pages/noResult";
 import Team from "./pages/teamTable";
 import Costs from "./pages/costsTable";
 import Revenue from "./pages/revenueTable";
-import Options from "./pages/optionsTable";
+import Options from "./pages/setupTable";
 import Risks from "./pages/risks";
 
 // function protectedRoute(Component, props) {
@@ -34,7 +34,7 @@ const Router = () => (
     <Route exact path="/costs" component={Costs} />
     <Route exact path="/revenue" component={Revenue} />
     <Route exact path="/risks" component={Risks} />
-    <Route exact path="/options" component={adminView} />
+    <Route exact path="/setup" component={adminView} />
     <Route exact path="/" component={HomePage} />
     <Route path="/" component={NoResult} />
   </Switch>

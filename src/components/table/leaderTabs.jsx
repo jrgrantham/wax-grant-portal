@@ -7,7 +7,7 @@ import { fontColorGrey, tabBottomMargin, tabHeight } from "../../helpers";
 
 function LeaderTabs(props) {
   const dispatch = useDispatch();
-  const { partners } = useSelector((state) => state.entities.options.data);
+  const { partners } = useSelector((state) => state.entities.setup.data);
   const leader = useSelector((state) => state.user.selectedLeader);
   const pOne = useSelector(
     (state) => state.entities.project.data.pOne.companyName

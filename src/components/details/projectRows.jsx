@@ -6,7 +6,7 @@ import {
   updateProjectInfo,
   setProjectDefaults,
 } from "../../store/entities/project";
-import { getProjectDefaults } from "../../store/entities/options";
+import { getProjectDefaults } from "../../store/entities/setup";
 import qMark from "../../images/qMark.png";
 import { Container } from "./detailsStyling";
 import dropdown1 from '../../images/dropArrow1.png'

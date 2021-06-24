@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container } from "./optionsStyling";
 import OptionsInput from "./optionsInput";
 import { generateArray } from "../../helpers";
-import { updateValue } from "../../store/entities/options";
+import { updateValue } from "../../store/entities/setup";
 import OptionsList from "./optionsList";
-import Global from './globalIndicator';
+import Global from "./globalIndicator";
 
 function CostsOptions() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function CostsOptions() {
     otherWarn,
     otherOver,
     marketOptions,
-  } = useSelector((state) => state.entities.options.data);
+  } = useSelector((state) => state.entities.setup.data);
 
   const {
     businessWarn,
@@ -163,7 +163,9 @@ function CostsOptions() {
           />
 
           <div className="row titles leaderTabMargin">
-            <p className="title description">Finance Constraints and Thresholds</p>
+            <p className="title description">
+              Finance Constraints and Thresholds
+            </p>
             <p className="title value">Entries</p>
             <p className="title value"></p>
             <p className="title value">Amber</p>

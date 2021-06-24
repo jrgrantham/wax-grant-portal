@@ -13,7 +13,7 @@ import capexReducer from "./entities/capex";
 import otherReducer from "./entities/other";
 import assignmentsReducer from "./entities/assignments";
 import revenueReducer from './entities/revenue'
-import optionsReducer from "./entities/options";
+import setupReducer from "./entities/setup";
 import globalReducer from "./entities/global";
 
 const entities = combineReducers({
@@ -28,7 +28,7 @@ const entities = combineReducers({
   other: otherReducer,
   assignments: assignmentsReducer,
   revenue: revenueReducer,
-  options: optionsReducer,
+  setup: setupReducer,
   global: globalReducer,
 })
 

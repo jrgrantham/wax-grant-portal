@@ -12,7 +12,7 @@ import { addStream } from "../../store/entities/revenue";
 function RevenueInfo() {
   const dispatch = useDispatch();
   const { streams } = useSelector((state) => state.entities.revenue.data);
-  const max = useSelector((state) => state.entities.options.data.maxStreams);
+  const max = useSelector((state) => state.entities.setup.data.maxStreams);
 
   return (
     <Container>
@@ -35,7 +35,7 @@ function RevenueInfo() {
             </button>
           </Tippy>
         )}
-      <RevenueTotal />
+        <RevenueTotal />
       </div>
     </Container>
   );

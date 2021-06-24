@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { navBackground, questionColor } from "../helpers/settings";
+import { useSelector } from "react-redux";
+import { navBackground } from "../helpers/settings";
 import Section from "../components/homePageSection";
 import tick from "../images/tick-white.png";
 
 function HomePage() {
-  // const { gantt, details, team, costs, revenue, options } = useSelector(
-  //   (state) => state.entities.project.data.status
-  // );
   const status = useSelector((state) => state.entities.project.data.status);
   const project = useSelector(
     (state) => state.entities.project.data.details.productPlatformName
   );
   const admin = useSelector((state) => state.user.admin);
+  const { partners } = useSelector((state) => state.entities.setup.data);
+  const leaderList = ["lead", "pOne", "pTwo"];
+  const leaders = leaderList.slice(0, partners);
 
   const sections = [
     "Details",
@@ -40,6 +40,7 @@ function HomePage() {
               <Section
                 title={title}
                 index={index}
+                leaders={leaders}
                 key={index}
                 status={status[title.toLowerCase()]}
               />
@@ -68,13 +69,9 @@ const Container = styled.div`
     background-color: white;
     border-radius: 6px;
     padding: 0 20px;
-    margin-top: 80px;
+    margin-top: 100px;
     box-shadow: 8px 8px 12px rgba(1, 1, 1, 0.5);
   }
-  /* .title {
-    position: relative;
-    padding: 5px 15px;
-  } */
   .top {
     width: 100%;
     height: 70px;

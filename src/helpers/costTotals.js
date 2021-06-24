@@ -12,7 +12,7 @@ export const getTotalsByCategory = createSelector(
   (state) => state.entities.tasks,
   (state) => state.entities.project,
   (state) => state.entities.team,
-  (state) => state.entities.options,
+  (state) => state.entities.setup,
   (state) => state.entities.materials,
   (state) => state.entities.travel,
   (state) => state.entities.capex,
@@ -273,7 +273,7 @@ export const getWPStatus = createSelector(
         )
           unassigned = true;
         result[leader].has[otherId] = true;
-        result[leader].unassigned[otherId] = unassigned
+        result[leader].unassigned[otherId] = unassigned;
       });
     });
     return result;

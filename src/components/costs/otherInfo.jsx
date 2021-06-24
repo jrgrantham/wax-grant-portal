@@ -19,7 +19,7 @@ function OtherInfo() {
   const state = useSelector((state) => state);
   const other = state.entities.other.data;
   const leader = state.user.selectedLeader;
-  const { maxOther } = state.entities.options.data;
+  const { maxOther } = state.entities.setup.data;
   const total = getOtherCost(state)[leader];
   const combined = leader === "combined";
   const group = combined

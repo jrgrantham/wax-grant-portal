@@ -1,4 +1,4 @@
-export const options = {
+export const setup = {
   loading: false,
   data: {
     partners: 3,

@@ -2,12 +2,12 @@ import React from "react";
 import { Container } from "./optionsStyling";
 import OptionsInput from "./optionsInput";
 import { useDispatch, useSelector } from "react-redux";
-import { updateValue } from "../../store/entities/options";
+import { updateValue } from "../../store/entities/setup";
 
 function SetupOptions() {
   const dispatch = useDispatch();
   const { partners, lead, pOne, pTwo } = useSelector(
-    (state) => state.entities.options.data
+    (state) => state.entities.setup.data
   );
 
   function handleChange(e) {

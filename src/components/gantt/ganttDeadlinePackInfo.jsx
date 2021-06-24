@@ -5,10 +5,7 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
 
 import GanttRowdeadlines from "./ganttDeadlineRowInfo";
-import {
-  reorderDeadline,
-  addDeadline,
-} from "../../store/entities/deadlines";
+import { reorderDeadline, addDeadline } from "../../store/entities/deadlines";
 import addMiles from "../../images/addMilestone.png";
 import addDeads from "../../images/addDeliverable.png";
 import addGrey from "../../images/add-grey.png";
@@ -20,7 +17,7 @@ function GanttPackDeadlines(props) {
   const packData = props.workPackData;
   const dispatch = useDispatch();
   const deadlines = useSelector((state) => state.entities.deadlines.data);
-  const { maxDeadlines } = useSelector((state) => state.entities.options.data);
+  const { maxDeadlines } = useSelector((state) => state.entities.setup.data);
 
   function addNewRow() {
     const newPosition = nextIndexOfGroup(packData, deadlines);
@@ -39,7 +36,7 @@ function GanttPackDeadlines(props) {
   const add = title === "Deliverables" ? addDeads : addMiles;
 
   return (
-    <Container titleBarColor={props.titleBarColor} className='applyShadow'>
+    <Container titleBarColor={props.titleBarColor} className="applyShadow">
       <div className="titleBar">
         <h3>{title}</h3>
       </div>

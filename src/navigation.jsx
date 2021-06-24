@@ -77,7 +77,7 @@ function Navigation() {
           {admin ? (
             <NavLink
               exact
-              to="/options"
+              to="/setup"
               className="navButton"
               activeClassName="selected"
             >

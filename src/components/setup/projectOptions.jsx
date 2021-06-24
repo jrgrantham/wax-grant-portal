@@ -10,7 +10,7 @@ function ProjectOptions() {
     maxWorkPackages,
     maxTasksPerPackage,
     maxDeadlines,
-  } = useSelector((state) => state.entities.options.data);
+  } = useSelector((state) => state.entities.setup.data);
 
   const {
     orgTypes,

@@ -16,7 +16,7 @@ function TargetMarketRow(props) {
   const { index } = props;
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  const { marketOptions } = state.entities.options.data;
+  const { marketOptions } = state.entities.setup.data;
   const market = getMarketData(state)[name];
   const { showComponent } = state.user;
   const modalName = "modal" + name;

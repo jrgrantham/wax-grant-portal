@@ -12,8 +12,8 @@ const slice = createSlice({
     selectedTeamOption: "staff",
     selectedCostsOption: "labour",
     selectedRevenueOption: "target market",
-    selectedOptionsOption: "setup",
-    userChanges: [] // log changes to be sent at split intervals
+    selectedSetupOption: "partners",
+    userChanges: [], // log changes to be sent at split intervals
     // log the end point, objectId, when the time comes, send the object from state
   },
   reducers: {

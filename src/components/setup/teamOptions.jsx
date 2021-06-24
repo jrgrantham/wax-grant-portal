@@ -7,7 +7,6 @@ import { Container } from "./optionsStyling";
 // import MaterialsRow from "./optionsRow";
 
 function TeamOptions() {
-
   const {
     maxTeamMembers,
     maxSubcontract,
@@ -15,7 +14,7 @@ function TeamOptions() {
     redSalary,
     amberDayRate,
     redDayRate,
-  } = useSelector((state) => state.entities.options.data);
+  } = useSelector((state) => state.entities.setup.data);
 
   const {
     projectRoles,

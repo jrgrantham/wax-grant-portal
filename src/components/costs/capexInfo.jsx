@@ -20,9 +20,9 @@ function CapexInfo() {
   const state = useSelector((state) => state);
   const capex = state.entities.capex.data;
   const leader = state.user.selectedLeader;
-  const { maxCapex } = state.entities.options.data;
+  const { maxCapex } = state.entities.setup.data;
   const total = getCapexCost(state)[leader];
-  const formattedCost = numberToCurrency(total)
+  const formattedCost = numberToCurrency(total);
   // console.log(totals);
   const combined = leader === "combined";
   const group = combined
@@ -129,9 +129,7 @@ function CapexInfo() {
                 <p className="title small" />
                 <p className="title small" />
                 <div className="total">
-                  <p className="field display small">
-                    {formattedCost}
-                  </p>
+                  <p className="field display small">{formattedCost}</p>
                 </div>
               </>
             ) : null}

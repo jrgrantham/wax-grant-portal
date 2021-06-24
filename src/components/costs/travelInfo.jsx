@@ -19,9 +19,9 @@ function TravelInfo() {
   const state = useSelector((state) => state);
   const travel = state.entities.travel.data;
   const leader = state.user.selectedLeader;
-  const { maxTravel } = state.entities.options.data;
+  const { maxTravel } = state.entities.setup.data;
   const total = getTravelCost(state)[leader];
-  const formattedCost = numberToCurrency(total)
+  const formattedCost = numberToCurrency(total);
   const combined = leader === "combined";
   const group = combined
     ? travel

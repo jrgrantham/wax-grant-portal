@@ -19,9 +19,9 @@ function MaterialsInfo() {
   const state = useSelector((state) => state);
   const materials = state.entities.materials.data;
   const leader = state.user.selectedLeader;
-  const { maxMaterials } = state.entities.options.data;
+  const { maxMaterials } = state.entities.setup.data;
   const total = getMaterialsCost(state)[leader];
-  const formattedCost = numberToCurrency(total)
+  const formattedCost = numberToCurrency(total);
   const combined = leader === "combined";
   const group = combined
     ? materials

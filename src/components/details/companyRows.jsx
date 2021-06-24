@@ -9,7 +9,7 @@ import {
   setCompanyDefaults,
   updateLeaderInfo,
 } from "../../store/entities/project";
-import { getCompanyDefaults } from "../../store/entities/options";
+import { getCompanyDefaults } from "../../store/entities/setup";
 import { generateArray, isNumberKey } from "../../helpers";
 // onKeyDown={(e) => isNumberKey(e)}
 

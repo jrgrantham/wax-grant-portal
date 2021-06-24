@@ -13,7 +13,7 @@
 // function OverheadRow(props) {
 //   const dispatch = useDispatch();
 //   const { projectRoles, locations } = useSelector(
-//     (state) => state.entities.options.data
+//     (state) => state.entities.setup.data
 //   );
 //   const { person, employmentType, provided, acronyms } = props;
 //   const [showProfile, setShowProfile] = useState(false);

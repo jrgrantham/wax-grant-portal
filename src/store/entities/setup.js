@@ -1,26 +1,26 @@
 // import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
-import { options } from "../../data";
+import { setup } from "../../data";
 
 const slice = createSlice({
-  name: "options",
-  initialState: options,
+  name: "setup",
+  initialState: setup,
   reducers: {
-    addToList: (options, action) => {
+    addToList: (setup, action) => {
       const { key, value } = action.payload;
-      options.data[key].push(value);
+      setup.data[key].push(value);
     },
-    removeFromList: (options, action) => {
+    removeFromList: (setup, action) => {
       const { key, index } = action.payload;
-      options.data[key].splice(index, 1);
+      setup.data[key].splice(index, 1);
     },
-    setDefault: (options, action) => {
+    setDefault: (setup, action) => {
       const { key, value } = action.payload;
-      options.data[key] = value;
+      setup.data[key] = value;
     },
-    updateValue: (options, action) => {
+    updateValue: (setup, action) => {
       const { key, value } = action.payload;
-      options.data[key] = value;
+      setup.data[key] = value;
     },
   },
 });
@@ -35,7 +35,7 @@ export default slice.reducer;
 
 export const getProjectDefaults = (state) => {
   console.log("getProjectDefaults");
-  const { natureDefault, ipProtectionDefault } = state.entities.options.data;
+  const { natureDefault, ipProtectionDefault } = state.entities.setup.data;
   const defaults = [
     { key: "nature", value: natureDefault },
     { key: "ipProtection", value: ipProtectionDefault },
@@ -50,7 +50,7 @@ export const getCompanyDefaults = (state) => {
     orgSizeDefault,
     fundingLevelDefault,
     matchFundingSourceDefault,
-  } = state.entities.options.data;
+  } = state.entities.setup.data;
   const defaults = [
     { key: "organisationType", value: orgTypeDefault },
     { key: "organisationSize", value: orgSizeDefault },

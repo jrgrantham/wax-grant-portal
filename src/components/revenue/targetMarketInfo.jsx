@@ -11,7 +11,7 @@ import { addMarket } from "../../store/entities/revenue";
 function TargetMarketInfo() {
   const dispatch = useDispatch();
   const { markets } = useSelector((state) => state.entities.revenue.data);
-  const max = useSelector((state) => state.entities.options.data.maxMarkets);
+  const max = useSelector((state) => state.entities.setup.data.maxMarkets);
 
   return (
     <Container>

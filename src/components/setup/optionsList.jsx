@@ -7,7 +7,7 @@ import {
   addToList,
   removeFromList,
   setDefault,
-} from "../../store/entities/options";
+} from "../../store/entities/setup";
 import Global from "./globalIndicator";
 // import {addToList}
 

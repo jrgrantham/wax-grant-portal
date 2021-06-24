@@ -25,7 +25,7 @@ function GanttPackWork(props) {
   const { title, index, packData, workPackageCount } = props;
   const { showComponent } = useSelector((state) => state.user);
   const { maxTasksPerPackage } = useSelector(
-    (state) => state.entities.options.data
+    (state) => state.entities.setup.data
   );
   const { projectLength } = useSelector(
     (state) => state.entities.project.data.details

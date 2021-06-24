@@ -17,7 +17,7 @@ function TeamInfo() {
   const team = useSelector((state) => state.entities.team.data);
   const leader = useSelector((state) => state.user.selectedLeader);
   const { maxTeamMembers, maxSubcontract } = useSelector(
-    (state) => state.entities.options.data
+    (state) => state.entities.setup.data
   );
 
   const employmentGroup = team.filter(

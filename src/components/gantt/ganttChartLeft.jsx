@@ -36,9 +36,7 @@ function GanttChartLeft(props) {
   const ganttComplete = useSelector(
     (state) => state.entities.project.data.status.gantt
   );
-  const { maxWorkPackages } = useSelector(
-    (state) => state.entities.options.data
-  );
+  const { maxWorkPackages } = useSelector((state) => state.entities.setup.data);
   const projectLength = useSelector(
     (state) => state.entities.project.data.details.projectLength
   );

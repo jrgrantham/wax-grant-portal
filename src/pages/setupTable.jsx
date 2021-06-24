@@ -4,35 +4,34 @@ import { updateUserSelection } from "../store/user";
 import LeftMenu from "../components/table/leftMenu";
 import { TableContainer } from "../components/table/tableStyling";
 import MarkedComplete from "../components/modals/markedComplete";
-import { updateOptionsStatus } from "../store/entities/project";
+import { updateSetupStatus } from "../store/entities/project";
 import { settingsColor, settingsFontColor } from "../helpers"; // check this
-import ProjectOptions from "../components/options/projectOptions"; // check this
-import CostsOptions from "../components/options/costsOptions"; // check this
-// import RevenueOptions from "../components/options/revenueOptions"; // check this
-import TeamOptions from "../components/options/teamOptions";
-import SetupOptions from "../components/options/setupOptions";
+import Project from "../components/setup/projectOptions"; // check this
+import Costs from "../components/setup/costsOptions"; // check this
+import Team from "../components/setup/teamOptions";
+import Setup from "../components/setup/setupOptions";
 
-function Options() {
+function SetupTable() {
   const dispatch = useDispatch();
   const status = useSelector(
-    (state) => state.entities.project.data.status.options // check this
+    (state) => state.entities.project.data.status.setup // check this
   );
   const selectedOption = useSelector(
-    (state) => state.user.selectedOptionsOption // check this
+    (state) => state.user.selectedSetupOption // check this
   );
-  const menuList = ["Setup", "Project", "Team", "Finance"]; // check this
+  const menuList = ["Partners", "Project", "Team", "Finance"]; // check this
   const menuData = {
-    section: "Options", // check this
+    section: "Setup", // check this
     status,
     menuList,
     selectedOption,
     color: settingsFontColor, // check this
     backgroundColor: settingsColor, // check this
     updateOption: function (value) {
-      dispatch(updateUserSelection({ key: "selectedOptionsOption", value })); // check this
+      dispatch(updateUserSelection({ key: "selectedSetupOption", value })); // check this
     },
     changeStatus: function () {
-      dispatch(updateOptionsStatus());
+      dispatch(updateSetupStatus());
     }, // check this
   };
 
@@ -48,10 +47,10 @@ function Options() {
   };
 
   const table = {
-    setup: <SetupOptions />,
-    project: <ProjectOptions />,
-    team: <TeamOptions />,
-    finance: <CostsOptions />,
+    partners: <Setup />,
+    project: <Project />,
+    team: <Team />,
+    finance: <Costs />,
   };
 
   return (
@@ -67,4 +66,4 @@ function Options() {
     </TableContainer>
   );
 }
-export default Options;
+export default SetupTable;

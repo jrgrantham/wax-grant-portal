@@ -56,6 +56,9 @@ export const global = {
     fundingLevelInc: 5,
     fundingLevelDefault: 70,
 
+    matchFundingSources: ["Investor", "Company Funds"],
+    matchFundingSourceDefault: "Investor",
+
     overheadRateMin: 0,
     overheadRateMax: 100,
     overheadRateInc: 10,

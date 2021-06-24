@@ -13,7 +13,7 @@ import DeleteModal from "../modals/teamDeleteModal";
 function TeamRow(props) {
   const dispatch = useDispatch();
   const { projectRoles, locations } = useSelector(
-    (state) => state.entities.options.data
+    (state) => state.entities.global.data
   );
   const { person, employmentType, provided, acronyms } = props;
   const [showProfile, setShowProfile] = useState(false);

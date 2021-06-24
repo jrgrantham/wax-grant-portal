@@ -96,12 +96,12 @@ function Costs() {
         <LeftMenu data={menuData} />
         <div className="content">
           <div className="table">
-            {status ? <MarkedComplete /> : null}
             {showLeaderTabs[selectedOption] ? (
               <LeaderTabs
                 viewCombinedTab={showLeaderTabs[selectedOption] === 4}
               />
             ) : null}
+            {status ? <MarkedComplete /> : null}
             {content()}
           </div>
           <OverviewModal />

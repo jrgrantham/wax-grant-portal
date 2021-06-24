@@ -8,7 +8,6 @@ import { updateRevenueStatus } from "../store/entities/project";
 import { revenueColor, revenueFontColor } from "../helpers"; // check this
 import TargetMarket from "../components/revenue/targetMarketInfo"; // check this
 import RevenueInfo from "../components/revenue/revenueInfo"; // check this
-import { getMarketData } from "../store/entities/revenue";
 
 function Revenue() {
   const dispatch = useDispatch();

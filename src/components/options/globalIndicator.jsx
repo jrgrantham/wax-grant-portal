@@ -1,6 +1,5 @@
 import React from "react";
 import Tippy from "@tippy.js/react";
-// import warning from "../../images/warning.png";
 import styled from "styled-components";
 import { settingsColor } from "../../helpers";
 
@@ -9,7 +8,7 @@ function GlobalIndicator() {
     <Container>
       <Tippy content="Global variable">
         <div className="global">
-          {/* <img src={warning} alt="warning" /> */}
+          &nbsp;
         </div>
       </Tippy>
     </Container>

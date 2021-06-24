@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { updateUserSelection } from "../../store/user";
 import { fontColorGrey, tabBottomMargin, tabHeight } from "../../helpers";
 
 function LeaderTabs(props) {
   const dispatch = useDispatch();
-  const { partners } = useSelector((state) => state.entities.project.data);
+  const { partners } = useSelector((state) => state.entities.options.data);
   const leader = useSelector((state) => state.user.selectedLeader);
   const pOne = useSelector(
     (state) => state.entities.project.data.pOne.companyName
@@ -16,6 +15,8 @@ function LeaderTabs(props) {
   const pTwo = useSelector(
     (state) => state.entities.project.data.pTwo.companyName
   );
+
+  console.log(partners);
 
   const allTabs = [
     { name: "Lead Applicant", key: "lead" },

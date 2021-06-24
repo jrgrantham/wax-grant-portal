@@ -24,14 +24,12 @@ function CostsOptions() {
     capexOver,
     otherWarn,
     otherOver,
-    matchFundingSources,
-    matchFundingSourceDefault,
     marketOptions,
-    businessWarn,
-    academicWarn,
   } = useSelector((state) => state.entities.options.data);
 
   const {
+    businessWarn,
+    academicWarn,
     fundingLevelMin,
     fundingLevelMax,
     fundingLevelInc,
@@ -40,6 +38,8 @@ function CostsOptions() {
     overheadRateMax,
     overheadRateInc,
     overheadRateDefault,
+    matchFundingSources,
+    matchFundingSourceDefault,
   } = useSelector((state) => state.entities.global.data);
 
   const funding = generateArray(
@@ -156,14 +156,14 @@ function CostsOptions() {
           <OptionsList
             title="Markets"
             list={marketOptions}
-            global={true}
+            // global={true}
             // defaultOption={matchFundingSourceDefault}
             listKey="marketOptions"
             // defaultKey="matchFundingSourceDefault"
           />
 
           <div className="row titles leaderTabMargin">
-            <p className="title description">Finance Thresholds</p>
+            <p className="title description">Finance Constraints and Thresholds</p>
             <p className="title value">Entries</p>
             <p className="title value"></p>
             <p className="title value">Amber</p>

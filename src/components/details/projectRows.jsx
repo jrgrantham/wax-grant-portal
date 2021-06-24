@@ -24,7 +24,7 @@ function ProjectRows() {
   }
 
   const { ipProtections, natures, months, years, maxProjectLength } = useSelector(
-    (state) => state.entities.options.data
+    (state) => state.entities.global.data
   );
 
   const projectLengths = generateArray(1, maxProjectLength, 1)

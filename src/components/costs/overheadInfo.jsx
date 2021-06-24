@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { numberToCurrency } from "../../helpers";
+import { generateArray, numberToCurrency } from "../../helpers";
 import { getTotalDays } from "../../store/entities/allocations";
 import { updateLeaderInfo } from "../../store/entities/project";
 import { Container } from "./costsStyling";
@@ -11,9 +11,19 @@ function OverheadInfo() {
   const leader = state.user.selectedLeader;
   const { overheadRate } = state.entities.project.data[leader];
   const { cost } = getTotalDays(state)[leader];
-  const rateOptions = state.entities.options.data.overheadRates;
+  const {
+    overheadRateMin,
+    overheadRateMax,
+    overheadRateInc,
+  } = state.entities.global.data;
   const overhead = Math.round((cost * overheadRate) / 100);
-  const formattedValue = numberToCurrency(overhead)
+  const formattedValue = numberToCurrency(overhead);
+
+  const rateOptions = generateArray(
+    overheadRateMin,
+    overheadRateMax,
+    overheadRateInc
+  );
 
   function onChangeHandler(e) {
     const key = e.target.name;
@@ -52,8 +62,7 @@ function OverheadInfo() {
               })}
             </select>
             <div className="total">
-
-            <p className="field display labourCost">{formattedValue}</p>
+              <p className="field display labourCost">{formattedValue}</p>
             </div>
           </div>
         </div>

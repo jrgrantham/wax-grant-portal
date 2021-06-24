@@ -1,19 +1,23 @@
-
 export const options = {
   loading: false,
   data: {
+    partners: 3,
+    lead: "james@xyz.com",
+    pOne: "damien@xyz.com",
+    pTwo: "casper@xyz.com",
+
     maxProjectLength: 36,
     maxWorkPackages: 10,
     maxDeadlines: 10,
     maxTasksPerPackage: 10,
-    
+
     maxTeamMembers: 10,
     maxSubcontract: 5,
     maxMaterials: 10,
     maxTravel: 10,
     maxCapex: 10,
     maxOther: 5,
-  
+
     marketOptions: ["US Market", "Asia Market"],
 
     materialWarn: 25,
@@ -29,12 +33,12 @@ export const options = {
     percentWarn: 25,
     percentOver: 40,
 
-    amberSalary: 50000,
-    redSalary: 70000,
-    amberDayRate: 300,
-    redDayRate: 450,
-    amberOverUtil: 55,
-    redOverUtil: 59,
+    amberSalary: 70000,
+    redSalary: 90000,
+    amberDayRate: 700,
+    redDayRate: 1200,
+    // amberOverUtil: 55,
+    // redOverUtil: 59,
 
     maxMarkets: 3,
     maxStreams: 4,

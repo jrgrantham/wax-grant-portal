@@ -5,12 +5,14 @@ import ListOption from "./optionsList";
 import OptionsInput from "./optionsInput";
 
 function ProjectOptions() {
-
   const {
     maxProjectLength,
     maxWorkPackages,
     maxTasksPerPackage,
     maxDeadlines,
+  } = useSelector((state) => state.entities.options.data);
+
+  const {
     orgTypes,
     orgTypeDefault,
     orgSizes,
@@ -19,7 +21,7 @@ function ProjectOptions() {
     natureDefault,
     ipProtections,
     ipProtectionDefault,
-  } = useSelector((state) => state.entities.options.data);
+  } = useSelector((state) => state.entities.global.data);
 
   return (
     <Container>

@@ -6,11 +6,11 @@ import { TableContainer } from "../components/table/tableStyling";
 import MarkedComplete from "../components/modals/markedComplete";
 import { updateOptionsStatus } from "../store/entities/project";
 import { settingsColor, settingsFontColor } from "../helpers"; // check this
-import ProjectRows from "../components/details/projectRows"; // check this
 import ProjectOptions from "../components/options/projectOptions"; // check this
 import CostsOptions from "../components/options/costsOptions"; // check this
 // import RevenueOptions from "../components/options/revenueOptions"; // check this
 import TeamOptions from "../components/options/teamOptions";
+import SetupOptions from "../components/options/setupOptions";
 
 function Options() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function Options() {
   const selectedOption = useSelector(
     (state) => state.user.selectedOptionsOption // check this
   );
-  const menuList = ["Project", "Team", "Finance"]; // check this
+  const menuList = ["Setup", "Project", "Team", "Finance"]; // check this
   const menuData = {
     section: "Options", // check this
     status,
@@ -48,6 +48,7 @@ function Options() {
   };
 
   const table = {
+    setup: <SetupOptions />,
     project: <ProjectOptions />,
     team: <TeamOptions />,
     finance: <CostsOptions />,

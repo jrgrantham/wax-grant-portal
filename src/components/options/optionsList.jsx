@@ -13,7 +13,6 @@ import Global from "./globalIndicator";
 
 function OptionsList(props) {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
 
   const { showComponent } = useSelector((state) => state.user);
   const { title, list, defaultOption, listKey, defaultKey, global } = props;

@@ -12,6 +12,11 @@ export const Container = styled.div`
     text-align: right;
     justify-content: flex-end;
   }
+  .double {
+    width: 200px;
+    justify-content: flex-start;
+    text-align: left;
+  }
   .text {
     width: 340px;
     text-align: right;
@@ -47,6 +52,10 @@ export const Container = styled.div`
       transition: opacity 0.3s;
       opacity: 1;
     }
+  }
+  .alignLeft {
+    text-align: left;
+    justify-content: flex-start;
   }
   .left {
     display: flex;

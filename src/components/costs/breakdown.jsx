@@ -6,7 +6,7 @@ import { getTotalsByLeader, numberToCurrency } from "../../helpers";
 function BreakdownInfo() {
   const state = useSelector((state) => state);
   const totals = getTotalsByLeader(state);
-  const { partners } = useSelector((state) => state.entities.project.data);
+  const { partners } = useSelector((state) => state.entities.options.data);
   console.log(partners);
   const { percentWarn, percentOver } = state.entities.options.data;
   const { lead, pOne, pTwo, combined } = totals.object.totals;

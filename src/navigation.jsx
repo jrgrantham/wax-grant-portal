@@ -81,7 +81,7 @@ function Navigation() {
               className="navButton"
               activeClassName="selected"
             >
-              <h3>Options</h3>
+              <h3>Setup</h3>
             </NavLink>
           ) : null}
         </div>

@@ -10,7 +10,7 @@ import {
   updateLeaderInfo,
 } from "../../store/entities/project";
 import { getCompanyDefaults } from "../../store/entities/options";
-import { isNumberKey } from "../../helpers";
+import { generateArray, isNumberKey } from "../../helpers";
 // onKeyDown={(e) => isNumberKey(e)}
 
 function CompanyRows() {
@@ -28,11 +28,19 @@ function CompanyRows() {
   const {
     orgSizes,
     orgTypes,
-    fundingLevels,
+    fundingLevelMin,
+    fundingLevelMax,
+    fundingLevelInc,
     matchFundingSources,
     months,
     years,
-  } = useSelector((state) => state.entities.options.data);
+  } = useSelector((state) => state.entities.global.data);
+
+  const fundingLevels = generateArray(
+    fundingLevelMin,
+    fundingLevelMax,
+    fundingLevelInc
+  );
 
   const {
     companyName,
@@ -173,19 +181,6 @@ function CompanyRows() {
             onChange={onchangeHandler}
           />
         </div>
-
-        {/* <div className="row column">
-          <div className="title">
-            <p>Last financial year (MMM/YY)</p>
-          </div>
-          <input
-            type="text"
-            value={lastYear}
-            className="field"
-            name="lastYear"
-            onChange={onchangeHandler}
-          />
-        </div> */}
 
         <div className="row column">
           <div className="title">

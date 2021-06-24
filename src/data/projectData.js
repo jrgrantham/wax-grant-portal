@@ -1,7 +1,7 @@
 export const projectData = {
   loading: false,
   data: {
-    partners: 3,
+    // partners: -1,
     status: {
       gantt: false,
       details: {
@@ -20,7 +20,7 @@ export const projectData = {
         pTwo: false,
       },
       revenue: false,
-      options: false,
+      setup: false,
       risks: {
         lead: false,
         pOne: false,
@@ -28,7 +28,7 @@ export const projectData = {
       },
     },
     details: {
-      productPlatformName: "productPlatformName",
+      productPlatformName: "My First Project",
       applicationNumber: "123445",
       nature: "Process",
       ipProtection: "protection",

@@ -1,14 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import OptionsInput from "./optionsInput";
 import ListOption from "./optionsList";
 import { Container } from "./optionsStyling";
-import Global from './globalIndicator';
 
 // import MaterialsRow from "./optionsRow";
 
 function TeamOptions() {
-  const dispatch = useDispatch();
 
   const {
     maxTeamMembers,
@@ -17,13 +15,14 @@ function TeamOptions() {
     redSalary,
     amberDayRate,
     redDayRate,
-    amberOverUtil,
-    redOverUtil,
+  } = useSelector((state) => state.entities.options.data);
+
+  const {
     projectRoles,
     projectRoleDefault,
     locations,
     locationDefault,
-  } = useSelector((state) => state.entities.options.data);
+  } = useSelector((state) => state.entities.global.data);
 
   return (
     <Container>
@@ -83,21 +82,6 @@ function TeamOptions() {
               characters={3}
             />
           </div>
-
-          {/* <div className="row">
-          <Global />
-            <p className="field display description">Overutilisation</p>
-            <OptionsInput
-              multiple={true}
-              field={"amberOverUtil"}
-              value={amberOverUtil}
-            />
-            <OptionsInput
-              multiple={true}
-              field={"redOverUtil"}
-              value={redOverUtil}
-            />
-          </div> */}
 
           <div className="row titles leaderTabMargin">
             <p className="title description">Team Options</p>

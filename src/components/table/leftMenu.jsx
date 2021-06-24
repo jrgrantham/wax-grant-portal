@@ -4,7 +4,6 @@ import { tabHeight, tableLeftHighlight, tableLeftWidth } from "../../helpers";
 import Button from "./leftMenuButton";
 import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css";
-import { useSelector } from "react-redux";
 
 function LeftMenu(props) {
   const {
@@ -15,12 +14,6 @@ function LeftMenu(props) {
     changeStatus,
     section,
   } = props.data;
-
-  const leader = useSelector((state) => state.user.selectedLeader);
-  const company = useSelector((state) => {
-    if (leader === "combined") return "Combined";
-    else return state.entities.project.data[leader].companyName;
-  });
 
   return (
     <MenuContainer backgroundColor={backgroundColor} color={color}>

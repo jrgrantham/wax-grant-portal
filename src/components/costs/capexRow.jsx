@@ -16,13 +16,12 @@ function CapexRow(props) {
     description,
     depreciation,
     currentValue,
-    // residualValue,
     utilisation,
   } = capex;
   const { projectLength } = useSelector(
     (state) => state.entities.project.data.details
   );
-  const { utilisations } = useSelector((state) => state.entities.options.data);
+  const { utilisations } = useSelector((state) => state.entities.global.data);
   const residualValue = depreciation === 0 ? 0 : Math.round(
     (1 - projectLength / depreciation) * currentValue
   );

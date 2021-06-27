@@ -2,8 +2,9 @@ export const projectData = {
   loading: false,
   data: {
     // partners: -1,
+    projectIdentifier: "I can't edit this because I'm an idiot",
     status: {
-      gantt: false,
+      gantt: true,
       details: {
         lead: false,
         pOne: true,
@@ -21,11 +22,7 @@ export const projectData = {
       },
       revenue: false,
       setup: false,
-      risks: {
-        lead: false,
-        pOne: false,
-        pTwo: false,
-      },
+      risks: false,
     },
     details: {
       productPlatformName: "My First Project",

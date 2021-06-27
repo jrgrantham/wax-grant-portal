@@ -1,6 +1,8 @@
+import { store } from "../../store";
 import styled from "styled-components";
 import {
   appTop,
+  appTopIfAdmin,
   appWidth,
   fontColorGrey,
   tabBottomMargin,
@@ -10,9 +12,12 @@ import {
   tableRightWidth,
 } from "../../helpers";
 
+const admin = store.getState().user.admin;
+const offset = admin ? appTopIfAdmin : appTop
+
 export const TableContainer = styled.div`
   position: relative;
-  top: ${appTop};
+  top: ${offset};
   margin: auto;
   max-width: ${appWidth};
   display: flex;
@@ -40,7 +45,7 @@ export const TableContainer = styled.div`
   .table {
     position: relative;
     flex-grow: 1;
-    margin-bottom: ${props => props.data.marginBottom};
+    margin-bottom: ${(props) => props.data.marginBottom};
     transition: margin-bottom 0.3s;
   }
   .relative {

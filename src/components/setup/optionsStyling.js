@@ -34,24 +34,9 @@ export const Container = styled.div`
     padding-bottom: 10px;
     background-color: #f4f4f4;
     border-radius: 6px;
-    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-  }
-  .listRow {
-    position: relative;
-    margin: 3px 10px 3px 10px;
-    /* margin: 1px 40px; */
-    width: 250px;
-    /* height: 33px; */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &:hover .hidden {
-      transition: opacity 0.3s;
-      opacity: 1;
-    }
   }
   .alignLeft {
     text-align: left;
@@ -62,14 +47,10 @@ export const Container = styled.div`
     align-items: center;
   }
   button {
-    min-width: 60px;
     font-size: 12px;
     background-color: white;
     color: ${questionColor};
     border: none;
-  }
-  .add {
-    padding: 3px;
   }
   .imageButton {
     margin-right: 10px;
@@ -77,10 +58,6 @@ export const Container = styled.div`
     max-height: 30px;
     max-width: 30px;
     min-width: 30px;
-  }
-  .selected {
-    color: white;
-    background-color: green;
   }
   .select {
     text-align: right;

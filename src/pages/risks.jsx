@@ -6,7 +6,7 @@ import { appTop, appWidth } from "../helpers";
 function Risks() {
   return (
     <PageContainer>
-      <h2>Risks</h2>
+      {/* <h2>Risks</h2> */}
     </PageContainer>
   );
 }

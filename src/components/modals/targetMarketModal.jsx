@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { updateTeamMember } from "../../store/entities/team";
 import close from "../../images/close-grey.png";
 import { teamColor, tableInputUnderline } from "../../helpers";
+import { updateUserSelection } from "../../store/user";
 
 function TargetMarketModal(props) {
   const dispatch = useDispatch();
@@ -18,21 +19,15 @@ function TargetMarketModal(props) {
   }
 
   function closeModal() {
-    console.log('listening');
+    console.log("listening");
     window.removeEventListener("keydown", checkCloseModal);
-    props.setShowProfile(false);
+    dispatch(updateUserSelection({ key: "showComponent", value: "" }));
   }
 
   function onChangeHandler(e) {
     const key = e.target.name;
     const value = e.target.value;
-    dispatch(
-      updateTeamMember({
-        // personId: person.personId,
-        key,
-        value,
-      })
-    );
+    dispatch(updateTeamMember({ key, value }));
   }
 
   return (
@@ -60,7 +55,7 @@ function TargetMarketModal(props) {
             className="input"
           />
           <textarea
-            id='comments'
+            id="comments"
             name="profile"
             value={0}
             onChange={onChangeHandler}

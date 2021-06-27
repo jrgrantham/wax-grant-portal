@@ -1,7 +1,8 @@
-// zt 6758 7862 9gb
-
 export const appWidth = "1400px";
+export const navHeight = "80px";
 export const appTop = "80px";
+export const refHeight = "40px";
+export const appTopIfAdmin = "120px"; // appTop + refHeight
 export const toastDelay = 2000;
 
 export const navBackground = "rgba(12, 58, 93, 1)";

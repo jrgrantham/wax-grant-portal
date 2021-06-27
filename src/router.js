@@ -34,7 +34,7 @@ const Router = () => (
     <Route exact path="/costs" component={Costs} />
     <Route exact path="/revenue" component={Revenue} />
     <Route exact path="/risks" component={Risks} />
-    <Route exact path="/setup" component={adminView} />
+    <Route exact path="/admin" component={adminView} />
     <Route exact path="/" component={HomePage} />
     <Route path="/" component={NoResult} />
   </Switch>

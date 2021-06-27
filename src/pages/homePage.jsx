@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { navBackground } from "../helpers/settings";
 import Section from "../components/homePageSection";
-import tick from "../images/tick-white.png";
 
 function HomePage() {
   const status = useSelector((state) => state.entities.project.data.status);
@@ -21,7 +20,7 @@ function HomePage() {
     "Gantt",
     "Costs",
     "Revenue",
-    // "Risks",
+    "Risks",
     "Setup",
   ];
 
@@ -55,14 +54,16 @@ function HomePage() {
 export default HomePage;
 
 const Container = styled.div`
+position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 150px;
-  /* border: 1px solid red; */
+  margin: auto;
+  top: 150px;
   color: white;
+
   .content {
     width: 970px;
     height: 200px;
@@ -114,17 +115,16 @@ const Container = styled.div`
   }
   .complete {
     border-radius: 50%;
-    padding: 2px;
+    padding: 3px;
     background-color: ${navBackground};
     position: absolute;
-    top: 1px;
-    right: 1px;
-    width: 26px;
-    height: 26px;
+    top: -2px;
+    right: -2px;
+    width: 30px;
+    height: 30px;
   }
   h2 {
     font-size: 40px;
-    /* margin-bottom: 30px; */
   }
   h3 {
     font-size: 20px;

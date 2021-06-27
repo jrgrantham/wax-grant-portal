@@ -32,13 +32,13 @@ function Section(props) {
       <h3>{title}</h3>
       <div className="status">
         {isSingle ? (
-          <div className={status ? "single dot partnerComplete" : "single dot"} />
+          <div className={status ? "dot partnerComplete" : "dot"} />
         ) : (
           leaders.map((leader, index) => {
             return (
               <div
                 key={index}
-                className={status[leader] ? "multiple dot partnerComplete" : "multiple dot"}
+                className={status[leader] ? "dot partnerComplete" : "dot"}
               />
             );
           })
@@ -106,14 +106,14 @@ const Container = styled.div`
     border: 2px solid ${navBackground};
     margin: 0 2px;
     border-radius: 50%;
-  }
-  .single {
-    width: 12px;
-    height: 12px;
-  }
-  .multiple {
     width: 8px;
     height: 8px;
+  }
+  /* .single {
+    width: 12px;
+    height: 12px;
+  } */
+  .multiple {
   }
   .partnerComplete {
     background-color: ${navBackground};

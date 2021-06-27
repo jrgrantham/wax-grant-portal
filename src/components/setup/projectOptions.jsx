@@ -1,16 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Container } from "./optionsStyling";
 import ListOption from "./optionsList";
 import OptionsInput from "./optionsInput";
+import Global from "./globalIndicator";
+import { updateUserSelection } from "../../store/user";
+import AdminModal from "../modals/adminModal";
 
 function ProjectOptions() {
+  const dispatch = useDispatch();
   const {
     maxProjectLength,
     maxWorkPackages,
     maxTasksPerPackage,
     maxDeadlines,
   } = useSelector((state) => state.entities.setup.data);
+  const { showComponent } = useSelector((state) => state.user);
 
   const {
     orgTypes,
@@ -22,6 +27,11 @@ function ProjectOptions() {
     ipProtections,
     ipProtectionDefault,
   } = useSelector((state) => state.entities.global.data);
+
+  function showModal(field) {
+    const value = showComponent === field ? "" : field;
+    dispatch(updateUserSelection({ key: "showComponent", value }));
+  }
 
   return (
     <Container>
@@ -57,6 +67,23 @@ function ProjectOptions() {
 
         <div className="row titles leaderTabMargin">
           <p className="title description">Partner Options</p>
+        </div>
+
+        <div className="row">
+          {global ? <Global /> : null}
+          {showComponent === "orgTypes" ? (
+            <AdminModal
+              title="Organisation Types"
+              list={orgTypes}
+              defaultOption={orgTypeDefault}
+              listKey="orgTypes"
+              defaultKey="orgTypeDefault"
+            />
+          ) : null}
+          <p className="field display description">Organisation Types</p>
+          <button className="showButton" onClick={() => showModal("orgTypes")}>
+            Show
+          </button>
         </div>
 
         <ListOption

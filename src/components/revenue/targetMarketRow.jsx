@@ -36,7 +36,8 @@ function TargetMarketRow(props) {
 
   function showModal() {
     const key = "showComponent";
-    const value = showComponent === modalName ? "" : modalName;
+    const value = modalName;
+    // const value = showComponent === modalName ? "" : modalName;
     dispatch(updateUserSelection({ key, value }));
   }
 

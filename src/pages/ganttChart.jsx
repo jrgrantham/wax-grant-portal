@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-import { appTop, appWidth, wpMarginBottom } from "../helpers/";
+import { appTop, appTopIfAdmin, appWidth, wpMarginBottom } from "../helpers/";
 import GanttChartLeft from "../components/gantt/ganttChartLeft";
 import GanttChartRight from "../components/gantt/ganttChartRight";
 import MarkedCompleteModal from "../components/modals/markedComplete";
@@ -12,7 +12,9 @@ import { getTaskIds } from "../store/entities/tasks";
 
 function GanttChart() {
   const taskData = useSelector((state) => state.entities.tasks.data);
-  const showSummary = useSelector((state) => state.user.showComponent);
+  const { showComponent, admin } = useSelector((state) => state.user);
+  const offset = admin ? appTopIfAdmin : appTop;
+
   const taskIdKeys = getTaskIds(useSelector((state) => state));
   const ganttComplete = useSelector(
     (state) => state.entities.project.data.status.gantt
@@ -63,9 +65,9 @@ function GanttChart() {
     }
     return groupedTasks;
   }
-  
+
   const workPackages = generateWorkPackages();
-  
+
   const deliverables = useSelector((state) =>
     state.entities.deadlines.data.filter((task) => task.type === "deliverable")
   );
@@ -89,13 +91,13 @@ function GanttChart() {
   };
 
   return (
-    <PageContainer chartWidth={chartWidth}>
+    <PageContainer chartWidth={chartWidth} offset={offset}>
       <div id="chartArea" className="chartArea">
         {ganttComplete ? <MarkedCompleteModal /> : null}
         <GanttChartLeft data={data} />
         <GanttChartRight data={data} />
       </div>
-      {showSummary === 'ganttSummary' ? <GanttSummaryModal /> : null}
+      {showComponent === "ganttSummary" ? <GanttSummaryModal /> : null}
     </PageContainer>
   );
 }
@@ -103,7 +105,7 @@ export default GanttChart;
 
 const PageContainer = styled.div`
   position: relative;
-  top: ${appTop};
+  top: ${props => props.offset};
   margin: auto;
   padding: 0px 10px 10px 10px;
   width: 100%;

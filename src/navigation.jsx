@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Menu from "./components/general/menu";
-import { appTop, appWidth, navBackground, navHighlight } from "./helpers";
+import { appWidth, navBackground, navHeight, navHighlight } from "./helpers";
 import navHome from "./images/navHome.png";
 import navBurger from "./images/navBurger.png";
 import { updateUserSelection } from "./store/user";
@@ -77,11 +77,11 @@ function Navigation() {
           {admin ? (
             <NavLink
               exact
-              to="/setup"
+              to="/admin"
               className="navButton"
               activeClassName="selected"
             >
-              <h3>Setup</h3>
+              <h3>Admin</h3>
             </NavLink>
           ) : null}
         </div>
@@ -103,7 +103,7 @@ const Container = styled.nav`
   align-items: center;
   position: fixed;
   top: 0;
-  height: ${appTop};
+  height: ${navHeight};
   background-color: ${navBackground};
   z-index: 10;
 

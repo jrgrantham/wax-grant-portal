@@ -6,30 +6,37 @@ const slice = createSlice({
   name: "setup",
   initialState: setup,
   reducers: {
-    addToList: (setup, action) => {
+    addToProjectList: (setup, action) => {
       const { key, value } = action.payload;
       setup.data[key].push(value);
     },
-    removeFromList: (setup, action) => {
+    removeFromProjectList: (setup, action) => {
       const { key, index } = action.payload;
       setup.data[key].splice(index, 1);
     },
-    setDefault: (setup, action) => {
+    setProjectDefault: (setup, action) => {
       const { key, value } = action.payload;
       setup.data[key] = value;
     },
-    updateValue: (setup, action) => {
+    updateProjectValue: (setup, action) => {
       const { key, value } = action.payload;
       setup.data[key] = value;
+    },
+    reorderProjectList: (setup, action) => {
+      const { key, newIndex, originalIndex } = action.payload;
+      const [entry] = setup.data[key].splice(originalIndex, 1);
+      console.log(key, newIndex, originalIndex, entry);
+      setup.data[key].splice(newIndex, 0, entry);
     },
   },
 });
 
 export const {
-  addToList,
-  removeFromList,
-  setDefault,
-  updateValue,
+  addToProjectList,
+  removeFromProjectList,
+  setProjectDefault,
+  updateProjectValue,
+  reorderProjectList,
 } = slice.actions;
 export default slice.reducer;
 

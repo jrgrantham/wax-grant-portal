@@ -6,30 +6,37 @@ const slice = createSlice({
   name: "global",
   initialState: global,
   reducers: {
-    addToList: (global, action) => {
+    addToGlobalList: (global, action) => {
       const { key, value } = action.payload;
       global.data[key].push(value);
     },
-    removeFromList: (global, action) => {
+    removeFromGlobalList: (global, action) => {
       const { key, index } = action.payload;
       global.data[key].splice(index, 1);
     },
-    setDefault: (global, action) => {
+    setGlobalDefault: (global, action) => {
       const { key, value } = action.payload;
       global.data[key] = value;
     },
-    updateValue: (global, action) => {
+    updateGlobalValue: (global, action) => {
       const { key, value } = action.payload;
       global.data[key] = value;
+    },
+    reorderGlobalList: (global, action) => {
+      const { key, newIndex, originalIndex } = action.payload;
+      const [entry] = global.data[key].splice(originalIndex, 1);
+      console.log(key, newIndex, originalIndex, entry);
+      global.data[key].splice(newIndex, 0, entry);
     },
   },
 });
 
 export const {
-  addToList,
-  removeFromList,
-  setDefault,
-  updateValue,
+  addToGlobalList,
+  removeFromGlobalList,
+  setGlobalDefault,
+  updateGlobalValue,
+  reorderGlobalList,
 } = slice.actions;
 export default slice.reducer;
 

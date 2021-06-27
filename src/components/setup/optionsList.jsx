@@ -4,12 +4,12 @@ import bin from "../../images/bin-grey.png";
 import add from "../../images/add-grey.png";
 import { updateUserSelection } from "../../store/user";
 import {
-  addToList,
-  removeFromList,
-  setDefault,
+  addToProjectList,
+  removeFromProjectList,
+  setProjectDefault,
 } from "../../store/entities/setup";
 import Global from "./globalIndicator";
-// import {addToList}
+// import {addToProjectList}
 
 function OptionsList(props) {
   const dispatch = useDispatch();
@@ -35,17 +35,17 @@ function OptionsList(props) {
   function submitNew() {
     const result = value.trim();
     if (result) {
-      dispatch(addToList({ key: listKey, value: result }));
+      dispatch(addToProjectList({ key: listKey, value: result }));
       setValue("");
     }
   }
 
   function removeItem(index) {
-    dispatch(removeFromList({ key: listKey, index }));
+    dispatch(removeFromProjectList({ key: listKey, index }));
   }
 
   function submitDefault(value) {
-    dispatch(setDefault({ key: defaultKey, value }));
+    dispatch(setProjectDefault({ key: defaultKey, value }));
   }
 
   return (

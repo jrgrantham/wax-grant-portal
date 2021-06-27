@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { updateTeamMember } from "../../store/entities/team";
@@ -10,11 +11,23 @@ import add from "../../images/add-grey.png";
 import tick from "../../images/tick-grey.png";
 import Tippy from "@tippy.js/react";
 import { BiMenu } from "react-icons/bi";
+import {
+  addToGlobalList,
+  removeFromGlobalList,
+  setGlobalDefault,
+  reorderGlobalList,
+} from "../../store/entities/global";
+import {
+  addToProjectList,
+  removeFromProjectList,
+  setProjectDefault,
+} from "../../store/entities/setup";
 
 function AdminModal(props) {
   const dispatch = useDispatch();
-  const { title, list, defaultOption, listKey, defaultKey } = props;
+  const { title, list, defaultOption, listKey, defaultKey, global } = props;
   const [newValue, setNewValue] = useState("");
+  const closeData = { key: "" };
 
   window.addEventListener("keydown", checkCloseModal, false);
 
@@ -25,7 +38,6 @@ function AdminModal(props) {
   }
 
   function closeModal() {
-    console.log("listening");
     window.removeEventListener("keydown", checkCloseModal);
     dispatch(updateUserSelection({ key: "showComponent", value: "" }));
   }
@@ -35,9 +47,31 @@ function AdminModal(props) {
     setNewValue(value);
   }
 
-  const closeData = {
-    key: "",
-  };
+  function acceptValue() {
+    const result = newValue.trim();
+    if (!result) return;
+    if (global) dispatch(addToGlobalList({ key: listKey, value: result }));
+    else dispatch(addToProjectList({ key: listKey, value: result }));
+    setNewValue("");
+  }
+
+  function setDefault(value) {
+    if (global) dispatch(setGlobalDefault({ key: defaultKey, value }));
+    else dispatch(setProjectDefault({ key: defaultKey, value }));
+  }
+
+  function removeItem(index) {
+    if (global) dispatch(removeFromGlobalList({ key: listKey, index }));
+    else dispatch(removeFromProjectList({ key: listKey, index }));
+  }
+
+  function handleMovingRow(result) {
+    if (!result.destination || result.destination.index === result.source.index)
+      return;
+    const newIndex = result.destination.index;
+    const originalIndex = result.source.index;
+    dispatch(reorderGlobalList({ key: listKey, newIndex, originalIndex }));
+  }
 
   return (
     <Container id="background" onClick={checkCloseModal}>
@@ -50,47 +84,110 @@ function AdminModal(props) {
             name={listKey}
             value={newValue}
             onChange={onChangeHandler}
-            // placeholder="enter new value"
           />
           {newValue === "" ? null : (
-            <div className="add image">
+            <button onClick={acceptValue} className="add image">
               <img src={add} alt="add" />
-            </div>
+            </button>
           )}
         </div>
-        {list.map((value, index) => {
+        <DragDropContext onDragEnd={handleMovingRow}>
+          <Droppable droppableId="team">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {list.map((value, index) => {
+                  return (
+                    <Draggable key={index} draggableId={value+index} index={index}>
+                      {(provided) => (
+                        <div
+                          className="MonthContainer packBackground"
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                        >
+                          <div key={index} className="listRow">
+                            <Tippy content="Drag to reorder rows">
+                              <div
+                                {...provided.dragHandleProps}
+                                className="hiddenList grabHandle"
+                              >
+                                <BiMenu />
+                              </div>
+                            </Tippy>
+                            <p>{value}</p>
+                            <button
+                              onClick={() => removeItem(index)}
+                              className="delete image hiddenList"
+                            >
+                              <img src={bin} alt="delete" />
+                            </button>
+                            {defaultKey ? (
+                              <button
+                                onClick={() => setDefault(value)}
+                                className={
+                                  value === defaultOption ? "" : "hiddenList"
+                                }
+                              >
+                                <div className="setProjectDefault image">
+                                  <img src={tick} alt="accept" />
+                                </div>
+                              </button>
+                            ) : null}
+                          </div>
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+        {/* {list.map((value, index) => {
           return (
-            <div key={index} className="listRow">
-              <Tippy content="Drag to reorder rows">
+            <Draggable
+              key={person.personId}
+              draggableId={person.personId}
+              index={index}
+            >
+              {(provided) => (
                 <div
-                  // {...provided.dragHandleProps}
-                  className="hiddenList grabHandle"
+                  className="MonthContainer packBackground"
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
                 >
-                  <BiMenu />
-                </div>
-              </Tippy>
-              <p>{value}</p>
-              <button
-                // onClick={() => removeItem(index)}
-                className="delete image hiddenList"
-                // className="delete image"
-              >
-                <img src={bin} alt="delete" />
-              </button>
-              {defaultKey ? (
-                <button
-                  // onClick={() => submitDefault(value)}
-                  className={value === defaultOption ? "" : "hiddenList"}
-                >
-                  {/* <p>Default</p> */}
-                  <div className="setDefault image">
-                    <img src={tick} alt="accept" />
+                  <div key={index} className="listRow">
+                    <Tippy content="Drag to reorder rows">
+                      <div
+                        // {...provided.dragHandleProps}
+                        className="hiddenList grabHandle"
+                      >
+                        <BiMenu />
+                      </div>
+                    </Tippy>
+                    <p>{value}</p>
+                    <button
+                      onClick={() => removeItem(index)}
+                      className="delete image hiddenList"
+                    >
+                      <img src={bin} alt="delete" />
+                    </button>
+                    {defaultKey ? (
+                      <button
+                        onClick={() => setDefault(value)}
+                        className={value === defaultOption ? "" : "hiddenList"}
+                      >
+                        <div className="setProjectDefault image">
+                          <img src={tick} alt="accept" />
+                        </div>
+                      </button>
+                    ) : null}
                   </div>
-                </button>
-              ) : null}
-            </div>
+                </div>
+              )}
+            </Draggable>
           );
-        })}
+        })} */}
         {/* <div className="content" /> */}
       </div>
     </Container>
@@ -131,7 +228,7 @@ const Container = styled.div`
       position: relative;
       display: flex;
       align-items: center;
-      margin: 5px 0 15px 0;
+      margin: 10px 0 20px 0;
     }
     input {
       width: 300px;
@@ -143,7 +240,7 @@ const Container = styled.div`
     .listRow {
       position: relative;
       /* margin-left: 15px; */
-      margin-bottom: 5px;
+      padding-bottom: 10px;
       width: 300px;
       display: flex;
       justify-content: space-between;

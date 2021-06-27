@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { isNumberKey } from "../../helpers";
-import { updateValue } from "../../store/entities/setup";
+import { updateProjectValue } from "../../store/entities/setup";
 import Global from "./globalIndicator";
 
 function OptionsInput(props) {
@@ -23,7 +23,7 @@ function OptionsInput(props) {
     if (e.target.value) {
       value = parseInt(value.slice(-characters));
     } else value = 0;
-    dispatch(updateValue({ key: field, value }));
+    dispatch(updateProjectValue({ key: field, value }));
   }
 
   const row = (

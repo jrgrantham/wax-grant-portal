@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container } from "./optionsStyling";
 import OptionsInput from "./optionsInput";
 import { generateArray } from "../../helpers";
-import { updateValue } from "../../store/entities/setup";
+import { updateProjectValue } from "../../store/entities/setup";
 import OptionsList from "./optionsList";
 import Global from "./globalIndicator";
 
@@ -57,7 +57,7 @@ function CostsOptions() {
   function handleChange(e) {
     const key = e.target.name;
     const value = e.target.value;
-    dispatch(updateValue({ key, value }));
+    dispatch(updateProjectValue({ key, value }));
   }
 
   return (

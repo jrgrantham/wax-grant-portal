@@ -78,6 +78,7 @@ function ProjectOptions() {
               defaultOption={orgTypeDefault}
               listKey="orgTypes"
               defaultKey="orgTypeDefault"
+              global={true}
             />
           ) : null}
           <p className="field display description">Organisation Types</p>

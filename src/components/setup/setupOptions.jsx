@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "./optionsStyling";
 import OptionsInput from "./optionsInput";
 import { useDispatch, useSelector } from "react-redux";
-import { updateValue } from "../../store/entities/setup";
+import { updateProjectValue } from "../../store/entities/setup";
 
 function SetupOptions() {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ function SetupOptions() {
   function handleChange(e) {
     const key = e.target.name;
     const value = parseInt(e.target.value);
-    dispatch(updateValue({ key, value }));
+    dispatch(updateProjectValue({ key, value }));
   }
 
   return (

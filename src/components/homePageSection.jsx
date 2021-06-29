@@ -1,13 +1,15 @@
+import Tippy from "@tippy.js/react";
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 // import { useSelector } from "react-redux";
 import { navBackground } from "../helpers/settings";
 import tick from "../images/tick-white.png";
 
 function Section(props) {
   const { index, title, status, leaders } = props;
-
   const isSingle = typeof status === "object" ? false : true;
+  const project = useSelector((state) => state.entities.project.data);
 
   function checkAll() {
     for (let i = 0; i < leaders.length; i++) {
@@ -32,14 +34,20 @@ function Section(props) {
       <h3>{title}</h3>
       <div className="status">
         {isSingle ? (
-          <div className={status ? "dot partnerComplete" : "dot"} />
+          <Tippy key={index} content={status ? "Complete" : "Outstanding"}>
+            <div className={status ? "dot partnerComplete" : "dot"} />
+          </Tippy>
         ) : (
           leaders.map((leader, index) => {
-            return (
-              <div
-                key={index}
-                className={status[leader] ? "dot partnerComplete" : "dot"}
-              />
+            const company = project[leader].companyName;
+            return status[leader] ? (
+              <Tippy key={index} content={company + " complete"}>
+                <div className="dot partnerComplete" />
+              </Tippy>
+            ) : (
+              <Tippy key={index} content={company + " outstanding"}>
+                <div className="dot" />
+              </Tippy>
             );
           })
         )}
@@ -106,8 +114,8 @@ const Container = styled.div`
     border: 2px solid ${navBackground};
     margin: 0 2px;
     border-radius: 50%;
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
   }
   /* .single {
     width: 12px;

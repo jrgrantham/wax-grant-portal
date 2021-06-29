@@ -6,6 +6,8 @@ import { generateArray } from "../../helpers";
 import { updateProjectValue } from "../../store/entities/setup";
 import OptionsList from "./optionsList";
 import Global from "./globalIndicator";
+import { updateUserSelection } from "../../store/user";
+import AdminModal from "../modals/adminModal";
 
 function CostsOptions() {
   const dispatch = useDispatch();
@@ -41,6 +43,7 @@ function CostsOptions() {
     matchFundingSources,
     matchFundingSourceDefault,
   } = useSelector((state) => state.entities.global.data);
+  const { showComponent } = useSelector((state) => state.user);
 
   const funding = generateArray(
     fundingLevelMin,
@@ -60,8 +63,37 @@ function CostsOptions() {
     dispatch(updateProjectValue({ key, value }));
   }
 
+  function showModal(field) {
+    const value = showComponent === field ? "" : field;
+    dispatch(updateUserSelection({ key: "showComponent", value }));
+  }
+
+  const modalData = {
+    matchFundingSources: {
+      title: "Match Funding",
+      global: true,
+      list: matchFundingSources,
+      defaultOption: matchFundingSourceDefault,
+      listKey: "matchFundingSources",
+      defaultKey: "matchFundingSourceDefault",
+    },
+
+    marketOptions: {
+      title: "Markets",
+      list: marketOptions,
+      global: false,
+      // defaultOption: matchFundingSourceDefault,
+      listKey: "marketOptions",
+      // defaultKey: "matchFundingSourceDefault",
+    },
+  };
+
   return (
     <Container>
+      {showComponent === "matchFundingSources" ||
+      showComponent === "marketOptions" ? (
+        <AdminModal data={modalData[showComponent]} />
+      ) : null}
       <div className="materials">
         <div className="rows">
           <div className="row titles leaderTabMargin">
@@ -144,23 +176,27 @@ function CostsOptions() {
             </select>
           </div>
 
-          <OptionsList
-            title="Match Funding"
-            global={true}
-            list={matchFundingSources}
-            defaultOption={matchFundingSourceDefault}
-            listKey="matchFundingSources"
-            defaultKey="matchFundingSourceDefault"
-          />
+          <div className="row">
+            {global ? <Global /> : null}
+            <p className="field display description">Match Funding</p>
+            <button
+              className="showModal value"
+              onClick={() => showModal("matchFundingSources")}
+            >
+              Show
+            </button>
+          </div>
 
-          <OptionsList
-            title="Markets"
-            list={marketOptions}
-            // global={true}
-            // defaultOption={matchFundingSourceDefault}
-            listKey="marketOptions"
-            // defaultKey="matchFundingSourceDefault"
-          />
+          <div className="row">
+            {/* {global ? <Global /> : null} */}
+            <p className="field display description">Markets</p>
+            <button
+              className="showModal value"
+              onClick={() => showModal("marketOptions")}
+            >
+              Show
+            </button>
+          </div>
 
           <div className="row titles leaderTabMargin">
             <p className="title description">

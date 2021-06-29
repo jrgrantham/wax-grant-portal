@@ -8,7 +8,7 @@ import Close from "../../components/general/close";
 import bin from "../../images/bin-grey.png";
 import add from "../../images/add-grey.png";
 import tick from "../../images/tick-grey.png";
-import Tippy from "@tippy.js/react";
+import tickOr from "../../images/tick-orange.png";
 import { BiMenu } from "react-icons/bi";
 import {
   addToGlobalList,
@@ -148,7 +148,7 @@ function AdminModal(props) {
                                 }
                               >
                                 <div className="setProjectDefault image">
-                                  <img src={tick} alt="accept" />
+                                  <img src={value === defaultOption ? tickOr : tick} alt="accept" />
                                 </div>
                               </button>
                             ) : null}

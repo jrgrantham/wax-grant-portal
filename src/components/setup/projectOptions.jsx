@@ -114,7 +114,7 @@ function ProjectOptions() {
         <div className="row">
           {global ? <Global /> : null}
           <p className="field display description">Organisation Types</p>
-          <button className="showModal" onClick={() => showModal("orgTypes")}>
+          <button className="showModal value" onClick={() => showModal("orgTypes")}>
             Show
           </button>
         </div>
@@ -122,7 +122,7 @@ function ProjectOptions() {
         <div className="row">
           {global ? <Global /> : null}
           <p className="field display description">Organisation Sizes</p>
-          <button className="showModal" onClick={() => showModal("orgSizes")}>
+          <button className="showModal value" onClick={() => showModal("orgSizes")}>
             Show
           </button>
         </div>
@@ -136,7 +136,7 @@ function ProjectOptions() {
           <p className="field display description">
             Product / Platform Natures
           </p>
-          <button className="showModal" onClick={() => showModal("natures")}>
+          <button className="showModal value" onClick={() => showModal("natures")}>
             Show
           </button>
         </div>
@@ -145,7 +145,7 @@ function ProjectOptions() {
           {global ? <Global /> : null}
           <p className="field display description">IP Protection Strategies</p>
           <button
-            className="showModal"
+            className="showModal value"
             onClick={() => showModal("ipProtections")}
           >
             Show

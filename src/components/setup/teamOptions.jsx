@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserSelection } from "../../store/user";
 import OptionsInput from "./optionsInput";
-import ListOption from "./optionsList";
 import { Container } from "./optionsStyling";
 import Global from "./globalIndicator";
 import AdminModal from "../modals/adminModal";
@@ -105,13 +104,13 @@ function TeamOptions() {
               multiple={true}
               field={"amberDayRate"}
               value={amberDayRate}
-              characters={3}
+              characters={4}
             />
             <OptionsInput
               multiple={true}
               field={"redDayRate"}
               value={redDayRate}
-              characters={3}
+              characters={4}
             />
           </div>
 
@@ -123,7 +122,7 @@ function TeamOptions() {
             {global ? <Global /> : null}
             <p className="field display description">Project Roles</p>
             <button
-              className="showModal"
+              className="showModal value"
               onClick={() => showModal("projectRoles")}
             >
               Show
@@ -134,7 +133,7 @@ function TeamOptions() {
             {global ? <Global /> : null}
             <p className="field display description">Subcontractor Locations</p>
             <button
-              className="showModal"
+              className="showModal value"
               onClick={() => showModal("locations")}
             >
               Show

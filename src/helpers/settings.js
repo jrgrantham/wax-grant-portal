@@ -15,8 +15,8 @@ export const selectedYes = "rgba(139, 197, 63, 1)";
 export const selectedNo = "#b1b1b1";
 export const questionColor = "rgba(145,145,145)";
 
-export const adminColor = "rgba(162,84,198)";
-export const adminFontColor = "rgba(110,57,135)";
+// export const adminColor = "rgba(162,84,198)";
+// export const adminFontColor = "rgba(110,57,135)";
 export const projectColor = "rgba(38,169,224)";
 export const projectFontColor = "rgba(27,117,187)";
 export const teamColor = "rgba(139, 197, 63, 1)";

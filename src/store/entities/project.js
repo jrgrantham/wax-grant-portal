@@ -27,6 +27,7 @@ const slice = createSlice({
     },
     updateProjectInfo: (project, action) => {
       project.data.details[action.payload.key] = action.payload.value;
+      console.log(action.payload.value);
     },
     updateLeaderInfo: (project, action) => {
       const { leader, key, value } = action.payload;

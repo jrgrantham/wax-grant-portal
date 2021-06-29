@@ -9,7 +9,7 @@ function HomePage() {
   const project = useSelector(
     (state) => state.entities.project.data.details.productPlatformName
   );
-  const admin = useSelector((state) => state.user.admin);
+  // const admin = useSelector((state) => state.user.admin);
   const { partners } = useSelector((state) => state.entities.setup.data);
   const leaderList = ["lead", "pOne", "pTwo"];
   const leaders = leaderList.slice(0, partners);
@@ -21,10 +21,10 @@ function HomePage() {
     "Costs",
     "Revenue",
     "Risks",
-    "Setup",
+    // "Setup",
   ];
 
-  if (!admin) sections.pop();
+  // if (!admin) sections.pop();
 
   return (
     <Container>

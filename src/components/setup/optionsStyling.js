@@ -24,8 +24,6 @@ export const Container = styled.div`
   }
   .showButton {
     font-weight: bold;
-    position: absolute;
-    left: 240px;
   }
   .list {
     margin: 10px 20px;

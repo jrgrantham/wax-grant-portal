@@ -33,8 +33,50 @@ function ProjectOptions() {
     dispatch(updateUserSelection({ key: "showComponent", value }));
   }
 
+  const modalData = {
+    orgTypes: {
+      title: "Organisation Types",
+      list: orgTypes,
+      defaultOption: orgTypeDefault,
+      listKey: "orgTypes",
+      defaultKey: "orgTypeDefault",
+      global: true,
+    },
+    orgSizes: {
+      title: "Organisation Sizes",
+      global: true,
+      list: orgSizes,
+      defaultOption: orgSizeDefault,
+      listKey: "orgSizes",
+      defaultKey: "orgSizeDefault",
+    },
+    natures: {
+      title: "Product / Platform Natures",
+      global: true,
+      list: natures,
+      defaultOption: natureDefault,
+      listKey: "natures",
+      defaultKey: "natureDefault",
+    },
+    ipProtections: {
+      title: "IP Protection Strategies",
+      global: true,
+      list: ipProtections,
+      defaultOption: ipProtectionDefault,
+      listKey: "ipProtections",
+      defaultKey: "ipProtectionDefault",
+    },
+  };
+
   return (
     <Container>
+      {showComponent === "orgTypes" ||
+      showComponent === "ipProtections" ||
+      showComponent === "orgSizes" ||
+      showComponent === "natures" ? (
+        <AdminModal data={modalData[showComponent]} />
+      ) : null}
+
       <div className="rows">
         <div className="row titles leaderTabMargin">
           <p className="title description">Project Constraints</p>
@@ -71,61 +113,44 @@ function ProjectOptions() {
 
         <div className="row">
           {global ? <Global /> : null}
-          {showComponent === "orgTypes" ? (
-            <AdminModal
-              title="Organisation Types"
-              list={orgTypes}
-              defaultOption={orgTypeDefault}
-              listKey="orgTypes"
-              defaultKey="orgTypeDefault"
-              global={true}
-            />
-          ) : null}
           <p className="field display description">Organisation Types</p>
-          <button className="showButton" onClick={() => showModal("orgTypes")}>
+          <button className="showModal" onClick={() => showModal("orgTypes")}>
             Show
           </button>
         </div>
 
-        <ListOption
-          global={true}
-          title="Organisation Types"
-          list={orgTypes}
-          defaultOption={orgTypeDefault}
-          listKey="orgTypes"
-          defaultKey="orgTypeDefault"
-        />
-
-        <ListOption
-          title="Organisation Sizes"
-          global={true}
-          list={orgSizes}
-          defaultOption={orgSizeDefault}
-          listKey="orgSizes"
-          defaultKey="orgSizeDefault"
-        />
+        <div className="row">
+          {global ? <Global /> : null}
+          <p className="field display description">Organisation Sizes</p>
+          <button className="showModal" onClick={() => showModal("orgSizes")}>
+            Show
+          </button>
+        </div>
 
         <div className="row titles leaderTabMargin">
           <p className="title description">Project Options</p>
         </div>
 
-        <ListOption
-          title="Product / Platform Natures"
-          global={true}
-          list={natures}
-          defaultOption={natureDefault}
-          listKey="natures"
-          defaultKey="natureDefault"
-        />
+        <div className="row">
+          {global ? <Global /> : null}
+          <p className="field display description">
+            Product / Platform Natures
+          </p>
+          <button className="showModal" onClick={() => showModal("natures")}>
+            Show
+          </button>
+        </div>
 
-        <ListOption
-          title="IP Protection Strategies"
-          global={true}
-          list={ipProtections}
-          defaultOption={ipProtectionDefault}
-          listKey="ipProtections"
-          defaultKey="ipProtectionDefault"
-        />
+        <div className="row">
+          {global ? <Global /> : null}
+          <p className="field display description">IP Protection Strategies</p>
+          <button
+            className="showModal"
+            onClick={() => showModal("ipProtections")}
+          >
+            Show
+          </button>
+        </div>
       </div>
     </Container>
   );

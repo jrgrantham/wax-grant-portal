@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { updateTeamMember } from "../../store/entities/team";
-import { teamColor, tableInputUnderline, settingsColor } from "../../helpers";
+import { tableInputUnderline } from "../../helpers";
 import { updateUserSelection } from "../../store/user";
 import Close from "../../components/general/close";
 import bin from "../../images/bin-grey.png";
@@ -25,9 +24,15 @@ import {
 
 function AdminModal(props) {
   const dispatch = useDispatch();
-  const { title, list, defaultOption, listKey, defaultKey, global } = props;
+  const {
+    title,
+    list,
+    defaultOption,
+    listKey,
+    defaultKey,
+    global,
+  } = props.data;
   const [newValue, setNewValue] = useState("");
-  const closeData = { key: "" };
 
   window.addEventListener("keydown", checkCloseModal, false);
 
@@ -63,6 +68,7 @@ function AdminModal(props) {
   function removeItem(index) {
     if (global) dispatch(removeFromGlobalList({ key: listKey, index }));
     else dispatch(removeFromProjectList({ key: listKey, index }));
+    if (defaultOption === list[index]) setDefault("");
   }
 
   function handleMovingRow(result) {
@@ -73,10 +79,15 @@ function AdminModal(props) {
     dispatch(reorderGlobalList({ key: listKey, newIndex, originalIndex }));
   }
 
+  let message = null;
+  if (defaultOption === "") message = "Must select a default option";
+  if (list.length === 0) message = "Must have at least one entry";
+  const data = { message };
+
   return (
     <Container id="background" onClick={checkCloseModal}>
       <div className="editWindow">
-        <Close data={closeData} />
+        <Close data={data} />
         <h3 className="title">{title}</h3>
         <div className="input">
           <input
@@ -91,13 +102,22 @@ function AdminModal(props) {
             </button>
           )}
         </div>
+        {defaultKey ? <p className="default">Default</p> : null}
         <DragDropContext onDragEnd={handleMovingRow}>
           <Droppable droppableId="team">
             {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
+              <div
+                className="adminList"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
                 {list.map((value, index) => {
                   return (
-                    <Draggable key={index} draggableId={value+index} index={index}>
+                    <Draggable
+                      key={index}
+                      draggableId={value + index}
+                      index={index}
+                    >
                       {(provided) => (
                         <div
                           className="MonthContainer packBackground"
@@ -105,14 +125,14 @@ function AdminModal(props) {
                           {...provided.draggableProps}
                         >
                           <div key={index} className="listRow">
-                            <Tippy content="Drag to reorder rows">
+                            {/* <Tippy content="Drag to reorder rows"> */}
                               <div
                                 {...provided.dragHandleProps}
                                 className="hiddenList grabHandle"
                               >
                                 <BiMenu />
                               </div>
-                            </Tippy>
+                            {/* </Tippy> */}
                             <p>{value}</p>
                             <button
                               onClick={() => removeItem(index)}
@@ -143,52 +163,6 @@ function AdminModal(props) {
             )}
           </Droppable>
         </DragDropContext>
-        {/* {list.map((value, index) => {
-          return (
-            <Draggable
-              key={person.personId}
-              draggableId={person.personId}
-              index={index}
-            >
-              {(provided) => (
-                <div
-                  className="MonthContainer packBackground"
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                >
-                  <div key={index} className="listRow">
-                    <Tippy content="Drag to reorder rows">
-                      <div
-                        // {...provided.dragHandleProps}
-                        className="hiddenList grabHandle"
-                      >
-                        <BiMenu />
-                      </div>
-                    </Tippy>
-                    <p>{value}</p>
-                    <button
-                      onClick={() => removeItem(index)}
-                      className="delete image hiddenList"
-                    >
-                      <img src={bin} alt="delete" />
-                    </button>
-                    {defaultKey ? (
-                      <button
-                        onClick={() => setDefault(value)}
-                        className={value === defaultOption ? "" : "hiddenList"}
-                      >
-                        <div className="setProjectDefault image">
-                          <img src={tick} alt="accept" />
-                        </div>
-                      </button>
-                    ) : null}
-                  </div>
-                </div>
-              )}
-            </Draggable>
-          );
-        })} */}
-        {/* <div className="content" /> */}
       </div>
     </Container>
   );
@@ -206,22 +180,29 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(20, 20, 20, 0.6);
-  z-index: 5;
+  z-index: 11;
 
   .editWindow {
     margin: 30px 0;
     position: relative;
-    /* width: 365px; */
     border-radius: 6px;
-    padding: 15px 30px;
+    padding: 15px 0px;
     background-color: white;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    max-height: 610px;
+
+    .adminList {
+      display: flex;
+      flex-direction: column;
+      overflow-x: scroll;
+    }
 
     .title {
+      margin: 0 30px;
       height: 30px;
     }
     .input {
@@ -235,11 +216,18 @@ const Container = styled.div`
       position: relative;
       padding: 5px;
       border: 2px solid ${tableInputUnderline};
+      margin: 0 30px;
       min-height: 30px;
+    }
+    .default {
+      margin: 0 30px;
+      margin-bottom: 15px;
+      width: 300px;
+      text-align: right;
     }
     .listRow {
       position: relative;
-      /* margin-left: 15px; */
+      margin: 0 30px;
       padding-bottom: 10px;
       width: 300px;
       display: flex;
@@ -260,7 +248,7 @@ const Container = styled.div`
     }
     .add {
       position: absolute;
-      right: -25px;
+      right: 5px;
       /* top: 8px; */
     }
     .delete {

@@ -10,16 +10,16 @@ import { toastDelay } from "../../helpers";
 function Close(props) {
   const { message } = props.data;
   const dispatch = useDispatch();
-  let notification = true;
+  let notificationRequired = true;
   function close() {
     if (message) {
-      if (notification) {
+      if (notificationRequired) {
         toast.configure();
         toast.info(message, {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: toastDelay,
         });
-        notification = false;
+        notificationRequired = false;
       }
     } else
       dispatch(

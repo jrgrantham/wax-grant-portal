@@ -6,6 +6,7 @@ import Router from "./router";
 import Navigation from "./navigation";
 import "./App.css";
 import ProjectIdentifier from "./pages/projectIdentifier";
+import Footer from "./pages/footer";
 
 // import background from "./images/background.jpg";
 
@@ -28,6 +29,7 @@ function App() {
         <Navigation />
         <ProjectIdentifier />
         <Router />
+        <Footer />
       </BrowserRouter>
     </Provider>
   );

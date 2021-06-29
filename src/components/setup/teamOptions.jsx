@@ -1,12 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUserSelection } from "../../store/user";
 import OptionsInput from "./optionsInput";
 import ListOption from "./optionsList";
 import { Container } from "./optionsStyling";
+import Global from "./globalIndicator";
+import AdminModal from "../modals/adminModal";
 
 // import MaterialsRow from "./optionsRow";
 
 function TeamOptions() {
+  const dispatch = useDispatch();
   const {
     maxTeamMembers,
     maxSubcontract,
@@ -22,9 +26,38 @@ function TeamOptions() {
     locations,
     locationDefault,
   } = useSelector((state) => state.entities.global.data);
+  const { showComponent } = useSelector((state) => state.user);
+
+  function showModal(field) {
+    const value = showComponent === field ? "" : field;
+    dispatch(updateUserSelection({ key: "showComponent", value }));
+  }
+
+  const modalData = {
+    projectRoles: {
+      title: "Project Roles",
+      global: true,
+      list: projectRoles,
+      defaultOption: projectRoleDefault,
+      listKey: "projectRoles",
+      // defaultKey: "projectRoleDefault",
+    },
+    locations: {
+      title: "Subcontractor Locations",
+      global: true,
+      list: locations,
+      defaultOption: locationDefault,
+      listKey: "locations",
+      defaultKey: "locationDefault",
+    },
+  };
 
   return (
     <Container>
+      {showComponent === "projectRoles" || showComponent === "locations" ? (
+        <AdminModal data={modalData[showComponent]} />
+      ) : null}
+
       <div className="materials">
         <div className="rows">
           <div className="row titles leaderTabMargin">
@@ -86,23 +119,27 @@ function TeamOptions() {
             <p className="title description">Team Options</p>
           </div>
 
-          <ListOption
-            title="Project Roles"
-            global={true}
-            list={projectRoles}
-            defaultOption={projectRoleDefault}
-            listKey="projectRoles"
-            defaultKey="projectRoleDefault"
-          />
+          <div className="row">
+            {global ? <Global /> : null}
+            <p className="field display description">Project Roles</p>
+            <button
+              className="showModal"
+              onClick={() => showModal("projectRoles")}
+            >
+              Show
+            </button>
+          </div>
 
-          <ListOption
-            title="Subcontractor Locations"
-            global={true}
-            list={locations}
-            defaultOption={locationDefault}
-            listKey="locations"
-            defaultKey="locationDefault"
-          />
+          <div className="row">
+            {global ? <Global /> : null}
+            <p className="field display description">Subcontractor Locations</p>
+            <button
+              className="showModal"
+              onClick={() => showModal("locations")}
+            >
+              Show
+            </button>
+          </div>
         </div>
       </div>
     </Container>

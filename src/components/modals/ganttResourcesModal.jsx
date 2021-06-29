@@ -18,18 +18,15 @@ function ResourcesModal(props) {
   const taskIds = [...new Set(packData.map((task) => task.taskId))];
   const resources = getAllocationsByTaskId(state);
 
-  let closeMessage = false;
+  let message = false;
   for (let i = 0; i < taskIds.length; i++) {
     if (resources[taskIds[i]].completion !== 100) {
-      closeMessage = "All tasks must be 100%";
+      message = "All tasks must be 100%";
       break;
     }
   }
 
-  const data = {
-    key: "showTaskAllocationModal",
-    message: closeMessage,
-  };
+  const data = { message };
 
   return (
     <Container id="background">
